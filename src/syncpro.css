@@ -9,56 +9,56 @@
 
 /* ---- 1. Tokens -------------------------------------------------------- */
 :root {
-  /* Surfaces — cool neutral graphite, low chroma */
-  --bg-base:     #0C0E11;
-  --bg-sunken:   #0F1216;
-  --bg-surface:  #14181D;
-  --bg-elevated: #1A1F26;
-  --bg-input:    #0F1216;
-  --bg-hover:    rgba(255,255,255,.04);
+  /* Surfaces — Deep Matte Obsidian & Architectural Carbon */
+  --bg-base:     #08090B;
+  --bg-sunken:   #0D0F13;
+  --bg-surface:  #12151B;
+  --bg-elevated: #181D25;
+  --bg-input:    #0D0F13;
+  --bg-hover:    rgba(245,245,240,.04);
 
-  /* Hairlines */
-  --line:        rgba(255,255,255,.075);
-  --line-strong: rgba(255,255,255,.13);
-  --line-soft:   rgba(255,255,255,.045);
+  /* Hairlines — Sharp Technical Drafting Rules */
+  --line:        rgba(245,245,240,.08);
+  --line-strong: rgba(245,245,240,.15);
+  --line-soft:   rgba(245,245,240,.045);
 
-  /* Text — neutral, four steps */
-  --text:   #F3F5F7;
-  --text-2: #B3BAC4;
-  --text-3: #7C838E;
-  --text-4: #565C66;
+  /* Text — Warm Architectural Chalk & Bone */
+  --text:   #F5F5F0;
+  --text-2: #ACB5C2;
+  --text-3: #707A8A;
+  --text-4: #4A5361;
 
-  /* Brand — Site Amber: primary action, selection, field-reality signal.
-     Steel-blue (--steel) carries data / graph / baseline, never the CTA. */
-  --brand:     #F0A83A;
-  --brand-600: #E89C2C;
-  --brand-500: #F0A83A;
-  --brand-400: #F6BB5C;
-  --brand-300: #FAD08A;
-  --steel:     #5896E0;
-  --steel-bg:  rgba(88,150,224,.12);
-  --steel-line:rgba(88,150,224,.30);
+  /* Brand — Signal Cadmium Orange: high-visibility construction authority */
+  --brand:     #FF6B00;
+  --brand-600: #E65C00;
+  --brand-500: #FF6B00;
+  --brand-400: #FF8533;
+  --brand-300: #FFA766;
+  --steel:     #2563EB;
+  --steel-bg:  rgba(37,99,235,.12);
+  --steel-line:rgba(37,99,235,.30);
 
   /* Semantic — health / risk / status ONLY */
-  --success: #46C28E;  --success-bg: rgba(70,194,142,.11);  --success-line: rgba(70,194,142,.26);
-  --warning: #E6C24A;  --warning-bg: rgba(230,194,74,.12);  --warning-line: rgba(230,194,74,.28);
-  --danger:  #E8685F;  --danger-bg:  rgba(232,104,95,.11);  --danger-line:  rgba(232,104,95,.28);
-  --info:    #5896E0;  --info-bg:    rgba(88,150,224,.11);  --info-line:    rgba(88,150,224,.26);
+  --success: #10B981;  --success-bg: rgba(16,185,129,.11);  --success-line: rgba(16,185,129,.26);
+  --warning: #F59E0B;  --warning-bg: rgba(245,158,11,.12);  --warning-line: rgba(245,158,11,.28);
+  --danger:  #EF4444;  --danger-bg:  rgba(239,68,68,.11);   --danger-line:  rgba(239,68,68,.28);
+  --info:    #2563EB;  --info-bg:    rgba(37,99,235,.11);   --info-line:    rgba(37,99,235,.26);
 
-  --brand-bg:   rgba(240,168,58,.13);
-  --brand-line: rgba(240,168,58,.32);
+  --brand-bg:   rgba(255,107,0,.12);
+  --brand-line: rgba(255,107,0,.35);
 
   /* Radius — precise, not bubbly */
-  --r-xs: 4px; --r-sm: 5px; --r-md: 7px; --r-lg: 9px; --r-xl: 12px; --r-2xl: 16px; --r-full: 999px;
+  --r-xs: 3px; --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 10px; --r-2xl: 14px; --r-full: 999px;
 
   /* Elevation — subtle, no glow */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.35);
-  --shadow-md: 0 6px 20px -10px rgba(0,0,0,.6);
-  --shadow-pop: 0 16px 40px -16px rgba(0,0,0,.7), 0 0 0 1px var(--line);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.45);
+  --shadow-md: 0 6px 20px -10px rgba(0,0,0,.7);
+  --shadow-pop: 0 16px 40px -16px rgba(0,0,0,.8), 0 0 0 1px var(--line);
 
-  /* Type */
-  --font: "Geist", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Type — Bespoke Non-AI Architectural Pairing */
+  --font-display: "Syne", "Plus Jakarta Sans", sans-serif;
+  --font: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono: "Space Mono", monospace;
 
   --ease: cubic-bezier(.4,0,.2,1);
   --dur: .16s;
@@ -134,10 +134,10 @@ ul { list-style: none; padding: 0; }
 @media (max-width: 620px){ .grid-2,.grid-3,.grid-4{grid-template-columns:1fr} }
 
 /* ---- 4. Typography ---------------------------------------------------- */
-/* Editorial display — tight, confident, solid color (no gradients) */
-.display { font-size: clamp(38px,5.4vw,62px); font-weight: 600; line-height: 1.02; letter-spacing: -0.035em; }
-.h1 { font-size: 27px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.18; }
-.h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
+/* Editorial display — tight, architectural, high-character */
+.display { font-family: var(--font-display); font-size: clamp(38px,5.4vw,62px); font-weight: 700; line-height: 1.04; letter-spacing: -0.035em; color: var(--text); }
+.h1 { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.18; color: var(--text); }
+.h2 { font-family: var(--font-display); font-size: 21px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; color: var(--text); }
 .h3 { font-size: 15.5px; font-weight: 600; letter-spacing: -0.01em; }
 .h4 { font-size: 13.5px; font-weight: 600; letter-spacing: -0.005em; }
 .lead { font-size: 17px; color: var(--text-2); line-height: 1.6; letter-spacing: -0.01em; }

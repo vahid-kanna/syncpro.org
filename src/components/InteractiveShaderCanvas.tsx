@@ -55,24 +55,24 @@ export function InteractiveShaderCanvas() {
         float flow = sin(uv.x * 2.2 + u_time * 0.35) * 0.08;
         float flow2 = cos(uv.y * 1.8 - u_time * 0.25) * 0.1;
         
-        // SyncPro Dark Industrial Palette
-        vec3 color_base = vec3(0.047, 0.055, 0.067);    // #0C0E11
-        vec3 color_surface = vec3(0.078, 0.094, 0.114); // #14181D
-        vec3 accent_amber = vec3(0.941, 0.659, 0.227);  // #F0A83A (Site Amber)
-        vec3 accent_steel = vec3(0.345, 0.588, 0.878);  // #5896E0 (Steel Blue)
+        // SyncPro Bespoke Palette (Matte Obsidian & Cadmium Orange)
+        vec3 color_base = vec3(0.031, 0.035, 0.043);    // #08090B
+        vec3 color_surface = vec3(0.071, 0.082, 0.106); // #12151B
+        vec3 accent_orange = vec3(1.0, 0.420, 0.0);     // #FF6B00 (Cadmium Orange)
+        vec3 accent_cobalt = vec3(0.145, 0.388, 0.922); // #2563EB (Cobalt Precision)
         
         // Dynamic noise pulse
         float noise = sin(uv.x * 7.0 + flow * 3.5) * cos(uv.y * 7.0 + flow2 * 3.5);
         vec3 finalColor = mix(color_base, color_surface, uv.y + flow);
         
-        // Ambient site-amber & steel pulse
-        finalColor += accent_amber * (max(0.0, noise) * 0.04);
-        finalColor += accent_steel * (max(0.0, -noise) * 0.03);
+        // Ambient cadmium orange & cobalt pulse
+        finalColor += accent_orange * (max(0.0, noise) * 0.04);
+        finalColor += accent_cobalt * (max(0.0, -noise) * 0.03);
         
         // Interactive mouse proximity glow
         float dist = distance(uv, mouse);
         float glow = 1.0 - smoothstep(0.0, 0.45, dist);
-        finalColor += accent_amber * glow * 0.06;
+        finalColor += accent_orange * glow * 0.06;
 
         gl_FragColor = vec4(finalColor, 1.0);
       }
