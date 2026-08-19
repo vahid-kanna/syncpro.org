@@ -1,12 +1,16 @@
-import { ArrowRight, ShieldAlert, Sparkles, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowRight, ShieldAlert, Sparkles, CheckCircle2, ChevronRight, ShieldCheck } from "lucide-react";
 import { useReveal } from "../lib/useReveal";
+import { InteractiveShaderCanvas } from "./InteractiveShaderCanvas";
 
 export function Hero() {
   const reveal = useReveal();
 
   return (
-    <header className="wrap-lg blueprint" style={{ paddingTop: 80, paddingBottom: 64 }}>
-      <div className="hero-grid">
+    <header className="wrap-lg blueprint" style={{ position: "relative", paddingTop: 80, paddingBottom: 64, overflow: "hidden" }}>
+      {/* Ambient WebGL Shader from Stitch Design Engine */}
+      <InteractiveShaderCanvas />
+
+      <div className="hero-grid" style={{ position: "relative", zIndex: 1 }}>
         <div ref={reveal.ref} className={reveal.className}>
           <div className="eyebrow mb-4" style={{ letterSpacing: ".06em" }}>
             KNOW THE PLAN · KNOW REALITY · RUN THE PROJECT
@@ -24,13 +28,20 @@ export function Hero() {
               Request Early Access
               <ArrowRight className="ico" />
             </a>
-            <a className="btn btn-outline btn-lg" href="#how">
-              How it works
+            <a className="btn btn-outline btn-lg" href="#demo">
+              View Live Pipeline
               <ChevronRight className="ico" />
             </a>
           </div>
-          <div className="status mt-6">
-            <span className="sdot sdot-live pulse" /> In active development · onboarding first cohort of design partners
+          
+          <div className="row gap-4 mt-6 wrapf" style={{ alignItems: "center" }}>
+            <div className="status">
+              <span className="sdot sdot-live pulse" /> Onboarding first cohort of design partners
+            </div>
+            <div className="row gap-2 xs dim" style={{ borderLeft: "1px solid var(--line)", paddingLeft: 12 }}>
+              <ShieldCheck className="ico t-brand" style={{ width: 14, height: 14 }} />
+              <span>SOC 2 Type II Ready</span>
+            </div>
           </div>
         </div>
 
