@@ -15,12 +15,14 @@ import { TrustValidation } from "./components/TrustValidation";
 import { FAQSection } from "./components/FAQSection";
 import { Waitlist } from "./components/Waitlist";
 import { Footer } from "./components/Footer";
+import { VideoBackgroundFrame } from "./components/VideoBackgroundFrame";
 
 export default function App() {
   return (
     <>
+      <VideoBackgroundFrame />
       <Nav />
-      <main>
+      <main style={{ position: "relative", zIndex: 1 }}>
         <Hero />
         <TelemetryMarquee />
         <DigitalTwinStudio />
