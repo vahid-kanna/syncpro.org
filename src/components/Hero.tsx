@@ -12,11 +12,16 @@ export function Hero() {
 
       <div className="hero-grid" style={{ position: "relative", zIndex: 1 }}>
         <div ref={reveal.ref} className={reveal.className}>
-          <div className="eyebrow mb-4" style={{ letterSpacing: ".06em", color: "var(--brass)" }}>
-            [SYS_NODE: ONLINE] · DCMA-14 COMPLIANT · FIDIC DEFENSE
+          <div className="mb-4 row gap-2" style={{ border: "1px solid var(--line)", padding: "4px 12px", background: "var(--bg-sunken)", width: "max-content" }}>
+            <span className="sdot pulse" style={{ background: "var(--brand)" }} />
+            <span className="mono xs" style={{ color: "var(--brass)", letterSpacing: "0.08em" }}>
+              SYS.STATUS: OPERATIONAL // DCMA-14 VERIFIED
+            </span>
           </div>
-          <h1 className="display">
-            Earn the <span className="it" style={{ color: "var(--brand)" }}>right</span> to update the construction schedule.
+          <h1 className="display" style={{ fontFamily: "var(--font-display)", textTransform: "uppercase", letterSpacing: "-0.03em", lineHeight: 1.05 }}>
+            The Schedule <br />
+            <span style={{ color: "var(--text-3)", paddingLeft: "18px", display: "inline-block" }}>Never Lies.</span> <br />
+            Neither Do We.
           </h1>
           <p className="lead mt-5 measure">
             SyncPro is the AI Project Controls Engineer for heavy civil &amp; megaprojects. It resolves unstructured
@@ -24,12 +29,12 @@ export function Hero() {
             and produces tamper-evident audit records — so every update is a defensible fact, not a data-entry event.
           </p>
           <div className="row gap-3 mt-8 wrapf">
-            <a className="btn btn-primary btn-lg" href="#waitlist">
-              Request Early Access
+            <a className="btn btn-primary btn-lg mono xs" href="#waitlist" style={{ fontWeight: 700, letterSpacing: "0.05em" }}>
+              INITIALIZE_SEQUENCE
               <ArrowRight className="ico" />
             </a>
-            <a className="btn btn-outline btn-lg" href="#demo">
-              View Live Pipeline
+            <a className="btn btn-outline btn-lg mono xs" href="#demo" style={{ letterSpacing: "0.05em" }}>
+              VIEW_TELEMETRY
               <ChevronRight className="ico" />
             </a>
           </div>

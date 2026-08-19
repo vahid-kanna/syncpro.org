@@ -1,47 +1,70 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X, Radio } from "lucide-react";
 import { Brand } from "./Brand";
 
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [time, setTime] = useState("");
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toISOString().substring(11, 19) + " UTC");
     };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div
       className="nav"
       style={{
-        borderBottomColor: scrolled ? "var(--line-strong)" : "var(--line)",
-        transition: "border-color 0.2s, background 0.2s",
+        height: "56px",
+        background: "rgba(10, 11, 14, 0.92)",
+        backdropFilter: "blur(16px)",
+        borderBottom: "1px solid var(--line)",
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
       }}
     >
       <div className="wrap-lg row between" style={{ height: "100%" }}>
-        <div className="row gap-6">
+        {/* Left: Brand + System Version */}
+        <div className="row gap-4">
           <Brand />
-          <nav className="topnav desktop-nav" style={{ marginLeft: 12 }}>
-            <a href="#problem">The Problem</a>
-            <a href="#how">How It Works</a>
-            <a href="#demo">Live Pipeline</a>
-            <a href="#capabilities">Capabilities</a>
-            <a href="#roi">ROI Model</a>
-            <a href="#who">Who It's For</a>
-            <a href="#faq">FAQ</a>
-          </nav>
+          <span
+            className="mono xs desktop-nav"
+            style={{
+              color: "var(--text-3)",
+              borderLeft: "1px solid var(--line)",
+              paddingLeft: "14px",
+              letterSpacing: "0.06em",
+            }}
+          >
+            SYS.NODE_01 // PROD
+          </span>
         </div>
 
-        <div className="row gap-3">
-          <span className="status xs desktop-nav" style={{ marginRight: 6 }}>
-            <span className="sdot sdot-live pulse" /> Engine v2.4 Active
-          </span>
-          <a className="btn btn-primary btn-sm" href="#waitlist">
-            Request Early Access
+        {/* Center: Monospaced Telemetry Navigation */}
+        <nav className="desktop-nav row gap-6 mono xs" style={{ letterSpacing: "0.08em" }}>
+          <a href="#hero" className="nav-link">NODE_MAP</a>
+          <a href="#how" className="nav-link">RECONCILIATION</a>
+          <a href="#demo" className="nav-link">LIVE_TELEMETRY</a>
+          <a href="#roi" className="nav-link">RISK_MODEL</a>
+          <a href="#capabilities" className="nav-link">CAPABILITIES</a>
+          <a href="#faq" className="nav-link">SPEC_FAQ</a>
+        </nav>
+
+        {/* Right: Real-Time Clock + Action */}
+        <div className="row gap-4">
+          <div className="desktop-nav row gap-2 mono xs" style={{ color: "var(--brass)" }}>
+            <Radio className="ico pulse" style={{ width: 12, height: 12, color: "var(--brand)" }} />
+            <span>{time || "00:00:00 UTC"}</span>
+          </div>
+
+          <a className="btn btn-primary btn-sm mono xs" href="#waitlist" style={{ fontWeight: 700, letterSpacing: "0.05em" }}>
+            INITIALIZE_SEQUENCE
             <ArrowRight className="ico" />
           </a>
 
@@ -64,7 +87,7 @@ export function Nav() {
           className="mobile-drawer"
           style={{
             position: "absolute",
-            top: "58px",
+            top: "56px",
             left: 0,
             right: 0,
             background: "var(--bg-elevated)",
@@ -77,62 +100,19 @@ export function Nav() {
             boxShadow: "var(--shadow-pop)",
           }}
         >
-          <a
-            href="#problem"
-            onClick={() => setMobileOpen(false)}
-            style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
-          >
-            The Problem
-          </a>
-          <a
-            href="#how"
-            onClick={() => setMobileOpen(false)}
-            style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
-          >
-            How It Works
-          </a>
-          <a
-            href="#demo"
-            onClick={() => setMobileOpen(false)}
-            style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
-          >
-            Live Pipeline
-          </a>
-          <a
-            href="#capabilities"
-            onClick={() => setMobileOpen(false)}
-            style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
-          >
-            Capabilities
-          </a>
-          <a
-            href="#roi"
-            onClick={() => setMobileOpen(false)}
-            style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
-          >
-            ROI Model
-          </a>
-          <a
-            href="#who"
-            onClick={() => setMobileOpen(false)}
-            style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
-          >
-            Who It's For
-          </a>
-          <a
-            href="#faq"
-            onClick={() => setMobileOpen(false)}
-            style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
-          >
-            FAQ
-          </a>
+          <a href="#hero" onClick={() => setMobileOpen(false)} className="mono xs">NODE_MAP</a>
+          <a href="#how" onClick={() => setMobileOpen(false)} className="mono xs">RECONCILIATION</a>
+          <a href="#demo" onClick={() => setMobileOpen(false)} className="mono xs">LIVE_TELEMETRY</a>
+          <a href="#roi" onClick={() => setMobileOpen(false)} className="mono xs">RISK_MODEL</a>
+          <a href="#capabilities" onClick={() => setMobileOpen(false)} className="mono xs">CAPABILITIES</a>
+          <a href="#faq" onClick={() => setMobileOpen(false)} className="mono xs">SPEC_FAQ</a>
           <a
             href="#waitlist"
             onClick={() => setMobileOpen(false)}
-            className="btn btn-primary btn-sm mt-2"
-            style={{ justifyContent: "center" }}
+            className="btn btn-primary btn-sm mt-2 mono xs"
+            style={{ justifyContent: "center", fontWeight: 700 }}
           >
-            Request Early Access
+            INITIALIZE_SEQUENCE
           </a>
         </div>
       )}
