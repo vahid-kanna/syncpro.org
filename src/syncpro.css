@@ -9,52 +9,52 @@
 
 /* ---- 1. Tokens -------------------------------------------------------- */
 :root {
-  /* Surfaces — Deep Midnight Obsidian & High-Tech Void */
-  --bg-base:     #030712;
-  --bg-sunken:   #080C16;
-  --bg-surface:  #0E1422;
-  --bg-elevated: #151D30;
-  --bg-input:    #080C16;
-  --bg-hover:    rgba(255,255,255,.05);
+  /* Surfaces — Deep Swiss Architectural Titanium & Basalt Slate */
+  --bg-base:     #0A0C10;
+  --bg-sunken:   #0E1116;
+  --bg-surface:  #141820;
+  --bg-elevated: #1B212C;
+  --bg-input:    #0E1116;
+  --bg-hover:    rgba(246,245,240,.045);
 
-  /* Hairlines — Luminous Glass & Cyber Wireframes */
-  --line:        rgba(255,255,255,.09);
-  --line-strong: rgba(0,245,155,.28);
-  --line-soft:   rgba(255,255,255,.04);
+  /* Hairlines — Precision Engineering Drafting Hairlines */
+  --line:        rgba(246,245,240,.08);
+  --line-strong: rgba(59,130,246,.32);
+  --line-soft:   rgba(246,245,240,.04);
 
-  /* Text — Pure Crisp Snow White & Sleek Slate */
-  --text:   #FFFFFF;
-  --text-2: #CBD5E1;
-  --text-3: #94A3B8;
-  --text-4: #64748B;
+  /* Text — Warm Architectural Paper / Bone & Technical Slate */
+  --text:   #F6F5F0;
+  --text-2: #B2B9C6;
+  --text-3: #757F92;
+  --text-4: #4B5466;
 
-  /* Brand — Electric Cyber Emerald: luminous, intelligent, authoritative */
-  --brand:     #00F59B;
-  --brand-600: #059669;
-  --brand-500: #00F59B;
-  --brand-400: #34D399;
-  --brand-300: #6EE7B7;
-  --steel:     #38BDF8;
-  --steel-bg:  rgba(56,189,248,.12);
-  --steel-line:rgba(56,189,248,.30);
+  /* Brand — International Klein Blue: authoritative, structural, precision-engineered */
+  --brand:     #2563EB;
+  --brand-600: #1D4ED8;
+  --brand-500: #2563EB;
+  --brand-400: #3B82F6;
+  --brand-300: #60A5FA;
+  --steel:     #0284C7;
+  --steel-bg:  rgba(2,132,199,.12);
+  --steel-line:rgba(2,132,199,.30);
 
-  /* Semantic — health / risk / status ONLY */
-  --success: #00F59B;  --success-bg: rgba(0,245,155,.12);   --success-line: rgba(0,245,155,.30);
-  --warning: #FBBF24;  --warning-bg: rgba(251,191,36,.12);  --warning-line: rgba(251,191,36,.30);
-  --danger:  #F87171;  --danger-bg:  rgba(248,113,113,.12); --danger-line:  rgba(248,113,113,.30);
-  --info:    #38BDF8;  --info-bg:    rgba(56,189,248,.12);  --info-line:    rgba(56,189,248,.30);
+  /* Semantic — Health & Status (No generic AI green/pink/violet) */
+  --success: #38BDF8;  --success-bg: rgba(56,189,248,.12);  --success-line: rgba(56,189,248,.30);
+  --warning: #F59E0B;  --warning-bg: rgba(245,158,11,.12);  --warning-line: rgba(245,158,11,.30);
+  --danger:  #EF4444;  --danger-bg:  rgba(239,68,68,.12);   --danger-line:  rgba(239,68,68,.30);
+  --info:    #3B82F6;  --info-bg:    rgba(59,130,246,.12);  --info-line:    rgba(59,130,246,.30);
 
-  --brand-bg:   rgba(0,245,155,.12);
-  --brand-line: rgba(0,245,155,.35);
+  --brand-bg:   rgba(37,99,235,.14);
+  --brand-line: rgba(37,99,235,.40);
 
-  /* Radius — precise modern curves */
-  --r-xs: 4px; --r-sm: 6px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px; --r-2xl: 20px; --r-full: 999px;
+  /* Radius — Architectural Chamfered Edges */
+  --r-xs: 2px; --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 12px; --r-2xl: 16px; --r-full: 999px;
 
-  /* Elevation — Luminous depth */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.6);
-  --shadow-md: 0 8px 24px -8px rgba(0,0,0,.8);
-  --shadow-pop: 0 20px 50px -15px rgba(0,0,0,.9), 0 0 0 1px var(--line);
-  --glow-brand: 0 0 25px rgba(0,245,155,.22);
+  /* Elevation — Structural Depth */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.55);
+  --shadow-md: 0 8px 24px -8px rgba(0,0,0,.75);
+  --shadow-pop: 0 20px 50px -15px rgba(0,0,0,.85), 0 0 0 1px var(--line);
+  --glow-brand: 0 0 25px rgba(37,99,235,.25);
 
   /* Type — Bespoke Non-AI Architectural Pairing */
   --font-display: "Syne", "Plus Jakarta Sans", sans-serif;

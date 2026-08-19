@@ -1,14 +1,29 @@
 import { ArrowRight, ShieldAlert, Sparkles, CheckCircle2, ChevronRight, ShieldCheck } from "lucide-react";
 import { useReveal } from "../lib/useReveal";
-import { InteractiveShaderCanvas } from "./InteractiveShaderCanvas";
+import { Construction3DCanvas } from "./Construction3DCanvas";
 
 export function Hero() {
   const reveal = useReveal();
 
   return (
     <header className="wrap-lg blueprint" style={{ position: "relative", paddingTop: 80, paddingBottom: 64, overflow: "hidden" }}>
-      {/* Ambient WebGL Shader from Stitch Design Engine */}
-      <InteractiveShaderCanvas />
+      {/* 3D Procedural Construction Tower Canvas */}
+      <Construction3DCanvas />
+
+      {/* Subtle Architectural Drafting Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "linear-gradient(to right, var(--line-soft) 1px, transparent 1px), linear-gradient(to bottom, var(--line-soft) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          pointerEvents: "none",
+          zIndex: 0,
+          opacity: 0.6,
+        }}
+        aria-hidden="true"
+      />
 
       <div className="hero-grid" style={{ position: "relative", zIndex: 1 }}>
         <div ref={reveal.ref} className={reveal.className}>
@@ -47,7 +62,7 @@ export function Hero() {
 
         {/* Embedded product frame: live planned-vs-field reconciliation */}
         <div className="reveal d2">
-          <div className="frame">
+          <div className="frame" style={{ backdropFilter: "blur(16px)", background: "rgba(14, 17, 22, 0.85)" }}>
             <div className="frame-bar">
               <span className="tl" />
               <span className="tl" />
@@ -55,7 +70,10 @@ export function Hero() {
               <span className="crumbs" style={{ marginLeft: 8, fontSize: "11.5px" }}>
                 <span>Tower A — Commercial Core</span>
                 <span className="sep">/</span>
-                <span className="cur">Live Shadow Schedule</span>
+                <span className="cur">Live 3D CPM Shadow Schedule</span>
+              </span>
+              <span className="mono xs t-brand" style={{ marginLeft: "auto", fontSize: "10.5px" }}>
+                [3D BIM LOD-350]
               </span>
             </div>
             <div style={{ padding: 20 }}>
@@ -105,13 +123,13 @@ export function Hero() {
                 <polyline
                   points="6,32 64,32 64,16 150,16 150,30 244,30 244,12 314,12"
                   fill="none"
-                  style={{ stroke: "var(--danger)" }}
+                  style={{ stroke: "var(--brand-500)" }}
                   strokeWidth="1.75"
                   className="anim-flow"
                 />
                 <circle cx="6" cy="32" r="3.5" style={{ fill: "var(--brand-400)" }} />
-                <circle cx="64" cy="16" r="3.5" style={{ fill: "var(--hivis)" }} />
-                <circle cx="150" cy="30" r="3.5" style={{ fill: "var(--hivis)" }} />
+                <circle cx="64" cy="16" r="3.5" style={{ fill: "var(--warning)" }} />
+                <circle cx="150" cy="30" r="3.5" style={{ fill: "var(--warning)" }} />
                 <circle cx="244" cy="12" r="3.5" style={{ fill: "var(--danger)" }} />
                 <circle cx="314" cy="12" r="3.5" style={{ fill: "none", stroke: "var(--danger)" }} strokeWidth="1.5" />
               </svg>
