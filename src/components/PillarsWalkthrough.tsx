@@ -99,12 +99,24 @@ const PILLARS: PillarData[] = [
     ],
     mockupBadge: "Corroboration Engine · Reality Gate",
     mockupContent: (
-      <div className="card-tight stack" style={{ background: "var(--bg-sunken)" }}>
+      <div className="card-tight stack" style={{ background: "var(--bg-sunken)", overflow: "hidden" }}>
+        <div style={{ position: "relative", height: 160, borderRadius: 4, overflow: "hidden", marginBottom: 12 }}>
+          <img
+            src="/cpm-command-center.jpg"
+            alt="CPM Network Command Center"
+            style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.9) contrast(1.1)" }}
+          />
+          <div style={{ position: "absolute", bottom: 6, left: 8, background: "rgba(10,11,14,0.85)", padding: "2px 8px", borderRadius: 3, border: "1px solid var(--line)" }}>
+            <span className="mono xs" style={{ color: "var(--brass)", fontSize: 10 }}>FIG.B2 // MULTI-SOURCE GRAPH RECONCILIATION</span>
+          </div>
+        </div>
         <div className="row between">
           <span className="status xs">
-            <span className="sdot sdot-hivis pulse" /> Inbound Field Signal
+            <span className="sdot pulse" style={{ background: "var(--brand)" }} /> Inbound Field Signal
           </span>
-          <span className="tag tag-brand">Resolution: #A1082</span>
+          <span className="tag" style={{ background: "var(--brand-bg)", color: "var(--brand)", borderColor: "var(--brand-line)" }}>
+            Resolution: #A1082
+          </span>
         </div>
         <div
           className="bubble bubble-ai mt-2"
@@ -119,22 +131,22 @@ const PILLARS: PillarData[] = [
         <div className="mt-2 stack-sm">
           <div className="row between xs" style={{ padding: "4px 8px", background: "var(--bg-elevated)", borderRadius: 4 }}>
             <span className="row gap-2">
-              <CheckCircle2 className="ico" style={{ width: 13, height: 13, color: "var(--success)" }} />
+              <CheckCircle2 className="ico" style={{ width: 13, height: 13, color: "var(--brass)" }} />
               Delivery Docket #8819 (Concrete)
             </span>
-            <span className="tag tag-success">Matched</span>
+            <span className="tag" style={{ background: "var(--brass-bg)", color: "var(--brass)" }}>Matched</span>
           </div>
           <div className="row between xs" style={{ padding: "4px 8px", background: "var(--bg-elevated)", borderRadius: 4 }}>
             <span className="row gap-2">
-              <CheckCircle2 className="ico" style={{ width: 13, height: 13, color: "var(--success)" }} />
+              <CheckCircle2 className="ico" style={{ width: 13, height: 13, color: "var(--brass)" }} />
               QA/QC Sign-off Slip
             </span>
-            <span className="tag tag-success">Verified</span>
+            <span className="tag" style={{ background: "var(--brass-bg)", color: "var(--brass)" }}>Verified</span>
           </div>
         </div>
         <div className="row between mt-2 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
           <span className="xs dim">Corroboration Level</span>
-          <span className="xs t-success">High Confidence (96%) · Ready to Commit</span>
+          <span className="xs" style={{ color: "var(--brass)" }}>High Confidence (96%) · Ready to Commit</span>
         </div>
       </div>
     ),
@@ -153,12 +165,24 @@ const PILLARS: PillarData[] = [
     ],
     mockupBadge: "As-Built Evidence Graph · Defensibility",
     mockupContent: (
-      <div className="card-tight stack" style={{ background: "var(--bg-sunken)" }}>
+      <div className="card-tight stack" style={{ background: "var(--bg-sunken)", overflow: "hidden" }}>
+        <div style={{ position: "relative", height: 160, borderRadius: 4, overflow: "hidden", marginBottom: 12 }}>
+          <img
+            src="/forensic-dossier.jpg"
+            alt="Forensic Audit Controls Terminal"
+            style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.9) contrast(1.1)" }}
+          />
+          <div style={{ position: "absolute", bottom: 6, left: 8, background: "rgba(10,11,14,0.85)", padding: "2px 8px", borderRadius: 3, border: "1px solid var(--line)" }}>
+            <span className="mono xs" style={{ color: "var(--brass)", fontSize: 10 }}>FIG.C3 // DCMA-14 CRYPTOGRAPHIC RECORD</span>
+          </div>
+        </div>
         <div className="row between">
           <span className="status xs">
-            <span className="sdot sdot-live pulse" /> As-Built Evidence Record
+            <span className="sdot pulse" style={{ background: "var(--brand)" }} /> As-Built Evidence Record
           </span>
-          <span className="tag tag-info">Audit Trail #TR-9421</span>
+          <span className="tag" style={{ background: "var(--steel-bg)", color: "var(--steel)", borderColor: "var(--steel-line)" }}>
+            Audit Trail #TR-9421
+          </span>
         </div>
         <div className="mt-2 stack-sm">
           <div className="props" style={{ fontSize: "12px" }}>
@@ -169,14 +193,14 @@ const PILLARS: PillarData[] = [
             <dt>Root Cause</dt>
             <dd>Subcontractor MEP Clash #RFI-34</dd>
             <dt>Corroboration</dt>
-            <dd style={{ color: "var(--success)" }}>3 Independent Logs + Photos</dd>
+            <dd style={{ color: "var(--brass)" }}>3 Independent Logs + Photos</dd>
             <dt>Contract Notice</dt>
-            <dd style={{ color: "var(--brand-400)" }}>Clause 20.1 Draft Generated</dd>
+            <dd style={{ color: "var(--brand)" }}>Clause 20.1 Draft Generated</dd>
           </div>
         </div>
         <div className="row between mt-3 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
           <span className="xs dim">Defensible Dossier Status</span>
-          <span className="xs t-info">Exportable PDF / XER Commit</span>
+          <span className="xs" style={{ color: "var(--steel)" }}>Exportable PDF / XER Commit</span>
         </div>
       </div>
     ),
