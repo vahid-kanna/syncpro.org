@@ -1,6 +1,7 @@
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { TelemetryMarquee } from "./components/TelemetryMarquee";
+import { DigitalTwinStudio } from "./components/DigitalTwinStudio";
 import { EcosystemStrip } from "./components/EcosystemStrip";
 import { Problem } from "./components/Problem";
 import { PillarsWalkthrough } from "./components/PillarsWalkthrough";
@@ -22,6 +23,7 @@ export default function App() {
       <main>
         <Hero />
         <TelemetryMarquee />
+        <DigitalTwinStudio />
         <EcosystemStrip />
         <Problem />
         <PillarsWalkthrough />
