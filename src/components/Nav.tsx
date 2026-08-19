@@ -28,9 +28,11 @@ export function Nav() {
           <nav className="topnav desktop-nav" style={{ marginLeft: 12 }}>
             <a href="#problem">The Problem</a>
             <a href="#how">How It Works</a>
+            <a href="#demo">Live Pipeline</a>
             <a href="#capabilities">Capabilities</a>
+            <a href="#roi">ROI Model</a>
             <a href="#who">Who It's For</a>
-            <a href="#sectors">Sectors</a>
+            <a href="#faq">FAQ</a>
           </nav>
         </div>
 
@@ -87,11 +89,25 @@ export function Nav() {
             How It Works
           </a>
           <a
+            href="#demo"
+            onClick={() => setMobileOpen(false)}
+            style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
+          >
+            Live Pipeline
+          </a>
+          <a
             href="#capabilities"
             onClick={() => setMobileOpen(false)}
             style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
           >
             Capabilities
+          </a>
+          <a
+            href="#roi"
+            onClick={() => setMobileOpen(false)}
+            style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
+          >
+            ROI Model
           </a>
           <a
             href="#who"
@@ -101,11 +117,11 @@ export function Nav() {
             Who It's For
           </a>
           <a
-            href="#sectors"
+            href="#faq"
             onClick={() => setMobileOpen(false)}
             style={{ padding: "8px 0", color: "var(--text)", fontSize: 15 }}
           >
-            Sectors
+            FAQ
           </a>
           <a
             href="#waitlist"
