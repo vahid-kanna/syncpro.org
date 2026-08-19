@@ -9,57 +9,61 @@
 
 /* ---- 1. Tokens -------------------------------------------------------- */
 :root {
-  /* Surfaces — Deep Swiss Architectural Titanium & Basalt Slate */
-  --bg-base:     #0A0C10;
-  --bg-sunken:   #0E1116;
-  --bg-surface:  #141820;
-  --bg-elevated: #1B212C;
-  --bg-input:    #0E1116;
-  --bg-hover:    rgba(246,245,240,.045);
+  /* Surfaces — Deep Matte Slate-Obsidian & Machine Charcoal */
+  --bg-base:     #0A0B0E;
+  --bg-sunken:   #0F1116;
+  --bg-surface:  #151820;
+  --bg-elevated: #1C202C;
+  --bg-input:    #0F1116;
+  --bg-hover:    rgba(247,246,242,.04);
 
-  /* Hairlines — Precision Engineering Drafting Hairlines */
-  --line:        rgba(246,245,240,.08);
-  --line-strong: rgba(59,130,246,.32);
-  --line-soft:   rgba(246,245,240,.04);
+  /* Hairlines — Precise Architectural Drafting Rules */
+  --line:        rgba(247,246,242,.08);
+  --line-strong: rgba(255,69,0,.32);
+  --line-soft:   rgba(247,246,242,.04);
 
-  /* Text — Warm Architectural Paper / Bone & Technical Slate */
-  --text:   #F6F5F0;
+  /* Text — Warm Architectural Bone & Titanium Slate */
+  --text:   #F7F6F2;
   --text-2: #B2B9C6;
-  --text-3: #757F92;
-  --text-4: #4B5466;
+  --text-3: #798292;
+  --text-4: #4D5666;
 
-  /* Brand — International Klein Blue: authoritative, structural, precision-engineered */
-  --brand:     #2563EB;
-  --brand-600: #1D4ED8;
-  --brand-500: #2563EB;
-  --brand-400: #3B82F6;
-  --brand-300: #60A5FA;
-  --steel:     #0284C7;
-  --steel-bg:  rgba(2,132,199,.12);
-  --steel-line:rgba(2,132,199,.30);
+  /* Brand — Signal Safety Vermilion & Architectural Brass (NO GREEN / NO PINK / NO VIOLET) */
+  --brand:     #FF4500;
+  --brand-600: #E03D00;
+  --brand-500: #FF4500;
+  --brand-400: #FF5E1E;
+  --brand-300: #FF8554;
+  --brass:     #D49B4B;
+  --brass-bg:  rgba(212,155,75,.12);
+  --brass-line:rgba(212,155,75,.30);
+  --steel:     #2563EB;
+  --steel-bg:  rgba(37,99,235,.12);
+  --steel-line:rgba(37,99,235,.30);
 
-  /* Semantic — Health & Status (No generic AI green/pink/violet) */
-  --success: #38BDF8;  --success-bg: rgba(56,189,248,.12);  --success-line: rgba(56,189,248,.30);
-  --warning: #F59E0B;  --warning-bg: rgba(245,158,11,.12);  --warning-line: rgba(245,158,11,.30);
+  /* Semantic — Non-AI Architectural Indicators */
+  --success: #D49B4B;  --success-bg: rgba(212,155,75,.12);  --success-line: rgba(212,155,75,.30);
+  --warning: #EAB308;  --warning-bg: rgba(234,179,8,.12);   --warning-line: rgba(234,179,8,.30);
   --danger:  #EF4444;  --danger-bg:  rgba(239,68,68,.12);   --danger-line:  rgba(239,68,68,.30);
-  --info:    #3B82F6;  --info-bg:    rgba(59,130,246,.12);  --info-line:    rgba(59,130,246,.30);
+  --info:    #2563EB;  --info-bg:    rgba(37,99,235,.12);   --info-line:    rgba(37,99,235,.30);
 
-  --brand-bg:   rgba(37,99,235,.14);
-  --brand-line: rgba(37,99,235,.40);
+  --brand-bg:   rgba(255,69,0,.12);
+  --brand-line: rgba(255,69,0,.35);
 
-  /* Radius — Architectural Chamfered Edges */
-  --r-xs: 2px; --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 12px; --r-2xl: 16px; --r-full: 999px;
+  /* Radius — Precise architectural chamfers */
+  --r-xs: 3px; --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 10px; --r-2xl: 14px; --r-full: 999px;
 
-  /* Elevation — Structural Depth */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.55);
+  /* Elevation — Depth without generic glow blobs */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
   --shadow-md: 0 8px 24px -8px rgba(0,0,0,.75);
   --shadow-pop: 0 20px 50px -15px rgba(0,0,0,.85), 0 0 0 1px var(--line);
-  --glow-brand: 0 0 25px rgba(37,99,235,.25);
+  --glow-brand: 0 0 20px rgba(255,69,0,.22);
 
   /* Type — Bespoke Non-AI Architectural Pairing */
-  --font-display: "Syne", "Plus Jakarta Sans", sans-serif;
+  --font-display: "Syne", "Playfair Display", "Plus Jakarta Sans", sans-serif;
   --font: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --mono: "Space Mono", monospace;
+  --mono: "Space Mono", "JetBrains Mono", monospace;
+
 
   --ease: cubic-bezier(.4,0,.2,1);
   --dur: .16s;

@@ -102,11 +102,11 @@ export function DelayCostCalculator() {
                   </span>
                 </div>
 
-                <div className="mt-3 p-3" style={{ background: "var(--success-bg)", border: "1px solid var(--success-line)", borderRadius: 8 }}>
-                  <div className="xs dim" style={{ color: "var(--success)" }}>
+                <div className="mt-3 p-3" style={{ background: "var(--brass-bg)", border: "1px solid var(--brass-line)", borderRadius: 8 }}>
+                  <div className="xs dim" style={{ color: "var(--brass)" }}>
                     Estimated Margin Saved via SyncPro:
                   </div>
-                  <div className="figure mt-1" style={{ color: "var(--success)", fontSize: 32 }}>
+                  <div className="figure mt-1" style={{ color: "var(--brass)", fontSize: 32 }}>
                     ${(potentialSavings / 1000000).toFixed(2)}M
                   </div>
                   <div className="xs mt-1" style={{ color: "var(--text-2)" }}>

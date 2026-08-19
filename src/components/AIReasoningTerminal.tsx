@@ -125,18 +125,18 @@ export function AIReasoningTerminal() {
         </div>
 
         {/* Terminal Window */}
-        <div className="terminal-frame">
+        <div className="terminal-frame" style={{ background: "var(--bg-sunken)", borderColor: "var(--line-strong)" }}>
           <div className="terminal-bar">
             <div className="row gap-2">
-              <span className="tl" style={{ background: "#E8685F" }} />
-              <span className="tl" style={{ background: "#E6C24A" }} />
-              <span className="tl" style={{ background: "#46C28E" }} />
+              <span className="tl" style={{ background: "#FF4500" }} />
+              <span className="tl" style={{ background: "#D49B4B" }} />
+              <span className="tl" style={{ background: "#2563EB" }} />
             </div>
             <span className="mono xs dim" style={{ marginLeft: 12 }}>
               syncpro-agent-core // corroboration-pipeline v2.4
             </span>
             <span className="status xs" style={{ marginLeft: "auto" }}>
-              <span className="sdot sdot-live pulse" /> 
+              <span className="sdot pulse" style={{ background: isRunning ? "var(--brand)" : "var(--brass)" }} /> 
               {isRunning ? "Corroborating Evidence..." : "Pipeline Verified"}
             </span>
           </div>

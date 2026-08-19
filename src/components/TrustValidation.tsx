@@ -22,7 +22,7 @@ export function TrustValidation() {
 
             <div className="stack-sm">
               <div className="row gap-2">
-                <Lock className="ico t-success" style={{ width: 18, height: 18 }} />
+                <Lock className="ico" style={{ width: 18, height: 18, color: "var(--brass)" }} />
                 <h3 className="h4">Tamper-Evident Audit Trails</h3>
               </div>
               <p className="xs dim" style={{ lineHeight: 1.6 }}>

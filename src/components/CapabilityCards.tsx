@@ -10,7 +10,7 @@ const CAPABILITIES = [
       "Unlike generic LLMs that guess activity links, SyncPro anchors all reasoning to a deterministic project knowledge graph. Every location, contractor, trade, and CPM activity code is uniquely resolved.",
   },
   {
-    icon: <ShieldCheck className="ico" style={{ color: "var(--success)" }} />,
+    icon: <ShieldCheck className="ico" style={{ color: "var(--brass)" }} />,
     title: "Confidence-Gated Commit Engine",
     badge: "Multi-Source Proof",
     description:
