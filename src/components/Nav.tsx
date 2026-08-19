@@ -37,6 +37,9 @@ export function Nav() {
         </div>
 
         <div className="row gap-3">
+          <span className="status xs desktop-nav" style={{ marginRight: 6 }}>
+            <span className="sdot sdot-live pulse" /> Engine v2.4 Active
+          </span>
           <a className="btn btn-primary btn-sm" href="#waitlist">
             Request Early Access
             <ArrowRight className="ico" />

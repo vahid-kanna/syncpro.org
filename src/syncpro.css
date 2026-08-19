@@ -9,51 +9,52 @@
 
 /* ---- 1. Tokens -------------------------------------------------------- */
 :root {
-  /* Surfaces — Deep Matte Obsidian & Architectural Carbon */
-  --bg-base:     #08090B;
-  --bg-sunken:   #0D0F13;
-  --bg-surface:  #12151B;
-  --bg-elevated: #181D25;
-  --bg-input:    #0D0F13;
-  --bg-hover:    rgba(245,245,240,.04);
+  /* Surfaces — Deep Midnight Obsidian & High-Tech Void */
+  --bg-base:     #030712;
+  --bg-sunken:   #080C16;
+  --bg-surface:  #0E1422;
+  --bg-elevated: #151D30;
+  --bg-input:    #080C16;
+  --bg-hover:    rgba(255,255,255,.05);
 
-  /* Hairlines — Sharp Technical Drafting Rules */
-  --line:        rgba(245,245,240,.08);
-  --line-strong: rgba(245,245,240,.15);
-  --line-soft:   rgba(245,245,240,.045);
+  /* Hairlines — Luminous Glass & Cyber Wireframes */
+  --line:        rgba(255,255,255,.09);
+  --line-strong: rgba(0,245,155,.28);
+  --line-soft:   rgba(255,255,255,.04);
 
-  /* Text — Warm Architectural Chalk & Bone */
-  --text:   #F5F5F0;
-  --text-2: #ACB5C2;
-  --text-3: #707A8A;
-  --text-4: #4A5361;
+  /* Text — Pure Crisp Snow White & Sleek Slate */
+  --text:   #FFFFFF;
+  --text-2: #CBD5E1;
+  --text-3: #94A3B8;
+  --text-4: #64748B;
 
-  /* Brand — Signal Cadmium Orange: high-visibility construction authority */
-  --brand:     #FF6B00;
-  --brand-600: #E65C00;
-  --brand-500: #FF6B00;
-  --brand-400: #FF8533;
-  --brand-300: #FFA766;
-  --steel:     #2563EB;
-  --steel-bg:  rgba(37,99,235,.12);
-  --steel-line:rgba(37,99,235,.30);
+  /* Brand — Electric Cyber Emerald: luminous, intelligent, authoritative */
+  --brand:     #00F59B;
+  --brand-600: #059669;
+  --brand-500: #00F59B;
+  --brand-400: #34D399;
+  --brand-300: #6EE7B7;
+  --steel:     #38BDF8;
+  --steel-bg:  rgba(56,189,248,.12);
+  --steel-line:rgba(56,189,248,.30);
 
   /* Semantic — health / risk / status ONLY */
-  --success: #10B981;  --success-bg: rgba(16,185,129,.11);  --success-line: rgba(16,185,129,.26);
-  --warning: #F59E0B;  --warning-bg: rgba(245,158,11,.12);  --warning-line: rgba(245,158,11,.28);
-  --danger:  #EF4444;  --danger-bg:  rgba(239,68,68,.11);   --danger-line:  rgba(239,68,68,.28);
-  --info:    #2563EB;  --info-bg:    rgba(37,99,235,.11);   --info-line:    rgba(37,99,235,.26);
+  --success: #00F59B;  --success-bg: rgba(0,245,155,.12);   --success-line: rgba(0,245,155,.30);
+  --warning: #FBBF24;  --warning-bg: rgba(251,191,36,.12);  --warning-line: rgba(251,191,36,.30);
+  --danger:  #F87171;  --danger-bg:  rgba(248,113,113,.12); --danger-line:  rgba(248,113,113,.30);
+  --info:    #38BDF8;  --info-bg:    rgba(56,189,248,.12);  --info-line:    rgba(56,189,248,.30);
 
-  --brand-bg:   rgba(255,107,0,.12);
-  --brand-line: rgba(255,107,0,.35);
+  --brand-bg:   rgba(0,245,155,.12);
+  --brand-line: rgba(0,245,155,.35);
 
-  /* Radius — precise, not bubbly */
-  --r-xs: 3px; --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 10px; --r-2xl: 14px; --r-full: 999px;
+  /* Radius — precise modern curves */
+  --r-xs: 4px; --r-sm: 6px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px; --r-2xl: 20px; --r-full: 999px;
 
-  /* Elevation — subtle, no glow */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.45);
-  --shadow-md: 0 6px 20px -10px rgba(0,0,0,.7);
-  --shadow-pop: 0 16px 40px -16px rgba(0,0,0,.8), 0 0 0 1px var(--line);
+  /* Elevation — Luminous depth */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.6);
+  --shadow-md: 0 8px 24px -8px rgba(0,0,0,.8);
+  --shadow-pop: 0 20px 50px -15px rgba(0,0,0,.9), 0 0 0 1px var(--line);
+  --glow-brand: 0 0 25px rgba(0,245,155,.22);
 
   /* Type — Bespoke Non-AI Architectural Pairing */
   --font-display: "Syne", "Plus Jakarta Sans", sans-serif;
