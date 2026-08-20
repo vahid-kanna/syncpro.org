@@ -9,60 +9,61 @@
 
 /* ---- 1. Tokens -------------------------------------------------------- */
 :root {
-  /* Surfaces — Deep Matte Slate-Obsidian & Machine Charcoal */
-  --bg-base:     #0A0B0E;
-  --bg-sunken:   #0F1116;
-  --bg-surface:  #151820;
-  --bg-elevated: #1C202C;
-  --bg-input:    #0F1116;
-  --bg-hover:    rgba(247,246,242,.04);
+  /* Surfaces — Claude Slate Ink & Monochromatic Restraint */
+  --bg-base:     #0E0F12;
+  --bg-sunken:   #131418;
+  --bg-surface:  #191A20;
+  --bg-elevated: #21232B;
+  --bg-input:    #131418;
+  --bg-hover:    rgba(250,249,245,.04);
 
-  /* Hairlines — Precise Architectural Drafting Rules */
-  --line:        rgba(247,246,242,.08);
-  --line-strong: rgba(255,69,0,.32);
-  --line-soft:   rgba(247,246,242,.04);
+  /* Hairlines — Precise 1px Architectural Rules */
+  --line:        rgba(250,249,245,.08);
+  --line-strong: rgba(217,119,87,.32);
+  --line-soft:   rgba(250,249,245,.04);
 
-  /* Text — Warm Architectural Bone & Titanium Slate */
-  --text:   #F7F6F2;
-  --text-2: #B2B9C6;
-  --text-3: #798292;
-  --text-4: #4D5666;
+  /* Text — Claude Ivory Cream & Warm Muted Stone */
+  --text:   #FAF9F5;
+  --text-2: #B0AEA5;
+  --text-3: #828078;
+  --text-4: #54524C;
 
-  /* Brand — Signal Safety Vermilion & Architectural Brass (NO GREEN / NO PINK / NO VIOLET) */
-  --brand:     #FF4500;
-  --brand-600: #E03D00;
-  --brand-500: #FF4500;
-  --brand-400: #FF5E1E;
-  --brand-300: #FF8554;
+  /* Brand — Claude Terracotta / Coral (#D97757) & Solar Amber (#D49B4B) */
+  --brand:     #D97757;
+  --brand-600: #C46445;
+  --brand-500: #D97757;
+  --brand-400: #E08C6F;
+  --brand-300: #EAB29E;
   --brass:     #D49B4B;
   --brass-bg:  rgba(212,155,75,.12);
   --brass-line:rgba(212,155,75,.30);
-  --steel:     #2563EB;
-  --steel-bg:  rgba(37,99,235,.12);
-  --steel-line:rgba(37,99,235,.30);
+  --steel:     #6A9BCC;
+  --steel-bg:  rgba(106,155,204,.12);
+  --steel-line:rgba(106,155,204,.30);
 
-  /* Semantic — Non-AI Architectural Indicators */
+  /* Semantic — Restrained Architectural Indicators */
   --success: #D49B4B;  --success-bg: rgba(212,155,75,.12);  --success-line: rgba(212,155,75,.30);
-  --warning: #EAB308;  --warning-bg: rgba(234,179,8,.12);   --warning-line: rgba(234,179,8,.30);
-  --danger:  #EF4444;  --danger-bg:  rgba(239,68,68,.12);   --danger-line:  rgba(239,68,68,.30);
-  --info:    #2563EB;  --info-bg:    rgba(37,99,235,.12);   --info-line:    rgba(37,99,235,.30);
+  --warning: #E59838;  --warning-bg: rgba(229,152,56,.12);  --warning-line: rgba(229,152,56,.30);
+  --danger:  #E05252;  --danger-bg:  rgba(224,82,82,.12);   --danger-line:  rgba(224,82,82,.30);
+  --info:    #6A9BCC;  --info-bg:    rgba(106,155,204,.12); --info-line:    rgba(106,155,204,.30);
 
-  --brand-bg:   rgba(255,69,0,.12);
-  --brand-line: rgba(255,69,0,.35);
+  --brand-bg:   rgba(217,119,87,.12);
+  --brand-line: rgba(217,119,87,.35);
 
-  /* Radius — Precise architectural chamfers */
-  --r-xs: 3px; --r-sm: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 10px; --r-2xl: 14px; --r-full: 999px;
+  /* Radius — Precise 4-step scale */
+  --r-xs: 4px; --r-sm: 6px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px; --r-2xl: 20px; --r-full: 999px;
 
-  /* Elevation — Depth without generic glow blobs */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
-  --shadow-md: 0 8px 24px -8px rgba(0,0,0,.75);
-  --shadow-pop: 0 20px 50px -15px rgba(0,0,0,.85), 0 0 0 1px var(--line);
-  --glow-brand: 0 0 20px rgba(255,69,0,.22);
+  /* Elevation — Understated depth */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-md: 0 8px 24px -8px rgba(0,0,0,.6);
+  --shadow-pop: 0 20px 50px -15px rgba(0,0,0,.75), 0 0 0 1px var(--line);
+  --glow-brand: 0 0 20px rgba(217,119,87,.2);
 
-  /* Type — Bespoke Non-AI Architectural Pairing */
-  --font-display: "Syne", "Playfair Display", "Plus Jakarta Sans", sans-serif;
+  /* Type — Claude Editorial & Technical Mono Pairing */
+  --font-display: "Newsreader", "Lora", "Playfair Display", serif;
   --font: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --mono: "Space Mono", "JetBrains Mono", monospace;
+  --mono: "JetBrains Mono", "Space Mono", monospace;
+
 
 
   --ease: cubic-bezier(.4,0,.2,1);
