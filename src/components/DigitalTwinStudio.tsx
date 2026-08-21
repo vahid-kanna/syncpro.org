@@ -28,8 +28,8 @@ const HOTSPOTS: Hotspot[] = [
     cpmCode: "A1084",
     status: "verified",
     confidence: 96,
-    top: "28%",
-    left: "52%",
+    top: "30%",
+    left: "50%",
     details: {
       trade: "Structural Concrete & Rebar",
       subcontractor: "Apex Formwork Ltd.",
@@ -45,8 +45,8 @@ const HOTSPOTS: Hotspot[] = [
     cpmCode: "A1042",
     status: "warning",
     confidence: 91,
-    top: "46%",
-    left: "38%",
+    top: "48%",
+    left: "40%",
     details: {
       trade: "Glazing & Facade Systems",
       subcontractor: "EuroGlass Engineering",
@@ -63,7 +63,7 @@ const HOTSPOTS: Hotspot[] = [
     status: "on-schedule",
     confidence: 94,
     top: "68%",
-    left: "58%",
+    left: "60%",
     details: {
       trade: "Mechanical & Electrical",
       subcontractor: "Delta MEP Services",
@@ -82,19 +82,32 @@ export function DigitalTwinStudio() {
   const [selectedPin, setSelectedPin] = useState<Hotspot>(HOTSPOTS[0]);
 
   return (
-    <section id="digital-twin-studio" className="wrap-lg section" style={{ borderTop: "1px solid var(--line)" }}>
+    <section id="digital-twin-studio" className="wrap-lg py-16" style={{ borderBottom: "1px solid var(--line)" }}>
       <div ref={reveal.ref} className={reveal.className}>
         {/* Section Header */}
         <div className="row between mb-8 wrapf" style={{ alignItems: "flex-end" }}>
           <div>
-            <div className="eyebrow mb-2" style={{ color: "var(--brass)" }}>
-              INTERACTIVE 3D BIM &amp; CPM STUDIO
+            <div className="row gap-2 mb-3">
+              <span className="sdot" style={{ background: "var(--brand)" }} />
+              <span className="mono xs" style={{ color: "var(--brand)", letterSpacing: "0.08em" }}>
+                INTERACTIVE 3D CAD &amp; CPM STUDIO
+              </span>
             </div>
-            <h2 className="h1">
-              Inspect the living spatial twin of your project controls.
+            <h2
+              className="display"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(32px, 3.8vw, 52px)",
+                lineHeight: 1.1,
+                color: "var(--text)",
+                maxWidth: "840px",
+              }}
+            >
+              Living spatial twin of your <br />
+              <span style={{ fontStyle: "italic", color: "var(--brass)" }}>project controls.</span>
             </h2>
-            <p className="body mt-2 measure" style={{ color: "var(--text-3)" }}>
-              Click interactive telemetry pins to inspect real-time multi-source corroboration,
+            <p className="lead mt-3 measure" style={{ color: "var(--text-2)", fontSize: "16.5px" }}>
+              Click interactive floor pins to inspect real-time multi-source corroboration,
               critical path float variances, and automated contract notice drafts.
             </p>
           </div>
@@ -107,7 +120,7 @@ export function DigitalTwinStudio() {
               onClick={() => setActiveMode("digital-twin")}
             >
               <Layers className="ico" style={{ width: 13, height: 13 }} />
-              3D_DIGITAL_TWIN
+              3D_CAD_TWIN
             </button>
             <button
               type="button"
@@ -115,7 +128,7 @@ export function DigitalTwinStudio() {
               onClick={() => setActiveMode("cpm-network")}
             >
               <Cpu className="ico" style={{ width: 13, height: 13 }} />
-              CPM_COMMAND_CENTER
+              CPM_NETWORK
             </button>
             <button
               type="button"
@@ -123,7 +136,7 @@ export function DigitalTwinStudio() {
               onClick={() => setActiveMode("panoramic-overview")}
             >
               <Eye className="ico" style={{ width: 13, height: 13 }} />
-              SITE_PANORAMA
+              SITE_COORDINATES
             </button>
           </div>
         </div>
@@ -137,24 +150,25 @@ export function DigitalTwinStudio() {
             alignItems: "stretch",
           }}
         >
-          {/* Left: Interactive 3D Digital Twin Viewport */}
+          {/* Left: Interactive Vector CAD Wireframe Viewport (Zero Image Dependencies) */}
           <div
             className="card"
             style={{
               position: "relative",
               padding: 0,
               overflow: "hidden",
-              minHeight: 480,
-              background: "var(--bg-sunken)",
+              minHeight: 520,
+              background: "rgba(10, 11, 14, 0.95)",
               border: "1px solid var(--line-strong)",
               boxShadow: "var(--shadow-pop)",
+              borderRadius: "var(--r-md)",
             }}
           >
             {/* Viewport Header Bar */}
             <div
               className="row between px-4 py-3"
               style={{
-                background: "rgba(10, 11, 14, 0.95)",
+                background: "rgba(18, 20, 24, 0.95)",
                 borderBottom: "1px solid var(--line)",
                 fontSize: 12,
                 position: "absolute",
@@ -166,113 +180,151 @@ export function DigitalTwinStudio() {
             >
               <div className="row gap-2 mono xs" style={{ color: "var(--brass)" }}>
                 <Activity className="ico pulse" style={{ width: 13, height: 13, color: "var(--brand)" }} />
-                <span>MEGAPROJECT_NODE_TOWER_01 // 3D_CAD_LIVE</span>
+                <span>MEGAPROJECT_NODE_TOWER_01 // VECTOR_CAD_RENDER</span>
               </div>
-              <span className="mono xs dim">INTERPOLATION: 60 FPS · LATENCY: 0.04ms</span>
+              <span className="mono xs dim">VECTOR ENGINE: 60 FPS · LATENCY: 0.04ms</span>
             </div>
 
-            {/* Background High-Definition AI Asset */}
-            <div style={{ position: "relative", width: "100%", height: "100%", minHeight: 480 }}>
-              <img
-                src={
-                  activeMode === "digital-twin"
-                    ? "/digital-twin.jpg"
-                    : activeMode === "cpm-network"
-                    ? "/cpm-command-center.jpg"
-                    : "/panoramic-command.jpg"
-                }
-                alt="3D Digital Twin BIM Model"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  filter: "brightness(0.92) contrast(1.08)",
-                  transition: "all 0.4s ease",
-                }}
-              />
-              <div
+            {/* Pure Interactive Vector CAD Wireframe Blueprint Canvas */}
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                minHeight: 520,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "radial-gradient(ellipse at 50% 50%, rgba(217, 119, 87, 0.05) 0%, rgba(10, 11, 14, 0.98) 75%)",
+              }}
+            >
+              {/* Architectural CAD Wireframe SVG */}
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 600 500"
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: "radial-gradient(circle at center, transparent 30%, rgba(10,11,14,0.6) 100%)",
-                  pointerEvents: "none",
+                  width: "100%",
+                  height: "100%",
+                  opacity: 0.85,
                 }}
-              />
+              >
+                {/* Structural Grid Hairlines */}
+                <line x1="100" y1="50" x2="500" y2="50" stroke="var(--line)" strokeWidth="1" strokeDasharray="4 4" />
+                <line x1="100" y1="450" x2="500" y2="450" stroke="var(--line)" strokeWidth="1" strokeDasharray="4 4" />
+                <line x1="300" y1="40" x2="300" y2="460" stroke="var(--brand-line)" strokeWidth="1" strokeDasharray="2 4" />
 
-              {/* Interactive Telemetry Hotspot Pins (Rendered on Digital Twin Mode) */}
-              {activeMode === "digital-twin" &&
-                HOTSPOTS.map((pin) => {
-                  const isSelected = selectedPin.id === pin.id;
+                {/* Skyscraper Floor Slices & Isometric Wireframe */}
+                {Array.from({ length: 18 }).map((_, i) => {
+                  const y = 80 + i * 20;
+                  const width = 180 - i * 3;
+                  const left = 300 - width / 2;
                   return (
-                    <button
-                      key={pin.id}
-                      type="button"
-                      onClick={() => setSelectedPin(pin)}
-                      style={{
-                        position: "absolute",
-                        top: pin.top,
-                        left: pin.left,
-                        transform: "translate(-50%, -50%)",
-                        zIndex: 30,
-                        cursor: "pointer",
-                        background: "none",
-                        border: "none",
-                        padding: 0,
-                      }}
-                    >
-                      {/* Pulse Ring */}
-                      <span
-                        style={{
-                          position: "absolute",
-                          inset: -8,
-                          borderRadius: "50%",
-                          background: pin.status === "warning" ? "rgba(255, 69, 0, 0.4)" : "rgba(212, 155, 75, 0.4)",
-                          animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-                        }}
+                    <g key={i}>
+                      <rect
+                        x={left}
+                        y={y}
+                        width={width}
+                        height={14}
+                        fill={i === 2 ? "rgba(217, 119, 87, 0.25)" : i === 8 ? "rgba(212, 155, 75, 0.25)" : "rgba(244, 243, 238, 0.03)"}
+                        stroke={i === 2 ? "var(--brand)" : i === 8 ? "var(--brass)" : "rgba(244, 243, 238, 0.15)"}
+                        strokeWidth={i === 2 || i === 8 ? "1.5" : "1"}
                       />
-                      {/* Pin Center */}
-                      <div
-                        style={{
-                          width: 22,
-                          height: 22,
-                          borderRadius: "50%",
-                          background: isSelected ? "#FFFFFF" : pin.status === "warning" ? "var(--brand)" : "var(--brass)",
-                          color: "#08090C",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: 10,
-                          fontWeight: 800,
-                          boxShadow: "0 0 16px rgba(0,0,0,0.8)",
-                          border: "2px solid #FFFFFF",
-                          transition: "all 0.2s ease",
-                          transform: isSelected ? "scale(1.25)" : "scale(1)",
-                        }}
+                      <text
+                        x={left - 30}
+                        y={y + 11}
+                        fill="rgba(244, 243, 238, 0.3)"
+                        fontFamily="var(--mono)"
+                        fontSize="9"
                       >
-                        {pin.level.replace("Level ", "L")}
-                      </div>
-                      {/* Pin Label Tag */}
-                      <div
-                        style={{
-                          position: "absolute",
-                          left: "50%",
-                          top: 28,
-                          transform: "translateX(-50%)",
-                          background: "rgba(10, 11, 14, 0.92)",
-                          border: `1px solid ${isSelected ? "var(--brand)" : "var(--line)"}`,
-                          padding: "2px 8px",
-                          borderRadius: 3,
-                          whiteSpace: "nowrap",
-                          pointerEvents: "none",
-                        }}
-                      >
-                        <span className="mono xs" style={{ fontSize: 10, color: isSelected ? "#FFFFFF" : "var(--brass)" }}>
-                          {pin.label}
-                        </span>
-                      </div>
-                    </button>
+                        L{(18 - i).toString().padStart(2, "0")}
+                      </text>
+                    </g>
                   );
                 })}
+
+                {/* Tower Crane Vector Schematic */}
+                <line x1="420" y1="40" x2="420" y2="280" stroke="var(--brand)" strokeWidth="2" />
+                <line x1="320" y1="40" x2="520" y2="40" stroke="var(--brand)" strokeWidth="2" />
+                <line x1="420" y1="40" x2="360" y2="70" stroke="var(--brand-line)" strokeWidth="1" />
+                <line x1="420" y1="40" x2="480" y2="70" stroke="var(--brand-line)" strokeWidth="1" />
+              </svg>
+
+              {/* Interactive Telemetry Hotspot Pins */}
+              {HOTSPOTS.map((pin) => {
+                const isSelected = selectedPin.id === pin.id;
+                return (
+                  <button
+                    key={pin.id}
+                    type="button"
+                    onClick={() => setSelectedPin(pin)}
+                    style={{
+                      position: "absolute",
+                      top: pin.top,
+                      left: pin.left,
+                      transform: "translate(-50%, -50%)",
+                      zIndex: 30,
+                      cursor: "pointer",
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                    }}
+                  >
+                    {/* Pulse Ring */}
+                    <span
+                      style={{
+                        position: "absolute",
+                        inset: -8,
+                        borderRadius: "50%",
+                        background: pin.status === "warning" ? "rgba(217, 119, 87, 0.4)" : "rgba(212, 155, 75, 0.4)",
+                        animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                      }}
+                    />
+                    {/* Pin Center */}
+                    <div
+                      style={{
+                        width: 24,
+                        height: 24,
+                        borderRadius: "50%",
+                        background: isSelected ? "#FFFFFF" : pin.status === "warning" ? "var(--brand)" : "var(--brass)",
+                        color: "#08090C",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 10,
+                        fontWeight: 800,
+                        boxShadow: "0 0 16px rgba(0,0,0,0.8)",
+                        border: "2px solid #FFFFFF",
+                        transition: "all 0.2s ease",
+                        transform: isSelected ? "scale(1.25)" : "scale(1)",
+                      }}
+                    >
+                      {pin.level.replace("Level ", "L")}
+                    </div>
+                    {/* Pin Label Tag */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: "50%",
+                        top: 28,
+                        transform: "translateX(-50%)",
+                        background: "rgba(10, 11, 14, 0.95)",
+                        border: `1px solid ${isSelected ? "var(--brand)" : "var(--line)"}`,
+                        padding: "3px 8px",
+                        borderRadius: 3,
+                        whiteSpace: "nowrap",
+                        pointerEvents: "none",
+                      }}
+                    >
+                      <span className="mono xs" style={{ fontSize: 10.5, color: isSelected ? "#FFFFFF" : "var(--brass)" }}>
+                        {pin.label}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
 
             {/* Bottom Controls Overlay */}
@@ -283,7 +335,7 @@ export function DigitalTwinStudio() {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                background: "rgba(10, 11, 14, 0.92)",
+                background: "rgba(18, 20, 24, 0.95)",
                 borderTop: "1px solid var(--line)",
                 zIndex: 20,
               }}
@@ -293,7 +345,7 @@ export function DigitalTwinStudio() {
                 Click pins to inspect live schedule corroboration
               </span>
               <span className="mono xs" style={{ color: "var(--brand)" }}>
-                ACTIVE PIN: {selectedPin.cpmCode} ({selectedPin.level})
+                ACTIVE PIN: #{selectedPin.cpmCode} ({selectedPin.level})
               </span>
             </div>
           </div>
@@ -302,10 +354,11 @@ export function DigitalTwinStudio() {
           <div
             className="card stack"
             style={{
-              background: "var(--bg-surface)",
+              background: "rgba(18, 20, 24, 0.95)",
               border: "1px solid var(--line)",
               padding: 24,
               justifyContent: "space-between",
+              borderRadius: "var(--r-md)",
             }}
           >
             <div>
@@ -313,7 +366,7 @@ export function DigitalTwinStudio() {
               <div className="row between mb-4 pb-3" style={{ borderBottom: "1px solid var(--line)" }}>
                 <div>
                   <span className="mono xs dim">INSPECTION TARGET</span>
-                  <h3 className="h3 mt-1" style={{ color: "var(--text)" }}>
+                  <h3 className="h3 mt-1" style={{ color: "var(--text)", fontSize: "18px" }}>
                     {selectedPin.label}
                   </h3>
                 </div>
@@ -362,9 +415,9 @@ export function DigitalTwinStudio() {
                       key={idx}
                       className="row gap-2 xs"
                       style={{
-                        padding: "6px 10px",
-                        background: "var(--bg-sunken)",
-                        borderRadius: 4,
+                        padding: "8px 12px",
+                        background: "rgba(10, 11, 14, 0.8)",
+                        borderRadius: "var(--r-xs)",
                         border: "1px solid var(--line-soft)",
                       }}
                     >
@@ -378,16 +431,16 @@ export function DigitalTwinStudio() {
               {/* Staged Action */}
               <div
                 style={{
-                  padding: 12,
-                  background: selectedPin.status === "warning" ? "rgba(255, 69, 0, 0.08)" : "rgba(212, 155, 75, 0.08)",
+                  padding: 14,
+                  background: selectedPin.status === "warning" ? "rgba(217, 119, 87, 0.08)" : "rgba(212, 155, 75, 0.08)",
                   border: `1px solid ${selectedPin.status === "warning" ? "var(--brand-line)" : "var(--brass-line)"}`,
-                  borderRadius: 6,
+                  borderRadius: "var(--r-xs)",
                 }}
               >
                 <span className="mono xs dim block" style={{ color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)" }}>
                   RECOMMENDED ACTION:
                 </span>
-                <p className="xs mt-1" style={{ color: "var(--text)", fontWeight: 600 }}>
+                <p className="xs mt-1" style={{ color: "var(--text)", fontWeight: 600, margin: 0 }}>
                   {selectedPin.details.varianceAction}
                 </p>
               </div>
