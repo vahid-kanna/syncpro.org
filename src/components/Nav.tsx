@@ -21,7 +21,7 @@ export function Nav() {
       className="nav"
       style={{
         height: "56px",
-        background: "rgba(10, 11, 14, 0.92)",
+        background: "rgba(11, 12, 14, 0.94)",
         backdropFilter: "blur(16px)",
         borderBottom: "1px solid var(--line)",
         position: "sticky",
@@ -47,13 +47,13 @@ export function Nav() {
         </div>
 
         {/* Center: Monospaced Telemetry Navigation */}
-        <nav className="desktop-nav row gap-6 mono xs" style={{ letterSpacing: "0.08em" }}>
-          <a href="#hero" className="nav-link">NODE_MAP</a>
-          <a href="#how" className="nav-link">RECONCILIATION</a>
-          <a href="#demo" className="nav-link">LIVE_TELEMETRY</a>
-          <a href="#roi" className="nav-link">RISK_MODEL</a>
-          <a href="#capabilities" className="nav-link">CAPABILITIES</a>
-          <a href="#faq" className="nav-link">SPEC_FAQ</a>
+        <nav className="desktop-nav row gap-5 mono xs" style={{ letterSpacing: "0.07em" }}>
+          <a href="#hero" className="nav-link">TIME_MACHINE</a>
+          <a href="#signal-deconstructor" className="nav-link">DECONSTRUCTOR</a>
+          <a href="#digital-twin-studio" className="nav-link">DIGITAL_TWIN</a>
+          <a href="#dcma-scanner" className="nav-link">DCMA_14</a>
+          <a href="#claims-shield" className="nav-link">DISPUTE_SHIELD</a>
+          <a href="#financial-sandbox" className="nav-link">CAPITAL_SANDBOX</a>
         </nav>
 
         {/* Right: Real-Time Clock + Action */}
@@ -64,7 +64,7 @@ export function Nav() {
           </div>
 
           <a className="btn btn-primary btn-sm mono xs" href="#waitlist" style={{ fontWeight: 700, letterSpacing: "0.05em" }}>
-            INITIALIZE_SEQUENCE
+            INITIALIZE_PILOT
             <ArrowRight className="ico" />
           </a>
 
@@ -100,19 +100,19 @@ export function Nav() {
             boxShadow: "var(--shadow-pop)",
           }}
         >
-          <a href="#hero" onClick={() => setMobileOpen(false)} className="mono xs">NODE_MAP</a>
-          <a href="#how" onClick={() => setMobileOpen(false)} className="mono xs">RECONCILIATION</a>
-          <a href="#demo" onClick={() => setMobileOpen(false)} className="mono xs">LIVE_TELEMETRY</a>
-          <a href="#roi" onClick={() => setMobileOpen(false)} className="mono xs">RISK_MODEL</a>
-          <a href="#capabilities" onClick={() => setMobileOpen(false)} className="mono xs">CAPABILITIES</a>
-          <a href="#faq" onClick={() => setMobileOpen(false)} className="mono xs">SPEC_FAQ</a>
+          <a href="#hero" className="nav-link" onClick={() => setMobileOpen(false)}>TIME_MACHINE</a>
+          <a href="#signal-deconstructor" className="nav-link" onClick={() => setMobileOpen(false)}>SIGNAL_DECONSTRUCTOR</a>
+          <a href="#digital-twin-studio" className="nav-link" onClick={() => setMobileOpen(false)}>3D_DIGITAL_TWIN</a>
+          <a href="#dcma-scanner" className="nav-link" onClick={() => setMobileOpen(false)}>DCMA_14_DIAGNOSTICS</a>
+          <a href="#claims-shield" className="nav-link" onClick={() => setMobileOpen(false)}>DISPUTE_SHIELD</a>
+          <a href="#financial-sandbox" className="nav-link" onClick={() => setMobileOpen(false)}>CAPITAL_SANDBOX</a>
           <a
+            className="btn btn-primary btn-sm mono xs"
             href="#waitlist"
             onClick={() => setMobileOpen(false)}
-            className="btn btn-primary btn-sm mt-2 mono xs"
-            style={{ justifyContent: "center", fontWeight: 700 }}
+            style={{ marginTop: 8, justifyContent: "center" }}
           >
-            INITIALIZE_SEQUENCE
+            INITIALIZE_PILOT
           </a>
         </div>
       )}

@@ -1,125 +1,233 @@
 import { useState } from "react";
-import { Calculator, ArrowRight } from "lucide-react";
+import { Sliders, ShieldCheck, ArrowRight } from "lucide-react";
 import { useReveal } from "../lib/useReveal";
 
 export function DelayCostCalculator() {
-  const [projectValue, setProjectValue] = useState(150); // in millions
-  const [delayWeeks, setDelayWeeks] = useState(4); // in weeks
   const reveal = useReveal();
+  const [capexM, setCapexM] = useState<number>(250); // $250M CAPEX
+  const [delayWeeks, setDelayWeeks] = useState<number>(6); // 6 Weeks delay
 
-  // Industry estimation formulas (FMI / Arcadis benchmarks)
-  // Daily LD rate is typically 0.05% - 0.1% of project value / day, capped
-  const dailyLdRate = Math.round((projectValue * 1000000 * 0.0006));
-  const totalLdExposure = dailyLdRate * delayWeeks * 7;
-  const estimatedDisputeCost = Math.round(projectValue * 1000000 * 0.04);
-  const potentialSavings = Math.round(totalLdExposure * 0.65 + estimatedDisputeCost * 0.5);
+  // Financial Calculations
+  const dailyLD = Math.round((capexM * 1000000 * 0.001) / 7); // ~0.1% per week / 7 days
+  const totalLDs = dailyLD * (delayWeeks * 7);
+  const monthlyPrelims = Math.round((capexM * 1000000 * 0.08) / 24); // 8% total prelims over 24 mo
+  const extendedPrelims = Math.round((monthlyPrelims / 4.33) * delayWeeks);
+  const carryingCostInterest = Math.round((capexM * 1000000 * 0.07 * (delayWeeks / 52))); // 7% cost of capital
+  const totalExposure = totalLDs + extendedPrelims + carryingCostInterest;
+
+  // SyncPro 3-week early detection recovery (typically recovers 70-85% of critical path slip)
+  const syncproRecovery = Math.round(totalExposure * 0.76);
 
   return (
-    <section id="roi" className="wrap-lg section-sm" style={{ borderTop: "1px solid var(--line)" }}>
-      <div ref={reveal.ref} className={reveal.className}>
-        <div className="inset" style={{ padding: "40px 32px", background: "var(--bg-surface)", borderColor: "var(--line-strong)" }}>
-          <div className="grid" style={{ gridTemplateColumns: "1.1fr 1fr", gap: 48, alignItems: "center" }}>
-            <div>
-              <div className="eyebrow mb-2 t-brand">INTERACTIVE VALUE CALCULATOR</div>
-              <h2 className="h1">Quantify your project's delay exposure &amp; dispute risk.</h2>
-              <p className="body mt-3 measure">
-                On capital megaprojects, a 2-week blind spot on the critical path often compounds into
-                months of cumulative delay, liquidated damages, and protracted contractor claims.
-              </p>
+    <section
+      id="financial-sandbox"
+      className="wrap-lg py-16"
+      style={{
+        position: "relative",
+        borderBottom: "1px solid var(--line)",
+      }}
+    >
+      <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
+        <div className="row gap-2 mb-3">
+          <span className="sdot" style={{ background: "var(--brass)" }} />
+          <span className="mono xs" style={{ color: "var(--brass)", letterSpacing: "0.08em" }}>
+            ENGINEERING INSTRUMENT 04 // MEGAPROJECT CAPITAL EXPOSURE SANDBOX
+          </span>
+        </div>
+        <h2
+          className="display"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(32px, 3.8vw, 52px)",
+            lineHeight: 1.1,
+            color: "var(--text)",
+            maxWidth: "840px",
+          }}
+        >
+          Quantify the cost of <br />
+          <span style={{ fontStyle: "italic", color: "var(--brand)" }}>3 weeks of schedule blindness.</span>
+        </h2>
+        <p className="lead mt-4 measure" style={{ color: "var(--text-2)", fontSize: "16.5px" }}>
+          On a $250M megaproject, every week of undetected critical path slip costs ~$400,000 in liquidated damages,
+          extended preliminaries, and carrying costs. Calculate your project's exposure below.
+        </p>
+      </div>
 
-              {/* Sliders */}
-              <div className="stack-lg mt-6">
-                <div>
-                  <div className="row between mb-2">
-                    <label className="xs strong">Total Project Contract Value (CAPEX):</label>
-                    <span className="mono t-brand" style={{ fontSize: 16, fontWeight: 700 }}>
-                      ${projectValue} Million
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={20}
-                    max={1000}
-                    step={10}
-                    value={projectValue}
-                    onChange={(e) => setProjectValue(Number(e.target.value))}
-                    className="slider-range"
-                  />
-                  <div className="row between xs dim mt-1">
-                    <span>$20M</span>
-                    <span>$500M</span>
-                    <span>$1B+</span>
-                  </div>
-                </div>
+      <div className="grid-2 gap-6">
+        {/* Left Column: Interactive Titanium Sliders */}
+        <div
+          className="card"
+          style={{
+            background: "rgba(18, 20, 24, 0.95)",
+            border: "1px solid var(--line)",
+            padding: "28px",
+            borderRadius: "var(--r-md)",
+          }}
+        >
+          <div className="row between mb-6 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+            <span className="mono xs" style={{ color: "var(--brass)" }}>
+              PROJECT PARAMETERS
+            </span>
+            <Sliders className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
+          </div>
 
-                <div>
-                  <div className="row between mb-2">
-                    <label className="xs strong">Estimated Critical Path Delay Exposure:</label>
-                    <span className="mono t-warning" style={{ fontSize: 16, fontWeight: 700 }}>
-                      {delayWeeks} Weeks
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={1}
-                    max={16}
-                    step={1}
-                    value={delayWeeks}
-                    onChange={(e) => setDelayWeeks(Number(e.target.value))}
-                    className="slider-range"
-                  />
-                  <div className="row between xs dim mt-1">
-                    <span>1 Week</span>
-                    <span>8 Weeks</span>
-                    <span>16 Weeks</span>
-                  </div>
-                </div>
+          {/* Slider 1: Project CAPEX */}
+          <div className="mb-6">
+            <div className="row between mb-2">
+              <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>Total Project CAPEX</span>
+              <span className="mono xs" style={{ color: "var(--brand)", fontSize: "15px", fontWeight: 700 }}>
+                ${capexM}M USD
+              </span>
+            </div>
+            <input
+              type="range"
+              min={20}
+              max={1500}
+              step={10}
+              value={capexM}
+              onChange={(e) => setCapexM(Number(e.target.value))}
+              style={{
+                width: "100%",
+                accentColor: "var(--brand)",
+                cursor: "pointer",
+              }}
+            />
+            <div className="row between mt-1">
+              <span className="mono xs dim">$20M (Medium Civil)</span>
+              <span className="mono xs dim">$1.5B (Megaproject)</span>
+            </div>
+          </div>
+
+          {/* Slider 2: Unmitigated Critical Path Delay Weeks */}
+          <div className="mb-6">
+            <div className="row between mb-2">
+              <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>Unmitigated Float Slip</span>
+              <span className="mono xs" style={{ color: "var(--brand)", fontSize: "15px", fontWeight: 700 }}>
+                {delayWeeks} Weeks ({delayWeeks * 7} Days)
+              </span>
+            </div>
+            <input
+              type="range"
+              min={1}
+              max={16}
+              step={1}
+              value={delayWeeks}
+              onChange={(e) => setDelayWeeks(Number(e.target.value))}
+              style={{
+                width: "100%",
+                accentColor: "var(--brand)",
+                cursor: "pointer",
+              }}
+            />
+            <div className="row between mt-1">
+              <span className="mono xs dim">1 Week Slip</span>
+              <span className="mono xs dim">16 Weeks Slip</span>
+            </div>
+          </div>
+
+          {/* Key Breakdown Metrics */}
+          <div className="col gap-2 pt-3" style={{ borderTop: "1px solid var(--line-soft)" }}>
+            <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.6)", borderRadius: "var(--r-xs)" }}>
+              <span className="xs dim">Contractual Liquidated Damages (LDs):</span>
+              <span className="mono xs" style={{ color: "var(--text)" }}>
+                ${(totalLDs / 1000000).toFixed(2)}M
+              </span>
+            </div>
+            <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.6)", borderRadius: "var(--r-xs)" }}>
+              <span className="xs dim">Extended Site Preliminaries (Site General Conditions):</span>
+              <span className="mono xs" style={{ color: "var(--text)" }}>
+                ${(extendedPrelims / 1000000).toFixed(2)}M
+              </span>
+            </div>
+            <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.6)", borderRadius: "var(--r-xs)" }}>
+              <span className="xs dim">Capital Carrying &amp; Financing Interest:</span>
+              <span className="mono xs" style={{ color: "var(--text)" }}>
+                ${(carryingCostInterest / 1000000).toFixed(2)}M
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Financial Exposure Output & SyncPro Margin Recovery */}
+        <div
+          className="card"
+          style={{
+            background: "rgba(18, 20, 24, 0.95)",
+            border: "1px solid var(--line-strong)",
+            padding: "28px",
+            borderRadius: "var(--r-md)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <div className="row between mb-4 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+              <span className="mono xs" style={{ color: "var(--brand)" }}>
+                TOTAL CAPITAL AT RISK
+              </span>
+              <span className="status xs" style={{ color: "var(--brand)" }}>
+                UNMITIGATED STATUS
+              </span>
+            </div>
+
+            <div style={{ marginBottom: "24px" }}>
+              <div className="mono xs dim mb-1">TOTAL FINANCIAL EXPOSURE:</div>
+              <div
+                style={{
+                  fontFamily: "var(--mono)",
+                  fontSize: "clamp(36px, 4vw, 54px)",
+                  fontWeight: 700,
+                  color: "var(--brand)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                ${(totalExposure / 1000000).toFixed(2)}M
               </div>
             </div>
 
-            {/* Live Calculation Output Card */}
-            <div className="card" style={{ background: "var(--bg-sunken)", borderColor: "var(--brand-line)", padding: 28 }}>
-              <div className="row between mb-4">
-                <span className="status xs">
-                  <Calculator className="ico t-brand" style={{ width: 14, height: 14 }} />
-                  Financial Risk Model
+            {/* SyncPro Recovery Shield Box */}
+            <div
+              style={{
+                padding: "20px",
+                background: "rgba(10, 11, 14, 0.9)",
+                border: "1px solid var(--brass-line)",
+                borderRadius: "var(--r-xs)",
+              }}
+            >
+              <div className="row between mb-2">
+                <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700 }}>
+                  SYNCPRO REVENUE &amp; MARGIN RECOVERY
                 </span>
-                <span className="tag tag-brand">Industry Benchmark</span>
+                <ShieldCheck className="ico" style={{ width: 15, height: 15, color: "var(--brass)" }} />
               </div>
-
-              <div className="stack gap-3">
-                <div className="row between xs" style={{ padding: "8px 0", borderBottom: "1px solid var(--line-soft)" }}>
-                  <span className="dim">Estimated Liquidated Damages (LDs):</span>
-                  <span className="mono" style={{ color: "var(--danger)", fontWeight: 600 }}>
-                    ~${(totalLdExposure / 1000000).toFixed(2)}M
-                  </span>
-                </div>
-
-                <div className="row between xs" style={{ padding: "8px 0", borderBottom: "1px solid var(--line-soft)" }}>
-                  <span className="dim">Estimated Dispute &amp; Claims Exposure:</span>
-                  <span className="mono" style={{ color: "var(--warning)", fontWeight: 600 }}>
-                    ~${(estimatedDisputeCost / 1000000).toFixed(2)}M
-                  </span>
-                </div>
-
-                <div className="mt-3 p-3" style={{ background: "var(--brass-bg)", border: "1px solid var(--brass-line)", borderRadius: 8 }}>
-                  <div className="xs dim" style={{ color: "var(--brass)" }}>
-                    Estimated Margin Saved via SyncPro:
-                  </div>
-                  <div className="figure mt-1" style={{ color: "var(--brass)", fontSize: 32 }}>
-                    ${(potentialSavings / 1000000).toFixed(2)}M
-                  </div>
-                  <div className="xs mt-1" style={{ color: "var(--text-2)" }}>
-                    Through 3-week early slip detection &amp; tamper-evident contemporaneous records.
-                  </div>
-                </div>
+              <div
+                style={{
+                  fontFamily: "var(--mono)",
+                  fontSize: "28px",
+                  fontWeight: 700,
+                  color: "var(--brass)",
+                  marginBottom: "8px",
+                }}
+              >
+                +${(syncproRecovery / 1000000).toFixed(2)}M Protected
               </div>
-
-              <a className="btn btn-primary btn-block mt-5" href="#waitlist">
-                Model Your Live Project
-                <ArrowRight className="ico" />
-              </a>
+              <p style={{ fontSize: "12.5px", color: "var(--text-2)", lineHeight: 1.4, margin: 0 }}>
+                By detecting float erosion 21 days before traditional monthly contractor reports and assembling contemporaneous
+                FIDIC/NEC4 evidence, SyncPro neutralizes dispute liabilities and recovers 70–85% of downstream delay costs.
+              </p>
             </div>
+          </div>
+
+          <div className="mt-6 pt-3" style={{ borderTop: "1px solid var(--line-soft)" }}>
+            <a
+              className="btn btn-primary mono xs"
+              href="#waitlist"
+              style={{ width: "100%", justifyContent: "center", padding: "12px 20px" }}
+            >
+              PROTECT_PROJECT_MARGINS
+              <ArrowRight className="ico" />
+            </a>
           </div>
         </div>
       </div>
