@@ -82,62 +82,88 @@ export function DigitalTwinStudio() {
   const [selectedPin, setSelectedPin] = useState<Hotspot>(HOTSPOTS[0]);
 
   return (
-    <section id="digital-twin-studio" className="wrap-lg py-16" style={{ borderBottom: "1px solid var(--line)" }}>
-      <div ref={reveal.ref} className={reveal.className}>
+    <section
+      id="digital-twin-studio"
+      style={{
+        position: "relative",
+        paddingTop: "100px",
+        paddingBottom: "100px",
+        background: "rgba(10, 11, 14, 0.4)",
+        borderBottom: "1px solid var(--line)",
+      }}
+    >
+      <div className="wrap-lg">
         {/* Section Header */}
-        <div className="row between mb-8 wrapf" style={{ alignItems: "flex-end" }}>
-          <div>
-            <div className="row gap-2 mb-3">
-              <span className="sdot" style={{ background: "var(--brand)" }} />
-              <span className="mono xs" style={{ color: "var(--brand)", letterSpacing: "0.08em" }}>
-                INTERACTIVE 3D BIM &amp; CPM STUDIO // APEX-80 DIGITAL TWIN
-              </span>
+        <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
+          <div className="row between mb-8 wrapf" style={{ alignItems: "flex-end" }}>
+            <div>
+              <div className="row gap-2 mb-3" style={{ alignItems: "center" }}>
+                <span
+                  className="mono xs"
+                  style={{
+                    color: "var(--brass)",
+                    background: "var(--brass-bg)",
+                    border: "1px solid var(--brass-line)",
+                    padding: "3px 10px",
+                    borderRadius: "4px",
+                    fontWeight: 600,
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  MODULE 02 // SPATIAL BIM &amp; CPM NETWORK
+                </span>
+                <span className="mono xs dim desktop-nav">PROJECT: APEX-80 DIGITAL TWIN</span>
+              </div>
+              <h2
+                className="display"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(34px, 4vw, 54px)",
+                  lineHeight: 1.08,
+                  color: "var(--text)",
+                  maxWidth: "840px",
+                  marginTop: "8px",
+                }}
+              >
+                Living spatial twin of your <br />
+                <span style={{ fontStyle: "italic", color: "var(--brass)" }}>project controls.</span>
+              </h2>
+              <p className="lead mt-3 measure" style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}>
+                Click interactive spatial pins to inspect real-time multi-source corroboration,
+                critical path float variances, and automated contract notice drafts.
+              </p>
             </div>
-            <h2
-              className="display"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(32px, 3.8vw, 52px)",
-                lineHeight: 1.1,
-                color: "var(--text)",
-                maxWidth: "840px",
-              }}
-            >
-              Living spatial twin of your <br />
-              <span style={{ fontStyle: "italic", color: "var(--brass)" }}>project controls.</span>
-            </h2>
-            <p className="lead mt-3 measure" style={{ color: "var(--text-2)", fontSize: "16.5px" }}>
-              Click interactive floor pins to inspect real-time multi-source corroboration,
-              critical path float variances, and automated contract notice drafts.
-            </p>
-          </div>
 
-          {/* Mode Switcher Buttons */}
-          <div className="row gap-2 mt-4">
-            <button
-              type="button"
-              className={`btn btn-sm mono xs ${activeMode === "digital-twin" ? "btn-primary" : "btn-outline"}`}
-              onClick={() => setActiveMode("digital-twin")}
-            >
-              <Layers className="ico" style={{ width: 13, height: 13 }} />
-              3D_HOLOGRAPHIC_TWIN
-            </button>
-            <button
-              type="button"
-              className={`btn btn-sm mono xs ${activeMode === "cpm-network" ? "btn-primary" : "btn-outline"}`}
-              onClick={() => setActiveMode("cpm-network")}
-            >
-              <Cpu className="ico" style={{ width: 13, height: 13 }} />
-              CPM_NETWORK
-            </button>
-            <button
-              type="button"
-              className={`btn btn-sm mono xs ${activeMode === "panoramic-overview" ? "btn-primary" : "btn-outline"}`}
-              onClick={() => setActiveMode("panoramic-overview")}
-            >
-              <Eye className="ico" style={{ width: 13, height: 13 }} />
-              SITE_TELEMETRY
-            </button>
+            {/* Mode Switcher Buttons */}
+            <div className="row gap-2 mt-4">
+              <button
+                type="button"
+                className={`btn btn-sm mono xs ${activeMode === "digital-twin" ? "btn-primary" : "btn-outline"}`}
+                onClick={() => setActiveMode("digital-twin")}
+                style={{ padding: "8px 14px" }}
+              >
+                <Layers className="ico" style={{ width: 13, height: 13 }} />
+                3D_HOLOGRAPHIC_TWIN
+              </button>
+              <button
+                type="button"
+                className={`btn btn-sm mono xs ${activeMode === "cpm-network" ? "btn-primary" : "btn-outline"}`}
+                onClick={() => setActiveMode("cpm-network")}
+                style={{ padding: "8px 14px" }}
+              >
+                <Cpu className="ico" style={{ width: 13, height: 13 }} />
+                CPM_NETWORK
+              </button>
+              <button
+                type="button"
+                className={`btn btn-sm mono xs ${activeMode === "panoramic-overview" ? "btn-primary" : "btn-outline"}`}
+                onClick={() => setActiveMode("panoramic-overview")}
+                style={{ padding: "8px 14px" }}
+              >
+                <Eye className="ico" style={{ width: 13, height: 13 }} />
+                SITE_TELEMETRY
+              </button>
+            </div>
           </div>
         </div>
 
@@ -146,7 +172,7 @@ export function DigitalTwinStudio() {
           className="grid"
           style={{
             gridTemplateColumns: "1.35fr 0.85fr",
-            gap: 24,
+            gap: 28,
             alignItems: "stretch",
           }}
         >
@@ -309,9 +335,9 @@ export function DigitalTwinStudio() {
           <div
             className="card stack"
             style={{
-              background: "rgba(18, 20, 24, 0.95)",
+              background: "rgba(18, 20, 24, 0.96)",
               border: "1px solid var(--line)",
-              padding: 24,
+              padding: 26,
               justifyContent: "space-between",
               borderRadius: "var(--r-md)",
             }}

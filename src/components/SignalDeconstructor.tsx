@@ -67,296 +67,313 @@ export function SignalDeconstructor() {
   return (
     <section
       id="signal-deconstructor"
-      className="wrap-lg py-16"
       style={{
         position: "relative",
+        paddingTop: "100px",
+        paddingBottom: "100px",
+        background: "rgba(14, 15, 18, 0.6)",
         borderBottom: "1px solid var(--line)",
       }}
     >
-      {/* Section Header */}
-      <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
-        <div className="row gap-2 mb-3">
-          <span className="sdot" style={{ background: "var(--brand)" }} />
-          <span className="mono xs" style={{ color: "var(--brand)", letterSpacing: "0.08em" }}>
-            ENGINEERING INSTRUMENT 01 // UNSTRUCTURED SIGNAL DECONSTRUCTION
-          </span>
+      <div className="wrap-lg">
+        {/* Section Header */}
+        <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
+          <div className="row gap-2 mb-3" style={{ alignItems: "center" }}>
+            <span
+              className="mono xs"
+              style={{
+                color: "var(--brand)",
+                background: "var(--brand-bg)",
+                border: "1px solid var(--brand-line)",
+                padding: "3px 10px",
+                borderRadius: "4px",
+                fontWeight: 600,
+                letterSpacing: "0.06em",
+              }}
+            >
+              MODULE 01 // UNSTRUCTURED SIGNAL RESOLUTION
+            </span>
+            <span className="mono xs dim desktop-nav">NEO4J ENTITY EXTRACTION PIPELINE</span>
+          </div>
+          <h2
+            className="display"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(34px, 4vw, 54px)",
+              lineHeight: 1.08,
+              color: "var(--text)",
+              maxWidth: "800px",
+              marginTop: "8px",
+            }}
+          >
+            Earn the right to update <br />
+            <span style={{ fontStyle: "italic", color: "var(--brass)" }}>the critical path.</span>
+          </h2>
+          <p className="lead mt-4 measure" style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}>
+            Construction teams communicate in messy voice notes, delivery receipts, and inspection tickets.
+            SyncPro maps unstructured site signals to exact Primavera CPM activity nodes, requiring deterministic multi-source corroboration before committing updates.
+          </p>
         </div>
-        <h2
-          className="display"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(32px, 3.8vw, 52px)",
-            lineHeight: 1.1,
-            color: "var(--text)",
-            maxWidth: "780px",
-          }}
-        >
-          Earn the right to update <br />
-          <span style={{ fontStyle: "italic", color: "var(--brass)" }}>the critical path.</span>
-        </h2>
-        <p className="lead mt-4 measure" style={{ color: "var(--text-2)", fontSize: "16.5px" }}>
-          Construction teams don’t speak in Primavera activity IDs. SyncPro resolves messy field reality (voice notes,
-          batch dockets, digital rebar scans) to exact CPM logic with deterministic multi-source corroboration.
-        </p>
-      </div>
 
-      {/* Interactive Scenario Selector */}
-      <div className="row gap-3 mb-6 wrapf">
-        {SCENARIOS.map((s, idx) => {
-          const isSelected = idx === selectedIdx;
-          return (
-            <button
-              key={s.id}
-              onClick={() => setSelectedIdx(idx)}
-              style={{
-                padding: "8px 16px",
-                background: isSelected ? "var(--bg-elevated)" : "var(--bg-surface)",
-                border: isSelected ? "1px solid var(--brand)" : "1px solid var(--line)",
-                borderRadius: "var(--r-xs)",
-                color: isSelected ? "var(--text)" : "var(--text-3)",
-                cursor: "pointer",
-                fontFamily: "var(--mono)",
-                fontSize: "12px",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              <span style={{ color: isSelected ? "var(--brand)" : "var(--text-4)" }}>[{s.id}]</span>
-              <span>{s.sourceType.split("//")[0]}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* 4-Stage Deconstruction Pipeline Console */}
-      <div
-        className="card"
-        style={{
-          background: "rgba(18, 20, 24, 0.95)",
-          border: "1px solid var(--line-strong)",
-          padding: "24px",
-          borderRadius: "var(--r-md)",
-          boxShadow: "var(--shadow-pop)",
-        }}
-      >
-        <div className="grid" style={{ gridTemplateColumns: "1.1fr 0.9fr", gap: "24px" }}>
-          {/* Left Column: Photorealistic Field Corroboration Asset + Audio Waveform */}
-          <div>
-            <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-              <span className="mono xs" style={{ color: "var(--brand)" }}>
-                STAGE 01 // CONTEMPORANEOUS FIELD REBAR &amp; POUR TELEMETRY
-              </span>
-              <span className="mono xs dim">{activeSignal.sourceTimestamp}</span>
-            </div>
-
-            {/* Field Image Asset Frame */}
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "260px",
-                borderRadius: "var(--r-xs)",
-                overflow: "hidden",
-                border: "1px solid var(--line)",
-                marginBottom: "16px",
-              }}
-            >
-              <img
-                src={activeSignal.imageAsset}
-                alt="High-Rise Concrete Pour with Rebar Scanning"
+        {/* Interactive Scenario Selector Tabs */}
+        <div className="row gap-3 mb-8 wrapf">
+          {SCENARIOS.map((s, idx) => {
+            const isSelected = idx === selectedIdx;
+            return (
+              <button
+                key={s.id}
+                onClick={() => setSelectedIdx(idx)}
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  filter: "contrast(1.05) brightness(0.95)",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(180deg, rgba(14,15,18,0.1) 0%, rgba(14,15,18,0.85) 100%)",
-                  pointerEvents: "none",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 10,
-                  left: 12,
-                  right: 12,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: 11,
+                  padding: "10px 18px",
+                  background: isSelected ? "var(--bg-elevated)" : "rgba(18, 20, 24, 0.7)",
+                  border: isSelected ? "1px solid var(--brand)" : "1px solid var(--line)",
+                  borderRadius: "var(--r-xs)",
+                  color: isSelected ? "var(--text)" : "var(--text-3)",
+                  cursor: "pointer",
                   fontFamily: "var(--mono)",
-                  color: "#FFFFFF",
-                }}
-              >
-                <span>[SECTOR: CORE_WALL_W47-3B]</span>
-                <span style={{ color: "var(--brass)" }}>POUR: 03B // 80 MPa // 19:40 UTC</span>
-              </div>
-            </div>
-
-            {/* Audio Waveform & Transcript */}
-            <div
-              style={{
-                padding: "14px 16px",
-                background: "rgba(10, 11, 14, 0.8)",
-                borderRadius: "var(--r-xs)",
-                border: "1px solid var(--line)",
-              }}
-            >
-              <div className="row gap-3 mb-2" style={{ alignItems: "center" }}>
-                <div
-                  style={{
-                    width: 28,
-                    height: 28,
-                    borderRadius: "50%",
-                    background: "var(--brand-bg)",
-                    border: "1px solid var(--brand-line)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Mic className="ico" style={{ width: 14, height: 14, color: "var(--brand)" }} />
-                </div>
-                <div>
-                  <div className="mono xs" style={{ color: "var(--text)", fontWeight: 600 }}>
-                    {activeSignal.sourceType}
-                  </div>
-                  <div className="mono xs dim">AAC AUDIO STREAM // 44.1 kHz</div>
-                </div>
-              </div>
-
-              {/* Waveform Visualization Bars */}
-              <div
-                style={{
+                  fontSize: "12px",
                   display: "flex",
                   alignItems: "center",
-                  gap: "2px",
-                  height: "28px",
-                  padding: "2px 0",
-                  marginBottom: "8px",
+                  gap: "8px",
+                  transition: "all 0.15s ease",
                 }}
               >
-                {Array.from({ length: 48 }).map((_, i) => (
-                  <span
-                    key={i}
+                <span style={{ color: isSelected ? "var(--brand)" : "var(--text-4)", fontWeight: 700 }}>[{s.id}]</span>
+                <span>{s.sourceType.split("//")[0]}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* 4-Stage Deconstruction Pipeline Console */}
+        <div
+          className="card"
+          style={{
+            background: "rgba(18, 20, 24, 0.96)",
+            border: "1px solid var(--line-strong)",
+            padding: "32px",
+            borderRadius: "var(--r-md)",
+            boxShadow: "var(--shadow-pop)",
+          }}
+        >
+          <div className="grid" style={{ gridTemplateColumns: "1.1fr 0.9fr", gap: "32px" }}>
+            {/* Left Column: Field Corroboration Asset + Audio Stream */}
+            <div>
+              <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 600 }}>
+                  STAGE 01 // CONTEMPORANEOUS FIELD SIGNAL
+                </span>
+                <span className="mono xs dim">{activeSignal.sourceTimestamp}</span>
+              </div>
+
+              {/* Field Image Asset Frame */}
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "270px",
+                  borderRadius: "var(--r-xs)",
+                  overflow: "hidden",
+                  border: "1px solid var(--line)",
+                  marginBottom: "18px",
+                }}
+              >
+                <img
+                  src={activeSignal.imageAsset}
+                  alt="High-Rise Concrete Pour with Rebar Scanning"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    filter: "contrast(1.05) brightness(0.95)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(180deg, rgba(14,15,18,0.1) 0%, rgba(14,15,18,0.85) 100%)",
+                    pointerEvents: "none",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 12,
+                    left: 14,
+                    right: 14,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontSize: 11,
+                    fontFamily: "var(--mono)",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  <span>[SECTOR: CORE_WALL_W47-3B]</span>
+                  <span style={{ color: "var(--brass)" }}>POUR: 03B // 80 MPa // 19:40 UTC</span>
+                </div>
+              </div>
+
+              {/* Audio Waveform & Transcript */}
+              <div
+                style={{
+                  padding: "16px 18px",
+                  background: "rgba(10, 11, 14, 0.85)",
+                  borderRadius: "var(--r-xs)",
+                  border: "1px solid var(--line)",
+                }}
+              >
+                <div className="row gap-3 mb-3" style={{ alignItems: "center" }}>
+                  <div
                     style={{
-                      flex: 1,
-                      height: `${Math.sin(i * 0.4) * 45 + 55}%`,
-                      background: i % 2 === 0 ? "var(--brand)" : "var(--brass)",
-                      borderRadius: "1px",
-                      opacity: 0.85,
+                      width: 30,
+                      height: 30,
+                      borderRadius: "50%",
+                      background: "var(--brand-bg)",
+                      border: "1px solid var(--brand-line)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
-                  />
+                  >
+                    <Mic className="ico" style={{ width: 14, height: 14, color: "var(--brand)" }} />
+                  </div>
+                  <div>
+                    <div className="mono xs" style={{ color: "var(--text)", fontWeight: 600 }}>
+                      {activeSignal.sourceType}
+                    </div>
+                    <div className="mono xs dim">AAC AUDIO STREAM // 44.1 kHz</div>
+                  </div>
+                </div>
+
+                {/* Waveform Visualization Bars */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "3px",
+                    height: "30px",
+                    padding: "2px 0",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {Array.from({ length: 48 }).map((_, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        flex: 1,
+                        height: `${Math.sin(i * 0.4) * 45 + 55}%`,
+                        background: i % 2 === 0 ? "var(--brand)" : "var(--brass)",
+                        borderRadius: "1px",
+                        opacity: 0.85,
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <p style={{ fontSize: "13.5px", fontStyle: "italic", color: "var(--text)", lineHeight: 1.5, margin: 0 }}>
+                  {activeSignal.rawAudioTranscript}
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column: Multi-Source Corroboration & Cryptographic Commit */}
+            <div>
+              <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+                <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
+                  STAGE 02 // MULTI-SOURCE EVIDENCE CORROBORATION
+                </span>
+                <span className="tag" style={{ background: "var(--brass-bg)", color: "var(--brass)", borderColor: "var(--brass-line)" }}>
+                  <CheckCircle2 className="ico" style={{ width: 11, height: 11, marginRight: 4 }} />
+                  {activeSignal.trustScore}% CONFIDENCE
+                </span>
+              </div>
+
+              {/* Deterministic Entity Mapping */}
+              <div
+                className="p-3 mb-3"
+                style={{
+                  background: "rgba(10, 11, 14, 0.85)",
+                  border: "1px solid var(--line)",
+                  borderRadius: "var(--r-xs)",
+                }}
+              >
+                <div className="row between mb-1">
+                  <span className="mono xs dim">EXTRACTED ENTITY:</span>
+                  <span className="mono xs" style={{ color: "var(--text)", fontWeight: 600 }}>
+                    {activeSignal.extractedEntity}
+                  </span>
+                </div>
+                <div className="row between">
+                  <span className="mono xs dim">MAPPED CPM NODE:</span>
+                  <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                    {activeSignal.cpmNode} ({activeSignal.activityName})
+                  </span>
+                </div>
+              </div>
+
+              {/* Corroborating Evidence List */}
+              <div className="col gap-2 mb-3">
+                {activeSignal.corroboratingEvidence.map((ev, i) => (
+                  <div
+                    key={i}
+                    className="row between p-3"
+                    style={{
+                      background: "rgba(10, 11, 14, 0.85)",
+                      border: "1px solid var(--line)",
+                      borderRadius: "var(--r-xs)",
+                    }}
+                  >
+                    <div className="row gap-2" style={{ alignItems: "center" }}>
+                      <FileText className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
+                      <div>
+                        <div style={{ fontSize: "12.5px", fontWeight: 600, color: "var(--text)" }}>{ev.type}</div>
+                        <div className="mono xs dim">{ev.docNumber}</div>
+                      </div>
+                    </div>
+                    <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
+                      {ev.status}
+                    </span>
+                  </div>
                 ))}
               </div>
 
-              <p style={{ fontSize: "13px", fontStyle: "italic", color: "var(--text)", lineHeight: 1.45, margin: 0 }}>
-                {activeSignal.rawAudioTranscript}
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column: Multi-Source Corroboration & Cryptographic As-Built Commit */}
-          <div>
-            <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-              <span className="mono xs" style={{ color: "var(--brass)" }}>
-                STAGE 02 // MULTI-SOURCE EVIDENCE CORROBORATION
-              </span>
-              <span className="tag" style={{ background: "var(--brass-bg)", color: "var(--brass)", borderColor: "var(--brass-line)" }}>
-                <CheckCircle2 className="ico" style={{ width: 11, height: 11, marginRight: 4 }} />
-                {activeSignal.trustScore}% CONFIDENCE
-              </span>
-            </div>
-
-            {/* Stage 02: Deterministic Entity Mapping */}
-            <div
-              className="p-3 mb-3"
-              style={{
-                background: "rgba(10, 11, 14, 0.8)",
-                border: "1px solid var(--line)",
-                borderRadius: "var(--r-xs)",
-              }}
-            >
-              <div className="row between mb-1">
-                <span className="mono xs dim">EXTRACTED ENTITY:</span>
-                <span className="mono xs" style={{ color: "var(--text)" }}>
-                  {activeSignal.extractedEntity}
-                </span>
-              </div>
-              <div className="row between">
-                <span className="mono xs dim">MAPPED CPM NODE:</span>
-                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
-                  {activeSignal.cpmNode} ({activeSignal.activityName})
-                </span>
-              </div>
-            </div>
-
-            {/* Corroborating Evidence List */}
-            <div className="col gap-2 mb-3">
-              {activeSignal.corroboratingEvidence.map((ev, i) => (
-                <div
-                  key={i}
-                  className="row between p-2"
-                  style={{
-                    background: "rgba(10, 11, 14, 0.8)",
-                    border: "1px solid var(--line)",
-                    borderRadius: "var(--r-xs)",
-                  }}
-                >
-                  <div className="row gap-2" style={{ alignItems: "center" }}>
-                    <FileText className="ico" style={{ width: 13, height: 13, color: "var(--brass)" }} />
-                    <div>
-                      <div style={{ fontSize: "12px", fontWeight: 600, color: "var(--text)" }}>{ev.type}</div>
-                      <div className="mono xs dim">{ev.docNumber}</div>
-                    </div>
-                  </div>
-                  <span className="mono xs" style={{ color: "var(--brass)" }}>
-                    {ev.status}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Stage 04: Cryptographic As-Built Commit */}
-            <div
-              style={{
-                padding: "14px",
-                background: "rgba(10, 11, 14, 0.9)",
-                border: "1px solid var(--brand-line)",
-                borderRadius: "var(--r-xs)",
-              }}
-            >
-              <div className="row between mb-1">
-                <span className="mono xs" style={{ color: "var(--brand)" }}>
-                  STAGE 04 // CRYPTOGRAPHIC CONTEMPORANEOUS COMMIT
-                </span>
-                <ShieldCheck className="ico" style={{ width: 13, height: 13, color: "var(--brand)" }} />
-              </div>
-              <div className="mono xs dim mb-1">SHA-256 PROOF OF AS-BUILT LOG:</div>
+              {/* Cryptographic As-Built Commit */}
               <div
-                className="mono xs p-2"
                 style={{
-                  background: "rgba(0, 0, 0, 0.6)",
-                  border: "1px solid var(--line-soft)",
-                  borderRadius: "2px",
-                  color: "var(--text-3)",
-                  wordBreak: "break-all",
-                  fontSize: "10.5px",
+                  padding: "16px",
+                  background: "rgba(10, 11, 14, 0.95)",
+                  border: "1px solid var(--brand-line)",
+                  borderRadius: "var(--r-xs)",
                 }}
               >
-                {activeSignal.cryptographicHash}
-              </div>
-              <div className="row between mt-2 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
-                <span className="mono xs dim">DESTINATION: ORACLE P6 ENTERPRISE</span>
-                <span className="status xs" style={{ color: "var(--brass)" }}>
-                  <CheckCircle2 className="ico" style={{ width: 11, height: 11, color: "var(--brass)" }} />
-                  CONFIDENCE GATE PASSED
-                </span>
+                <div className="row between mb-1">
+                  <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 600 }}>
+                    STAGE 04 // CRYPTOGRAPHIC CONTEMPORANEOUS COMMIT
+                  </span>
+                  <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--brand)" }} />
+                </div>
+                <div className="mono xs dim mb-1">SHA-256 PROOF OF AS-BUILT LOG:</div>
+                <div
+                  className="mono xs p-2"
+                  style={{
+                    background: "rgba(0, 0, 0, 0.6)",
+                    border: "1px solid var(--line-soft)",
+                    borderRadius: "2px",
+                    color: "var(--text-3)",
+                    wordBreak: "break-all",
+                    fontSize: "11px",
+                  }}
+                >
+                  {activeSignal.cryptographicHash}
+                </div>
+                <div className="row between mt-2 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
+                  <span className="mono xs dim">DESTINATION: ORACLE P6 ENTERPRISE</span>
+                  <span className="status xs" style={{ color: "var(--brass)" }}>
+                    <CheckCircle2 className="ico" style={{ width: 11, height: 11, color: "var(--brass)" }} />
+                    CONFIDENCE GATE PASSED
+                  </span>
+                </div>
               </div>
             </div>
           </div>

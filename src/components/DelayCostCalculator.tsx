@@ -21,211 +21,230 @@ export function DelayCostCalculator() {
   return (
     <section
       id="financial-sandbox"
-      className="wrap-lg py-16"
       style={{
         position: "relative",
+        paddingTop: "100px",
+        paddingBottom: "100px",
+        background: "rgba(14, 15, 18, 0.6)",
         borderBottom: "1px solid var(--line)",
       }}
     >
-      <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
-        <div className="row gap-2 mb-3">
-          <span className="sdot" style={{ background: "var(--brass)" }} />
-          <span className="mono xs" style={{ color: "var(--brass)", letterSpacing: "0.08em" }}>
-            ENGINEERING INSTRUMENT 04 // MEGAPROJECT CAPITAL EXPOSURE SANDBOX
-          </span>
-        </div>
-        <h2
-          className="display"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(32px, 3.8vw, 52px)",
-            lineHeight: 1.1,
-            color: "var(--text)",
-            maxWidth: "840px",
-          }}
-        >
-          Quantify the cost of <br />
-          <span style={{ fontStyle: "italic", color: "var(--brand)" }}>3 weeks of schedule blindness.</span>
-        </h2>
-        <p className="lead mt-4 measure" style={{ color: "var(--text-2)", fontSize: "16.5px" }}>
-          On a $250M megaproject, every week of undetected critical path slip costs ~$400,000 in liquidated damages,
-          extended preliminaries, and carrying costs. Calculate your project's exposure below.
-        </p>
-      </div>
-
-      <div className="grid-2 gap-6">
-        {/* Left Column: Interactive Titanium Sliders */}
-        <div
-          className="card"
-          style={{
-            background: "rgba(18, 20, 24, 0.95)",
-            border: "1px solid var(--line)",
-            padding: "28px",
-            borderRadius: "var(--r-md)",
-          }}
-        >
-          <div className="row between mb-6 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-            <span className="mono xs" style={{ color: "var(--brass)" }}>
-              PROJECT PARAMETERS
+      <div className="wrap-lg">
+        {/* Section Header */}
+        <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
+          <div className="row gap-2 mb-3" style={{ alignItems: "center" }}>
+            <span
+              className="mono xs"
+              style={{
+                color: "var(--brass)",
+                background: "var(--brass-bg)",
+                border: "1px solid var(--brass-line)",
+                padding: "3px 10px",
+                borderRadius: "4px",
+                fontWeight: 600,
+                letterSpacing: "0.06em",
+              }}
+            >
+              MODULE 05 // MEGAPROJECT CAPITAL EXPOSURE SANDBOX
             </span>
-            <Sliders className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
+            <span className="mono xs dim desktop-nav">FINANCIAL RISK QUANTIFICATION</span>
           </div>
-
-          {/* Slider 1: Project CAPEX */}
-          <div className="mb-6">
-            <div className="row between mb-2">
-              <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>Total Project CAPEX</span>
-              <span className="mono xs" style={{ color: "var(--brand)", fontSize: "15px", fontWeight: 700 }}>
-                ${capexM}M USD
-              </span>
-            </div>
-            <input
-              type="range"
-              min={20}
-              max={1500}
-              step={10}
-              value={capexM}
-              onChange={(e) => setCapexM(Number(e.target.value))}
-              style={{
-                width: "100%",
-                accentColor: "var(--brand)",
-                cursor: "pointer",
-              }}
-            />
-            <div className="row between mt-1">
-              <span className="mono xs dim">$20M (Medium Civil)</span>
-              <span className="mono xs dim">$1.5B (Megaproject)</span>
-            </div>
-          </div>
-
-          {/* Slider 2: Unmitigated Critical Path Delay Weeks */}
-          <div className="mb-6">
-            <div className="row between mb-2">
-              <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>Unmitigated Float Slip</span>
-              <span className="mono xs" style={{ color: "var(--brand)", fontSize: "15px", fontWeight: 700 }}>
-                {delayWeeks} Weeks ({delayWeeks * 7} Days)
-              </span>
-            </div>
-            <input
-              type="range"
-              min={1}
-              max={16}
-              step={1}
-              value={delayWeeks}
-              onChange={(e) => setDelayWeeks(Number(e.target.value))}
-              style={{
-                width: "100%",
-                accentColor: "var(--brand)",
-                cursor: "pointer",
-              }}
-            />
-            <div className="row between mt-1">
-              <span className="mono xs dim">1 Week Slip</span>
-              <span className="mono xs dim">16 Weeks Slip</span>
-            </div>
-          </div>
-
-          {/* Key Breakdown Metrics */}
-          <div className="col gap-2 pt-3" style={{ borderTop: "1px solid var(--line-soft)" }}>
-            <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.6)", borderRadius: "var(--r-xs)" }}>
-              <span className="xs dim">Contractual Liquidated Damages (LDs):</span>
-              <span className="mono xs" style={{ color: "var(--text)" }}>
-                ${(totalLDs / 1000000).toFixed(2)}M
-              </span>
-            </div>
-            <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.6)", borderRadius: "var(--r-xs)" }}>
-              <span className="xs dim">Extended Site Preliminaries (Site General Conditions):</span>
-              <span className="mono xs" style={{ color: "var(--text)" }}>
-                ${(extendedPrelims / 1000000).toFixed(2)}M
-              </span>
-            </div>
-            <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.6)", borderRadius: "var(--r-xs)" }}>
-              <span className="xs dim">Capital Carrying &amp; Financing Interest:</span>
-              <span className="mono xs" style={{ color: "var(--text)" }}>
-                ${(carryingCostInterest / 1000000).toFixed(2)}M
-              </span>
-            </div>
-          </div>
+          <h2
+            className="display"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(34px, 4vw, 54px)",
+              lineHeight: 1.08,
+              color: "var(--text)",
+              maxWidth: "840px",
+              marginTop: "8px",
+            }}
+          >
+            Quantify the cost of <br />
+            <span style={{ fontStyle: "italic", color: "var(--brand)" }}>3 weeks of schedule blindness.</span>
+          </h2>
+          <p className="lead mt-4 measure" style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}>
+            On a $250M megaproject, every week of undetected critical path slip costs ~$400,000 in liquidated damages,
+            extended preliminaries, and carrying costs. Calculate your project's exposure below.
+          </p>
         </div>
 
-        {/* Right Column: Financial Exposure Output & SyncPro Margin Recovery */}
-        <div
-          className="card"
-          style={{
-            background: "rgba(18, 20, 24, 0.95)",
-            border: "1px solid var(--line-strong)",
-            padding: "28px",
-            borderRadius: "var(--r-md)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <div>
-            <div className="row between mb-4 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-              <span className="mono xs" style={{ color: "var(--brand)" }}>
-                TOTAL CAPITAL AT RISK
+        <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: "28px" }}>
+          {/* Left Column: Interactive Titanium Sliders */}
+          <div
+            className="card"
+            style={{
+              background: "rgba(18, 20, 24, 0.96)",
+              border: "1px solid var(--line-strong)",
+              padding: "30px",
+              borderRadius: "var(--r-md)",
+              boxShadow: "var(--shadow-pop)",
+            }}
+          >
+            <div className="row between mb-6 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+              <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
+                PROJECT INPUT PARAMETERS
               </span>
-              <span className="status xs" style={{ color: "var(--brand)" }}>
-                UNMITIGATED STATUS
-              </span>
+              <Sliders className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
             </div>
 
-            <div style={{ marginBottom: "24px" }}>
-              <div className="mono xs dim mb-1">TOTAL FINANCIAL EXPOSURE:</div>
-              <div
+            {/* Slider 01: Project CAPEX */}
+            <div className="mb-6">
+              <div className="row between mb-2">
+                <label htmlFor="capex-slider" style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>
+                  Total Project Contract Value (CAPEX)
+                </label>
+                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700, fontSize: "15px" }}>
+                  ${capexM}M USD
+                </span>
+              </div>
+              <input
+                id="capex-slider"
+                type="range"
+                min="20"
+                max="1500"
+                step="10"
+                value={capexM}
+                onChange={(e) => setCapexM(Number(e.target.value))}
                 style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: "clamp(36px, 4vw, 54px)",
-                  fontWeight: 700,
-                  color: "var(--brand)",
-                  letterSpacing: "-0.02em",
+                  width: "100%",
+                  accentColor: "var(--brand)",
+                  cursor: "pointer",
                 }}
-              >
-                ${(totalExposure / 1000000).toFixed(2)}M
+              />
+              <div className="row between mono xs dim mt-1">
+                <span>$20M</span>
+                <span>$500M</span>
+                <span>$1.5B+</span>
               </div>
             </div>
 
-            {/* SyncPro Recovery Shield Box */}
+            {/* Slider 02: Delay Duration */}
+            <div className="mb-6">
+              <div className="row between mb-2">
+                <label htmlFor="delay-slider" style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>
+                  Undetected Critical Path Slip Duration
+                </label>
+                <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700, fontSize: "15px" }}>
+                  {delayWeeks} WEEKS ({delayWeeks * 7} DAYS)
+                </span>
+              </div>
+              <input
+                id="delay-slider"
+                type="range"
+                min="1"
+                max="24"
+                step="1"
+                value={delayWeeks}
+                onChange={(e) => setDelayWeeks(Number(e.target.value))}
+                style={{
+                  width: "100%",
+                  accentColor: "var(--brass)",
+                  cursor: "pointer",
+                }}
+              />
+              <div className="row between mono xs dim mt-1">
+                <span>1 Week</span>
+                <span>12 Weeks</span>
+                <span>24 Weeks</span>
+              </div>
+            </div>
+
             <div
+              className="p-3 mt-4"
               style={{
-                padding: "20px",
-                background: "rgba(10, 11, 14, 0.9)",
-                border: "1px solid var(--brass-line)",
+                background: "rgba(10, 11, 14, 0.8)",
+                border: "1px solid var(--line-soft)",
                 borderRadius: "var(--r-xs)",
               }}
             >
-              <div className="row between mb-2">
-                <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700 }}>
-                  SYNCPRO REVENUE &amp; MARGIN RECOVERY
-                </span>
-                <ShieldCheck className="ico" style={{ width: 15, height: 15, color: "var(--brass)" }} />
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: "28px",
-                  fontWeight: 700,
-                  color: "var(--brass)",
-                  marginBottom: "8px",
-                }}
-              >
-                +${(syncproRecovery / 1000000).toFixed(2)}M Protected
-              </div>
-              <p style={{ fontSize: "12.5px", color: "var(--text-2)", lineHeight: 1.4, margin: 0 }}>
-                By detecting float erosion 21 days before traditional monthly contractor reports and assembling contemporaneous
-                FIDIC/NEC4 evidence, SyncPro neutralizes dispute liabilities and recovers 70–85% of downstream delay costs.
+              <div className="mono xs dim mb-1">CONTRACT STANDARD BENCHMARKS:</div>
+              <p className="xs dim" style={{ margin: 0, lineHeight: 1.5 }}>
+                Liquidated damages modeled at 0.1% per week (capped at 10% contract sum); site preliminaries modeled at 8% total CAPEX.
               </p>
             </div>
           </div>
 
-          <div className="mt-6 pt-3" style={{ borderTop: "1px solid var(--line-soft)" }}>
-            <a
-              className="btn btn-primary mono xs"
-              href="#waitlist"
-              style={{ width: "100%", justifyContent: "center", padding: "12px 20px" }}
-            >
-              PROTECT_PROJECT_MARGINS
+          {/* Right Column: Financial Exposure Output & Margin Recovery */}
+          <div
+            className="card stack"
+            style={{
+              background: "rgba(18, 20, 24, 0.96)",
+              border: "1px solid var(--line-strong)",
+              padding: "30px",
+              borderRadius: "var(--r-md)",
+              justifyContent: "space-between",
+              boxShadow: "var(--shadow-pop)",
+            }}
+          >
+            <div>
+              <div className="row between mb-4 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 600 }}>
+                  TOTAL UNMITIGATED FINANCIAL RISK
+                </span>
+                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                  ESTIMATED EXPOSURE
+                </span>
+              </div>
+
+              {/* Huge Total Exposure Number */}
+              <div className="mb-4">
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "clamp(34px, 3.8vw, 48px)",
+                    fontWeight: 700,
+                    color: "var(--brand)",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  ${(totalExposure / 1000000).toFixed(2)}M
+                </div>
+                <div className="mono xs dim">ACCUMULATED DIRECT LOSSES ACROSS {delayWeeks} WEEKS</div>
+              </div>
+
+              {/* Breakdown Rows */}
+              <div className="stack gap-2 mb-4" style={{ fontSize: "13px" }}>
+                <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.8)", borderRadius: "var(--r-xs)" }}>
+                  <span className="dim">Liquidated Damages (LDs):</span>
+                  <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(totalLDs / 1000).toLocaleString()} USD</span>
+                </div>
+                <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.8)", borderRadius: "var(--r-xs)" }}>
+                  <span className="dim">Extended Site Preliminaries (Site Overhead):</span>
+                  <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(extendedPrelims / 1000).toLocaleString()} USD</span>
+                </div>
+                <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.8)", borderRadius: "var(--r-xs)" }}>
+                  <span className="dim">Carrying Costs &amp; Working Capital Interest:</span>
+                  <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(carryingCostInterest / 1000).toLocaleString()} USD</span>
+                </div>
+              </div>
+
+              {/* SyncPro Margin Recovery Box */}
+              <div
+                className="p-3"
+                style={{
+                  background: "rgba(212, 155, 75, 0.08)",
+                  border: "1px solid var(--brass-line)",
+                  borderRadius: "var(--r-xs)",
+                }}
+              >
+                <div className="row gap-2 mb-1" style={{ alignItems: "center" }}>
+                  <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
+                  <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700 }}>
+                    SYNCPRO EARLY RECOVERY PROTECTION:
+                  </span>
+                </div>
+                <div className="row between mt-1">
+                  <span className="xs" style={{ color: "var(--text-2)" }}>Protected Capital via 3-Week Early Detection:</span>
+                  <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700, fontSize: "14px" }}>
+                    +${(syncproRecovery / 1000000).toFixed(2)}M
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <a className="btn btn-primary btn-block mt-4 mono xs" href="#waitlist" style={{ justifyContent: "center", padding: "12px", fontWeight: 700 }}>
+              PROTECT_MY_CAPITAL_PROJECT
               <ArrowRight className="ico" />
             </a>
           </div>

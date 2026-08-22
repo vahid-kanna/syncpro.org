@@ -85,200 +85,217 @@ export function DCMA14Matrix() {
   return (
     <section
       id="dcma-scanner"
-      className="wrap-lg py-16"
       style={{
         position: "relative",
+        paddingTop: "100px",
+        paddingBottom: "100px",
+        background: "rgba(14, 15, 18, 0.6)",
         borderBottom: "1px solid var(--line)",
       }}
     >
-      <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
-        <div className="row gap-2 mb-3">
-          <span className="sdot" style={{ background: "var(--brass)" }} />
-          <span className="mono xs" style={{ color: "var(--brass)", letterSpacing: "0.08em" }}>
-            ENGINEERING INSTRUMENT 02 // DCMA-14 FORENSIC SCHEDULE DIAGNOSTICS
-          </span>
-        </div>
-        <h2
-          className="display"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(32px, 3.8vw, 52px)",
-            lineHeight: 1.1,
-            color: "var(--text)",
-            maxWidth: "840px",
-          }}
-        >
-          Automated defense-grade <br />
-          <span style={{ fontStyle: "italic", color: "var(--brand)" }}>schedule health verification.</span>
-        </h2>
-        <p className="lead mt-4 measure" style={{ color: "var(--text-2)", fontSize: "16.5px" }}>
-          Before any update touches your baseline, SyncPro runs all 14 Defense Contract Management Agency (DCMA) integrity
-          checks across your Oracle Primavera P6 (.xer) and Asta Powerproject (.pp) schedules.
-        </p>
-      </div>
-
-      <div className="grid" style={{ gridTemplateColumns: "1fr 1.2fr", gap: "24px" }}>
-        {/* Left Column: Interactive 14-Point Diagnostic List */}
-        <div
-          className="card"
-          style={{
-            background: "rgba(18, 20, 24, 0.9)",
-            border: "1px solid var(--line)",
-            padding: "20px",
-            borderRadius: "var(--r-md)",
-            maxHeight: "520px",
-            overflowY: "auto",
-          }}
-        >
-          <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-            <span className="mono xs" style={{ color: "var(--brass)" }}>
-              DCMA-14 CRITERIA AUDIT (14 OF 14 VERIFIED)
-            </span>
-            <span className="mono xs dim">STANDARD: DoD 5000.2</span>
-          </div>
-
-          <div className="col gap-2">
-            {DCMA_METRICS.map((item) => {
-              const isSelected = activeItem.id === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveItem(item)}
-                  style={{
-                    padding: "12px 14px",
-                    background: isSelected ? "var(--bg-elevated)" : "rgba(10, 11, 14, 0.6)",
-                    border: isSelected ? "1px solid var(--brand)" : "1px solid var(--line-soft)",
-                    borderRadius: "var(--r-xs)",
-                    textAlign: "left",
-                    cursor: "pointer",
-                    transition: "all 0.15s ease",
-                  }}
-                >
-                  <div className="row between mb-1">
-                    <span className="mono xs" style={{ color: isSelected ? "var(--brand)" : "var(--text-3)" }}>
-                      CHECK #{item.id.toString().padStart(2, "0")}
-                    </span>
-                    <span className="row gap-1 xs" style={{ color: "var(--brass)" }}>
-                      <CheckCircle2 className="ico" style={{ width: 12, height: 12 }} />
-                      {item.status}
-                    </span>
-                  </div>
-                  <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>{item.metric}</div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Right Column: High-Resolution Tablet Visual Asset + Selected Check Inspection */}
-        <div
-          className="card"
-          style={{
-            background: "rgba(18, 20, 24, 0.95)",
-            border: "1px solid var(--line-strong)",
-            padding: "24px",
-            borderRadius: "var(--r-md)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <div>
-            {/* Tablet Image Asset Banner */}
-            <div
+      <div className="wrap-lg">
+        {/* Section Header */}
+        <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
+          <div className="row gap-2 mb-3" style={{ alignItems: "center" }}>
+            <span
+              className="mono xs"
               style={{
-                position: "relative",
-                width: "100%",
-                height: "220px",
-                borderRadius: "var(--r-xs)",
-                overflow: "hidden",
-                border: "1px solid var(--line)",
-                marginBottom: "16px",
+                color: "var(--brand)",
+                background: "var(--brand-bg)",
+                border: "1px solid var(--brand-line)",
+                padding: "3px 10px",
+                borderRadius: "4px",
+                fontWeight: 600,
+                letterSpacing: "0.06em",
               }}
             >
-              <img
-                src="/dcma-audit-tablet.jpg"
-                alt="Primavera P6 Schedule Health Audit Tablet"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  filter: "contrast(1.06) brightness(0.96)",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(180deg, rgba(14,15,18,0.1) 0%, rgba(14,15,18,0.85) 100%)",
-                  pointerEvents: "none",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 8,
-                  left: 12,
-                  right: 12,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: 11,
-                  fontFamily: "var(--mono)",
-                  color: "#FFFFFF",
-                }}
-              >
-                <span>[PROJECT: AURORA-7 TOWER]</span>
-                <span style={{ color: "var(--brass)" }}>P6 OVERALL HEALTH SCORE: 92/100 GOOD</span>
-              </div>
-            </div>
+              MODULE 03 // DCMA-14 FORENSIC SCHEDULE DIAGNOSTICS
+            </span>
+            <span className="mono xs dim desktop-nav">STANDARD: DoD 5000.2 COMPLIANCE</span>
+          </div>
+          <h2
+            className="display"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(34px, 4vw, 54px)",
+              lineHeight: 1.08,
+              color: "var(--text)",
+              maxWidth: "840px",
+              marginTop: "8px",
+            }}
+          >
+            Automated defense-grade <br />
+            <span style={{ fontStyle: "italic", color: "var(--brass)" }}>schedule health verification.</span>
+          </h2>
+          <p className="lead mt-4 measure" style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}>
+            Before any update touches your baseline, SyncPro runs all 14 Defense Contract Management Agency (DCMA) integrity
+            checks across your Oracle Primavera P6 (.xer) and Asta Powerproject (.pp) schedules.
+          </p>
+        </div>
 
-            <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-              <span className="mono xs" style={{ color: "var(--brand)" }}>
-                INSPECTION DETAIL // CHECK #{activeItem.id.toString().padStart(2, "0")}
+        <div className="grid" style={{ gridTemplateColumns: "1fr 1.2fr", gap: "28px" }}>
+          {/* Left Column: Interactive 14-Point Diagnostic List */}
+          <div
+            className="card"
+            style={{
+              background: "rgba(18, 20, 24, 0.9)",
+              border: "1px solid var(--line)",
+              padding: "24px",
+              borderRadius: "var(--r-md)",
+              maxHeight: "540px",
+              overflowY: "auto",
+            }}
+          >
+            <div className="row between mb-4 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+              <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
+                DCMA-14 CRITERIA AUDIT (14 OF 14 VERIFIED)
               </span>
-              <span className="status xs" style={{ color: "var(--brass)" }}>
-                <ShieldCheck className="ico" style={{ width: 12, height: 12, color: "var(--brass)" }} />
-                COMPLIANT
-              </span>
+              <span className="mono xs dim">STATUS: 100% HEALTH</span>
             </div>
 
-            <h3 style={{ fontSize: "17px", fontWeight: 700, color: "var(--text)", marginBottom: "12px" }}>
-              {activeItem.metric}
-            </h3>
-
-            <div className="grid-2 gap-3 mb-4">
-              <div className="p-2" style={{ background: "rgba(10, 11, 14, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
-                <div className="mono xs dim mb-1">ALLOWED THRESHOLD:</div>
-                <div className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
-                  {activeItem.threshold}
-                </div>
-              </div>
-              <div className="p-2" style={{ background: "rgba(10, 11, 14, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
-                <div className="mono xs dim mb-1">ACTUAL MEASURED:</div>
-                <div className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
-                  {activeItem.measured}
-                </div>
-              </div>
-            </div>
-
-            <div className="p-3" style={{ background: "rgba(10, 11, 14, 0.9)", borderLeft: "3px solid var(--brass)", borderRadius: "var(--r-xs)" }}>
-              <div className="row gap-2 mb-1" style={{ alignItems: "center" }}>
-                <RefreshCw className="ico" style={{ width: 13, height: 13, color: "var(--brass)" }} />
-                <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
-                  AUTOMATED GRAPH LOGIC REMEDIATION:
-                </span>
-              </div>
-              <p style={{ fontSize: "12.5px", color: "var(--text-2)", lineHeight: 1.45, margin: 0 }}>
-                {activeItem.remediation}
-              </p>
+            <div className="col gap-2">
+              {DCMA_METRICS.map((item) => {
+                const isSelected = activeItem.id === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveItem(item)}
+                    style={{
+                      padding: "14px 16px",
+                      background: isSelected ? "var(--bg-elevated)" : "rgba(10, 11, 14, 0.6)",
+                      border: isSelected ? "1px solid var(--brand)" : "1px solid var(--line-soft)",
+                      borderRadius: "var(--r-xs)",
+                      textAlign: "left",
+                      cursor: "pointer",
+                      transition: "all 0.15s ease",
+                    }}
+                  >
+                    <div className="row between mb-1">
+                      <span className="mono xs" style={{ color: isSelected ? "var(--brand)" : "var(--text-3)", fontWeight: 700 }}>
+                        CHECK #{item.id.toString().padStart(2, "0")}
+                      </span>
+                      <span className="row gap-1 xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
+                        <CheckCircle2 className="ico" style={{ width: 12, height: 12 }} />
+                        {item.status}
+                      </span>
+                    </div>
+                    <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>{item.metric}</div>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          <div className="row between mt-4 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
-            <span className="mono xs dim">AUDIT ENGINE: NEO4J TOPOLOGICAL SORT</span>
-            <span className="mono xs" style={{ color: "var(--text-3)" }}>
-              CORRECTION TIME: &lt; 40ms
-            </span>
+          {/* Right Column: High-Resolution Tablet Visual Asset + Selected Check Inspection */}
+          <div
+            className="card"
+            style={{
+              background: "rgba(18, 20, 24, 0.96)",
+              border: "1px solid var(--line-strong)",
+              padding: "26px",
+              borderRadius: "var(--r-md)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              {/* Tablet Image Asset Banner */}
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "230px",
+                  borderRadius: "var(--r-xs)",
+                  overflow: "hidden",
+                  border: "1px solid var(--line)",
+                  marginBottom: "18px",
+                }}
+              >
+                <img
+                  src="/dcma-audit-tablet.jpg"
+                  alt="Primavera P6 Schedule Health Audit Tablet"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    filter: "contrast(1.06) brightness(0.96)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(180deg, rgba(14,15,18,0.1) 0%, rgba(14,15,18,0.85) 100%)",
+                    pointerEvents: "none",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 10,
+                    left: 14,
+                    right: 14,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontSize: 11,
+                    fontFamily: "var(--mono)",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  <span>[PROJECT: AURORA-7 TOWER]</span>
+                  <span style={{ color: "var(--brass)" }}>P6 OVERALL HEALTH SCORE: 92/100 GOOD</span>
+                </div>
+              </div>
+
+              <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 600 }}>
+                  INSPECTION DETAIL // CHECK #{activeItem.id.toString().padStart(2, "0")}
+                </span>
+                <span className="status xs" style={{ color: "var(--brass)" }}>
+                  <ShieldCheck className="ico" style={{ width: 12, height: 12, color: "var(--brass)" }} />
+                  COMPLIANT
+                </span>
+              </div>
+
+              <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--text)", marginBottom: "14px" }}>
+                {activeItem.metric}
+              </h3>
+
+              <div className="grid-2 gap-3 mb-4">
+                <div className="p-3" style={{ background: "rgba(10, 11, 14, 0.85)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                  <div className="mono xs dim mb-1">ALLOWED THRESHOLD:</div>
+                  <div className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
+                    {activeItem.threshold}
+                  </div>
+                </div>
+                <div className="p-3" style={{ background: "rgba(10, 11, 14, 0.85)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                  <div className="mono xs dim mb-1">ACTUAL MEASURED:</div>
+                  <div className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                    {activeItem.measured}
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-3" style={{ background: "rgba(10, 11, 14, 0.9)", borderLeft: "3px solid var(--brass)", borderRadius: "var(--r-xs)" }}>
+                <div className="row gap-2 mb-1" style={{ alignItems: "center" }}>
+                  <RefreshCw className="ico" style={{ width: 13, height: 13, color: "var(--brass)" }} />
+                  <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
+                    AUTOMATED GRAPH LOGIC REMEDIATION:
+                  </span>
+                </div>
+                <p style={{ fontSize: "13px", color: "var(--text-2)", lineHeight: 1.5, margin: 0 }}>
+                  {activeItem.remediation}
+                </p>
+              </div>
+            </div>
+
+            <div className="row between mt-4 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
+              <span className="mono xs dim">AUDIT ENGINE: NEO4J TOPOLOGICAL SORT</span>
+              <span className="mono xs" style={{ color: "var(--text-3)" }}>
+                CORRECTION TIME: &lt; 40ms
+              </span>
+            </div>
           </div>
         </div>
       </div>
