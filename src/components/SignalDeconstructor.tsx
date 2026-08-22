@@ -17,25 +17,27 @@ interface SignalScenario {
   }[];
   trustScore: number;
   cryptographicHash: string;
+  imageAsset: string;
 }
 
 const SCENARIOS: SignalScenario[] = [
   {
     id: "SIG-01",
     sourceType: "WHATSAPP AUDIO NOTE // SUPERINTENDENT",
-    sourceTimestamp: "14:22 UTC · SECTOR 04",
+    sourceTimestamp: "19:40 UTC · LEVEL 47 CORE WALL",
     rawAudioTranscript:
-      "“Poured the remaining 140 cubic meters for Level 18 Core Shear Wall today. Ready-mix trucks 12 through 18 arrived with 45 MPa mix. Waiting on cube break lab tests.”",
-    extractedEntity: "Level 18 Core Shear Wall // Pour 03",
+      "“Poured Level 47 Core Wall Section W47-3B today. Putzmeister hydraulic boom pump operational. Ready-mix trucks 14 through 19 delivered 80 MPa mix. Waiting on 7-day cube break tests.”",
+    extractedEntity: "Level 47 Core Wall // Pour 03B",
     cpmNode: "#A1084",
-    activityName: "Core Wall Vertical Element Concrete Placement",
+    activityName: "Core Wall High-Strength Concrete Placement",
     corroboratingEvidence: [
-      { type: "Supplier Batch Docket", docNumber: "#CEMEX-88412", status: "VERIFIED (140m³ C45)" },
-      { type: "QA Slump Test Certificate", docNumber: "#QA-SLUMP-109", status: "PASSED (160mm Slump)" },
-      { type: "Site Gate OCR Log", docNumber: "#GATE-IN-4921", status: "TIMESTAMPTED (13:58 UTC)" },
+      { type: "Supplier Batch Docket", docNumber: "#CEMEX-88412", status: "VERIFIED (140m³ C80/95)" },
+      { type: "Digital Rebar Scan Ticket", docNumber: "#QC-SCAN-47B", status: "PASSED (Zero Clash)" },
+      { type: "Gate Telemetry OCR Log", docNumber: "#GATE-IN-4921", status: "TIMESTAMPTED (19:38 UTC)" },
     ],
-    trustScore: 96.4,
+    trustScore: 98.4,
     cryptographicHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    imageAsset: "/concrete-pour-corroboration.jpg",
   },
   {
     id: "SIG-02",
@@ -53,6 +55,7 @@ const SCENARIOS: SignalScenario[] = [
     ],
     trustScore: 98.1,
     cryptographicHash: "7d865e959b2466918c9863afca942d0fb89d7c9ac0c99bafc3749504ded97730",
+    imageAsset: "/concrete-pour-corroboration.jpg",
   },
 ];
 
@@ -93,7 +96,7 @@ export function SignalDeconstructor() {
         </h2>
         <p className="lead mt-4 measure" style={{ color: "var(--text-2)", fontSize: "16.5px" }}>
           Construction teams don’t speak in Primavera activity IDs. SyncPro resolves messy field reality (voice notes,
-          batch dockets, inspection slips) to exact CPM logic with deterministic multi-source corroboration.
+          batch dockets, digital rebar scans) to exact CPM logic with deterministic multi-source corroboration.
         </p>
       </div>
 
@@ -132,36 +135,83 @@ export function SignalDeconstructor() {
         style={{
           background: "rgba(18, 20, 24, 0.95)",
           border: "1px solid var(--line-strong)",
-          padding: "28px",
+          padding: "24px",
           borderRadius: "var(--r-md)",
           boxShadow: "var(--shadow-pop)",
         }}
       >
-        <div className="grid-2 gap-6">
-          {/* Left Column: Raw Input Signal & Waveform */}
+        <div className="grid" style={{ gridTemplateColumns: "1.1fr 0.9fr", gap: "24px" }}>
+          {/* Left Column: Photorealistic Field Corroboration Asset + Audio Waveform */}
           <div>
             <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
               <span className="mono xs" style={{ color: "var(--brand)" }}>
-                STAGE 01 // RAW FIELD SIGNAL
+                STAGE 01 // CONTEMPORANEOUS FIELD REBAR &amp; POUR TELEMETRY
               </span>
               <span className="mono xs dim">{activeSignal.sourceTimestamp}</span>
             </div>
 
-            {/* Simulated Audio Waveform Bar */}
+            {/* Field Image Asset Frame */}
             <div
               style={{
-                padding: "16px",
-                background: "rgba(10, 11, 14, 0.8)",
+                position: "relative",
+                width: "100%",
+                height: "260px",
                 borderRadius: "var(--r-xs)",
+                overflow: "hidden",
                 border: "1px solid var(--line)",
                 marginBottom: "16px",
               }}
             >
-              <div className="row gap-3 mb-3" style={{ alignItems: "center" }}>
+              <img
+                src={activeSignal.imageAsset}
+                alt="High-Rise Concrete Pour with Rebar Scanning"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  filter: "contrast(1.05) brightness(0.95)",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(180deg, rgba(14,15,18,0.1) 0%, rgba(14,15,18,0.85) 100%)",
+                  pointerEvents: "none",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 10,
+                  left: 12,
+                  right: 12,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: 11,
+                  fontFamily: "var(--mono)",
+                  color: "#FFFFFF",
+                }}
+              >
+                <span>[SECTOR: CORE_WALL_W47-3B]</span>
+                <span style={{ color: "var(--brass)" }}>POUR: 03B // 80 MPa // 19:40 UTC</span>
+              </div>
+            </div>
+
+            {/* Audio Waveform & Transcript */}
+            <div
+              style={{
+                padding: "14px 16px",
+                background: "rgba(10, 11, 14, 0.8)",
+                borderRadius: "var(--r-xs)",
+                border: "1px solid var(--line)",
+              }}
+            >
+              <div className="row gap-3 mb-2" style={{ alignItems: "center" }}>
                 <div
                   style={{
-                    width: 32,
-                    height: 32,
+                    width: 28,
+                    height: 28,
                     borderRadius: "50%",
                     background: "var(--brand-bg)",
                     border: "1px solid var(--brand-line)",
@@ -170,13 +220,13 @@ export function SignalDeconstructor() {
                     justifyContent: "center",
                   }}
                 >
-                  <Mic className="ico" style={{ width: 15, height: 15, color: "var(--brand)" }} />
+                  <Mic className="ico" style={{ width: 14, height: 14, color: "var(--brand)" }} />
                 </div>
                 <div>
                   <div className="mono xs" style={{ color: "var(--text)", fontWeight: 600 }}>
                     {activeSignal.sourceType}
                   </div>
-                  <div className="mono xs dim">SAMPLE RATE: 44.1 kHz // AAC VOICE NOTE</div>
+                  <div className="mono xs dim">AAC AUDIO STREAM // 44.1 kHz</div>
                 </div>
               </div>
 
@@ -185,46 +235,54 @@ export function SignalDeconstructor() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "3px",
-                  height: "36px",
-                  padding: "4px 0",
-                  marginBottom: "12px",
+                  gap: "2px",
+                  height: "28px",
+                  padding: "2px 0",
+                  marginBottom: "8px",
                 }}
               >
-                {Array.from({ length: 36 }).map((_, i) => (
+                {Array.from({ length: 48 }).map((_, i) => (
                   <span
                     key={i}
                     style={{
                       flex: 1,
-                      height: `${Math.sin(i * 0.5) * 45 + 50}%`,
+                      height: `${Math.sin(i * 0.4) * 45 + 55}%`,
                       background: i % 2 === 0 ? "var(--brand)" : "var(--brass)",
                       borderRadius: "1px",
-                      opacity: 0.8,
+                      opacity: 0.85,
                     }}
                   />
                 ))}
               </div>
 
-              <div className="p-3" style={{ background: "rgba(18, 20, 24, 0.9)", borderLeft: "2px solid var(--brand)" }}>
-                <p style={{ fontSize: "13.5px", fontStyle: "italic", color: "var(--text)", lineHeight: 1.5, margin: 0 }}>
-                  {activeSignal.rawAudioTranscript}
-                </p>
-              </div>
+              <p style={{ fontSize: "13px", fontStyle: "italic", color: "var(--text)", lineHeight: 1.45, margin: 0 }}>
+                {activeSignal.rawAudioTranscript}
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Multi-Source Corroboration & Cryptographic As-Built Commit */}
+          <div>
+            <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+              <span className="mono xs" style={{ color: "var(--brass)" }}>
+                STAGE 02 // MULTI-SOURCE EVIDENCE CORROBORATION
+              </span>
+              <span className="tag" style={{ background: "var(--brass-bg)", color: "var(--brass)", borderColor: "var(--brass-line)" }}>
+                <CheckCircle2 className="ico" style={{ width: 11, height: 11, marginRight: 4 }} />
+                {activeSignal.trustScore}% CONFIDENCE
+              </span>
             </div>
 
-            {/* Stage 02: Deterministic Entity Graph Match */}
+            {/* Stage 02: Deterministic Entity Mapping */}
             <div
+              className="p-3 mb-3"
               style={{
-                padding: "16px",
                 background: "rgba(10, 11, 14, 0.8)",
-                borderRadius: "var(--r-xs)",
                 border: "1px solid var(--line)",
+                borderRadius: "var(--r-xs)",
               }}
             >
-              <div className="mono xs mb-2" style={{ color: "var(--brass)" }}>
-                STAGE 02 // DETERMINISTIC ENTITY EXTRACTION
-              </div>
-              <div className="row between mb-2">
+              <div className="row between mb-1">
                 <span className="mono xs dim">EXTRACTED ENTITY:</span>
                 <span className="mono xs" style={{ color: "var(--text)" }}>
                   {activeSignal.extractedEntity}
@@ -237,26 +295,13 @@ export function SignalDeconstructor() {
                 </span>
               </div>
             </div>
-          </div>
-
-          {/* Right Column: Multi-Source Corroboration & Cryptographic Seal */}
-          <div>
-            <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-              <span className="mono xs" style={{ color: "var(--brass)" }}>
-                STAGE 03 // EVIDENCE CORROBORATION
-              </span>
-              <span className="tag" style={{ background: "var(--brass-bg)", color: "var(--brass)", borderColor: "var(--brass-line)" }}>
-                <CheckCircle2 className="ico" style={{ width: 11, height: 11, marginRight: 4 }} />
-                {activeSignal.trustScore}% CONFIDENCE
-              </span>
-            </div>
 
             {/* Corroborating Evidence List */}
-            <div className="col gap-3 mb-4">
+            <div className="col gap-2 mb-3">
               {activeSignal.corroboratingEvidence.map((ev, i) => (
                 <div
                   key={i}
-                  className="row between p-3"
+                  className="row between p-2"
                   style={{
                     background: "rgba(10, 11, 14, 0.8)",
                     border: "1px solid var(--line)",
@@ -264,9 +309,9 @@ export function SignalDeconstructor() {
                   }}
                 >
                   <div className="row gap-2" style={{ alignItems: "center" }}>
-                    <FileText className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
+                    <FileText className="ico" style={{ width: 13, height: 13, color: "var(--brass)" }} />
                     <div>
-                      <div style={{ fontSize: "12.5px", fontWeight: 600, color: "var(--text)" }}>{ev.type}</div>
+                      <div style={{ fontSize: "12px", fontWeight: 600, color: "var(--text)" }}>{ev.type}</div>
                       <div className="mono xs dim">{ev.docNumber}</div>
                     </div>
                   </div>
@@ -280,17 +325,17 @@ export function SignalDeconstructor() {
             {/* Stage 04: Cryptographic As-Built Commit */}
             <div
               style={{
-                padding: "16px",
+                padding: "14px",
                 background: "rgba(10, 11, 14, 0.9)",
                 border: "1px solid var(--brand-line)",
                 borderRadius: "var(--r-xs)",
               }}
             >
-              <div className="row between mb-2">
+              <div className="row between mb-1">
                 <span className="mono xs" style={{ color: "var(--brand)" }}>
                   STAGE 04 // CRYPTOGRAPHIC CONTEMPORANEOUS COMMIT
                 </span>
-                <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--brand)" }} />
+                <ShieldCheck className="ico" style={{ width: 13, height: 13, color: "var(--brand)" }} />
               </div>
               <div className="mono xs dim mb-1">SHA-256 PROOF OF AS-BUILT LOG:</div>
               <div
@@ -301,11 +346,12 @@ export function SignalDeconstructor() {
                   borderRadius: "2px",
                   color: "var(--text-3)",
                   wordBreak: "break-all",
+                  fontSize: "10.5px",
                 }}
               >
                 {activeSignal.cryptographicHash}
               </div>
-              <div className="row between mt-3 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
+              <div className="row between mt-2 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
                 <span className="mono xs dim">DESTINATION: ORACLE P6 ENTERPRISE</span>
                 <span className="status xs" style={{ color: "var(--brass)" }}>
                   <CheckCircle2 className="ico" style={{ width: 11, height: 11, color: "var(--brass)" }} />

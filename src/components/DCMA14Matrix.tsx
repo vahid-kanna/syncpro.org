@@ -14,16 +14,16 @@ interface DCMAItem {
 const DCMA_METRICS: DCMAItem[] = [
   {
     id: 1,
-    metric: "Logic Open Ends (Missing Predecessor / Successor)",
+    metric: "Logic Open Ends (Missing Predecessors / Successors)",
     threshold: "< 5.0% of total activities",
-    measured: "0.2% (2 of 940 activities)",
+    measured: "0.2% (2 of 2,846 activities)",
     status: "PASSED",
     remediation: "Deterministic Neo4j topological sort mapped unlinked slab activities to downstream MEP riser rough-in.",
   },
   {
     id: 2,
     metric: "Leads (Negative Lags on Relationships)",
-    threshold: "0.0% (Strict prohibition)",
+    threshold: "0.0% (Strict DoD Prohibition)",
     measured: "0.0% (Zero leads found)",
     status: "PASSED",
     remediation: "Subcontractor negative leads automatically converted to legitimate start-to-start (SS) with positive lag.",
@@ -117,7 +117,7 @@ export function DCMA14Matrix() {
         </p>
       </div>
 
-      <div className="grid-2 gap-6">
+      <div className="grid" style={{ gridTemplateColumns: "1fr 1.2fr", gap: "24px" }}>
         {/* Left Column: Interactive 14-Point Diagnostic List */}
         <div
           className="card"
@@ -126,7 +126,7 @@ export function DCMA14Matrix() {
             border: "1px solid var(--line)",
             padding: "20px",
             borderRadius: "var(--r-md)",
-            maxHeight: "480px",
+            maxHeight: "520px",
             overflowY: "auto",
           }}
         >
@@ -170,13 +170,13 @@ export function DCMA14Matrix() {
           </div>
         </div>
 
-        {/* Right Column: Selected Check Inspection & Automated Logic Repair */}
+        {/* Right Column: High-Resolution Tablet Visual Asset + Selected Check Inspection */}
         <div
           className="card"
           style={{
             background: "rgba(18, 20, 24, 0.95)",
             border: "1px solid var(--line-strong)",
-            padding: "28px",
+            padding: "24px",
             borderRadius: "var(--r-md)",
             display: "flex",
             flexDirection: "column",
@@ -184,7 +184,55 @@ export function DCMA14Matrix() {
           }}
         >
           <div>
-            <div className="row between mb-4 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+            {/* Tablet Image Asset Banner */}
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "220px",
+                borderRadius: "var(--r-xs)",
+                overflow: "hidden",
+                border: "1px solid var(--line)",
+                marginBottom: "16px",
+              }}
+            >
+              <img
+                src="/dcma-audit-tablet.jpg"
+                alt="Primavera P6 Schedule Health Audit Tablet"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  filter: "contrast(1.06) brightness(0.96)",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(180deg, rgba(14,15,18,0.1) 0%, rgba(14,15,18,0.85) 100%)",
+                  pointerEvents: "none",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 8,
+                  left: 12,
+                  right: 12,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: 11,
+                  fontFamily: "var(--mono)",
+                  color: "#FFFFFF",
+                }}
+              >
+                <span>[PROJECT: AURORA-7 TOWER]</span>
+                <span style={{ color: "var(--brass)" }}>P6 OVERALL HEALTH SCORE: 92/100 GOOD</span>
+              </div>
+            </div>
+
+            <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
               <span className="mono xs" style={{ color: "var(--brand)" }}>
                 INSPECTION DETAIL // CHECK #{activeItem.id.toString().padStart(2, "0")}
               </span>
@@ -194,18 +242,18 @@ export function DCMA14Matrix() {
               </span>
             </div>
 
-            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "var(--text)", marginBottom: "16px" }}>
+            <h3 style={{ fontSize: "17px", fontWeight: 700, color: "var(--text)", marginBottom: "12px" }}>
               {activeItem.metric}
             </h3>
 
-            <div className="grid-2 gap-4 mb-6">
-              <div className="p-3" style={{ background: "rgba(10, 11, 14, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+            <div className="grid-2 gap-3 mb-4">
+              <div className="p-2" style={{ background: "rgba(10, 11, 14, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
                 <div className="mono xs dim mb-1">ALLOWED THRESHOLD:</div>
                 <div className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
                   {activeItem.threshold}
                 </div>
               </div>
-              <div className="p-3" style={{ background: "rgba(10, 11, 14, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+              <div className="p-2" style={{ background: "rgba(10, 11, 14, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
                 <div className="mono xs dim mb-1">ACTUAL MEASURED:</div>
                 <div className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
                   {activeItem.measured}
@@ -213,23 +261,23 @@ export function DCMA14Matrix() {
               </div>
             </div>
 
-            <div className="p-4" style={{ background: "rgba(10, 11, 14, 0.9)", borderLeft: "3px solid var(--brass)", borderRadius: "var(--r-xs)" }}>
+            <div className="p-3" style={{ background: "rgba(10, 11, 14, 0.9)", borderLeft: "3px solid var(--brass)", borderRadius: "var(--r-xs)" }}>
               <div className="row gap-2 mb-1" style={{ alignItems: "center" }}>
                 <RefreshCw className="ico" style={{ width: 13, height: 13, color: "var(--brass)" }} />
                 <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
                   AUTOMATED GRAPH LOGIC REMEDIATION:
                 </span>
               </div>
-              <p style={{ fontSize: "13.5px", color: "var(--text-2)", lineHeight: 1.5, margin: 0 }}>
+              <p style={{ fontSize: "12.5px", color: "var(--text-2)", lineHeight: 1.45, margin: 0 }}>
                 {activeItem.remediation}
               </p>
             </div>
           </div>
 
-          <div className="row between mt-6 pt-3" style={{ borderTop: "1px solid var(--line-soft)" }}>
-            <span className="mono xs dim">AUDIT ENGINE: NEO4J SCHEDULE KNOWLEDGE GRAPH</span>
+          <div className="row between mt-4 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
+            <span className="mono xs dim">AUDIT ENGINE: NEO4J TOPOLOGICAL SORT</span>
             <span className="mono xs" style={{ color: "var(--text-3)" }}>
-              AUTOMATED CORRECTION TIME: &lt; 40ms
+              CORRECTION TIME: &lt; 40ms
             </span>
           </div>
         </div>

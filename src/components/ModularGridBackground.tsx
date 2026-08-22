@@ -34,6 +34,38 @@ export function ModularGridBackground() {
       }}
       aria-hidden="true"
     >
+      {/* Ambient Panoramic Skyscraper Spire Background */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "85vh",
+          overflow: "hidden",
+          opacity: 0.35,
+        }}
+      >
+        <img
+          src="/hero-panoramic-spire.jpg"
+          alt="Megaproject Panoramic Spire at Night"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 30%",
+            filter: "contrast(1.1) brightness(0.8)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(180deg, rgba(14,15,18,0.3) 0%, rgba(14,15,18,0.95) 100%)",
+          }}
+        />
+      </div>
+
       {/* Mathematical CAD Blueprint Grid Lines */}
       <div
         style={{
@@ -53,8 +85,8 @@ export function ModularGridBackground() {
           position: "absolute",
           inset: 0,
           backgroundImage: `
-            linear-gradient(to right, rgba(244, 243, 238, 0.09) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(244, 243, 238, 0.09) 1px, transparent 1px)
+            linear-gradient(to right, rgba(244, 243, 238, 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(244, 243, 238, 0.08) 1px, transparent 1px)
           `,
           backgroundSize: "300px 300px",
         }}

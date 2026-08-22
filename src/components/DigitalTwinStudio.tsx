@@ -23,51 +23,51 @@ interface Hotspot {
 const HOTSPOTS: Hotspot[] = [
   {
     id: "pin-1",
-    label: "Core Shear Wall — L18",
-    level: "Level 18",
+    label: "Outrigger Level 68 — Steel Diagrid",
+    level: "Level 68",
     cpmCode: "A1084",
     status: "verified",
-    confidence: 96,
-    top: "30%",
-    left: "50%",
+    confidence: 98.7,
+    top: "22%",
+    left: "51%",
     details: {
-      trade: "Structural Concrete & Rebar",
-      subcontractor: "Apex Formwork Ltd.",
-      evidence: ["Ready-mix Batch Docket #8841 (C50/60)", "QA Pour Inspection Sign-off #QC-902", "Site Supervisor Audio Note"],
+      trade: "Structural Steel & Outriggers",
+      subcontractor: "Apex Steel Erectors Ltd.",
+      evidence: ["Mill Test Cert #ST-8841 (S460M)", "Weld Ultrasonic Testing Log #NDT-902", "Drone Orthophoto Scan"],
       criticalFloat: "+0.00 Days (Zero Slip)",
       varianceAction: "Staged for P6 Master Baseline Commit",
     },
   },
   {
     id: "pin-2",
-    label: "Unitized Curtain Wall — L12",
-    level: "Level 12",
+    label: "Structural Core B — Outrigger L42",
+    level: "Level 42",
     cpmCode: "A1042",
     status: "warning",
-    confidence: 91,
-    top: "48%",
-    left: "40%",
+    confidence: 91.2,
+    top: "44%",
+    left: "49%",
     details: {
-      trade: "Glazing & Facade Systems",
-      subcontractor: "EuroGlass Engineering",
-      evidence: ["Port Customs Release Notice", "Crane Rigging Schedule #CR-04"],
-      criticalFloat: "-4.00 Days (Float Consumed)",
+      trade: "Heavy Concrete Core Wall",
+      subcontractor: "Emirates Coreform Engineering",
+      evidence: ["Port Customs Release Notice", "Crane Wind Gust Log (38 kts)"],
+      criticalFloat: "-4.50 Days (Float Consumed)",
       varianceAction: "Early Delay Notice Drafted (FIDIC Sub-Clause 8.4)",
     },
   },
   {
     id: "pin-3",
-    label: "MEP Riser Penetrations — L06",
-    level: "Level 06",
+    label: "Podium & MEP Risers — Transit Hub",
+    level: "Level 08",
     cpmCode: "A0915",
     status: "on-schedule",
-    confidence: 94,
-    top: "68%",
-    left: "60%",
+    confidence: 96.4,
+    top: "72%",
+    left: "50%",
     details: {
-      trade: "Mechanical & Electrical",
+      trade: "Mechanical & Electrical Risers",
       subcontractor: "Delta MEP Services",
-      evidence: ["BIM 3D Clash Resolution Ticket #BIM-118", "Daily Progress Log #DPR-402"],
+      evidence: ["BIM 3D Clash Resolution Ticket #BIM-118", "Hydrostatic Pressure Test Sign-off #QC-402"],
       criticalFloat: "+2.00 Days Total Float",
       varianceAction: "Contemporaneous Record Cryptographically Sealed",
     },
@@ -90,7 +90,7 @@ export function DigitalTwinStudio() {
             <div className="row gap-2 mb-3">
               <span className="sdot" style={{ background: "var(--brand)" }} />
               <span className="mono xs" style={{ color: "var(--brand)", letterSpacing: "0.08em" }}>
-                INTERACTIVE 3D CAD &amp; CPM STUDIO
+                INTERACTIVE 3D BIM &amp; CPM STUDIO // APEX-80 DIGITAL TWIN
               </span>
             </div>
             <h2
@@ -120,7 +120,7 @@ export function DigitalTwinStudio() {
               onClick={() => setActiveMode("digital-twin")}
             >
               <Layers className="ico" style={{ width: 13, height: 13 }} />
-              3D_CAD_TWIN
+              3D_HOLOGRAPHIC_TWIN
             </button>
             <button
               type="button"
@@ -136,7 +136,7 @@ export function DigitalTwinStudio() {
               onClick={() => setActiveMode("panoramic-overview")}
             >
               <Eye className="ico" style={{ width: 13, height: 13 }} />
-              SITE_COORDINATES
+              SITE_TELEMETRY
             </button>
           </div>
         </div>
@@ -150,7 +150,7 @@ export function DigitalTwinStudio() {
             alignItems: "stretch",
           }}
         >
-          {/* Left: Interactive Vector CAD Wireframe Viewport (Zero Image Dependencies) */}
+          {/* Left: Interactive Holographic BIM Viewport */}
           <div
             className="card"
             style={{
@@ -180,77 +180,32 @@ export function DigitalTwinStudio() {
             >
               <div className="row gap-2 mono xs" style={{ color: "var(--brass)" }}>
                 <Activity className="ico pulse" style={{ width: 13, height: 13, color: "var(--brand)" }} />
-                <span>MEGAPROJECT_NODE_TOWER_01 // VECTOR_CAD_RENDER</span>
+                <span>PROJECT: APEX-80 // 3D_HOLOGRAPHIC_DIGITAL_TWIN</span>
               </div>
-              <span className="mono xs dim">VECTOR ENGINE: 60 FPS · LATENCY: 0.04ms</span>
+              <span className="mono xs dim">ACCURACY: ±2.3mm · SCAN: 2.48B PTS</span>
             </div>
 
-            {/* Pure Interactive Vector CAD Wireframe Blueprint Canvas */}
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-                minHeight: 520,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "radial-gradient(ellipse at 50% 50%, rgba(217, 119, 87, 0.05) 0%, rgba(10, 11, 14, 0.98) 75%)",
-              }}
-            >
-              {/* Architectural CAD Wireframe SVG */}
-              <svg
-                width="100%"
-                height="100%"
-                viewBox="0 0 600 500"
+            {/* High-Definition Holographic BIM Asset */}
+            <div style={{ position: "relative", width: "100%", height: "100%", minHeight: 520 }}>
+              <img
+                src="/apex-holographic-bim.png"
+                alt="Apex-80 3D Holographic BIM Digital Twin"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center 35%",
+                  filter: "contrast(1.08) brightness(0.95)",
+                }}
+              />
+              <div
                 style={{
                   position: "absolute",
                   inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  opacity: 0.85,
+                  background: "radial-gradient(circle at center, transparent 40%, rgba(10,11,14,0.65) 100%)",
+                  pointerEvents: "none",
                 }}
-              >
-                {/* Structural Grid Hairlines */}
-                <line x1="100" y1="50" x2="500" y2="50" stroke="var(--line)" strokeWidth="1" strokeDasharray="4 4" />
-                <line x1="100" y1="450" x2="500" y2="450" stroke="var(--line)" strokeWidth="1" strokeDasharray="4 4" />
-                <line x1="300" y1="40" x2="300" y2="460" stroke="var(--brand-line)" strokeWidth="1" strokeDasharray="2 4" />
-
-                {/* Skyscraper Floor Slices & Isometric Wireframe */}
-                {Array.from({ length: 18 }).map((_, i) => {
-                  const y = 80 + i * 20;
-                  const width = 180 - i * 3;
-                  const left = 300 - width / 2;
-                  return (
-                    <g key={i}>
-                      <rect
-                        x={left}
-                        y={y}
-                        width={width}
-                        height={14}
-                        fill={i === 2 ? "rgba(217, 119, 87, 0.25)" : i === 8 ? "rgba(212, 155, 75, 0.25)" : "rgba(244, 243, 238, 0.03)"}
-                        stroke={i === 2 ? "var(--brand)" : i === 8 ? "var(--brass)" : "rgba(244, 243, 238, 0.15)"}
-                        strokeWidth={i === 2 || i === 8 ? "1.5" : "1"}
-                      />
-                      <text
-                        x={left - 30}
-                        y={y + 11}
-                        fill="rgba(244, 243, 238, 0.3)"
-                        fontFamily="var(--mono)"
-                        fontSize="9"
-                      >
-                        L{(18 - i).toString().padStart(2, "0")}
-                      </text>
-                    </g>
-                  );
-                })}
-
-                {/* Tower Crane Vector Schematic */}
-                <line x1="420" y1="40" x2="420" y2="280" stroke="var(--brand)" strokeWidth="2" />
-                <line x1="320" y1="40" x2="520" y2="40" stroke="var(--brand)" strokeWidth="2" />
-                <line x1="420" y1="40" x2="360" y2="70" stroke="var(--brand-line)" strokeWidth="1" />
-                <line x1="420" y1="40" x2="480" y2="70" stroke="var(--brand-line)" strokeWidth="1" />
-              </svg>
+              />
 
               {/* Interactive Telemetry Hotspot Pins */}
               {HOTSPOTS.map((pin) => {
@@ -278,7 +233,7 @@ export function DigitalTwinStudio() {
                         position: "absolute",
                         inset: -8,
                         borderRadius: "50%",
-                        background: pin.status === "warning" ? "rgba(217, 119, 87, 0.4)" : "rgba(212, 155, 75, 0.4)",
+                        background: pin.status === "warning" ? "rgba(217, 119, 87, 0.45)" : "rgba(212, 155, 75, 0.45)",
                         animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
                       }}
                     />
