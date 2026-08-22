@@ -103,6 +103,7 @@ export function ModularGridBackground() {
 
       {/* Live Interactive Cursor Drafting HUD (vanlent.dev-inspired) */}
       <div
+        className="desktop-nav"
         style={{
           position: "fixed",
           bottom: 16,

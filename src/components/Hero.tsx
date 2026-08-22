@@ -340,13 +340,14 @@ export function Hero() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(5, 1fr)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
               gap: "8px",
               marginBottom: "14px",
               padding: "6px",
               background: "rgba(10, 11, 14, 0.7)",
               borderRadius: "var(--r-xs)",
               border: "1px solid var(--line)",
+              overflowX: "auto",
             }}
           >
             {MILESTONES.map((m, idx) => {
@@ -356,13 +357,14 @@ export function Hero() {
                   key={m.week}
                   onClick={() => setSelectedMilestoneIdx(idx)}
                   style={{
-                    padding: "8px 10px",
+                    padding: "10px 12px",
                     background: active ? "var(--bg-elevated)" : "transparent",
                     border: active ? "1px solid var(--brand)" : "1px solid transparent",
                     borderRadius: "var(--r-xs)",
                     color: active ? "var(--text)" : "var(--text-3)",
                     cursor: "pointer",
                     textAlign: "left",
+                    minWidth: "140px",
                     transition: "all 0.15s ease",
                   }}
                 >
