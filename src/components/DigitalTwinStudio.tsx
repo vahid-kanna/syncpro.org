@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Layers, Eye, CheckCircle2, ChevronRight, Activity, Cpu, Sparkles } from "lucide-react";
-import { useReveal } from "../lib/useReveal";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight, Activity, Sparkles } from "lucide-react";
+import { fadeUpVariants, staggerContainer } from "../lib/motion";
 
 interface Hotspot {
   id: string;
@@ -11,32 +12,24 @@ interface Hotspot {
   confidence: number;
   top: string;
   left: string;
-  details: {
-    trade: string;
-    subcontractor: string;
-    evidence: string[];
-    criticalFloat: string;
-    varianceAction: string;
-  };
+  trade: string;
+  criticalFloat: string;
+  action: string;
 }
 
 const HOTSPOTS: Hotspot[] = [
   {
     id: "pin-1",
-    label: "Outrigger Level 68 — Steel Diagrid",
+    label: "Outrigger Level 68",
     level: "Level 68",
     cpmCode: "A1084",
     status: "verified",
     confidence: 98.7,
     top: "22%",
     left: "51%",
-    details: {
-      trade: "Structural Steel & Outriggers",
-      subcontractor: "Apex Steel Erectors Ltd.",
-      evidence: ["Mill Test Cert #ST-8841 (S460M)", "Weld Ultrasonic Testing Log #NDT-902", "Drone Orthophoto Scan"],
-      criticalFloat: "+0.00 Days (Zero Slip)",
-      varianceAction: "Staged for P6 Master Baseline Commit",
-    },
+    trade: "Structural Steel & Outriggers",
+    criticalFloat: "+0.00 Days (Zero Slip)",
+    action: "Verified & Staged for Baseline Commit",
   },
   {
     id: "pin-2",
@@ -47,38 +40,26 @@ const HOTSPOTS: Hotspot[] = [
     confidence: 91.2,
     top: "44%",
     left: "49%",
-    details: {
-      trade: "Heavy Concrete Core Wall",
-      subcontractor: "Emirates Coreform Engineering",
-      evidence: ["Port Customs Release Notice", "Crane Wind Gust Log (38 kts)"],
-      criticalFloat: "-4.50 Days (Float Consumed)",
-      varianceAction: "Early Delay Notice Drafted (FIDIC Sub-Clause 8.4)",
-    },
+    trade: "Heavy Concrete Core Wall",
+    criticalFloat: "-4.50 Days (Float Consumed)",
+    action: "Early Delay Notice Drafted (FIDIC 8.4)",
   },
   {
     id: "pin-3",
-    label: "Podium & MEP Risers — Transit Hub",
+    label: "Podium & MEP Risers",
     level: "Level 08",
     cpmCode: "A0915",
     status: "on-schedule",
     confidence: 96.4,
     top: "72%",
     left: "50%",
-    details: {
-      trade: "Mechanical & Electrical Risers",
-      subcontractor: "Delta MEP Services",
-      evidence: ["BIM 3D Clash Resolution Ticket #BIM-118", "Hydrostatic Pressure Test Sign-off #QC-402"],
-      criticalFloat: "+2.00 Days Total Float",
-      varianceAction: "Contemporaneous Record Cryptographically Sealed",
-    },
+    trade: "Mechanical & Electrical Risers",
+    criticalFloat: "+2.00 Days Total Float",
+    action: "Contemporaneous Record Sealed",
   },
 ];
 
-type ViewMode = "digital-twin" | "cpm-network" | "panoramic-overview";
-
 export function DigitalTwinStudio() {
-  const reveal = useReveal();
-  const [activeMode, setActiveMode] = useState<ViewMode>("digital-twin");
   const [selectedPin, setSelectedPin] = useState<Hotspot>(HOTSPOTS[0]);
 
   return (
@@ -94,10 +75,16 @@ export function DigitalTwinStudio() {
     >
       <div className="wrap-lg">
         {/* Section Header */}
-        <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={staggerContainer}
+          className="mb-12"
+        >
           <div className="row between mb-8 wrapf" style={{ alignItems: "flex-end" }}>
             <div>
-              <div className="row gap-2 mb-3" style={{ alignItems: "center" }}>
+              <motion.div variants={fadeUpVariants} className="row gap-2 mb-3" style={{ alignItems: "center" }}>
                 <span
                   className="mono xs"
                   style={{
@@ -110,11 +97,13 @@ export function DigitalTwinStudio() {
                     letterSpacing: "0.06em",
                   }}
                 >
-                  MODULE 02 // SPATIAL BIM &amp; CPM NETWORK
+                  SPATIAL 4D CONTROLS // LIVING DIGITAL TWIN
                 </span>
-                <span className="mono xs dim desktop-nav">PROJECT: APEX-80 DIGITAL TWIN</span>
-              </div>
-              <h2
+                <span className="mono xs dim desktop-nav">PROJECT: APEX-80</span>
+              </motion.div>
+
+              <motion.h2
+                variants={fadeUpVariants}
                 className="display"
                 style={{
                   fontFamily: "var(--font-display)",
@@ -127,47 +116,25 @@ export function DigitalTwinStudio() {
               >
                 Living spatial twin of your <br />
                 <span style={{ fontStyle: "italic", color: "var(--brass)" }}>project controls.</span>
-              </h2>
-              <p className="lead mt-3 measure" style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}>
-                Click interactive spatial pins to inspect real-time multi-source corroboration,
-                critical path float variances, and automated contract notice drafts.
-              </p>
+              </motion.h2>
+
+              <motion.p
+                variants={fadeUpVariants}
+                className="lead mt-3 measure"
+                style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}
+              >
+                Click spatial pins to inspect real-time progress, float variances, and automated contract notice drafts.
+              </motion.p>
             </div>
 
-            {/* Mode Switcher Buttons */}
-            <div className="row gap-2 mt-4">
-              <button
-                type="button"
-                className={`btn btn-sm mono xs ${activeMode === "digital-twin" ? "btn-primary" : "btn-outline"}`}
-                onClick={() => setActiveMode("digital-twin")}
-                style={{ padding: "8px 14px" }}
-              >
-                <Layers className="ico" style={{ width: 13, height: 13 }} />
-                3D_HOLOGRAPHIC_TWIN
-              </button>
-              <button
-                type="button"
-                className={`btn btn-sm mono xs ${activeMode === "cpm-network" ? "btn-primary" : "btn-outline"}`}
-                onClick={() => setActiveMode("cpm-network")}
-                style={{ padding: "8px 14px" }}
-              >
-                <Cpu className="ico" style={{ width: 13, height: 13 }} />
-                CPM_NETWORK
-              </button>
-              <button
-                type="button"
-                className={`btn btn-sm mono xs ${activeMode === "panoramic-overview" ? "btn-primary" : "btn-outline"}`}
-                onClick={() => setActiveMode("panoramic-overview")}
-                style={{ padding: "8px 14px" }}
-              >
-                <Eye className="ico" style={{ width: 13, height: 13 }} />
-                SITE_TELEMETRY
-              </button>
-            </div>
+            <motion.div variants={fadeUpVariants} className="tag" style={{ background: "var(--brass-bg)", color: "var(--brass)", borderColor: "var(--brass-line)" }}>
+              <Sparkles className="ico" style={{ width: 12, height: 12, marginRight: 4 }} />
+              BIM 4D SPATIAL MODEL
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Studio Canvas & Inspection Console Grid */}
+        {/* Studio Canvas Grid */}
         <div
           className="grid"
           style={{
@@ -177,20 +144,24 @@ export function DigitalTwinStudio() {
           }}
         >
           {/* Left: Interactive Holographic BIM Viewport */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="card"
             style={{
               position: "relative",
               padding: 0,
               overflow: "hidden",
-              minHeight: 520,
+              minHeight: 480,
               background: "rgba(10, 11, 14, 0.95)",
               border: "1px solid var(--line-strong)",
               boxShadow: "var(--shadow-pop)",
               borderRadius: "var(--r-md)",
             }}
           >
-            {/* Viewport Header Bar */}
+            {/* Viewport Header */}
             <div
               className="row between px-4 py-3"
               style={{
@@ -206,13 +177,13 @@ export function DigitalTwinStudio() {
             >
               <div className="row gap-2 mono xs" style={{ color: "var(--brass)" }}>
                 <Activity className="ico pulse" style={{ width: 13, height: 13, color: "var(--brand)" }} />
-                <span>PROJECT: APEX-80 // 3D_HOLOGRAPHIC_DIGITAL_TWIN</span>
+                <span>APEX-80 // HOLOGRAPHIC BIM TWIN</span>
               </div>
-              <span className="mono xs dim">ACCURACY: ±2.3mm · SCAN: 2.48B PTS</span>
+              <span className="mono xs dim">ACCURACY: ±2.3mm · 2.48B PTS</span>
             </div>
 
-            {/* High-Definition Holographic BIM Asset */}
-            <div style={{ position: "relative", width: "100%", height: "100%", minHeight: 520 }}>
+            {/* High-Definition Holographic Asset */}
+            <div style={{ position: "relative", width: "100%", height: "100%", minHeight: 480 }}>
               <img
                 src="/apex-holographic-bim.png"
                 alt="Apex-80 3D Holographic BIM Digital Twin"
@@ -237,9 +208,11 @@ export function DigitalTwinStudio() {
               {HOTSPOTS.map((pin) => {
                 const isSelected = selectedPin.id === pin.id;
                 return (
-                  <button
+                  <motion.button
                     key={pin.id}
                     type="button"
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedPin(pin)}
                     style={{
                       position: "absolute",
@@ -266,8 +239,8 @@ export function DigitalTwinStudio() {
                     {/* Pin Center */}
                     <div
                       style={{
-                        width: 24,
-                        height: 24,
+                        width: 26,
+                        height: 26,
                         borderRadius: "50%",
                         background: isSelected ? "#FFFFFF" : pin.status === "warning" ? "var(--brand)" : "var(--brass)",
                         color: "#08090C",
@@ -279,7 +252,6 @@ export function DigitalTwinStudio() {
                         boxShadow: "0 0 16px rgba(0,0,0,0.8)",
                         border: "2px solid #FFFFFF",
                         transition: "all 0.2s ease",
-                        transform: isSelected ? "scale(1.25)" : "scale(1)",
                       }}
                     >
                       {pin.level.replace("Level ", "L")}
@@ -289,7 +261,7 @@ export function DigitalTwinStudio() {
                       style={{
                         position: "absolute",
                         left: "50%",
-                        top: 28,
+                        top: 30,
                         transform: "translateX(-50%)",
                         background: "rgba(10, 11, 14, 0.95)",
                         border: `1px solid ${isSelected ? "var(--brand)" : "var(--line)"}`,
@@ -303,7 +275,7 @@ export function DigitalTwinStudio() {
                         {pin.label}
                       </span>
                     </div>
-                  </button>
+                  </motion.button>
                 );
               })}
             </div>
@@ -321,118 +293,103 @@ export function DigitalTwinStudio() {
                 zIndex: 20,
               }}
             >
-              <span className="xs dim" style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                <Sparkles className="ico" style={{ width: 13, height: 13, color: "var(--brass)" }} />
-                Click pins to inspect live schedule corroboration
-              </span>
+              <span className="xs dim">Tap pins to inspect live schedule corroboration</span>
               <span className="mono xs" style={{ color: "var(--brand)" }}>
-                ACTIVE PIN: #{selectedPin.cpmCode} ({selectedPin.level})
+                TARGET: #{selectedPin.cpmCode} ({selectedPin.level})
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right: Telemetry Inspection Console */}
-          <div
-            className="card stack"
-            style={{
-              background: "rgba(18, 20, 24, 0.96)",
-              border: "1px solid var(--line)",
-              padding: 26,
-              justifyContent: "space-between",
-              borderRadius: "var(--r-md)",
-            }}
-          >
-            <div>
-              {/* Header */}
-              <div className="row between mb-4 pb-3" style={{ borderBottom: "1px solid var(--line)" }}>
-                <div>
-                  <span className="mono xs dim">INSPECTION TARGET</span>
-                  <h3 className="h3 mt-1" style={{ color: "var(--text)", fontSize: "18px" }}>
-                    {selectedPin.label}
-                  </h3>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedPin.id}
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.2 }}
+              className="card stack"
+              style={{
+                background: "rgba(18, 20, 24, 0.96)",
+                border: "1px solid var(--line-strong)",
+                padding: 28,
+                justifyContent: "space-between",
+                borderRadius: "var(--r-md)",
+              }}
+            >
+              <div>
+                {/* Header */}
+                <div className="row between mb-4 pb-3" style={{ borderBottom: "1px solid var(--line)" }}>
+                  <div>
+                    <span className="mono xs dim">LOCATION TARGET</span>
+                    <h3 className="h3 mt-1" style={{ color: "var(--text)", fontSize: "18px" }}>
+                      {selectedPin.label}
+                    </h3>
+                  </div>
+                  <span
+                    className="tag"
+                    style={{
+                      background: selectedPin.status === "warning" ? "var(--brand-bg)" : "var(--brass-bg)",
+                      color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)",
+                      borderColor: selectedPin.status === "warning" ? "var(--brand-line)" : "var(--brass-line)",
+                    }}
+                  >
+                    {selectedPin.confidence}% Corroborated
+                  </span>
                 </div>
-                <span
-                  className="tag"
+
+                {/* Data Properties */}
+                <div className="props mb-4" style={{ fontSize: 13 }}>
+                  <dt>CPM Node ID</dt>
+                  <dd className="mono" style={{ color: "var(--brass)", fontWeight: 700 }}>
+                    #{selectedPin.cpmCode}
+                  </dd>
+
+                  <dt>Discipline</dt>
+                  <dd>{selectedPin.trade}</dd>
+
+                  <dt>Critical Float</dt>
+                  <dd
+                    style={{
+                      color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {selectedPin.criticalFloat}
+                  </dd>
+                </div>
+
+                {/* Staged Action */}
+                <div
                   style={{
-                    background: selectedPin.status === "warning" ? "var(--brand-bg)" : "var(--brass-bg)",
-                    color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)",
-                    borderColor: selectedPin.status === "warning" ? "var(--brand-line)" : "var(--brass-line)",
+                    padding: 16,
+                    background: selectedPin.status === "warning" ? "rgba(217, 119, 87, 0.08)" : "rgba(212, 155, 75, 0.08)",
+                    border: `1px solid ${selectedPin.status === "warning" ? "var(--brand-line)" : "var(--brass-line)"}`,
+                    borderRadius: "var(--r-xs)",
                   }}
                 >
-                  {selectedPin.confidence}% Corroborated
-                </span>
-              </div>
-
-              {/* Data Properties */}
-              <div className="props mb-4" style={{ fontSize: 12.5 }}>
-                <dt>CPM Node ID</dt>
-                <dd className="mono" style={{ color: "var(--brass)", fontWeight: 700 }}>
-                  #{selectedPin.cpmCode}
-                </dd>
-
-                <dt>Trade / Discipline</dt>
-                <dd>{selectedPin.details.trade}</dd>
-
-                <dt>Subcontractor</dt>
-                <dd>{selectedPin.details.subcontractor}</dd>
-
-                <dt>Critical Float</dt>
-                <dd
-                  style={{
-                    color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)",
-                    fontWeight: 700,
-                  }}
-                >
-                  {selectedPin.details.criticalFloat}
-                </dd>
-              </div>
-
-              {/* Corroborated Evidence Stack */}
-              <div className="mb-4">
-                <span className="mono xs dim mb-2 block">CORROBORATING EVIDENCE ARTIFACTS:</span>
-                <div className="stack gap-2">
-                  {selectedPin.details.evidence.map((ev, idx) => (
-                    <div
-                      key={idx}
-                      className="row gap-2 xs"
-                      style={{
-                        padding: "8px 12px",
-                        background: "rgba(10, 11, 14, 0.8)",
-                        borderRadius: "var(--r-xs)",
-                        border: "1px solid var(--line-soft)",
-                      }}
-                    >
-                      <CheckCircle2 className="ico" style={{ width: 13, height: 13, color: "var(--brass)" }} />
-                      <span style={{ color: "var(--text)" }}>{ev}</span>
-                    </div>
-                  ))}
+                  <span className="mono xs dim block" style={{ color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)" }}>
+                    AUTOMATED CONTROLS ACTION:
+                  </span>
+                  <p className="xs mt-1" style={{ color: "var(--text)", fontWeight: 600, margin: 0 }}>
+                    {selectedPin.action}
+                  </p>
                 </div>
               </div>
 
-              {/* Staged Action */}
-              <div
-                style={{
-                  padding: 14,
-                  background: selectedPin.status === "warning" ? "rgba(217, 119, 87, 0.08)" : "rgba(212, 155, 75, 0.08)",
-                  border: `1px solid ${selectedPin.status === "warning" ? "var(--brand-line)" : "var(--brass-line)"}`,
-                  borderRadius: "var(--r-xs)",
-                }}
+              {/* Bottom Action CTA */}
+              <motion.a
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn btn-primary btn-block mt-6 mono xs"
+                href="#waitlist"
+                style={{ fontWeight: 700, justifyContent: "center", padding: "12px" }}
               >
-                <span className="mono xs dim block" style={{ color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)" }}>
-                  RECOMMENDED ACTION:
-                </span>
-                <p className="xs mt-1" style={{ color: "var(--text)", fontWeight: 600, margin: 0 }}>
-                  {selectedPin.details.varianceAction}
-                </p>
-              </div>
-            </div>
-
-            {/* Bottom Action CTA */}
-            <a className="btn btn-primary btn-block mt-6 mono xs" href="#waitlist" style={{ fontWeight: 700, justifyContent: "center" }}>
-              INITIALIZE_DESIGN_PARTNER_PILOT
-              <ChevronRight className="ico" />
-            </a>
-          </div>
+                INITIALIZE_PILOT_SEQUENCE
+                <ChevronRight className="ico" />
+              </motion.a>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

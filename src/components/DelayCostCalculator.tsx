@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Sliders, ShieldCheck, ArrowRight } from "lucide-react";
-import { useReveal } from "../lib/useReveal";
+import { fadeUpVariants, staggerContainer } from "../lib/motion";
 
 export function DelayCostCalculator() {
-  const reveal = useReveal();
   const [capexM, setCapexM] = useState<number>(250); // $250M CAPEX
   const [delayWeeks, setDelayWeeks] = useState<number>(6); // 6 Weeks delay
 
@@ -15,7 +15,7 @@ export function DelayCostCalculator() {
   const carryingCostInterest = Math.round((capexM * 1000000 * 0.07 * (delayWeeks / 52))); // 7% cost of capital
   const totalExposure = totalLDs + extendedPrelims + carryingCostInterest;
 
-  // SyncPro 3-week early detection recovery (typically recovers 70-85% of critical path slip)
+  // SyncPro 3-week early detection recovery
   const syncproRecovery = Math.round(totalExposure * 0.76);
 
   return (
@@ -25,14 +25,20 @@ export function DelayCostCalculator() {
         position: "relative",
         paddingTop: "100px",
         paddingBottom: "100px",
-        background: "rgba(14, 15, 18, 0.6)",
+        background: "rgba(10, 11, 14, 0.4)",
         borderBottom: "1px solid var(--line)",
       }}
     >
       <div className="wrap-lg">
         {/* Section Header */}
-        <div ref={reveal.ref} className={`${reveal.className} mb-12`}>
-          <div className="row gap-2 mb-3" style={{ alignItems: "center" }}>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={staggerContainer}
+          className="mb-12"
+        >
+          <motion.div variants={fadeUpVariants} className="row gap-2 mb-3" style={{ alignItems: "center" }}>
             <span
               className="mono xs"
               style={{
@@ -45,11 +51,13 @@ export function DelayCostCalculator() {
                 letterSpacing: "0.06em",
               }}
             >
-              MODULE 05 // MEGAPROJECT CAPITAL EXPOSURE SANDBOX
+              FINANCIAL RISK SANDBOX // ROI IMPACT
             </span>
-            <span className="mono xs dim desktop-nav">FINANCIAL RISK QUANTIFICATION</span>
-          </div>
-          <h2
+            <span className="mono xs dim desktop-nav">CAPITAL EXPOSURE MODELING</span>
+          </motion.div>
+
+          <motion.h2
+            variants={fadeUpVariants}
             className="display"
             style={{
               fontFamily: "var(--font-display)",
@@ -62,16 +70,25 @@ export function DelayCostCalculator() {
           >
             Quantify the cost of <br />
             <span style={{ fontStyle: "italic", color: "var(--brand)" }}>3 weeks of schedule blindness.</span>
-          </h2>
-          <p className="lead mt-4 measure" style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}>
+          </motion.h2>
+
+          <motion.p
+            variants={fadeUpVariants}
+            className="lead mt-4 measure"
+            style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}
+          >
             On a $250M megaproject, every week of undetected critical path slip costs ~$400,000 in liquidated damages,
             extended preliminaries, and carrying costs. Calculate your project's exposure below.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: "28px" }}>
-          {/* Left Column: Interactive Titanium Sliders */}
-          <div
+          {/* Left Column: Sliders */}
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="card"
             style={{
               background: "rgba(18, 20, 24, 0.96)",
@@ -92,7 +109,7 @@ export function DelayCostCalculator() {
             <div className="mb-6">
               <div className="row between mb-2">
                 <label htmlFor="capex-slider" style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>
-                  Total Project Contract Value (CAPEX)
+                  Contract Value (CAPEX)
                 </label>
                 <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700, fontSize: "15px" }}>
                   ${capexM}M USD
@@ -123,7 +140,7 @@ export function DelayCostCalculator() {
             <div className="mb-6">
               <div className="row between mb-2">
                 <label htmlFor="delay-slider" style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>
-                  Undetected Critical Path Slip Duration
+                  Undetected Critical Path Slip
                 </label>
                 <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700, fontSize: "15px" }}>
                   {delayWeeks} WEEKS ({delayWeeks * 7} DAYS)
@@ -158,15 +175,19 @@ export function DelayCostCalculator() {
                 borderRadius: "var(--r-xs)",
               }}
             >
-              <div className="mono xs dim mb-1">CONTRACT STANDARD BENCHMARKS:</div>
+              <div className="mono xs dim mb-1">INDUSTRY BENCHMARKS:</div>
               <p className="xs dim" style={{ margin: 0, lineHeight: 1.5 }}>
-                Liquidated damages modeled at 0.1% per week (capped at 10% contract sum); site preliminaries modeled at 8% total CAPEX.
+                Liquidated damages modeled at 0.1%/week; site preliminaries at 8% total CAPEX; cost of capital at 7% APR.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Financial Exposure Output & Margin Recovery */}
-          <div
+          {/* Right Column: Output Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="card stack"
             style={{
               background: "rgba(18, 20, 24, 0.96)",
@@ -180,10 +201,10 @@ export function DelayCostCalculator() {
             <div>
               <div className="row between mb-4 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
                 <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 600 }}>
-                  TOTAL UNMITIGATED FINANCIAL RISK
+                  TOTAL UNMITIGATED RISK
                 </span>
                 <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
-                  ESTIMATED EXPOSURE
+                  DIRECT LOSS
                 </span>
               </div>
 
@@ -206,15 +227,15 @@ export function DelayCostCalculator() {
               {/* Breakdown Rows */}
               <div className="stack gap-2 mb-4" style={{ fontSize: "13px" }}>
                 <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.8)", borderRadius: "var(--r-xs)" }}>
-                  <span className="dim">Liquidated Damages (LDs):</span>
+                  <span className="dim">Liquidated Damages:</span>
                   <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(totalLDs / 1000).toLocaleString()} USD</span>
                 </div>
                 <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.8)", borderRadius: "var(--r-xs)" }}>
-                  <span className="dim">Extended Site Preliminaries (Site Overhead):</span>
+                  <span className="dim">Extended Site Preliminaries:</span>
                   <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(extendedPrelims / 1000).toLocaleString()} USD</span>
                 </div>
                 <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.8)", borderRadius: "var(--r-xs)" }}>
-                  <span className="dim">Carrying Costs &amp; Working Capital Interest:</span>
+                  <span className="dim">Carrying Costs &amp; Working Capital:</span>
                   <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(carryingCostInterest / 1000).toLocaleString()} USD</span>
                 </div>
               </div>
@@ -231,7 +252,7 @@ export function DelayCostCalculator() {
                 <div className="row gap-2 mb-1" style={{ alignItems: "center" }}>
                   <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
                   <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700 }}>
-                    SYNCPRO EARLY RECOVERY PROTECTION:
+                    SYNCPRO EARLY PROTECTION:
                   </span>
                 </div>
                 <div className="row between mt-1">
@@ -243,11 +264,17 @@ export function DelayCostCalculator() {
               </div>
             </div>
 
-            <a className="btn btn-primary btn-block mt-4 mono xs" href="#waitlist" style={{ justifyContent: "center", padding: "12px", fontWeight: 700 }}>
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn btn-primary btn-block mt-4 mono xs"
+              href="#waitlist"
+              style={{ justifyContent: "center", padding: "12px", fontWeight: 700 }}
+            >
               PROTECT_MY_CAPITAL_PROJECT
               <ArrowRight className="ico" />
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
       </div>
     </section>

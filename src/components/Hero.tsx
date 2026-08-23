@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ArrowRight, ShieldCheck, Activity, ChevronRight, AlertTriangle, CheckCircle2, Clock } from "lucide-react";
-import { useReveal } from "../lib/useReveal";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ShieldCheck, Activity, ChevronRight, AlertTriangle, CheckCircle2, Clock, Sparkles } from "lucide-react";
+import { fadeUpVariants, staggerContainer } from "../lib/motion";
 
 interface MilestoneData {
   week: number;
@@ -18,68 +19,67 @@ interface MilestoneData {
 const MILESTONES: MilestoneData[] = [
   {
     week: 6,
-    phase: "PACKAGE A-01 // SUBSTRUCTURE PILING",
+    phase: "SUBSTRUCTURE // PILING & RAFT",
     activityId: "#A1012",
-    activityName: "Bored Cast-in-Place Piles — Grid A-F",
+    activityName: "Bored Piles & Foundation Raft",
     status: "ON_TRACK",
     plannedDuration: 45,
     actualProgress: 100,
     floatDelta: 0,
     liquidatedDamageRisk: "$0",
-    eventLog: "32/32 concrete cube test cylinders exceeded 45 MPa spec. Commits cryptographically sealed.",
+    eventLog: "32/32 concrete cube tests verified. Field commits sealed.",
   },
   {
     week: 16,
-    phase: "PACKAGE A-02 // CORE JUMP-FORM LIFT",
+    phase: "SUPERSTRUCTURE // CORE SHEAR WALL",
     activityId: "#A1048",
-    activityName: "Level 18 Hydraulic Slipform Core Pour",
+    activityName: "Level 18 Slipform Core Pour",
     status: "ON_TRACK",
     plannedDuration: 30,
     actualProgress: 88,
     floatDelta: 0,
     liquidatedDamageRisk: "$0",
-    eventLog: "Multi-source corroboration verified 4 batch delivery dockets against drone orthophoto.",
+    eventLog: "Corroborated 4 batch delivery dockets against drone orthophoto.",
   },
   {
     week: 24,
-    phase: "PACKAGE B-04 // STEEL DIAGRID ERECTION",
+    phase: "STEEL DIAGRID // OUTRIGGER LIFT",
     activityId: "#A1084",
-    activityName: "Diagrid Node N45 Heavy Lift & Outrigger",
+    activityName: "Diagrid Node N45 Outrigger",
     status: "WARNING",
     plannedDuration: 60,
     actualProgress: 42,
     floatDelta: -4.5,
     liquidatedDamageRisk: "$315,000",
-    eventLog: "Extrusion delivery delayed at port. Float consumption triggered early FIDIC 8.4 notice draft.",
+    eventLog: "Material delay at port. Float consumption flagged 3 weeks early.",
   },
   {
     week: 36,
-    phase: "PACKAGE C-08 // MEP CENTRAL RISERS",
+    phase: "MEP & FIT-OUT // CENTRAL RISERS",
     activityId: "#A1142",
-    activityName: "Level 14-22 Chilled Water Primary Riser",
+    activityName: "Level 14-22 Chilled Water Riser",
     status: "CRITICAL_SLIP",
     plannedDuration: 40,
     actualProgress: 60,
     floatDelta: -8.0,
     liquidatedDamageRisk: "$560,000",
-    eventLog: "Weld radiography inspection delay flagged. Live shadow schedule restaged mitigation sequence.",
+    eventLog: "Weld inspection delay flagged. Live shadow schedule restaged.",
   },
   {
     week: 48,
-    phase: "PACKAGE D-12 // COMMISSIONING & HANDOVER",
+    phase: "COMMISSIONING & HANDOVER",
     activityId: "#A1220",
-    activityName: "Integrated Building Systems Handover",
+    activityName: "Integrated Building Handover",
     status: "RECONCILED",
     plannedDuration: 25,
     actualProgress: 98,
     floatDelta: 0,
     liquidatedDamageRisk: "$0 (Recovered)",
-    eventLog: "Tamper-evident contemporaneous audit dossier sealed for final employer sign-off.",
+    eventLog: "Tamper-evident contemporaneous audit dossier sealed for sign-off.",
   },
 ];
 
 export function Hero() {
-  const reveal = useReveal();
   const [selectedMilestoneIdx, setSelectedMilestoneIdx] = useState<number>(2); // Default to Week 24 (Warning phase)
   const current = MILESTONES[selectedMilestoneIdx];
 
@@ -88,30 +88,36 @@ export function Hero() {
       id="hero"
       style={{
         position: "relative",
-        minHeight: "92vh",
+        minHeight: "90vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        paddingTop: "72px",
+        paddingTop: "64px",
         paddingBottom: "48px",
         overflow: "hidden",
         borderBottom: "1px solid var(--line)",
       }}
     >
-      {/* Background CAD Blueprint Ambient Glow */}
+      {/* Background CAD Ambient Glow */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "radial-gradient(ellipse at 50% 0%, rgba(217, 119, 87, 0.09) 0%, transparent 65%)",
+          backgroundImage: "radial-gradient(ellipse at 50% 0%, rgba(217, 119, 87, 0.12) 0%, transparent 65%)",
           pointerEvents: "none",
           zIndex: 0,
         }}
       />
 
       <div className="wrap-lg" style={{ position: "relative", zIndex: 10, width: "100%" }}>
-        {/* Top Blueprint Coordinates Header */}
-        <div className="row between mb-6 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+        {/* Top Status Ticker */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="row between mb-6 pb-2"
+          style={{ borderBottom: "1px solid var(--line-soft)" }}
+        >
           <div className="row gap-3">
             <span className="mono xs" style={{ color: "var(--brand)", letterSpacing: "0.08em" }}>
               [PROJECT: OBSIDIAN SPIRE // 1,280m MEGAPROJECT]
@@ -121,76 +127,91 @@ export function Hero() {
           <div className="row gap-2">
             <span className="sdot pulse" style={{ background: "var(--brand)" }} />
             <span className="mono xs" style={{ color: "var(--brass)", letterSpacing: "0.08em" }}>
-              CPM RECONCILIATION: ARMED
+              AUTONOMOUS SCHEDULE RECONCILIATION: ACTIVE
             </span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Hero 2-Column Master Layout */}
-        <div className="grid" style={{ gridTemplateColumns: "1.05fr 1.15fr", gap: "36px", alignItems: "center" }}>
-          {/* Left Column: Bold Human Editorial Headline & Mission */}
-          <div ref={reveal.ref} className={reveal.className}>
-            <div
+        {/* Hero 2-Column Grid */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="grid"
+          style={{ gridTemplateColumns: "1.1fr 1.1fr", gap: "36px", alignItems: "center" }}
+        >
+          {/* Left Column: Kinetic Editorial Headline & Mission */}
+          <div>
+            <motion.div
+              variants={fadeUpVariants}
               className="mb-4 row gap-2"
               style={{
                 border: "1px solid var(--line-strong)",
-                padding: "4px 12px",
+                padding: "5px 12px",
                 background: "rgba(18, 20, 24, 0.85)",
                 backdropFilter: "blur(12px)",
                 width: "max-content",
                 borderRadius: "var(--r-xs)",
               }}
             >
-              <span className="mono xs" style={{ color: "var(--brand)", letterSpacing: "0.08em" }}>
-                FIDIC &amp; NEC4 CLAIMS SHIELD // DCMA-14 VERIFIED
+              <Sparkles className="ico" style={{ width: 13, height: 13, color: "var(--brand)" }} />
+              <span className="mono xs" style={{ color: "var(--brand)", letterSpacing: "0.06em", fontWeight: 600 }}>
+                AUTONOMOUS PROJECT CONTROLS FOR MEGAPROJECTS
               </span>
-            </div>
+            </motion.div>
 
-            <h1
+            <motion.h1
+              variants={fadeUpVariants}
               className="display"
               style={{
                 fontFamily: "var(--font-display)",
                 letterSpacing: "-0.035em",
-                lineHeight: 1.03,
-                fontSize: "clamp(42px, 4.8vw, 70px)",
+                lineHeight: 1.04,
+                fontSize: "clamp(40px, 4.6vw, 68px)",
                 color: "var(--text)",
               }}
             >
               The schedule never lies. <br />
-              <span style={{ fontStyle: "italic", color: "var(--brass)", paddingLeft: "12px" }}>
+              <span style={{ fontStyle: "italic", color: "var(--brass)", paddingLeft: "8px" }}>
                 Neither do we.
               </span>
-            </h1>
+            </motion.h1>
 
-            <p
+            <motion.p
+              variants={fadeUpVariants}
               className="lead mt-4 measure"
               style={{
-                fontSize: "clamp(15.5px, 1.2vw, 18px)",
+                fontSize: "clamp(16px, 1.2vw, 18px)",
                 color: "var(--text-2)",
                 lineHeight: 1.6,
               }}
             >
-              SyncPro is the AI Project Controls Engineer for capital megaprojects. It resolves unstructured site audio,
-              batch dockets, and inspection logs into deterministic CPM activities — producing legally defensible contemporaneous
-              evidence before delay claims materialize.
-            </p>
+              SyncPro eliminates delay surprises on capital megaprojects. It reconciles messy site audio,
+              drone scans, and delivery dockets into live CPM activity nodes — catching critical path slips 3 weeks before contractors report them.
+            </motion.p>
 
-            <div className="row gap-4 mt-7 wrapf">
-              <a
+            {/* CTAs with Spring Physics */}
+            <motion.div variants={fadeUpVariants} className="row gap-4 mt-7 wrapf">
+              <motion.a
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 className="btn btn-primary btn-lg mono xs"
                 href="#waitlist"
                 style={{
                   fontWeight: 700,
                   letterSpacing: "0.06em",
                   padding: "14px 28px",
+                  boxShadow: "0 0 24px rgba(217, 119, 87, 0.35)",
                 }}
               >
                 INITIALIZE_PILOT_SEQUENCE
                 <ArrowRight className="ico" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className="btn btn-outline btn-lg mono xs"
-                href="#signal-deconstructor"
+                href="#how-it-works"
                 style={{
                   letterSpacing: "0.06em",
                   padding: "14px 24px",
@@ -198,24 +219,26 @@ export function Hero() {
                   backdropFilter: "blur(8px)",
                 }}
               >
-                VIEW_SIGNAL_DECONSTRUCTOR
+                HOW_IT_WORKS
                 <ChevronRight className="ico" />
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
-            <div className="row gap-4 mt-6 wrapf" style={{ alignItems: "center" }}>
+            {/* Trust Badges */}
+            <motion.div variants={fadeUpVariants} className="row gap-4 mt-6 wrapf" style={{ alignItems: "center" }}>
               <div className="status" style={{ background: "rgba(18, 20, 24, 0.8)", padding: "4px 10px", borderRadius: 4 }}>
-                <span className="sdot sdot-live pulse" style={{ background: "var(--brand)" }} /> Cohort 01 Onboarding Active
+                <span className="sdot sdot-live pulse" style={{ background: "var(--brand)" }} /> Cohort 01 Onboarding Live
               </div>
               <div className="row gap-2 xs dim" style={{ borderLeft: "1px solid var(--line)", paddingLeft: 14 }}>
                 <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
                 <span>SOC 2 Type II · Zero Model Training on Client P6 Data</span>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Right Column: High-Definition Megaproject CAD Asset & HUD */}
-          <div
+          {/* Right Column: Visual Frame with Floating Jitter Badges */}
+          <motion.div
+            variants={fadeUpVariants}
             className="card"
             style={{
               position: "relative",
@@ -227,7 +250,7 @@ export function Hero() {
               background: "var(--bg-sunken)",
             }}
           >
-            {/* Asset Header Tag */}
+            {/* Header */}
             <div
               className="row between px-4 py-2"
               style={{
@@ -237,13 +260,13 @@ export function Hero() {
               }}
             >
               <span className="mono xs" style={{ color: "var(--brass)" }}>
-                [FIG.01-MEGAPROJECT_CAD] // OBSIDIAN_SPIRE_PACKAGE_A01
+                [FIG.01-MEGAPROJECT_CAD] // OBSIDIAN_SPIRE
               </span>
-              <span className="mono xs dim">FOV: 35mm · RESOLUTION: 8K · f/8</span>
+              <span className="mono xs dim">PRIMAVERA P6 SHADOW ENGINE</span>
             </div>
 
-            {/* High-Definition Photorealistic Megaproject CAD Asset */}
-            <div style={{ position: "relative", width: "100%", height: "360px", overflow: "hidden" }}>
+            {/* Visual Image Asset Frame */}
+            <div style={{ position: "relative", width: "100%", height: "350px", overflow: "hidden" }}>
               <img
                 src="/obsidian-spire-cad.jpg"
                 alt="Obsidian Spire Megaproject CAD Telemetry Render"
@@ -259,20 +282,61 @@ export function Hero() {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: "linear-gradient(180deg, rgba(14,15,18,0.1) 0%, rgba(14,15,18,0.7) 100%)",
+                  background: "linear-gradient(180deg, rgba(14,15,18,0.1) 0%, rgba(14,15,18,0.75) 100%)",
                   pointerEvents: "none",
                 }}
               />
+
+              {/* Floating Jitter-Style Badges */}
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                style={{
+                  position: "absolute",
+                  top: 20,
+                  left: 20,
+                  background: "rgba(14, 15, 18, 0.9)",
+                  border: "1px solid var(--brand)",
+                  padding: "6px 12px",
+                  borderRadius: "var(--r-xs)",
+                  backdropFilter: "blur(12px)",
+                }}
+              >
+                <div className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                  98.7% EVIDENCE CONFIDENCE
+                </div>
+                <div className="xs dim" style={{ fontSize: 10 }}>Multi-Source Verified</div>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                style={{
+                  position: "absolute",
+                  bottom: 30,
+                  right: 20,
+                  background: "rgba(14, 15, 18, 0.9)",
+                  border: "1px solid var(--brass)",
+                  padding: "6px 12px",
+                  borderRadius: "var(--r-xs)",
+                  backdropFilter: "blur(12px)",
+                }}
+              >
+                <div className="mono xs" style={{ color: "var(--brass)", fontWeight: 700 }}>
+                  0 UNNOTIFIED DELAYS
+                </div>
+                <div className="xs dim" style={{ fontSize: 10 }}>FIDIC 8.4 Shield Armed</div>
+              </motion.div>
             </div>
 
-            {/* Live Planned vs Actual Reconciled CPM Float Bar */}
+            {/* Reconciled Float Bar */}
             <div style={{ padding: "14px 20px", background: "rgba(18, 20, 24, 0.98)" }}>
               <div className="row between mb-2">
                 <span className="mono xs" style={{ color: "var(--brass)" }}>
                   {current.activityId} — {current.activityName}
                 </span>
                 <span className="mono xs" style={{ color: current.floatDelta < 0 ? "var(--brand)" : "var(--brass)" }}>
-                  FLOAT: {current.floatDelta > 0 ? `+${current.floatDelta}` : current.floatDelta} DAYS
+                  FLOAT DELTA: {current.floatDelta > 0 ? `+${current.floatDelta}` : current.floatDelta} DAYS
                 </span>
               </div>
 
@@ -284,7 +348,7 @@ export function Hero() {
                   </div>
                 </div>
                 <div className="gantt-row">
-                  <span className="lab" style={{ fontSize: 11 }}>Field Progress</span>
+                  <span className="lab" style={{ fontSize: 11 }}>Field Reality</span>
                   <div className="gtrack">
                     <div
                       className={`gbar ${current.floatDelta < 0 ? "gbar-crit" : "gbar-field"}`}
@@ -293,21 +357,23 @@ export function Hero() {
                         width: `${Math.min(100, current.actualProgress * 0.45)}%`,
                         background: current.floatDelta < 0 ? "var(--brand)" : "var(--brass)",
                       }}
-                      title="Actual Corroborated Site Progress"
                     />
-                    {current.floatDelta < 0 && (
-                      <span className="gtick data" style={{ left: `${current.actualProgress * 0.45}%` }} />
-                    )}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Bottom Full-Width Interactive Time-Machine CPM Scrubber */}
-      <div className="wrap-lg mt-8" style={{ position: "relative", zIndex: 10, width: "100%" }}>
+      {/* Interactive Time-Machine Scrubber */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="wrap-lg mt-8"
+        style={{ position: "relative", zIndex: 10, width: "100%" }}
+      >
         <div
           className="card"
           style={{
@@ -324,9 +390,9 @@ export function Hero() {
             <div className="row gap-3">
               <span className="status xs" style={{ color: "var(--brand)" }}>
                 <Activity className="ico pulse" style={{ width: 12, height: 12, color: "var(--brand)" }} />
-                INTERACTIVE_TIME_MACHINE // CRITICAL_PATH_LIFECYCLE_SCRUBBER
+                INTERACTIVE TIME-MACHINE // SCHEDULE LIFECYCLE
               </span>
-              <span className="mono xs dim desktop-nav">ORACLE PRIMAVERA P6 .XER SHADOW EMULATOR</span>
+              <span className="mono xs dim desktop-nav">SCRUB TO SIMULATE FLOAT SHIFTS</span>
             </div>
             <div className="row gap-2">
               <span className="tag" style={{ background: "var(--brass-bg)", color: "var(--brass)", borderColor: "var(--brass-line)" }}>
@@ -353,8 +419,9 @@ export function Hero() {
             {MILESTONES.map((m, idx) => {
               const active = idx === selectedMilestoneIdx;
               return (
-                <button
+                <motion.button
                   key={m.week}
+                  whileTap={{ scale: 0.97 }}
                   onClick={() => setSelectedMilestoneIdx(idx)}
                   style={{
                     padding: "10px 12px",
@@ -372,40 +439,50 @@ export function Hero() {
                     WEEK {m.week.toString().padStart(2, "0")}
                   </div>
                   <div style={{ fontSize: "11px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {m.phase.split("//")[1] || m.phase}
+                    {m.phase.split("//")[0]}
                   </div>
-                </button>
+                </motion.button>
               );
             })}
           </div>
 
-          {/* Event Docket & Liquidated Damages Exposure */}
-          <div className="row between wrapf gap-3 pt-2" style={{ borderTop: "1px solid var(--line-soft)" }}>
-            <div className="row gap-2" style={{ maxWidth: "720px" }}>
-              {current.floatDelta < 0 ? (
-                <AlertTriangle className="ico" style={{ width: 14, height: 14, color: "var(--brand)", flexShrink: 0 }} />
-              ) : (
-                <CheckCircle2 className="ico" style={{ width: 14, height: 14, color: "var(--brass)", flexShrink: 0 }} />
-              )}
-              <span className="xs dim" style={{ color: "var(--text-2)", lineHeight: 1.4 }}>
-                <strong style={{ color: "var(--text)" }}>Contemporaneous Event Log:</strong> {current.eventLog}
-              </span>
-            </div>
-            <div className="row gap-2">
-              <span className="mono xs dim">LIQUIDATED DAMAGES RISK:</span>
-              <span
-                className="mono xs"
-                style={{
-                  fontWeight: 700,
-                  color: current.liquidatedDamageRisk === "$0" || current.liquidatedDamageRisk.includes("Recovered") ? "var(--brass)" : "var(--brand)",
-                }}
-              >
-                {current.liquidatedDamageRisk}
-              </span>
-            </div>
-          </div>
+          {/* Event Log & Risk Meter */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.week}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.2 }}
+              className="row between wrapf gap-3 pt-2"
+              style={{ borderTop: "1px solid var(--line-soft)" }}
+            >
+              <div className="row gap-2" style={{ maxWidth: "720px" }}>
+                {current.floatDelta < 0 ? (
+                  <AlertTriangle className="ico" style={{ width: 14, height: 14, color: "var(--brand)", flexShrink: 0 }} />
+                ) : (
+                  <CheckCircle2 className="ico" style={{ width: 14, height: 14, color: "var(--brass)", flexShrink: 0 }} />
+                )}
+                <span className="xs dim" style={{ color: "var(--text-2)", lineHeight: 1.4 }}>
+                  <strong style={{ color: "var(--text)" }}>Contemporaneous Event:</strong> {current.eventLog}
+                </span>
+              </div>
+              <div className="row gap-2">
+                <span className="mono xs dim">DELAY EXPOSURE:</span>
+                <span
+                  className="mono xs"
+                  style={{
+                    fontWeight: 700,
+                    color: current.liquidatedDamageRisk === "$0" || current.liquidatedDamageRisk.includes("Recovered") ? "var(--brass)" : "var(--brand)",
+                  }}
+                >
+                  {current.liquidatedDamageRisk}
+                </span>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
     </header>
   );
 }
