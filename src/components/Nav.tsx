@@ -70,7 +70,6 @@ export function Nav() {
             { label: "What We Do", href: "#what-we-do" },
             { label: "How It Works", href: "#how-it-works" },
             { label: "3D Digital Twin", href: "#digital-twin-studio" },
-            { label: "Schedule Health", href: "#dcma-scanner" },
             { label: "ROI Sandbox", href: "#financial-sandbox" },
           ].map((link) => (
             <motion.a
@@ -173,7 +172,6 @@ export function Nav() {
               { label: "What We Do", href: "#what-we-do" },
               { label: "How It Works", href: "#how-it-works" },
               { label: "3D Digital Twin", href: "#digital-twin-studio" },
-              { label: "Schedule Health", href: "#dcma-scanner" },
               { label: "ROI Sandbox", href: "#financial-sandbox" },
             ].map((link) => (
               <a

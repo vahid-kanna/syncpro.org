@@ -1,16 +1,17 @@
 import { motion } from "framer-motion";
 import { Zap, ShieldCheck, Activity } from "lucide-react";
-import { fadeUpVariants, staggerContainer, cardHoverVariants } from "../lib/motion";
+import { fadeUpVariants, staggerContainer } from "../lib/motion";
+import { TiltCard } from "./TiltCard";
 
 const PILLARS = [
   {
     step: "01",
-    title: "Ingest Messy Field Reality",
+    title: "Ingest Messy Field Signals",
     description:
-      "Site audio memos, delivery dockets, and inspection logs are automatically structured and mapped to exact Primavera CPM activity nodes.",
+      "Field voice memos, delivery receipts, and inspection tickets are automatically structured into hard data with zero manual entry.",
     icon: Zap,
     metric: "100% Automated",
-    metricLabel: "Zero manual data entry",
+    metricLabel: "Autonomous field extraction",
     color: "var(--brand)",
     bgColor: "var(--brand-bg)",
     lineColor: "var(--brand-line)",
@@ -19,7 +20,7 @@ const PILLARS = [
     step: "02",
     title: "Reconcile in Real Time",
     description:
-      "Catch critical path slips 3 weeks before contractors report them. SyncPro maintains a live shadow schedule updated continuously from field telemetry.",
+      "Catch critical path slips 3 weeks before contractors report them with a live, continuous shadow schedule.",
     icon: Activity,
     metric: "3-Week Lead Time",
     metricLabel: "Early critical path detection",
@@ -31,10 +32,10 @@ const PILLARS = [
     step: "03",
     title: "Seal Dispute Immunity",
     description:
-      "Generate 1-click contemporaneous evidence dossiers and formal FIDIC/NEC4 extension-of-time notices before strict contractual time-bars expire.",
+      "Generate instant contemporaneous evidence packets and contractual FIDIC/NEC4 notices before strict time-bars expire.",
     icon: ShieldCheck,
     metric: "$60M+ Protected",
-    metricLabel: "Per megaproject dispute averted",
+    metricLabel: "Per dispute averted",
     color: "var(--brand)",
     bgColor: "var(--brand-bg)",
     lineColor: "var(--brand-line)",
@@ -47,8 +48,8 @@ export function WhatWeDo() {
       id="what-we-do"
       style={{
         position: "relative",
-        paddingTop: "100px",
-        paddingBottom: "100px",
+        paddingTop: "110px",
+        paddingBottom: "110px",
         background: "rgba(10, 11, 14, 0.4)",
         borderBottom: "1px solid var(--line)",
       }}
@@ -70,7 +71,7 @@ export function WhatWeDo() {
                 color: "var(--brand)",
                 background: "var(--brand-bg)",
                 border: "1px solid var(--brand-line)",
-                padding: "3px 10px",
+                padding: "4px 12px",
                 borderRadius: "4px",
                 fontWeight: 600,
                 letterSpacing: "0.06em",
@@ -97,12 +98,11 @@ export function WhatWeDo() {
             className="lead mt-4"
             style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}
           >
-            SyncPro replaces fragmented spreadsheets and retrospective monthly reports with continuous,
-            deterministic project controls.
+            Continuous, deterministic project controls that replace retrospective monthly guesswork.
           </motion.p>
         </motion.div>
 
-        {/* 3 Pillar Cards with Jitter-Style Hover & Glow */}
+        {/* 3 Pillar Cards with Landing.love 3D Tilt & Cursor Spotlight */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -113,12 +113,9 @@ export function WhatWeDo() {
           {PILLARS.map((pillar) => {
             const Icon = pillar.icon;
             return (
-              <motion.div
+              <TiltCard
                 key={pillar.step}
-                variants={cardHoverVariants}
-                initial="rest"
-                whileHover="hover"
-                className="card"
+                className="card animated-border-glow"
                 style={{
                   background: "rgba(18, 20, 24, 0.94)",
                   border: "1px solid var(--line-strong)",
@@ -137,8 +134,8 @@ export function WhatWeDo() {
                     </span>
                     <div
                       style={{
-                        width: 36,
-                        height: 36,
+                        width: 40,
+                        height: 40,
                         borderRadius: "8px",
                         background: pillar.bgColor,
                         border: `1px solid ${pillar.lineColor}`,
@@ -147,7 +144,7 @@ export function WhatWeDo() {
                         justifyContent: "center",
                       }}
                     >
-                      <Icon className="ico" style={{ width: 18, height: 18, color: pillar.color }} />
+                      <Icon className="ico" style={{ width: 20, height: 20, color: pillar.color }} />
                     </div>
                   </div>
 
@@ -166,7 +163,7 @@ export function WhatWeDo() {
                   </div>
                   <div className="xs dim mt-1">{pillar.metricLabel}</div>
                 </div>
-              </motion.div>
+              </TiltCard>
             );
           })}
         </motion.div>

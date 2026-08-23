@@ -33,7 +33,7 @@ export function Footer() {
               <a className="small dim" href="#what-we-do">What We Do</a>
               <a className="small dim" href="#how-it-works">How It Works</a>
               <a className="small dim" href="#digital-twin-studio">3D Digital Twin</a>
-              <a className="small dim" href="#dcma-scanner">DCMA-14 Diagnostics</a>
+              <a className="small dim" href="#financial-sandbox">ROI Calculator</a>
             </div>
           </div>
 

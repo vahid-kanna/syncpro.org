@@ -507,39 +507,56 @@ ul { list-style: none; padding: 0; }
 }
 
 /* ============================================================================
-   v2.2 — Product-moment motion
-   Domain-specific and purposeful: a DCMA score *computing*, a re-forecast
-   *resolving*, the agent *answering*, a file *becoming* a graph. Decorative
-   loops are avoided. Everything here is covered by the reduced-motion guard
-   above (durations collapse to ~0, so the end-state shows instantly).
+/* ============================================================================
+   Landing.love-Inspired Motion & Spotlight System
    ========================================================================== */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-/* score ring "computing" sweep — animates the conic --val from 0 → its target.
-   @property makes the custom prop interpolable; older engines just render the
-   final value (graceful, no jump-to-empty). */
-@property --val { syntax: "<number>"; inherits: false; initial-value: 0; }
-@keyframes ringFill { from { --val: 0; } }
-.ring.anim-ring, .gauge.anim-ring { animation: ringFill 1.5s var(--ease) both; }
+.spotlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(217, 119, 87, 0.2), 0 0 0 1px var(--brand-line);
+}
 
-/* count-up numerals — JS drives the value; this keeps the digits from jittering */
-.countup { font-variant-numeric: tabular-nums; }
+.animated-border-glow {
+  position: relative;
+}
 
-/* streaming agent answer — blinking caret + "thinking" dots */
-@keyframes caretBlink { 0%,100%{ opacity:1 } 50%{ opacity:0 } }
-.caret { display:inline-block; width:2px; height:1.05em; vertical-align:-0.16em;
-  margin-left:2px; border-radius:1px; background:var(--brand-500);
-  animation: caretBlink 1s steps(1,end) infinite; }
-@keyframes typingBounce { 0%,80%,100%{ transform:translateY(0); opacity:.35 } 40%{ transform:translateY(-3px); opacity:1 } }
-.typing { display:inline-flex; align-items:center; gap:4px; }
-.typing i { width:5px; height:5px; border-radius:50%; background:var(--text-3);
-  display:inline-block; animation: typingBounce 1.2s var(--ease) infinite; }
-.typing i:nth-child(2){ animation-delay:.16s } .typing i:nth-child(3){ animation-delay:.32s }
+.animated-border-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(90deg, transparent, var(--brand), var(--brass), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.6;
+  pointer-events: none;
+}
 
-/* active pipeline node (the step in progress) + the connector it's feeding */
-@keyframes nodePulse { 0%{ box-shadow:0 0 0 0 var(--brand-bg) } 70%{ box-shadow:0 0 0 6px transparent } 100%{ box-shadow:0 0 0 0 transparent } }
-.pulse-node { animation: nodePulse 1.8s var(--ease) infinite; }
-.flow-active { position:relative; overflow:hidden; }
-.flow-active::after { content:""; position:absolute; inset:0;
-  background:linear-gradient(90deg, transparent, var(--brand-500), transparent);
-  opacity:.55; transform:translateX(-100%); animation: flowSlide 1.7s var(--ease) infinite; }
-@keyframes flowSlide { to { transform:translateX(100%); } }
+@keyframes floatSmooth {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.anim-float {
+  animation: floatSmooth 4.5s ease-in-out infinite;
+}
+
+.anim-float-delayed {
+  animation: floatSmooth 5s ease-in-out infinite 2s;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.04); }
+}
+
+.anim-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
