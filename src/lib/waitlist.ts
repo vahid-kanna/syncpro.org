@@ -11,59 +11,45 @@ export interface WaitlistPayload {
   message: string;
 }
 
-const ENDPOINT = import.meta.env.VITE_WAITLIST_ENDPOINT as string | undefined;
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined;
-export const CONTACT_EMAIL =
-  (import.meta.env.VITE_CONTACT_EMAIL as string | undefined) ||
-  "founders@syncpro.org";
+export const CONTACT_EMAIL = "syncprov1@gmail.com";
 
 /**
- * Submits the waitlist form.
- *
- * 1. If VITE_WEB3FORMS_ACCESS_KEY is set, posts to Web3Forms API.
- * 2. If VITE_WAITLIST_ENDPOINT is set (Formspree / Web3Forms / Formspark / custom webhook),
- *    POSTs payload as JSON and resolves on 2xx.
- * 3. Otherwise falls back to opening a pre-filled mailto: so the site is 100% operational
- *    even before an API key is configured.
+ * Submits the waitlist / contact form directly to syncprov1@gmail.com
+ * using FormSubmit AJAX endpoint, with fallback to mailto.
  */
 export async function submitWaitlist(payload: WaitlistPayload): Promise<void> {
-  // Web3Forms direct support
-  if (WEB3FORMS_KEY) {
-    const res = await fetch("https://api.web3forms.com/submit", {
+  const subject =
+    payload.kind === "investor"
+      ? `[SyncPro] New Investor / Advisor Enquiry from ${payload.name} (${payload.company || "Individual"})`
+      : `[SyncPro] New Pilot Access Request from ${payload.name} (${payload.company || "Individual"})`;
+
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
       body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        subject:
-          payload.kind === "investor"
-            ? `SyncPro Investor Enquiry: ${payload.name} (${payload.company || "Individual"})`
-            : `SyncPro Pilot Access Request: ${payload.name} (${payload.company || "Individual"})`,
-        from_name: payload.name,
-        ...payload,
+        _subject: subject,
+        _template: "table",
+        _captcha: "false",
+        name: payload.name,
+        email: payload.email,
+        company: payload.company,
+        role: payload.role,
+        enquiry_type: payload.kind === "investor" ? "Investor / Advisor" : "Early Access Pilot",
+        project_scale: payload.projectScale || "Not specified",
+        scheduling_tools: payload.tools || "Not specified",
+        message: payload.message || "No additional notes provided.",
       }),
     });
 
-    if (!res.ok) {
-      throw new Error(`Submission failed (${res.status})`);
+    if (res.ok) {
+      return;
     }
-    return;
-  }
-
-  // Custom Endpoint support (Formspree, Cloudflare Worker, Supabase Edge Function)
-  if (ENDPOINT) {
-    const res = await fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    if (!res.ok) {
-      throw new Error(`Submission failed (${res.status})`);
-    }
-    return;
+  } catch {
+    // If blocked by adblocker / CORS, fallback to mailto
   }
 
   // Graceful fallback to pre-filled mailto
