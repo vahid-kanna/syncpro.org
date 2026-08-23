@@ -11,10 +11,10 @@ export interface WaitlistPayload {
   message: string;
 }
 
-export const CONTACT_EMAIL = "syncprov1@gmail.com";
+export const CONTACT_EMAIL = "founders@syncpro.org";
 
 /**
- * Submits the waitlist / contact form directly to syncprov1@gmail.com
+ * Submits the waitlist / contact form directly to founders@syncpro.org
  * using FormSubmit AJAX endpoint, with fallback to mailto.
  */
 export async function submitWaitlist(payload: WaitlistPayload): Promise<void> {
