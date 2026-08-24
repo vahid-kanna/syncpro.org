@@ -6,37 +6,40 @@ import { TiltCard } from "./TiltCard";
 const PILLARS = [
   {
     step: "01",
-    title: "Ingest Messy Field Signals",
+    title: "Zero Manual Data Entry",
+    subtitle: "Ingest Messy Field Reality",
     description:
-      "Field voice memos, delivery receipts, and inspection tickets are automatically structured into hard data with zero manual entry.",
+      "Site voice memos, delivery dockets, and inspection logs are automatically structured and mapped to exact Primavera P6 CPM activity nodes with zero manual typing.",
     icon: Zap,
-    metric: "100% Automated",
-    metricLabel: "Autonomous field extraction",
-    color: "var(--brand)",
+    metric: "100% Autonomous",
+    metricLabel: "Multimodal field signal extraction",
+    color: "var(--brand-300)",
     bgColor: "var(--brand-bg)",
     lineColor: "var(--brand-line)",
   },
   {
     step: "02",
-    title: "Reconcile in Real Time",
+    title: "Zero Retrospective Blindness",
+    subtitle: "Reconcile in Real Time",
     description:
-      "Catch critical path slips 3 weeks before contractors report them with a live, continuous shadow schedule.",
+      "Catch critical path slips 3 weeks before contractors report them. SyncPro maintains a live shadow schedule updated continuously from field telemetry.",
     icon: Activity,
     metric: "3-Week Lead Time",
     metricLabel: "Early critical path detection",
-    color: "var(--brass)",
-    bgColor: "var(--brass-bg)",
-    lineColor: "var(--brass-line)",
+    color: "var(--accent)",
+    bgColor: "var(--accent-bg)",
+    lineColor: "var(--accent-line)",
   },
   {
     step: "03",
-    title: "Seal Dispute Immunity",
+    title: "Zero Dispute Liability",
+    subtitle: "Seal Legal Immunity",
     description:
-      "Generate instant contemporaneous evidence packets and contractual FIDIC/NEC4 notices before strict time-bars expire.",
+      "Generate 1-click contemporaneous evidence dossiers and formal FIDIC/NEC4 extension-of-time notices before strict contractual time-bars expire.",
     icon: ShieldCheck,
     metric: "$60M+ Protected",
-    metricLabel: "Per dispute averted",
-    color: "var(--brand)",
+    metricLabel: "Per megaproject dispute averted",
+    color: "var(--brand-300)",
     bgColor: "var(--brand-bg)",
     lineColor: "var(--brand-line)",
   },
@@ -50,7 +53,7 @@ export function WhatWeDo() {
         position: "relative",
         paddingTop: "110px",
         paddingBottom: "110px",
-        background: "rgba(10, 11, 14, 0.4)",
+        background: "rgba(11, 13, 18, 0.6)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -62,47 +65,48 @@ export function WhatWeDo() {
           viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
           className="mb-14 text-center"
-          style={{ maxWidth: "720px", margin: "0 auto 48px auto" }}
+          style={{ maxWidth: "780px", margin: "0 auto 52px auto" }}
         >
           <motion.div variants={fadeUpVariants} className="row center gap-2 mb-3">
             <span
               className="mono xs"
               style={{
-                color: "var(--brand)",
+                color: "var(--brand-300)",
                 background: "var(--brand-bg)",
                 border: "1px solid var(--brand-line)",
-                padding: "4px 12px",
-                borderRadius: "4px",
+                padding: "4px 14px",
+                borderRadius: "var(--r-full)",
                 fontWeight: 600,
                 letterSpacing: "0.06em",
               }}
             >
-              WHAT WE DO // THE AUTONOMOUS CONTROLS LAYER
+              CORE CAPABILITIES // ZERO GUESSWORK
             </span>
           </motion.div>
           <motion.h2
             variants={fadeUpVariants}
             className="display"
             style={{
-              fontFamily: "var(--font-display)",
               fontSize: "clamp(34px, 4vw, 54px)",
               lineHeight: 1.08,
               color: "var(--text)",
             }}
           >
-            Three pillars of <br />
-            <span style={{ fontStyle: "italic", color: "var(--brass)" }}>schedule certainty.</span>
+            Three non-negotiable truths of <br />
+            <span style={{ color: "var(--brand-400)", textDecoration: "underline", textUnderlineOffset: "6px" }}>
+              autonomous project controls.
+            </span>
           </motion.h2>
           <motion.p
             variants={fadeUpVariants}
             className="lead mt-4"
             style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}
           >
-            Continuous, deterministic project controls that replace retrospective monthly guesswork.
+            Continuous, deterministic schedule reconciliation that replaces delayed monthly reports.
           </motion.p>
         </motion.div>
 
-        {/* 3 Pillar Cards with Landing.love 3D Tilt & Cursor Spotlight */}
+        {/* 3 Stacking Cards with Zero 3D Tilt & Cursor Spotlight */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -117,9 +121,9 @@ export function WhatWeDo() {
                 key={pillar.step}
                 className="card animated-border-glow"
                 style={{
-                  background: "rgba(18, 20, 24, 0.94)",
+                  background: "rgba(16, 19, 26, 0.95)",
                   border: "1px solid var(--line-strong)",
-                  borderRadius: "var(--r-md)",
+                  borderRadius: "var(--r-lg)",
                   padding: "32px 28px",
                   display: "flex",
                   flexDirection: "column",
@@ -134,9 +138,9 @@ export function WhatWeDo() {
                     </span>
                     <div
                       style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: "8px",
+                        width: 42,
+                        height: 42,
+                        borderRadius: "10px",
                         background: pillar.bgColor,
                         border: `1px solid ${pillar.lineColor}`,
                         display: "flex",
@@ -146,6 +150,10 @@ export function WhatWeDo() {
                     >
                       <Icon className="ico" style={{ width: 20, height: 20, color: pillar.color }} />
                     </div>
+                  </div>
+
+                  <div className="mono xs dim mb-1" style={{ color: "var(--text-3)", letterSpacing: "0.04em" }}>
+                    {pillar.subtitle.toUpperCase()}
                   </div>
 
                   <h3 style={{ fontSize: "20px", fontWeight: 700, color: "var(--text)", marginBottom: "12px" }}>

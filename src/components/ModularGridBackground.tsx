@@ -54,14 +54,14 @@ export function ModularGridBackground() {
             height: "100%",
             objectFit: "cover",
             objectPosition: "center 30%",
-            filter: "contrast(1.1) brightness(0.8)",
+            filter: "contrast(1.15) brightness(0.75)",
           }}
         />
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(180deg, rgba(14,15,18,0.3) 0%, rgba(14,15,18,0.95) 100%)",
+            background: "linear-gradient(180deg, rgba(8,9,12,0.2) 0%, rgba(8,9,12,0.98) 100%)",
           }}
         />
       </div>
@@ -72,8 +72,8 @@ export function ModularGridBackground() {
           position: "absolute",
           inset: 0,
           backgroundImage: `
-            linear-gradient(to right, rgba(244, 243, 238, 0.045) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(244, 243, 238, 0.045) 1px, transparent 1px)
+            linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px)
           `,
           backgroundSize: "60px 60px",
         }}
@@ -85,8 +85,8 @@ export function ModularGridBackground() {
           position: "absolute",
           inset: 0,
           backgroundImage: `
-            linear-gradient(to right, rgba(244, 243, 238, 0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(244, 243, 238, 0.08) 1px, transparent 1px)
+            linear-gradient(to right, rgba(255, 255, 255, 0.065) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.065) 1px, transparent 1px)
           `,
           backgroundSize: "300px 300px",
         }}
@@ -97,11 +97,11 @@ export function ModularGridBackground() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse at 50% 15%, rgba(14, 15, 18, 0.4) 0%, rgba(11, 12, 14, 0.96) 80%)",
+          background: "radial-gradient(ellipse at 50% 15%, rgba(8, 9, 12, 0.3) 0%, rgba(8, 9, 12, 0.98) 80%)",
         }}
       />
 
-      {/* Live Interactive Cursor Drafting HUD (vanlent.dev-inspired) */}
+      {/* Live Interactive Cursor Drafting HUD */}
       <div
         className="desktop-nav"
         style={{
@@ -109,12 +109,12 @@ export function ModularGridBackground() {
           bottom: 16,
           right: 20,
           padding: "6px 14px",
-          background: "rgba(18, 20, 24, 0.9)",
+          background: "rgba(16, 19, 26, 0.9)",
           border: "1px solid var(--line)",
           backdropFilter: "blur(12px)",
-          borderRadius: "var(--r-xs)",
+          borderRadius: "var(--r-full)",
           fontFamily: "var(--mono)",
-          fontSize: "10.5px",
+          fontSize: "11px",
           color: "var(--text-3)",
           letterSpacing: "0.06em",
           display: "flex",
@@ -126,7 +126,7 @@ export function ModularGridBackground() {
       >
         <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "var(--brand)" }} />
         <span>COORD: [X: {mousePos.x}, Y: {mousePos.y}]</span>
-        <span style={{ color: "var(--brass)" }}>GRID: [COL_{mousePos.col.toString().padStart(2, '0')}, ROW_{mousePos.row.toString().padStart(2, '0')}]</span>
+        <span style={{ color: "var(--accent)" }}>GRID: [COL_{mousePos.col.toString().padStart(2, '0')}, ROW_{mousePos.row.toString().padStart(2, '0')}]</span>
         <span className="desktop-nav" style={{ color: "var(--text-4)" }}>CRS: EPSG:4326 // WGS84</span>
       </div>
     </div>

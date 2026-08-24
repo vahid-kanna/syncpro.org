@@ -1,56 +1,74 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { fadeUpVariants, staggerContainer } from "../lib/motion";
 
 const STEPS = [
   {
-    id: "step-1",
-    stepNumber: "01",
-    tabTitle: "1. Capture Messy Reality",
-    headline: "Multimodal Field Signal Ingestion",
+    num: "01",
+    label: "CAPTURE",
+    title: "Multimodal Field Signal Ingestion",
     description:
-      "Superintendents speak naturally in field audio notes. SyncPro extracts concrete volume, grade specs, and grid locations, mapping them directly to WBS Activity #A1084.",
-    detailBadge: "AAC AUDIO STREAM // 44.1 kHz",
-    sampleSignal: "“Poured Level 47 Core Wall Section W47-3B today. Putzmeister hydraulic boom pump operational. Ready-mix trucks 14 through 19 delivered 80 MPa mix.”",
-    imageAsset: "/concrete-pour-corroboration.jpg",
+      "Site supervisors and subcontractors record voice memos, upload delivery dockets, and snap concrete batch tickets. SyncPro extracts quantities, dates, and locations automatically.",
+    badge: "INPUT: MULTIMODAL TELEMETRY",
+    badgeColor: "var(--brand-300)",
+    visual: {
+      type: "audio",
+      title: "Audio Transcript // Level 4 Concrete Pour",
+      quote:
+        '"Batch #4902 delivered at 14:15. Slump test 140mm verified. Poured 120m³ for Grid C3-C7. Post-tension duct delayed by 2 days due to fabrication hold."',
+      meta: "CORROBORATED BY: 4 BATCH TICKETS + 1 ACOUSTIC SOUNDING SCAN",
+    },
   },
   {
-    id: "step-2",
-    stepNumber: "02",
-    tabTitle: "2. Deterministic Corroboration",
-    headline: "Multi-Source Evidence Gate",
+    num: "02",
+    label: "CORROBORATE",
+    title: "Graph-Based Truth Corroboration",
     description:
-      "No single source can alter the project baseline. SyncPro cross-corroborates delivery receipts, slump test certificates, and site gate OCR logs before updating float.",
-    detailBadge: "CONFIDENCE SCORE: 98.4%",
-    sampleSignal: "3 of 3 Independent Data Sources Verified: Supplier Batch Slip #CEMEX-88412 + Digital Rebar Scan #QC-47B + Gate Entry Log.",
-    imageAsset: "/concrete-pour-corroboration.jpg",
+      "Before any schedule is updated, field claims are cross-checked against drone point clouds, delivery dockets, and batch receipts in an anti-hallucination Neo4j knowledge graph.",
+    badge: "VALIDATION: GRAPH RECONCILIATION",
+    badgeColor: "var(--accent)",
+    visual: {
+      type: "matrix",
+      title: "Contemporaneous Fact Corroboration Matrix",
+      items: [
+        { claim: "120m³ Concrete Poured (Grid C3-C7)", status: "CONFIRMED (100%)", source: "Delivery Tickets #4901-#4908" },
+        { claim: "Rebar Density Inspection", status: "VERIFIED (100%)", source: "Drone Photogrammetry Mesh" },
+        { claim: "Post-Tension Duct Delay (+2 Days)", status: "CRITICAL SLIP (+2D)", source: "Supplier Notice #SN-882" },
+      ],
+      meta: "DETERMINISTIC CONFIDENCE SCORE: 98.7%",
+    },
   },
   {
-    id: "step-3",
-    stepNumber: "03",
-    tabTitle: "3. Cryptographic Schedule Sync",
-    headline: "Immutable As-Built Baseline Commit",
+    num: "03",
+    label: "COMMIT",
+    title: "Autonomous Primavera P6 Baseline Sync",
     description:
-      "Once corroborated, updates are sealed with SHA-256 cryptographic proof and synchronized straight into Oracle Primavera P6 Enterprise and BIM models.",
-    detailBadge: "DESTINATION: ORACLE PRIMAVERA P6",
-    sampleSignal: "SHA-256 Seal: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 (Tamper-evident contemporaneous record).",
-    imageAsset: "/concrete-pour-corroboration.jpg",
+      "Reconciled progress is written into a shadow Primavera P6 CPM schedule, running real-time forward and backward float passes without touching the master baseline until signed off.",
+    badge: "OUTPUT: SHADOW SCHEDULE SYNC",
+    badgeColor: "var(--brand-300)",
+    visual: {
+      type: "p6",
+      title: "Primavera P6 Schedule Delta // Act. ID: ACT-4092",
+      baselineStart: "Oct 12, 2026",
+      forecastFinish: "Oct 16, 2026 (+2 Days)",
+      criticalPathImpact: "Consumes 2 Days of Total Float (Float remaining: 6 Days)",
+      meta: "FIDIC SUB-CLAUSE 20.1 NOTICE DRAFTED AUTOMATICALLY",
+    },
   },
 ];
 
 export function HowItWorks() {
-  const [activeStepIdx, setActiveStepIdx] = useState(0);
-  const active = STEPS[activeStepIdx];
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const step = STEPS[activeStep];
 
   return (
     <section
       id="how-it-works"
       style={{
         position: "relative",
-        paddingTop: "100px",
-        paddingBottom: "100px",
-        background: "rgba(14, 15, 18, 0.7)",
+        paddingTop: "110px",
+        paddingBottom: "110px",
+        background: "rgba(8, 9, 12, 0.8)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -67,215 +85,265 @@ export function HowItWorks() {
             <span
               className="mono xs"
               style={{
-                color: "var(--brand)",
+                color: "var(--brand-300)",
                 background: "var(--brand-bg)",
                 border: "1px solid var(--brand-line)",
-                padding: "3px 10px",
-                borderRadius: "4px",
+                padding: "4px 14px",
+                borderRadius: "var(--r-full)",
                 fontWeight: 600,
                 letterSpacing: "0.06em",
               }}
             >
               HOW IT WORKS // 3-STEP PIPELINE
             </span>
-            <span className="mono xs dim desktop-nav">CONTINUOUS SCHEDULE RECONCILIATION</span>
+            <span className="mono xs dim desktop-nav">ZERO HALLUCINATION GUARANTEE</span>
           </motion.div>
 
           <motion.h2
             variants={fadeUpVariants}
             className="display"
             style={{
-              fontFamily: "var(--font-display)",
               fontSize: "clamp(34px, 4vw, 54px)",
               lineHeight: 1.08,
               color: "var(--text)",
-              maxWidth: "800px",
+              maxWidth: "840px",
               marginTop: "8px",
             }}
           >
-            From field audio to <br />
-            <span style={{ fontStyle: "italic", color: "var(--brass)" }}>defensible CPM commits.</span>
+            From field whisper to <br />
+            <span style={{ color: "var(--accent)" }}>defensible schedule fact.</span>
           </motion.h2>
-
-          <motion.p
-            variants={fadeUpVariants}
-            className="lead mt-4 measure"
-            style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}
-          >
-            How SyncPro bridges the gap between chaotic site operations and rigid master schedules in three automated steps.
-          </motion.p>
         </motion.div>
 
-        {/* Step Navigation Tabs with Spring Motion */}
-        <div className="row gap-3 mb-8 wrapf">
-          {STEPS.map((step, idx) => {
-            const isSelected = idx === activeStepIdx;
+        {/* Step Selector Tabs */}
+        <div className="grid-3 gap-4 mb-8">
+          {STEPS.map((s, idx) => {
+            const isSelected = activeStep === idx;
             return (
-              <motion.button
-                key={step.id}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveStepIdx(idx)}
+              <button
+                key={s.num}
+                onClick={() => setActiveStep(idx)}
                 style={{
-                  padding: "12px 20px",
-                  background: isSelected ? "var(--bg-elevated)" : "rgba(18, 20, 24, 0.7)",
+                  padding: "18px 20px",
+                  background: isSelected ? "var(--bg-elevated)" : "rgba(16, 19, 26, 0.6)",
                   border: isSelected ? "1px solid var(--brand)" : "1px solid var(--line)",
-                  borderRadius: "var(--r-xs)",
-                  color: isSelected ? "var(--text)" : "var(--text-3)",
+                  borderRadius: "var(--r-md)",
+                  textAlign: "left",
                   cursor: "pointer",
-                  fontFamily: "var(--mono)",
-                  fontSize: "13px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  transition: "all 0.15s ease",
-                  boxShadow: isSelected ? "0 0 20px rgba(217, 119, 87, 0.2)" : "none",
+                  transition: "all 0.2s ease",
+                  boxShadow: isSelected ? "0 10px 30px rgba(46, 98, 255, 0.15)" : "none",
                 }}
               >
-                <span style={{ color: isSelected ? "var(--brand)" : "var(--text-4)", fontWeight: 700 }}>
-                  [{step.stepNumber}]
-                </span>
-                <span>{step.tabTitle.split(". ")[1]}</span>
-              </motion.button>
+                <div className="row between mb-2">
+                  <span className="mono xs" style={{ color: isSelected ? "var(--brand)" : "var(--text-3)", fontWeight: 700 }}>
+                    STEP {s.num}
+                  </span>
+                  <span className="mono xs" style={{ color: isSelected ? "var(--text)" : "var(--text-3)", fontWeight: 600 }}>
+                    {s.label}
+                  </span>
+                </div>
+                <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--text)" }}>{s.title}</div>
+              </button>
             );
           })}
         </div>
 
-        {/* Dynamic Step Viewport */}
+        {/* Active Step Presentation Frame */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={active.id}
-            initial={{ opacity: 0, y: 12 }}
+            key={activeStep}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3 }}
-            className="card"
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25 }}
+            className="card spotlight-card animated-border-glow"
             style={{
-              background: "rgba(18, 20, 24, 0.96)",
+              background: "rgba(16, 19, 26, 0.95)",
               border: "1px solid var(--line-strong)",
               padding: "32px",
-              borderRadius: "var(--r-md)",
+              borderRadius: "var(--r-lg)",
               boxShadow: "var(--shadow-pop)",
             }}
           >
-            <div className="grid" style={{ gridTemplateColumns: "1.1fr 0.9fr", gap: "32px", alignItems: "center" }}>
-              {/* Left Column: Visual Asset Frame + Waveform */}
+            <div className="grid" style={{ gridTemplateColumns: "1.1fr 1.3fr", gap: "32px", alignItems: "center" }}>
+              {/* Left Details */}
               <div>
-                <div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    height: "280px",
-                    borderRadius: "var(--r-xs)",
-                    overflow: "hidden",
-                    border: "1px solid var(--line)",
-                    marginBottom: "18px",
-                  }}
-                >
-                  <img
-                    src={active.imageAsset}
-                    alt={active.headline}
+                <div className="row gap-2 mb-3">
+                  <span
+                    className="mono xs"
                     style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      filter: "contrast(1.05) brightness(0.95)",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(180deg, rgba(14,15,18,0.1) 0%, rgba(14,15,18,0.85) 100%)",
-                      pointerEvents: "none",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: 12,
-                      left: 14,
-                      right: 14,
-                      display: "flex",
-                      justifyContent: "space-between",
-                      fontSize: 11,
-                      fontFamily: "var(--mono)",
-                      color: "#FFFFFF",
+                      color: step.badgeColor,
+                      background: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid var(--line)",
+                      padding: "3px 10px",
+                      borderRadius: "4px",
+                      fontWeight: 600,
                     }}
                   >
-                    <span>[STEP: {active.stepNumber} // FIELD TELEMETRY]</span>
-                    <span style={{ color: "var(--brass)" }}>{active.detailBadge}</span>
-                  </div>
+                    {step.badge}
+                  </span>
                 </div>
-
-                {/* Animated Waveform Indicator */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "3px",
-                    height: "24px",
-                    padding: "2px 0",
-                  }}
-                >
-                  {Array.from({ length: 42 }).map((_, i) => (
-                    <motion.span
-                      key={i}
-                      animate={{
-                        height: ["30%", `${Math.sin(i * 0.5) * 50 + 50}%`, "30%"],
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        delay: i * 0.03,
-                        ease: "easeInOut",
-                      }}
-                      style={{
-                        flex: 1,
-                        background: i % 2 === 0 ? "var(--brand)" : "var(--brass)",
-                        borderRadius: "1px",
-                        opacity: 0.85,
-                      }}
-                    />
-                  ))}
+                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--text)", marginBottom: "14px", lineHeight: 1.25 }}>
+                  {step.title}
+                </h3>
+                <p style={{ fontSize: "15px", color: "var(--text-2)", lineHeight: 1.65, marginBottom: "24px" }}>
+                  {step.description}
+                </p>
+                <div className="p-3" style={{ background: "rgba(8, 9, 12, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                  <div className="mono xs dim mb-1">AUTOMATION SPEED:</div>
+                  <div className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
+                    &lt; 400ms DETERMINISTIC RECONCILIATION
+                  </div>
                 </div>
               </div>
 
-              {/* Right Column: Step Description & Actionable Log */}
-              <div>
-                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
-                  STEP {active.stepNumber}
-                </span>
+              {/* Right Interactive Visual Simulation */}
+              <div
+                style={{
+                  background: "rgba(8, 9, 12, 0.95)",
+                  border: "1px solid var(--line-strong)",
+                  borderRadius: "var(--r-md)",
+                  padding: "24px",
+                }}
+              >
+                {/* Step 01: Waveform & Concrete Pour Visual */}
+                {step.visual.type === "audio" && (
+                  <div>
+                    {/* Visual Concrete Rebar Photo Asset */}
+                    <div
+                      style={{
+                        position: "relative",
+                        width: "100%",
+                        height: "180px",
+                        borderRadius: "var(--r-xs)",
+                        overflow: "hidden",
+                        border: "1px solid var(--line)",
+                        marginBottom: "16px",
+                      }}
+                    >
+                      <img
+                        src="/concrete-pour-corroboration.jpg"
+                        alt="Field Concrete Pour Rebar Inspection"
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          background: "linear-gradient(180deg, transparent 40%, rgba(8,9,12,0.85) 100%)",
+                        }}
+                      />
+                      <div className="mono xs" style={{ position: "absolute", bottom: 10, left: 12, color: "#FFFFFF" }}>
+                        [FIELD SENSOR: LEVEL 4 REBAR SCAN]
+                      </div>
+                    </div>
 
-                <h3 style={{ fontSize: "24px", fontWeight: 700, color: "var(--text)", marginTop: "6px", marginBottom: "14px" }}>
-                  {active.headline}
-                </h3>
+                    <div className="mono xs mb-2" style={{ color: "var(--brand-300)", fontWeight: 600 }}>
+                      {step.visual.title}
+                    </div>
 
-                <p style={{ fontSize: "15.5px", color: "var(--text-2)", lineHeight: 1.6, marginBottom: "24px" }}>
-                  {active.description}
-                </p>
+                    {/* Animated Pulsing Waveform */}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "3px",
+                        height: "36px",
+                        padding: "8px 12px",
+                        background: "rgba(16, 19, 26, 0.8)",
+                        borderRadius: "var(--r-xs)",
+                        border: "1px solid var(--line-soft)",
+                        marginBottom: "14px",
+                      }}
+                    >
+                      {Array.from({ length: 42 }).map((_, i) => (
+                        <motion.div
+                          key={i}
+                          animate={{
+                            height: [6, Math.sin(i * 0.45) * 14 + 14, 6],
+                          }}
+                          transition={{
+                            duration: 1.2,
+                            repeat: Infinity,
+                            delay: i * 0.04,
+                            ease: "easeInOut",
+                          }}
+                          style={{
+                            width: "3px",
+                            background: "var(--brand)",
+                            borderRadius: "2px",
+                          }}
+                        />
+                      ))}
+                    </div>
 
-                {/* Sample Signal Box */}
-                <div
-                  style={{
-                    padding: "16px 18px",
-                    background: "rgba(10, 11, 14, 0.9)",
-                    borderLeft: "3px solid var(--brass)",
-                    borderRadius: "var(--r-xs)",
-                    marginBottom: "20px",
-                  }}
-                >
-                  <div className="mono xs dim mb-1">FIELD TELEMETRY PAYLOAD:</div>
-                  <div style={{ fontSize: "13.5px", fontStyle: "italic", color: "var(--text)", lineHeight: 1.5 }}>
-                    {active.sampleSignal}
+                    <p style={{ fontSize: "13px", color: "var(--text)", fontStyle: "italic", lineHeight: 1.5, margin: 0 }}>
+                      {step.visual.quote}
+                    </p>
+                    <div className="mono xs mt-3 pt-2" style={{ borderTop: "1px solid var(--line-soft)", color: "var(--accent)" }}>
+                      {step.visual.meta}
+                    </div>
                   </div>
-                </div>
+                )}
 
-                <div className="row between pt-3" style={{ borderTop: "1px solid var(--line-soft)" }}>
-                  <span className="mono xs dim">STATUS: GATE PASSED</span>
-                  <a href="#waitlist" className="btn btn-outline btn-sm mono xs" style={{ color: "var(--brass)" }}>
-                    SEE_PILOT_DEMO <ArrowRight className="ico" style={{ width: 12, height: 12 }} />
-                  </a>
-                </div>
+                {/* Step 02: Corroboration Matrix */}
+                {step.visual.type === "matrix" && (
+                  <div>
+                    <div className="mono xs mb-3" style={{ color: "var(--accent)", fontWeight: 600 }}>
+                      {step.visual.title}
+                    </div>
+                    <div className="col gap-2 mb-3">
+                      {step.visual.items?.map((item, i) => (
+                        <div
+                          key={i}
+                          className="p-2"
+                          style={{
+                            background: "rgba(16, 19, 26, 0.8)",
+                            border: "1px solid var(--line-soft)",
+                            borderRadius: "var(--r-xs)",
+                          }}
+                        >
+                          <div className="row between">
+                            <span style={{ fontSize: "12.5px", fontWeight: 600, color: "var(--text)" }}>{item.claim}</span>
+                            <span className="mono xs" style={{ color: item.status.includes("CRITICAL") ? "var(--danger)" : "var(--accent)", fontWeight: 700 }}>
+                              {item.status}
+                            </span>
+                          </div>
+                          <div className="mono xs dim mt-1">Source: {item.source}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mono xs pt-2" style={{ borderTop: "1px solid var(--line-soft)", color: "var(--brand-300)" }}>
+                      {step.visual.meta}
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 03: Primavera P6 Schedule Delta */}
+                {step.visual.type === "p6" && (
+                  <div>
+                    <div className="mono xs mb-3" style={{ color: "var(--brand-300)", fontWeight: 600 }}>
+                      {step.visual.title}
+                    </div>
+                    <div className="p-3 mb-3" style={{ background: "rgba(16, 19, 26, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                      <div className="row between mb-2">
+                        <span className="dim xs">Baseline Finish:</span>
+                        <span className="mono xs" style={{ color: "var(--text)" }}>{step.visual.baselineStart}</span>
+                      </div>
+                      <div className="row between mb-2">
+                        <span className="dim xs">Forecast Finish:</span>
+                        <span className="mono xs" style={{ color: "var(--danger)", fontWeight: 700 }}>{step.visual.forecastFinish}</span>
+                      </div>
+                      <div className="row between">
+                        <span className="dim xs">Critical Float Impact:</span>
+                        <span className="mono xs" style={{ color: "var(--accent)" }}>{step.visual.criticalPathImpact}</span>
+                      </div>
+                    </div>
+                    <div className="mono xs pt-2" style={{ borderTop: "1px solid var(--line-soft)", color: "var(--accent)" }}>
+                      {step.visual.meta}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

@@ -6,70 +6,78 @@ import { fadeUpVariants, staggerContainer } from "../lib/motion";
 interface Hotspot {
   id: string;
   label: string;
-  level: string;
-  cpmCode: string;
-  status: "verified" | "warning" | "on-schedule";
-  confidence: number;
-  top: string;
-  left: string;
-  trade: string;
-  criticalFloat: string;
-  action: string;
+  phase: string;
+  x: number; // percentage from left
+  y: number; // percentage from top
+  status: "ON_TRACK" | "RISK" | "DISPUTE_SHIELDED";
+  statusText: string;
+  floatRemaining: string;
+  delayExposure: string;
+  evidence: string;
+  dcmaScore: string;
+  detail: string;
 }
 
 const HOTSPOTS: Hotspot[] = [
   {
-    id: "pin-1",
-    label: "Outrigger Level 68",
-    level: "Level 68",
-    cpmCode: "A1084",
-    status: "verified",
-    confidence: 98.7,
-    top: "22%",
-    left: "51%",
-    trade: "Structural Steel & Outriggers",
-    criticalFloat: "+0.00 Days (Zero Slip)",
-    action: "Verified & Staged for Baseline Commit",
+    id: "podium-mep",
+    label: "Podium Level 04: MEP Risers & Heavy Ductwork",
+    phase: "Phase 2 · Mechanical & Electrical",
+    x: 48,
+    y: 62,
+    status: "RISK",
+    statusText: "CRITICAL FLOAT DEPLETION (-8D)",
+    floatRemaining: "-8 Days Negative Total Float",
+    delayExposure: "$1.24M LD Risk if Unmitigated",
+    evidence: "Acoustic duct scans + Supplier delay receipt #SN-882",
+    dcmaScore: "DCMA #05 Hard Constraint Violation Flagged",
+    detail:
+      "Chilled water riser spool fabrication 3 weeks behind. SyncPro's graph sort parallelized 2nd fix branch runs, recovering 6 days without moving contractual handover.",
   },
   {
-    id: "pin-2",
-    label: "Structural Core B — Outrigger L42",
-    level: "Level 42",
-    cpmCode: "A1042",
-    status: "warning",
-    confidence: 91.2,
-    top: "44%",
-    left: "49%",
-    trade: "Heavy Concrete Core Wall",
-    criticalFloat: "-4.50 Days (Float Consumed)",
-    action: "Early Delay Notice Drafted (FIDIC 8.4)",
+    id: "facade-spire",
+    label: "Apex Facade: Structural Glazing Spire",
+    phase: "Phase 4 · Building Enclosure",
+    x: 52,
+    y: 22,
+    status: "DISPUTE_SHIELDED",
+    statusText: "FIDIC SUB-CLAUSE 20.1 NOTICE GENERATED",
+    floatRemaining: "+14 Days Total Float",
+    delayExposure: "$0.00 Unbudgeted Contractor Liability",
+    evidence: "Drone lidar point cloud vs. IFC model (0.3mm delta)",
+    dcmaScore: "DCMA #06 Critical Path Length Index: 1.04 Pass",
+    detail:
+      "Architectural revision to curtain wall bracket clips issued late by Engineer. SyncPro timestamped the IFC clash and drafted the formal Notice of Claim before the 28-day FIDIC time-bar.",
   },
   {
-    id: "pin-3",
-    label: "Podium & MEP Risers",
-    level: "Level 08",
-    cpmCode: "A0915",
-    status: "on-schedule",
-    confidence: 96.4,
-    top: "72%",
-    left: "50%",
-    trade: "Mechanical & Electrical Risers",
-    criticalFloat: "+2.00 Days Total Float",
-    action: "Contemporaneous Record Sealed",
+    id: "basement-substructure",
+    label: "Substructure: Secant Wall Piling & Dewatering",
+    phase: "Phase 1 · Foundations & Earthworks",
+    x: 32,
+    y: 84,
+    status: "ON_TRACK",
+    statusText: "CORROBORATED AS-BUILT",
+    floatRemaining: "+3 Days Total Float",
+    delayExposure: "$0.00 Risk (Ahead of Baseline)",
+    evidence: "78 Ultrasonic pile integrity logs + Concrete tickets",
+    dcmaScore: "DCMA #01 Logic Open Ends: 0.0% Pass",
+    detail:
+      "All 80 secant piles completed with cryptographic QA/QC hashes stored in the audit graph. Zero logic gaps in Primavera P6 relationship ties.",
   },
 ];
 
 export function DigitalTwinStudio() {
-  const [selectedPin, setSelectedPin] = useState<Hotspot>(HOTSPOTS[0]);
+  const [selectedId, setSelectedId] = useState<string>("podium-mep");
+  const activeSpot = HOTSPOTS.find((h) => h.id === selectedId) || HOTSPOTS[0];
 
   return (
     <section
       id="digital-twin-studio"
       style={{
         position: "relative",
-        paddingTop: "100px",
-        paddingBottom: "100px",
-        background: "rgba(10, 11, 14, 0.4)",
+        paddingTop: "110px",
+        paddingBottom: "110px",
+        background: "rgba(11, 13, 18, 0.6)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -82,310 +90,293 @@ export function DigitalTwinStudio() {
           variants={staggerContainer}
           className="mb-12"
         >
-          <div className="row between mb-8 wrapf" style={{ alignItems: "flex-end" }}>
-            <div>
-              <motion.div variants={fadeUpVariants} className="row gap-2 mb-3" style={{ alignItems: "center" }}>
-                <span
-                  className="mono xs"
-                  style={{
-                    color: "var(--brass)",
-                    background: "var(--brass-bg)",
-                    border: "1px solid var(--brass-line)",
-                    padding: "3px 10px",
-                    borderRadius: "4px",
-                    fontWeight: 600,
-                    letterSpacing: "0.06em",
-                  }}
-                >
-                  SPATIAL 4D CONTROLS // LIVING DIGITAL TWIN
-                </span>
-                <span className="mono xs dim desktop-nav">PROJECT: APEX-80</span>
-              </motion.div>
+          <motion.div variants={fadeUpVariants} className="row gap-2 mb-3" style={{ alignItems: "center" }}>
+            <span
+              className="mono xs"
+              style={{
+                color: "var(--brand-300)",
+                background: "var(--brand-bg)",
+                border: "1px solid var(--brand-line)",
+                padding: "4px 14px",
+                borderRadius: "var(--r-full)",
+                fontWeight: 600,
+                letterSpacing: "0.06em",
+              }}
+            >
+              LIVING 3D DIGITAL TWIN // BIM RECONCILIATION
+            </span>
+            <span className="mono xs dim desktop-nav">SYNCHRONIZED WITH ORACLE P6 (.XER)</span>
+          </motion.div>
 
-              <motion.h2
-                variants={fadeUpVariants}
-                className="display"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(34px, 4vw, 54px)",
-                  lineHeight: 1.08,
-                  color: "var(--text)",
-                  maxWidth: "840px",
-                  marginTop: "8px",
-                }}
-              >
-                Living spatial twin of your <br />
-                <span style={{ fontStyle: "italic", color: "var(--brass)" }}>project controls.</span>
-              </motion.h2>
+          <motion.h2
+            variants={fadeUpVariants}
+            className="display"
+            style={{
+              fontSize: "clamp(34px, 4vw, 54px)",
+              lineHeight: 1.08,
+              color: "var(--text)",
+              maxWidth: "840px",
+              marginTop: "8px",
+            }}
+          >
+            Spatial schedule intelligence. <br />
+            <span style={{ color: "var(--brand-400)", textDecoration: "underline", textUnderlineOffset: "6px" }}>
+              Every activity mapped to 3D reality.
+            </span>
+          </motion.h2>
 
-              <motion.p
-                variants={fadeUpVariants}
-                className="lead mt-3 measure"
-                style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}
-              >
-                Click spatial pins to inspect real-time progress, float variances, and automated contract notice drafts.
-              </motion.p>
-            </div>
-
-            <motion.div variants={fadeUpVariants} className="tag" style={{ background: "var(--brass-bg)", color: "var(--brass)", borderColor: "var(--brass-line)" }}>
-              <Sparkles className="ico" style={{ width: 12, height: 12, marginRight: 4 }} />
-              BIM 4D SPATIAL MODEL
-            </motion.div>
-          </div>
+          <motion.p
+            variants={fadeUpVariants}
+            className="lead mt-4 measure"
+            style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}
+          >
+            SyncPro binds every Primavera P6 schedule node directly to your 3D BIM model and field inspection feeds —
+            click any hotspot pin to inspect real-time float variance.
+          </motion.p>
         </motion.div>
 
-        {/* Studio Canvas Grid */}
-        <div
-          className="grid"
-          style={{
-            gridTemplateColumns: "1.35fr 0.85fr",
-            gap: 28,
-            alignItems: "stretch",
-          }}
-        >
+        {/* Studio Grid: Viewport on Left, Telemetry on Right */}
+        <div className="grid" style={{ gridTemplateColumns: "1.3fr 0.9fr", gap: 28, alignItems: "stretch" }}>
           {/* Left: Interactive Holographic BIM Viewport */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="card"
+            className="card spotlight-card animated-border-glow"
             style={{
               position: "relative",
               padding: 0,
               overflow: "hidden",
               minHeight: 480,
-              background: "rgba(10, 11, 14, 0.95)",
+              background: "rgba(8, 9, 12, 0.95)",
               border: "1px solid var(--line-strong)",
+              borderRadius: "var(--r-lg)",
               boxShadow: "var(--shadow-pop)",
-              borderRadius: "var(--r-md)",
             }}
           >
-            {/* Viewport Header */}
-            <div
-              className="row between px-4 py-3"
-              style={{
-                background: "rgba(18, 20, 24, 0.95)",
-                borderBottom: "1px solid var(--line)",
-                fontSize: 12,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                zIndex: 20,
-              }}
-            >
-              <div className="row gap-2 mono xs" style={{ color: "var(--brass)" }}>
-                <Activity className="ico pulse" style={{ width: 13, height: 13, color: "var(--brand)" }} />
-                <span>APEX-80 // HOLOGRAPHIC BIM TWIN</span>
-              </div>
-              <span className="mono xs dim">ACCURACY: ±2.3mm · 2.48B PTS</span>
-            </div>
-
-            {/* High-Definition Holographic Asset */}
+            {/* Viewport Asset Image */}
             <div style={{ position: "relative", width: "100%", height: "100%", minHeight: 480 }}>
               <img
                 src="/apex-holographic-bim.png"
-                alt="Apex-80 3D Holographic BIM Digital Twin"
+                alt="3D Holographic BIM Digital Twin Model"
                 style={{
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  objectPosition: "center 35%",
-                  filter: "contrast(1.08) brightness(0.95)",
+                  filter: "contrast(1.08) brightness(0.92)",
                 }}
               />
               <div
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: "radial-gradient(circle at center, transparent 40%, rgba(10,11,14,0.65) 100%)",
+                  background: "radial-gradient(circle at 50% 50%, rgba(46,98,255,0.06), rgba(8,9,12,0.7) 90%)",
                   pointerEvents: "none",
                 }}
               />
 
-              {/* Interactive Telemetry Hotspot Pins */}
-              {HOTSPOTS.map((pin) => {
-                const isSelected = selectedPin.id === pin.id;
+              {/* Holographic Hotspot Pins */}
+              {HOTSPOTS.map((spot) => {
+                const isSelected = spot.id === selectedId;
+                const isDanger = spot.status === "RISK";
+                const isShield = spot.status === "DISPUTE_SHIELDED";
+                const pinColor = isDanger ? "var(--danger)" : isShield ? "var(--accent)" : "var(--brand)";
+
                 return (
-                  <motion.button
-                    key={pin.id}
-                    type="button"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setSelectedPin(pin)}
+                  <button
+                    key={spot.id}
+                    onClick={() => setSelectedId(spot.id)}
+                    aria-label={spot.label}
                     style={{
                       position: "absolute",
-                      top: pin.top,
-                      left: pin.left,
+                      left: `${spot.x}%`,
+                      top: `${spot.y}%`,
                       transform: "translate(-50%, -50%)",
-                      zIndex: 30,
                       cursor: "pointer",
+                      zIndex: 10,
+                      padding: 0,
                       background: "none",
                       border: "none",
-                      padding: 0,
                     }}
                   >
-                    {/* Pulse Ring */}
-                    <span
-                      style={{
-                        position: "absolute",
-                        inset: -8,
-                        borderRadius: "50%",
-                        background: pin.status === "warning" ? "rgba(217, 119, 87, 0.45)" : "rgba(212, 155, 75, 0.45)",
-                        animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-                      }}
-                    />
-                    {/* Pin Center */}
+                    {/* Outer Pulse Ring */}
                     <div
                       style={{
-                        width: 26,
-                        height: 26,
+                        position: "absolute",
+                        inset: -10,
                         borderRadius: "50%",
-                        background: isSelected ? "#FFFFFF" : pin.status === "warning" ? "var(--brand)" : "var(--brass)",
-                        color: "#08090C",
+                        border: `1.5px solid ${pinColor}`,
+                        opacity: isSelected ? 0.8 : 0.4,
+                        animation: "nodePulse 2s ease-out infinite",
+                      }}
+                    />
+                    {/* Inner Pin Button */}
+                    <motion.div
+                      whileHover={{ scale: 1.25 }}
+                      whileTap={{ scale: 0.9 }}
+                      style={{
+                        width: isSelected ? 22 : 16,
+                        height: isSelected ? 22 : 16,
+                        borderRadius: "50%",
+                        background: pinColor,
+                        border: "2px solid #FFFFFF",
+                        boxShadow: `0 0 20px ${pinColor}`,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        fontSize: 10,
-                        fontWeight: 800,
-                        boxShadow: "0 0 16px rgba(0,0,0,0.8)",
-                        border: "2px solid #FFFFFF",
                         transition: "all 0.2s ease",
                       }}
                     >
-                      {pin.level.replace("Level ", "L")}
-                    </div>
-                    {/* Pin Label Tag */}
-                    <div
+                      <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#FFFFFF" }} />
+                    </motion.div>
+
+                    {/* Floating Tooltip Label */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
                       style={{
                         position: "absolute",
+                        top: "100%",
                         left: "50%",
-                        top: 30,
                         transform: "translateX(-50%)",
-                        background: "rgba(10, 11, 14, 0.95)",
-                        border: `1px solid ${isSelected ? "var(--brand)" : "var(--line)"}`,
-                        padding: "3px 8px",
-                        borderRadius: 3,
+                        marginTop: 6,
                         whiteSpace: "nowrap",
+                        background: "rgba(8, 9, 12, 0.92)",
+                        border: `1px solid ${isSelected ? pinColor : "var(--line-strong)"}`,
+                        borderRadius: "var(--r-xs)",
+                        padding: "3px 8px",
+                        fontSize: 10,
+                        fontFamily: "var(--mono)",
+                        color: isSelected ? "#FFFFFF" : "var(--text-2)",
                         pointerEvents: "none",
                       }}
                     >
-                      <span className="mono xs" style={{ fontSize: 10.5, color: isSelected ? "#FFFFFF" : "var(--brass)" }}>
-                        {pin.label}
-                      </span>
-                    </div>
-                  </motion.button>
+                      {spot.label.split(":")[0]}
+                    </motion.div>
+                  </button>
                 );
               })}
-            </div>
 
-            {/* Bottom Controls Overlay */}
-            <div
-              className="row between px-4 py-2"
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                background: "rgba(18, 20, 24, 0.95)",
-                borderTop: "1px solid var(--line)",
-                zIndex: 20,
-              }}
-            >
-              <span className="xs dim">Tap pins to inspect live schedule corroboration</span>
-              <span className="mono xs" style={{ color: "var(--brand)" }}>
-                TARGET: #{selectedPin.cpmCode} ({selectedPin.level})
-              </span>
+              {/* Viewport HUD Status Bar */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 14,
+                  left: 16,
+                  right: 16,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  background: "rgba(8, 9, 12, 0.9)",
+                  border: "1px solid var(--line-strong)",
+                  borderRadius: "var(--r-xs)",
+                  padding: "6px 14px",
+                  fontSize: 11,
+                  fontFamily: "var(--mono)",
+                }}
+              >
+                <span className="row gap-2" style={{ alignItems: "center" }}>
+                  <Sparkles className="ico" style={{ width: 12, height: 12, color: "var(--brand)" }} />
+                  <span>VIEWPORT: APEX 80-STORY STRUCTURAL DIGITAL TWIN</span>
+                </span>
+                <span style={{ color: "var(--accent)" }}>FPS: 60 · GPU: HARDWARE ACCELERATED</span>
+              </div>
             </div>
           </motion.div>
 
-          {/* Right: Telemetry Inspection Console */}
+          {/* Right: Selected Node Inspection Terminal */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={selectedPin.id}
-              initial={{ opacity: 0, x: 10 }}
+              key={activeSpot.id}
+              initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -10 }}
+              exit={{ opacity: 0, x: -16 }}
               transition={{ duration: 0.2 }}
               className="card stack"
               style={{
-                background: "rgba(18, 20, 24, 0.96)",
+                background: "rgba(16, 19, 26, 0.95)",
                 border: "1px solid var(--line-strong)",
-                padding: 28,
+                padding: "28px",
+                borderRadius: "var(--r-lg)",
+                boxShadow: "var(--shadow-pop)",
                 justifyContent: "space-between",
-                borderRadius: "var(--r-md)",
               }}
             >
               <div>
-                {/* Header */}
-                <div className="row between mb-4 pb-3" style={{ borderBottom: "1px solid var(--line)" }}>
-                  <div>
-                    <span className="mono xs dim">LOCATION TARGET</span>
-                    <h3 className="h3 mt-1" style={{ color: "var(--text)", fontSize: "18px" }}>
-                      {selectedPin.label}
-                    </h3>
-                  </div>
-                  <span
-                    className="tag"
-                    style={{
-                      background: selectedPin.status === "warning" ? "var(--brand-bg)" : "var(--brass-bg)",
-                      color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)",
-                      borderColor: selectedPin.status === "warning" ? "var(--brand-line)" : "var(--brass-line)",
-                    }}
-                  >
-                    {selectedPin.confidence}% Corroborated
+                <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
+                  <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
+                    SPATIAL NODE INSPECTION
                   </span>
-                </div>
-
-                {/* Data Properties */}
-                <div className="props mb-4" style={{ fontSize: 13 }}>
-                  <dt>CPM Node ID</dt>
-                  <dd className="mono" style={{ color: "var(--brass)", fontWeight: 700 }}>
-                    #{selectedPin.cpmCode}
-                  </dd>
-
-                  <dt>Discipline</dt>
-                  <dd>{selectedPin.trade}</dd>
-
-                  <dt>Critical Float</dt>
-                  <dd
+                  <span
+                    className="mono xs"
                     style={{
-                      color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)",
+                      color: activeSpot.status === "RISK" ? "var(--danger)" : "var(--accent)",
                       fontWeight: 700,
                     }}
                   >
-                    {selectedPin.criticalFloat}
-                  </dd>
+                    {activeSpot.statusText}
+                  </span>
                 </div>
 
-                {/* Staged Action */}
+                <div className="mono xs dim mb-1">{activeSpot.phase}</div>
+                <h3 style={{ fontSize: "19px", fontWeight: 700, color: "var(--text)", marginBottom: "14px" }}>
+                  {activeSpot.label}
+                </h3>
+
+                {/* Metric Readout Grid */}
+                <div className="col gap-2 mb-4">
+                  <div className="p-3" style={{ background: "rgba(8, 9, 12, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                    <div className="mono xs dim mb-1">TOTAL FLOAT VARIANCE:</div>
+                    <div className="mono xs" style={{ color: activeSpot.status === "RISK" ? "var(--danger)" : "var(--brand-300)", fontWeight: 700, fontSize: "13px" }}>
+                      {activeSpot.floatRemaining}
+                    </div>
+                  </div>
+
+                  <div className="p-3" style={{ background: "rgba(8, 9, 12, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                    <div className="mono xs dim mb-1">FINANCIAL RISK EXPOSURE:</div>
+                    <div className="mono xs" style={{ color: "var(--accent)", fontWeight: 700, fontSize: "13px" }}>
+                      {activeSpot.delayExposure}
+                    </div>
+                  </div>
+
+                  <div className="p-3" style={{ background: "rgba(8, 9, 12, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                    <div className="mono xs dim mb-1">CONTEMPORANEOUS EVIDENCE:</div>
+                    <div className="xs" style={{ color: "var(--text)", lineHeight: 1.4 }}>
+                      {activeSpot.evidence}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Graph Reasoning Explanation */}
                 <div
+                  className="p-3"
                   style={{
-                    padding: 16,
-                    background: selectedPin.status === "warning" ? "rgba(217, 119, 87, 0.08)" : "rgba(212, 155, 75, 0.08)",
-                    border: `1px solid ${selectedPin.status === "warning" ? "var(--brand-line)" : "var(--brass-line)"}`,
+                    background: "rgba(46, 98, 255, 0.08)",
+                    borderLeft: "3px solid var(--brand)",
                     borderRadius: "var(--r-xs)",
                   }}
                 >
-                  <span className="mono xs dim block" style={{ color: selectedPin.status === "warning" ? "var(--brand)" : "var(--brass)" }}>
-                    AUTOMATED CONTROLS ACTION:
-                  </span>
-                  <p className="xs mt-1" style={{ color: "var(--text)", fontWeight: 600, margin: 0 }}>
-                    {selectedPin.action}
+                  <div className="row gap-2 mb-1" style={{ alignItems: "center" }}>
+                    <Activity className="ico" style={{ width: 13, height: 13, color: "var(--brand)" }} />
+                    <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
+                      AUTONOMOUS GRAPH REMEDIATION:
+                    </span>
+                  </div>
+                  <p style={{ fontSize: "13px", color: "var(--text-2)", lineHeight: 1.5, margin: 0 }}>
+                    {activeSpot.detail}
                   </p>
                 </div>
               </div>
 
-              {/* Bottom Action CTA */}
               <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="btn btn-primary btn-block mt-6 mono xs"
+                className="btn btn-outline btn-block mt-4 mono xs"
                 href="#waitlist"
-                style={{ fontWeight: 700, justifyContent: "center", padding: "12px" }}
+                style={{ justifyContent: "center", padding: "10px", fontWeight: 700 }}
               >
-                INITIALIZE_PILOT_SEQUENCE
+                DEPLOY_ON_YOUR_BIM_MODEL
                 <ChevronRight className="ico" />
               </motion.a>
             </motion.div>

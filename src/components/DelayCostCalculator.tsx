@@ -23,9 +23,9 @@ export function DelayCostCalculator() {
       id="financial-sandbox"
       style={{
         position: "relative",
-        paddingTop: "100px",
-        paddingBottom: "100px",
-        background: "rgba(10, 11, 14, 0.4)",
+        paddingTop: "110px",
+        paddingBottom: "110px",
+        background: "rgba(8, 9, 12, 0.85)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -42,11 +42,11 @@ export function DelayCostCalculator() {
             <span
               className="mono xs"
               style={{
-                color: "var(--brass)",
-                background: "var(--brass-bg)",
-                border: "1px solid var(--brass-line)",
-                padding: "3px 10px",
-                borderRadius: "4px",
+                color: "var(--accent)",
+                background: "var(--accent-bg)",
+                border: "1px solid var(--accent-line)",
+                padding: "4px 14px",
+                borderRadius: "var(--r-full)",
                 fontWeight: 600,
                 letterSpacing: "0.06em",
               }}
@@ -60,7 +60,6 @@ export function DelayCostCalculator() {
             variants={fadeUpVariants}
             className="display"
             style={{
-              fontFamily: "var(--font-display)",
               fontSize: "clamp(34px, 4vw, 54px)",
               lineHeight: 1.08,
               color: "var(--text)",
@@ -69,7 +68,7 @@ export function DelayCostCalculator() {
             }}
           >
             Quantify the cost of <br />
-            <span style={{ fontStyle: "italic", color: "var(--brand)" }}>3 weeks of schedule blindness.</span>
+            <span style={{ color: "var(--accent)" }}>3 weeks of schedule blindness.</span>
           </motion.h2>
 
           <motion.p
@@ -89,29 +88,29 @@ export function DelayCostCalculator() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="card"
+            className="card spotlight-card animated-border-glow"
             style={{
-              background: "rgba(18, 20, 24, 0.96)",
+              background: "rgba(16, 19, 26, 0.95)",
               border: "1px solid var(--line-strong)",
-              padding: "30px",
-              borderRadius: "var(--r-md)",
+              padding: "32px",
+              borderRadius: "var(--r-lg)",
               boxShadow: "var(--shadow-pop)",
             }}
           >
             <div className="row between mb-6 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-              <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 600 }}>
+              <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
                 PROJECT INPUT PARAMETERS
               </span>
-              <Sliders className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
+              <Sliders className="ico" style={{ width: 14, height: 14, color: "var(--brand)" }} />
             </div>
 
             {/* Slider 01: Project CAPEX */}
             <div className="mb-6">
               <div className="row between mb-2">
-                <label htmlFor="capex-slider" style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>
+                <label htmlFor="capex-slider" style={{ fontSize: "14.5px", fontWeight: 600, color: "var(--text)" }}>
                   Contract Value (CAPEX)
                 </label>
-                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700, fontSize: "15px" }}>
+                <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700, fontSize: "16px" }}>
                   ${capexM}M USD
                 </span>
               </div>
@@ -139,10 +138,10 @@ export function DelayCostCalculator() {
             {/* Slider 02: Delay Duration */}
             <div className="mb-6">
               <div className="row between mb-2">
-                <label htmlFor="delay-slider" style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>
+                <label htmlFor="delay-slider" style={{ fontSize: "14.5px", fontWeight: 600, color: "var(--text)" }}>
                   Undetected Critical Path Slip
                 </label>
-                <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700, fontSize: "15px" }}>
+                <span className="mono xs" style={{ color: "var(--accent)", fontWeight: 700, fontSize: "16px" }}>
                   {delayWeeks} WEEKS ({delayWeeks * 7} DAYS)
                 </span>
               </div>
@@ -156,7 +155,7 @@ export function DelayCostCalculator() {
                 onChange={(e) => setDelayWeeks(Number(e.target.value))}
                 style={{
                   width: "100%",
-                  accentColor: "var(--brass)",
+                  accentColor: "var(--accent)",
                   cursor: "pointer",
                 }}
               />
@@ -170,7 +169,7 @@ export function DelayCostCalculator() {
             <div
               className="p-3 mt-4"
               style={{
-                background: "rgba(10, 11, 14, 0.8)",
+                background: "rgba(8, 9, 12, 0.8)",
                 border: "1px solid var(--line-soft)",
                 borderRadius: "var(--r-xs)",
               }}
@@ -188,23 +187,25 @@ export function DelayCostCalculator() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="card stack"
+            className="card spotlight-card animated-border-glow"
             style={{
-              background: "rgba(18, 20, 24, 0.96)",
+              background: "rgba(16, 19, 26, 0.95)",
               border: "1px solid var(--line-strong)",
-              padding: "30px",
-              borderRadius: "var(--r-md)",
+              padding: "32px",
+              borderRadius: "var(--r-lg)",
+              display: "flex",
+              flexDirection: "column",
               justifyContent: "space-between",
               boxShadow: "var(--shadow-pop)",
             }}
           >
             <div>
               <div className="row between mb-4 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 600 }}>
+                <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
                   TOTAL UNMITIGATED RISK
                 </span>
-                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
-                  DIRECT LOSS
+                <span className="mono xs" style={{ color: "var(--danger)", fontWeight: 700 }}>
+                  DIRECT FINANCIAL LOSS
                 </span>
               </div>
 
@@ -213,9 +214,9 @@ export function DelayCostCalculator() {
                 <div
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: "clamp(34px, 3.8vw, 48px)",
-                    fontWeight: 700,
-                    color: "var(--brand)",
+                    fontSize: "clamp(36px, 4vw, 52px)",
+                    fontWeight: 800,
+                    color: "var(--text)",
                     letterSpacing: "-0.02em",
                   }}
                 >
@@ -225,17 +226,17 @@ export function DelayCostCalculator() {
               </div>
 
               {/* Breakdown Rows */}
-              <div className="stack gap-2 mb-4" style={{ fontSize: "13px" }}>
-                <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.8)", borderRadius: "var(--r-xs)" }}>
+              <div className="col gap-2 mb-4" style={{ fontSize: "13.5px" }}>
+                <div className="row between p-2" style={{ background: "rgba(8, 9, 12, 0.8)", borderRadius: "var(--r-xs)" }}>
                   <span className="dim">Liquidated Damages:</span>
                   <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(totalLDs / 1000).toLocaleString()} USD</span>
                 </div>
-                <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.8)", borderRadius: "var(--r-xs)" }}>
+                <div className="row between p-2" style={{ background: "rgba(8, 9, 12, 0.8)", borderRadius: "var(--r-xs)" }}>
                   <span className="dim">Extended Site Preliminaries:</span>
                   <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(extendedPrelims / 1000).toLocaleString()} USD</span>
                 </div>
-                <div className="row between p-2" style={{ background: "rgba(10, 11, 14, 0.8)", borderRadius: "var(--r-xs)" }}>
-                  <span className="dim">Carrying Costs &amp; Working Capital:</span>
+                <div className="row between p-2" style={{ background: "rgba(8, 9, 12, 0.8)", borderRadius: "var(--r-xs)" }}>
+                  <span className="dim">Carrying Costs &amp; Capital Interest:</span>
                   <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(carryingCostInterest / 1000).toLocaleString()} USD</span>
                 </div>
               </div>
@@ -244,20 +245,20 @@ export function DelayCostCalculator() {
               <div
                 className="p-3"
                 style={{
-                  background: "rgba(212, 155, 75, 0.08)",
-                  border: "1px solid var(--brass-line)",
+                  background: "rgba(245, 166, 35, 0.08)",
+                  border: "1px solid var(--accent-line)",
                   borderRadius: "var(--r-xs)",
                 }}
               >
                 <div className="row gap-2 mb-1" style={{ alignItems: "center" }}>
-                  <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--brass)" }} />
-                  <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700 }}>
-                    SYNCPRO EARLY PROTECTION:
+                  <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--accent)" }} />
+                  <span className="mono xs" style={{ color: "var(--accent)", fontWeight: 700 }}>
+                    SYNCPRO EARLY RECOVERY:
                   </span>
                 </div>
                 <div className="row between mt-1">
                   <span className="xs" style={{ color: "var(--text-2)" }}>Protected Capital via 3-Week Early Detection:</span>
-                  <span className="mono xs" style={{ color: "var(--brass)", fontWeight: 700, fontSize: "14px" }}>
+                  <span className="mono xs" style={{ color: "var(--accent)", fontWeight: 700, fontSize: "14.5px" }}>
                     +${(syncproRecovery / 1000000).toFixed(2)}M
                   </span>
                 </div>
