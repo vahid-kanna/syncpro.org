@@ -257,7 +257,7 @@ export function DelayCostCalculator() {
               <div
                 className="p-3"
                 style={{
-                  background: "rgba(0, 229, 153, 0.08)",
+                  background: "rgba(245, 166, 35, 0.08)",
                   border: "1px solid var(--brand-line)",
                   borderRadius: "var(--r-xs)",
                 }}

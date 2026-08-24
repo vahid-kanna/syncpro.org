@@ -171,7 +171,7 @@ export function DigitalTwinStudio() {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: "radial-gradient(circle at 50% 50%, rgba(0,229,153,0.06), rgba(7,8,10,0.7) 90%)",
+                  background: "radial-gradient(circle at 50% 50%, rgba(245,166,35,0.06), rgba(7,8,10,0.7) 90%)",
                   pointerEvents: "none",
                 }}
               />
@@ -352,7 +352,7 @@ export function DigitalTwinStudio() {
                 <div
                   className="p-3"
                   style={{
-                    background: "rgba(0, 229, 153, 0.08)",
+                    background: "rgba(245, 166, 35, 0.08)",
                     borderLeft: "3px solid var(--brand)",
                     borderRadius: "var(--r-xs)",
                   }}

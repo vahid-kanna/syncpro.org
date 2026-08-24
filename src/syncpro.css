@@ -1,5 +1,5 @@
 /* ============================================================================
-   SyncPro Design System  ·  v4  ·  "Luminous Emerald & Velvet Obsidian"
+   SyncPro Design System  ·  v5  ·  "Radiant Solar Gold & Velvet Obsidian"
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&display=swap');
@@ -15,9 +15,9 @@
 
   /* Hairlines — Precision 1px Structural Rules */
   --line:        rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(0, 229, 153, 0.32);
+  --line-strong: rgba(245, 166, 35, 0.32);
   --line-soft:   rgba(255, 255, 255, 0.04);
-  --line-gold:   rgba(245, 166, 35, 0.32);
+  --line-gold:   rgba(245, 166, 35, 0.35);
 
   /* Text — Warm Alabaster Ivory & Muted Slate */
   --text:   #FAF8F5;
@@ -25,18 +25,18 @@
   --text-3: #64748B;
   --text-4: #475569;
 
-  /* Brand — Luminous Emerald (#00E599 / #10B981) & Solar Gold (#F5A623) */
-  --brand:     #00E599;
-  --brand-600: #059669;
-  --brand-500: #10B981;
-  --brand-400: #00E599;
-  --brand-300: #34D399;
-  --brand-bg:  rgba(0, 229, 153, 0.12);
-  --brand-line:rgba(0, 229, 153, 0.32);
+  /* Brand — Radiant Solar Gold (#F5A623) & Precision Steel (#38BDF8) */
+  --brand:     #F5A623;
+  --brand-600: #D97706;
+  --brand-500: #F5A623;
+  --brand-400: #FBBF24;
+  --brand-300: #FDE68A;
+  --brand-bg:  rgba(245, 166, 35, 0.12);
+  --brand-line:rgba(245, 166, 35, 0.32);
 
-  --accent:     #F5A623;
-  --accent-bg:  rgba(245, 166, 35, 0.12);
-  --accent-line:rgba(245, 166, 35, 0.32);
+  --accent:     #38BDF8;
+  --accent-bg:  rgba(56, 189, 248, 0.12);
+  --accent-line:rgba(56, 189, 248, 0.32);
 
   --brass:     #F5A623;
   --brass-bg:  rgba(245, 166, 35, 0.12);
@@ -46,7 +46,7 @@
   --steel-line:rgba(56, 189, 248, 0.30);
 
   /* Semantic */
-  --success: #00E599;  --success-bg: rgba(0, 229, 153, 0.12);  --success-line: rgba(0, 229, 153, 0.30);
+  --success: #10B981;  --success-bg: rgba(16, 185, 129, 0.12); --success-line: rgba(16, 185, 129, 0.30);
   --warning: #F5A623;  --warning-bg: rgba(245, 166, 35, 0.12); --warning-line: rgba(245, 166, 35, 0.30);
   --danger:  #EF4444;  --danger-bg:  rgba(239, 68, 68, 0.12);  --danger-line:  rgba(239, 68, 68, 0.30);
   --info:    #38BDF8;  --info-bg:    rgba(56, 189, 248, 0.12); --info-line:    rgba(56, 189, 248, 0.30);
@@ -58,7 +58,7 @@
   --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
   --shadow-md: 0 8px 24px -8px rgba(0,0,0,.7);
   --shadow-pop: 0 20px 50px -15px rgba(0,0,0,.85), 0 0 0 1px var(--line);
-  --glow-brand: 0 0 30px rgba(0, 229, 153, 0.28);
+  --glow-brand: 0 0 32px rgba(245, 166, 35, 0.35);
 
   /* Typography */
   --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -89,13 +89,13 @@ button { cursor: pointer; background: none; border: none; }
 img, svg { display: block; max-width: 100%; }
 ul { list-style: none; padding: 0; }
 :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
-::selection { background: rgba(0, 229, 153, 0.35); color: #FFFFFF; }
+::selection { background: rgba(245, 166, 35, 0.35); color: #FFFFFF; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-base); }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0,229,153,0.4); }
+::-webkit-scrollbar-thumb:hover { background: rgba(245,166,35,0.45); }
 
 /* Typography Helpers */
 .display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; }
@@ -149,7 +149,7 @@ ul { list-style: none; padding: 0; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: var(--r-full);
   font-weight: 600;
   transition: all 0.2s var(--ease);
@@ -159,12 +159,12 @@ ul { list-style: none; padding: 0; }
   background: var(--brand);
   color: #07080A;
   font-weight: 700;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 24px rgba(0, 229, 153, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 26px rgba(245, 166, 35, 0.38);
 }
 .btn-primary:hover {
-  background: #34D399;
-  box-shadow: 0 0 36px rgba(0, 229, 153, 0.6);
+  background: #FBBF24;
+  box-shadow: 0 0 38px rgba(245, 166, 35, 0.65);
   transform: translateY(-2px);
 }
 .btn-outline {
@@ -174,7 +174,7 @@ ul { list-style: none; padding: 0; }
 }
 .btn-outline:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(245, 166, 35, 0.35);
 }
 .btn-block { width: 100%; }
 
@@ -195,7 +195,7 @@ ul { list-style: none; padding: 0; }
 
 .spotlight-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -10px rgba(0, 229, 153, 0.2), 0 0 0 1px var(--brand-line);
+  box-shadow: 0 20px 40px -10px rgba(245, 166, 35, 0.22), 0 0 0 1px var(--brand-line);
 }
 
 .animated-border-glow {
