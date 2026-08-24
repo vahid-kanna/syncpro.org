@@ -46,12 +46,12 @@ export function Nav() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "10px 20px",
-          background: scrolled ? "rgba(8, 9, 12, 0.88)" : "rgba(14, 16, 22, 0.75)",
+          padding: "10px 24px",
+          background: scrolled ? "rgba(7, 8, 10, 0.9)" : "rgba(13, 15, 20, 0.75)",
           backdropFilter: "blur(20px)",
           border: "1px solid var(--line-strong)",
           borderRadius: "var(--r-full)",
-          boxShadow: scrolled ? "0 20px 40px rgba(0, 0, 0, 0.7)" : "0 8px 30px rgba(0, 0, 0, 0.4)",
+          boxShadow: scrolled ? "0 20px 40px rgba(0, 0, 0, 0.8)" : "0 8px 30px rgba(0, 0, 0, 0.4)",
           transition: "all 0.3s ease",
           pointerEvents: "auto",
         }}
@@ -62,17 +62,17 @@ export function Nav() {
           <span
             className="mono xs desktop-nav"
             style={{
-              color: "var(--brand-300)",
+              color: "var(--brand)",
               background: "var(--brand-bg)",
               border: "1px solid var(--brand-line)",
-              padding: "2px 8px",
-              borderRadius: "4px",
+              padding: "2px 10px",
+              borderRadius: "var(--r-full)",
               fontSize: "11px",
               fontWeight: 600,
-              letterSpacing: "0.04em",
+              letterSpacing: "0.02em",
             }}
           >
-            SYS.CORE_01
+            System Core · Node 01
           </span>
         </div>
 
@@ -120,17 +120,16 @@ export function Nav() {
           <motion.a
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="btn btn-primary mono xs"
+            className="btn btn-primary xs"
             href="#waitlist"
             style={{
               fontWeight: 700,
-              letterSpacing: "0.04em",
-              padding: "8px 18px",
+              padding: "8px 20px",
               borderRadius: "var(--r-full)",
-              fontSize: "12px",
+              fontSize: "13px",
             }}
           >
-            INITIALIZE_PILOT
+            Initialize Pilot
             <ArrowRight className="ico" style={{ width: 13, height: 13, marginLeft: 4 }} />
           </motion.a>
 
@@ -170,7 +169,7 @@ export function Nav() {
               top: "72px",
               left: 20,
               right: 20,
-              background: "rgba(8, 9, 12, 0.98)",
+              background: "rgba(7, 8, 10, 0.98)",
               backdropFilter: "blur(24px)",
               border: "1px solid var(--line-strong)",
               borderRadius: "var(--r-lg)",
@@ -184,7 +183,7 @@ export function Nav() {
             }}
           >
             <div className="row between pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-              <span className="mono xs dim">NAVIGATION MENU</span>
+              <span className="mono xs dim">Navigation Menu</span>
               <div className="row gap-2 mono xs" style={{ color: "var(--accent)" }}>
                 <Radio className="ico pulse" style={{ width: 11, height: 11, color: "var(--brand)" }} />
                 <span>{time || "00:00:00 UTC"}</span>
@@ -206,12 +205,12 @@ export function Nav() {
               </a>
             ))}
             <a
-              className="btn btn-primary mono xs"
+              className="btn btn-primary xs"
               href="#waitlist"
               onClick={() => setMobileOpen(false)}
               style={{ marginTop: 8, justifyContent: "center", padding: "12px", fontWeight: 700 }}
             >
-              INITIALIZE_PILOT <ArrowRight className="ico" />
+              Initialize Pilot <ArrowRight className="ico" />
             </a>
           </motion.div>
         )}

@@ -7,13 +7,13 @@ const PILLARS = [
   {
     step: "01",
     title: "Zero Manual Data Entry",
-    subtitle: "Ingest Messy Field Reality",
+    subtitle: "Ingest Messy Field Signals",
     description:
-      "Site voice memos, delivery dockets, and inspection logs are automatically structured and mapped to exact Primavera P6 CPM activity nodes with zero manual typing.",
+      "Site voice notes, concrete batch tickets, and delivery dockets are automatically structured and mapped to exact Primavera P6 CPM activity nodes with zero manual typing.",
     icon: Zap,
     metric: "100% Autonomous",
     metricLabel: "Multimodal field signal extraction",
-    color: "var(--brand-300)",
+    color: "var(--brand)",
     bgColor: "var(--brand-bg)",
     lineColor: "var(--brand-line)",
   },
@@ -22,7 +22,7 @@ const PILLARS = [
     title: "Zero Retrospective Blindness",
     subtitle: "Reconcile in Real Time",
     description:
-      "Catch critical path slips 3 weeks before contractors report them. SyncPro maintains a live shadow schedule updated continuously from field telemetry.",
+      "Catch critical path slips 3 weeks before contractors report them. SyncPro maintains a live shadow schedule updated continuously from site telemetry.",
     icon: Activity,
     metric: "3-Week Lead Time",
     metricLabel: "Early critical path detection",
@@ -33,13 +33,13 @@ const PILLARS = [
   {
     step: "03",
     title: "Zero Dispute Liability",
-    subtitle: "Seal Legal Immunity",
+    subtitle: "Seal Contractual Immunity",
     description:
-      "Generate 1-click contemporaneous evidence dossiers and formal FIDIC/NEC4 extension-of-time notices before strict contractual time-bars expire.",
+      "Generate 1-click contemporaneous evidence dossiers and formal FIDIC / NHAI extension-of-time notices before strict contractual time-bars expire.",
     icon: ShieldCheck,
-    metric: "$60M+ Protected",
+    metric: "₹50 Cr+ Protected",
     metricLabel: "Per megaproject dispute averted",
-    color: "var(--brand-300)",
+    color: "var(--brand)",
     bgColor: "var(--brand-bg)",
     lineColor: "var(--brand-line)",
   },
@@ -53,7 +53,7 @@ export function WhatWeDo() {
         position: "relative",
         paddingTop: "110px",
         paddingBottom: "110px",
-        background: "rgba(11, 13, 18, 0.6)",
+        background: "rgba(11, 13, 17, 0.6)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -71,16 +71,16 @@ export function WhatWeDo() {
             <span
               className="mono xs"
               style={{
-                color: "var(--brand-300)",
+                color: "var(--brand)",
                 background: "var(--brand-bg)",
                 border: "1px solid var(--brand-line)",
-                padding: "4px 14px",
+                padding: "4px 16px",
                 borderRadius: "var(--r-full)",
                 fontWeight: 600,
-                letterSpacing: "0.06em",
+                letterSpacing: "0.02em",
               }}
             >
-              CORE CAPABILITIES // ZERO GUESSWORK
+              Core Capabilities · Zero Guesswork
             </span>
           </motion.div>
           <motion.h2
@@ -93,7 +93,7 @@ export function WhatWeDo() {
             }}
           >
             Three non-negotiable truths of <br />
-            <span style={{ color: "var(--brand-400)", textDecoration: "underline", textUnderlineOffset: "6px" }}>
+            <span style={{ color: "var(--brand)", textDecoration: "underline", textUnderlineOffset: "6px" }}>
               autonomous project controls.
             </span>
           </motion.h2>
@@ -106,7 +106,7 @@ export function WhatWeDo() {
           </motion.p>
         </motion.div>
 
-        {/* 3 Stacking Cards with Zero 3D Tilt & Cursor Spotlight */}
+        {/* 3 Stacking Cards with 3D Tilt & Cursor Spotlight */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -121,7 +121,7 @@ export function WhatWeDo() {
                 key={pillar.step}
                 className="card animated-border-glow"
                 style={{
-                  background: "rgba(16, 19, 26, 0.95)",
+                  background: "rgba(15, 18, 24, 0.95)",
                   border: "1px solid var(--line-strong)",
                   borderRadius: "var(--r-lg)",
                   padding: "32px 28px",
@@ -134,7 +134,7 @@ export function WhatWeDo() {
                 <div>
                   <div className="row between mb-6">
                     <span className="mono xs" style={{ color: pillar.color, fontWeight: 700, fontSize: "14px" }}>
-                      [{pillar.step}]
+                      0{pillar.step}
                     </span>
                     <div
                       style={{
@@ -152,8 +152,8 @@ export function WhatWeDo() {
                     </div>
                   </div>
 
-                  <div className="mono xs dim mb-1" style={{ color: "var(--text-3)", letterSpacing: "0.04em" }}>
-                    {pillar.subtitle.toUpperCase()}
+                  <div className="mono xs dim mb-1" style={{ color: "var(--text-3)", letterSpacing: "0.02em" }}>
+                    {pillar.subtitle}
                   </div>
 
                   <h3 style={{ fontSize: "20px", fontWeight: 700, color: "var(--text)", marginBottom: "12px" }}>

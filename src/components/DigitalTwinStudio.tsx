@@ -22,14 +22,14 @@ const HOTSPOTS: Hotspot[] = [
   {
     id: "podium-mep",
     label: "Podium Level 04: MEP Risers & Heavy Ductwork",
-    phase: "Phase 2 · Mechanical & Electrical",
+    phase: "Phase 2 · Mechanical & Electrical Rough-ins",
     x: 48,
     y: 62,
     status: "RISK",
-    statusText: "CRITICAL FLOAT DEPLETION (-8D)",
+    statusText: "Critical Float Depletion (-8D)",
     floatRemaining: "-8 Days Negative Total Float",
-    delayExposure: "$1.24M LD Risk if Unmitigated",
-    evidence: "Acoustic duct scans + Supplier delay receipt #SN-882",
+    delayExposure: "₹9.4 Cr Delay Penalty Risk if Unmitigated",
+    evidence: "Acoustic duct scans + Supplier delay challan #SN-882",
     dcmaScore: "DCMA #05 Hard Constraint Violation Flagged",
     detail:
       "Chilled water riser spool fabrication 3 weeks behind. SyncPro's graph sort parallelized 2nd fix branch runs, recovering 6 days without moving contractual handover.",
@@ -37,13 +37,13 @@ const HOTSPOTS: Hotspot[] = [
   {
     id: "facade-spire",
     label: "Apex Facade: Structural Glazing Spire",
-    phase: "Phase 4 · Building Enclosure",
+    phase: "Phase 4 · Building Enclosure & Curtain Wall",
     x: 52,
     y: 22,
     status: "DISPUTE_SHIELDED",
-    statusText: "FIDIC SUB-CLAUSE 20.1 NOTICE GENERATED",
+    statusText: "FIDIC / NHAI Claim Notice Generated",
     floatRemaining: "+14 Days Total Float",
-    delayExposure: "$0.00 Unbudgeted Contractor Liability",
+    delayExposure: "₹0.00 Unbudgeted Contractor Liability",
     evidence: "Drone lidar point cloud vs. IFC model (0.3mm delta)",
     dcmaScore: "DCMA #06 Critical Path Length Index: 1.04 Pass",
     detail:
@@ -56,9 +56,9 @@ const HOTSPOTS: Hotspot[] = [
     x: 32,
     y: 84,
     status: "ON_TRACK",
-    statusText: "CORROBORATED AS-BUILT",
+    statusText: "Corroborated As-Built",
     floatRemaining: "+3 Days Total Float",
-    delayExposure: "$0.00 Risk (Ahead of Baseline)",
+    delayExposure: "₹0.00 Risk (Ahead of Baseline)",
     evidence: "78 Ultrasonic pile integrity logs + Concrete tickets",
     dcmaScore: "DCMA #01 Logic Open Ends: 0.0% Pass",
     detail:
@@ -77,7 +77,7 @@ export function DigitalTwinStudio() {
         position: "relative",
         paddingTop: "110px",
         paddingBottom: "110px",
-        background: "rgba(11, 13, 18, 0.6)",
+        background: "rgba(11, 13, 17, 0.6)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -94,18 +94,18 @@ export function DigitalTwinStudio() {
             <span
               className="mono xs"
               style={{
-                color: "var(--brand-300)",
+                color: "var(--brand)",
                 background: "var(--brand-bg)",
                 border: "1px solid var(--brand-line)",
-                padding: "4px 14px",
+                padding: "4px 16px",
                 borderRadius: "var(--r-full)",
                 fontWeight: 600,
-                letterSpacing: "0.06em",
+                letterSpacing: "0.02em",
               }}
             >
-              LIVING 3D DIGITAL TWIN // BIM RECONCILIATION
+              Living 3D Digital Twin · BIM Reconciliation
             </span>
-            <span className="mono xs dim desktop-nav">SYNCHRONIZED WITH ORACLE P6 (.XER)</span>
+            <span className="mono xs dim desktop-nav">Synchronized with Oracle P6 (.xer)</span>
           </motion.div>
 
           <motion.h2
@@ -120,7 +120,7 @@ export function DigitalTwinStudio() {
             }}
           >
             Spatial schedule intelligence. <br />
-            <span style={{ color: "var(--brand-400)", textDecoration: "underline", textUnderlineOffset: "6px" }}>
+            <span style={{ color: "var(--brand)", textDecoration: "underline", textUnderlineOffset: "6px" }}>
               Every activity mapped to 3D reality.
             </span>
           </motion.h2>
@@ -130,7 +130,7 @@ export function DigitalTwinStudio() {
             className="lead mt-4 measure"
             style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}
           >
-            SyncPro binds every Primavera P6 schedule node directly to your 3D BIM model and field inspection feeds —
+            SyncPro binds every Primavera P6 schedule node directly to your 3D BIM model and site inspection feeds —
             click any hotspot pin to inspect real-time float variance.
           </motion.p>
         </motion.div>
@@ -149,7 +149,7 @@ export function DigitalTwinStudio() {
               padding: 0,
               overflow: "hidden",
               minHeight: 480,
-              background: "rgba(8, 9, 12, 0.95)",
+              background: "rgba(7, 8, 10, 0.95)",
               border: "1px solid var(--line-strong)",
               borderRadius: "var(--r-lg)",
               boxShadow: "var(--shadow-pop)",
@@ -171,7 +171,7 @@ export function DigitalTwinStudio() {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: "radial-gradient(circle at 50% 50%, rgba(46,98,255,0.06), rgba(8,9,12,0.7) 90%)",
+                  background: "radial-gradient(circle at 50% 50%, rgba(0,229,153,0.06), rgba(7,8,10,0.7) 90%)",
                   pointerEvents: "none",
                 }}
               />
@@ -242,11 +242,11 @@ export function DigitalTwinStudio() {
                         transform: "translateX(-50%)",
                         marginTop: 6,
                         whiteSpace: "nowrap",
-                        background: "rgba(8, 9, 12, 0.92)",
+                        background: "rgba(7, 8, 10, 0.92)",
                         border: `1px solid ${isSelected ? pinColor : "var(--line-strong)"}`,
                         borderRadius: "var(--r-xs)",
-                        padding: "3px 8px",
-                        fontSize: 10,
+                        padding: "3px 10px",
+                        fontSize: 10.5,
                         fontFamily: "var(--mono)",
                         color: isSelected ? "#FFFFFF" : "var(--text-2)",
                         pointerEvents: "none",
@@ -268,19 +268,19 @@ export function DigitalTwinStudio() {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  background: "rgba(8, 9, 12, 0.9)",
+                  background: "rgba(7, 8, 10, 0.9)",
                   border: "1px solid var(--line-strong)",
                   borderRadius: "var(--r-xs)",
-                  padding: "6px 14px",
+                  padding: "6px 16px",
                   fontSize: 11,
                   fontFamily: "var(--mono)",
                 }}
               >
                 <span className="row gap-2" style={{ alignItems: "center" }}>
                   <Sparkles className="ico" style={{ width: 12, height: 12, color: "var(--brand)" }} />
-                  <span>VIEWPORT: APEX 80-STORY STRUCTURAL DIGITAL TWIN</span>
+                  <span>Viewport: Apex 80-Story Structural Digital Twin</span>
                 </span>
-                <span style={{ color: "var(--accent)" }}>FPS: 60 · GPU: HARDWARE ACCELERATED</span>
+                <span style={{ color: "var(--brand)", fontWeight: 600 }}>60 FPS · Hardware Accelerated</span>
               </div>
             </div>
           </motion.div>
@@ -295,7 +295,7 @@ export function DigitalTwinStudio() {
               transition={{ duration: 0.2 }}
               className="card stack"
               style={{
-                background: "rgba(16, 19, 26, 0.95)",
+                background: "rgba(15, 18, 24, 0.95)",
                 border: "1px solid var(--line-strong)",
                 padding: "28px",
                 borderRadius: "var(--r-lg)",
@@ -305,8 +305,8 @@ export function DigitalTwinStudio() {
             >
               <div>
                 <div className="row between mb-3 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-                  <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
-                    SPATIAL NODE INSPECTION
+                  <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                    Spatial Node Inspection
                   </span>
                   <span
                     className="mono xs"
@@ -326,22 +326,22 @@ export function DigitalTwinStudio() {
 
                 {/* Metric Readout Grid */}
                 <div className="col gap-2 mb-4">
-                  <div className="p-3" style={{ background: "rgba(8, 9, 12, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
-                    <div className="mono xs dim mb-1">TOTAL FLOAT VARIANCE:</div>
-                    <div className="mono xs" style={{ color: activeSpot.status === "RISK" ? "var(--danger)" : "var(--brand-300)", fontWeight: 700, fontSize: "13px" }}>
+                  <div className="p-3" style={{ background: "rgba(7, 8, 10, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                    <div className="mono xs dim mb-1">Total Float Variance:</div>
+                    <div className="mono xs" style={{ color: activeSpot.status === "RISK" ? "var(--danger)" : "var(--brand)", fontWeight: 700, fontSize: "13px" }}>
                       {activeSpot.floatRemaining}
                     </div>
                   </div>
 
-                  <div className="p-3" style={{ background: "rgba(8, 9, 12, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
-                    <div className="mono xs dim mb-1">FINANCIAL RISK EXPOSURE:</div>
+                  <div className="p-3" style={{ background: "rgba(7, 8, 10, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                    <div className="mono xs dim mb-1">Financial Delay Risk Exposure:</div>
                     <div className="mono xs" style={{ color: "var(--accent)", fontWeight: 700, fontSize: "13px" }}>
                       {activeSpot.delayExposure}
                     </div>
                   </div>
 
-                  <div className="p-3" style={{ background: "rgba(8, 9, 12, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
-                    <div className="mono xs dim mb-1">CONTEMPORANEOUS EVIDENCE:</div>
+                  <div className="p-3" style={{ background: "rgba(7, 8, 10, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                    <div className="mono xs dim mb-1">Contemporaneous Evidence:</div>
                     <div className="xs" style={{ color: "var(--text)", lineHeight: 1.4 }}>
                       {activeSpot.evidence}
                     </div>
@@ -352,15 +352,15 @@ export function DigitalTwinStudio() {
                 <div
                   className="p-3"
                   style={{
-                    background: "rgba(46, 98, 255, 0.08)",
+                    background: "rgba(0, 229, 153, 0.08)",
                     borderLeft: "3px solid var(--brand)",
                     borderRadius: "var(--r-xs)",
                   }}
                 >
                   <div className="row gap-2 mb-1" style={{ alignItems: "center" }}>
                     <Activity className="ico" style={{ width: 13, height: 13, color: "var(--brand)" }} />
-                    <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
-                      AUTONOMOUS GRAPH REMEDIATION:
+                    <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                      Autonomous Graph Remediation:
                     </span>
                   </div>
                   <p style={{ fontSize: "13px", color: "var(--text-2)", lineHeight: 1.5, margin: 0 }}>
@@ -372,11 +372,11 @@ export function DigitalTwinStudio() {
               <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="btn btn-outline btn-block mt-4 mono xs"
+                className="btn btn-outline btn-block mt-4 xs"
                 href="#waitlist"
-                style={{ justifyContent: "center", padding: "10px", fontWeight: 700 }}
+                style={{ justifyContent: "center", padding: "11px", fontWeight: 700, borderRadius: "var(--r-full)" }}
               >
-                DEPLOY_ON_YOUR_BIM_MODEL
+                Deploy on Your BIM Model
                 <ChevronRight className="ico" />
               </motion.a>
             </motion.div>

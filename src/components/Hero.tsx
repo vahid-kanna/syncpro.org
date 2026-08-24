@@ -16,27 +16,27 @@ interface MilestoneData {
 const MILESTONES: MilestoneData[] = [
   {
     week: 4,
-    date: "W04 · OCT 12",
+    date: "Week 04 · Oct 12",
     phase: "Substructure & Piling",
-    fieldTruth: "78 of 80 secant piles poured. Sonic integrity tests verified via drone acoustic telemetry.",
+    fieldTruth: "78 of 80 secant piles poured. Ultrasonic cross-hole sonic logging verified via site acoustic sensors.",
     cpmStatus: "ON_TRACK",
     floatDelta: "+2 Days Total Float",
     confidence: 99.4,
   },
   {
     week: 12,
-    date: "W12 · DEC 08",
-    phase: "Level 4 Slab & Rebar",
-    fieldTruth: "Subcontractor audio reports 3-day delay in post-tension cable delivery. P6 critical path at risk.",
+    date: "Week 12 · Dec 08",
+    phase: "Level 18 Post-Tension Slab",
+    fieldTruth: "Site audio reports 4-day girder delivery delay. Primavera P6 critical path at risk of ₹3.2 Cr delay penalty.",
     cpmStatus: "SLIP_FLAGGED",
     floatDelta: "-8 Days Critical Slip (CPLI 0.88)",
     confidence: 97.8,
   },
   {
     week: 24,
-    date: "W24 · MAR 15",
-    phase: "Podium MEP & Facade",
-    fieldTruth: "Autonomous graph remediation executed: MEP rough-ins parallelized. Baseline restored.",
+    date: "Week 24 · Mar 15",
+    phase: "Podium MEP & Facade Glazing",
+    fieldTruth: "Autonomous graph remediation executed: MEP rough-ins parallelized. Baseline restored, saving ₹11.2 Cr.",
     cpmStatus: "REMEDIATED",
     floatDelta: "+1 Day Float Restored (DCMA Pass)",
     confidence: 98.9,
@@ -84,20 +84,20 @@ export function Hero() {
             <span
               className="mono xs"
               style={{
-                color: "var(--brand-300)",
+                color: "var(--brand)",
                 background: "var(--brand-bg)",
                 border: "1px solid var(--brand-line)",
-                padding: "4px 14px",
+                padding: "4px 16px",
                 borderRadius: "var(--r-full)",
                 fontWeight: 600,
-                letterSpacing: "0.06em",
+                letterSpacing: "0.02em",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "6px",
               }}
             >
               <Sparkles className="ico" style={{ width: 12, height: 12, color: "var(--brand)" }} />
-              AUTONOMOUS CONTROLS LAYER FOR MEGAPROJECTS
+              Autonomous Project Controls for Megaprojects
             </span>
           </motion.div>
 
@@ -119,7 +119,7 @@ export function Hero() {
               style={{
                 display: "inline-block",
                 position: "relative",
-                color: "var(--brand-400)",
+                color: "var(--brand)",
                 minWidth: "260px",
                 textAlign: "left",
                 verticalAlign: "bottom",
@@ -156,7 +156,7 @@ export function Hero() {
               color: "var(--text-2)",
             }}
           >
-            SyncPro continuously reconciles field reality against your Primavera P6 baseline — catching critical
+            SyncPro continuously reconciles ground reality against your Primavera P6 baseline — catching critical
             path slips 3 weeks before contractors report them.
           </motion.p>
 
@@ -168,30 +168,31 @@ export function Hero() {
             <motion.a
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="btn btn-primary mono xs"
+              className="btn btn-primary xs"
               href="#waitlist"
               style={{
-                padding: "12px 28px",
+                padding: "12px 30px",
                 borderRadius: "var(--r-full)",
-                fontSize: "13px",
+                fontSize: "14px",
                 fontWeight: 700,
               }}
             >
-              REQUEST_PILOT_ACCESS
+              Request Pilot Access
               <ArrowRight className="ico" style={{ width: 14, height: 14 }} />
             </motion.a>
             <motion.a
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="btn btn-outline mono xs"
+              className="btn btn-outline xs"
               href="#financial-sandbox"
               style={{
-                padding: "12px 24px",
+                padding: "12px 26px",
                 borderRadius: "var(--r-full)",
-                fontSize: "13px",
+                fontSize: "14px",
+                fontWeight: 600,
               }}
             >
-              CALCULATE_DELAY_ROI
+              Calculate Delay Exposure
             </motion.a>
           </motion.div>
         </motion.div>
@@ -206,7 +207,7 @@ export function Hero() {
             maxWidth: "1080px",
             margin: "0 auto",
             padding: "24px",
-            background: "rgba(16, 19, 26, 0.95)",
+            background: "rgba(15, 18, 24, 0.95)",
             border: "1px solid var(--line-strong)",
             borderRadius: "var(--r-lg)",
             boxShadow: "0 30px 80px -20px rgba(0, 0, 0, 0.9)",
@@ -217,12 +218,12 @@ export function Hero() {
             <div className="row gap-2" style={{ alignItems: "center" }}>
               <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--brand)" }} />
               <span className="mono xs" style={{ color: "var(--text)", fontWeight: 700 }}>
-                PROJECT: OBSIDIAN SPIRE (TOWER A) · $450M CAPEX
+                Project: Obsidian Commercial Tower · ₹1,800 Cr CAPEX
               </span>
             </div>
             <div className="row gap-3 xs mono dim">
-              <span>ORACLE PRIMAVERA P6 (.XER)</span>
-              <span style={{ color: "var(--accent)" }}>GRAPH_ENGINE: ACTIVE</span>
+              <span>Oracle Primavera P6 (.xer)</span>
+              <span style={{ color: "var(--brand)", fontWeight: 600 }}>Graph Engine Active</span>
             </div>
           </div>
 
@@ -253,23 +254,23 @@ export function Hero() {
               style={{
                 position: "absolute",
                 inset: 0,
-                background: "linear-gradient(180deg, rgba(8,9,12,0.1) 0%, rgba(8,9,12,0.85) 100%)",
+                background: "linear-gradient(180deg, rgba(7,8,10,0.1) 0%, rgba(7,8,10,0.85) 100%)",
                 pointerEvents: "none",
               }}
             />
 
-            {/* Zero-Style Floating Telemetry Badges */}
+            {/* Floating Telemetry Badges */}
             <div
               className="anim-float"
               style={{
                 position: "absolute",
                 top: "24px",
                 left: "24px",
-                background: "rgba(16, 19, 26, 0.9)",
+                background: "rgba(15, 18, 24, 0.9)",
                 backdropFilter: "blur(12px)",
                 border: "1px solid var(--brand-line)",
-                padding: "8px 14px",
-                borderRadius: "var(--r-sm)",
+                padding: "8px 16px",
+                borderRadius: "var(--r-full)",
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
@@ -280,7 +281,7 @@ export function Hero() {
               }}
             >
               <Activity className="ico" style={{ width: 14, height: 14, color: "var(--brand)" }} />
-              <span>EVIDENCE CONFIDENCE: {current.confidence}%</span>
+              <span>Evidence Confidence: {current.confidence}%</span>
             </div>
 
             <div
@@ -289,11 +290,11 @@ export function Hero() {
                 position: "absolute",
                 top: "24px",
                 right: "24px",
-                background: "rgba(16, 19, 26, 0.9)",
+                background: "rgba(15, 18, 24, 0.9)",
                 backdropFilter: "blur(12px)",
                 border: "1px solid var(--accent-line)",
-                padding: "8px 14px",
-                borderRadius: "var(--r-sm)",
+                padding: "8px 16px",
+                borderRadius: "var(--r-full)",
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
@@ -304,7 +305,7 @@ export function Hero() {
               }}
             >
               <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--accent)" }} />
-              <span>DISPUTE IMMUNITY: SEALED</span>
+              <span>Dispute Immunity: Sealed</span>
             </div>
 
             {/* Bottom Milestone Information Overlay */}
@@ -320,8 +321,8 @@ export function Hero() {
               }}
             >
               <div>
-                <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
-                  {current.date} // PHASE: {current.phase}
+                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                  {current.date} · Phase: {current.phase}
                 </span>
                 <p style={{ color: "#FFFFFF", fontSize: "14px", fontWeight: 600, margin: "4px 0 0 0", maxWidth: "620px" }}>
                   {current.fieldTruth}
@@ -342,10 +343,10 @@ export function Hero() {
                   key={m.week}
                   onClick={() => setActiveStep(idx)}
                   style={{
-                    padding: "12px 14px",
-                    background: isSelected ? "var(--bg-elevated)" : "rgba(8, 9, 12, 0.6)",
-                    border: isSelected ? "1px solid var(--brand)" : "1px solid var(--line-soft)",
-                    borderRadius: "var(--r-xs)",
+                    padding: "14px 16px",
+                    background: isSelected ? "var(--bg-elevated)" : "rgba(7, 8, 10, 0.6)",
+                    border: isSelected ? "1px solid var(--brand)" : "1px solid var(--line)",
+                    borderRadius: "var(--r-md)",
                     textAlign: "left",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
@@ -353,15 +354,15 @@ export function Hero() {
                 >
                   <div className="row between mb-1">
                     <span className="mono xs" style={{ color: isSelected ? "var(--brand)" : "var(--text-3)", fontWeight: 700 }}>
-                      MILESTONE {idx + 1}
+                      Milestone {idx + 1}
                     </span>
                     {m.cpmStatus === "SLIP_FLAGGED" ? (
                       <AlertTriangle className="ico" style={{ width: 12, height: 12, color: "var(--danger)" }} />
                     ) : (
-                      <CheckCircle2 className="ico" style={{ width: 12, height: 12, color: "var(--accent)" }} />
+                      <CheckCircle2 className="ico" style={{ width: 12, height: 12, color: "var(--brand)" }} />
                     )}
                   </div>
-                  <div style={{ fontSize: "13px", fontWeight: 600, color: isSelected ? "var(--text)" : "var(--text-2)" }}>
+                  <div style={{ fontSize: "13.5px", fontWeight: 600, color: isSelected ? "var(--text)" : "var(--text-2)" }}>
                     {m.date}
                   </div>
                 </button>

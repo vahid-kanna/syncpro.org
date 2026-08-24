@@ -5,54 +5,54 @@ import { fadeUpVariants, staggerContainer } from "../lib/motion";
 const STEPS = [
   {
     num: "01",
-    label: "CAPTURE",
+    label: "Capture",
     title: "Multimodal Field Signal Ingestion",
     description:
-      "Site supervisors and subcontractors record voice memos, upload delivery dockets, and snap concrete batch tickets. SyncPro extracts quantities, dates, and locations automatically.",
-    badge: "INPUT: MULTIMODAL TELEMETRY",
-    badgeColor: "var(--brand-300)",
+      "Site supervisors and package managers record Hindi/English voice notes, upload delivery dockets, and snap concrete batch receipts. SyncPro extracts quantities, dates, and grids automatically.",
+    badge: "Input: Multimodal Telemetry",
+    badgeColor: "var(--brand)",
     visual: {
       type: "audio",
-      title: "Audio Transcript // Level 4 Concrete Pour",
+      title: "Audio Transcript · Level 18 Concrete Pour",
       quote:
-        '"Batch #4902 delivered at 14:15. Slump test 140mm verified. Poured 120m³ for Grid C3-C7. Post-tension duct delayed by 2 days due to fabrication hold."',
-      meta: "CORROBORATED BY: 4 BATCH TICKETS + 1 ACOUSTIC SOUNDING SCAN",
+        '"Batch #4902 RMC truck delivered at 14:15. Slump test 140mm verified. Poured 120m³ M40 concrete for Grid C3-C7. Post-tension cable delivery delayed by 2 days due to fabrication hold."',
+      meta: "Corroborated by: 4 RMC Delivery Tickets + Ultrasonic Sounding Scan",
     },
   },
   {
     num: "02",
-    label: "CORROBORATE",
+    label: "Corroborate",
     title: "Graph-Based Truth Corroboration",
     description:
-      "Before any schedule is updated, field claims are cross-checked against drone point clouds, delivery dockets, and batch receipts in an anti-hallucination Neo4j knowledge graph.",
-    badge: "VALIDATION: GRAPH RECONCILIATION",
+      "Before any schedule is updated, site claims are cross-checked against drone point clouds, delivery challans, and weighbridge receipts in an anti-hallucination Neo4j knowledge graph.",
+    badge: "Validation: Graph Reconciliation",
     badgeColor: "var(--accent)",
     visual: {
       type: "matrix",
       title: "Contemporaneous Fact Corroboration Matrix",
       items: [
-        { claim: "120m³ Concrete Poured (Grid C3-C7)", status: "CONFIRMED (100%)", source: "Delivery Tickets #4901-#4908" },
-        { claim: "Rebar Density Inspection", status: "VERIFIED (100%)", source: "Drone Photogrammetry Mesh" },
-        { claim: "Post-Tension Duct Delay (+2 Days)", status: "CRITICAL SLIP (+2D)", source: "Supplier Notice #SN-882" },
+        { claim: "120m³ M40 Concrete Poured (Grid C3-C7)", status: "Confirmed (100%)", source: "RMC Challans #4901-#4908" },
+        { claim: "Rebar Density & Cover Verification", status: "Verified (100%)", source: "Drone Photogrammetry Mesh" },
+        { claim: "Post-Tension Duct Hold (+2 Days)", status: "Critical Slip (+2D)", source: "Supplier Notice #SN-882" },
       ],
-      meta: "DETERMINISTIC CONFIDENCE SCORE: 98.7%",
+      meta: "Deterministic Confidence Score: 98.7%",
     },
   },
   {
     num: "03",
-    label: "COMMIT",
+    label: "Commit",
     title: "Autonomous Primavera P6 Baseline Sync",
     description:
       "Reconciled progress is written into a shadow Primavera P6 CPM schedule, running real-time forward and backward float passes without touching the master baseline until signed off.",
-    badge: "OUTPUT: SHADOW SCHEDULE SYNC",
-    badgeColor: "var(--brand-300)",
+    badge: "Output: Shadow Schedule Sync",
+    badgeColor: "var(--brand)",
     visual: {
       type: "p6",
-      title: "Primavera P6 Schedule Delta // Act. ID: ACT-4092",
+      title: "Primavera P6 Schedule Delta · Activity ID: ACT-4092",
       baselineStart: "Oct 12, 2026",
       forecastFinish: "Oct 16, 2026 (+2 Days)",
       criticalPathImpact: "Consumes 2 Days of Total Float (Float remaining: 6 Days)",
-      meta: "FIDIC SUB-CLAUSE 20.1 NOTICE DRAFTED AUTOMATICALLY",
+      meta: "Contractual Notice Drafted Automatically (FIDIC / NHAI Compliant)",
     },
   },
 ];
@@ -68,7 +68,7 @@ export function HowItWorks() {
         position: "relative",
         paddingTop: "110px",
         paddingBottom: "110px",
-        background: "rgba(8, 9, 12, 0.8)",
+        background: "rgba(7, 8, 10, 0.85)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -85,18 +85,18 @@ export function HowItWorks() {
             <span
               className="mono xs"
               style={{
-                color: "var(--brand-300)",
+                color: "var(--brand)",
                 background: "var(--brand-bg)",
                 border: "1px solid var(--brand-line)",
-                padding: "4px 14px",
+                padding: "4px 16px",
                 borderRadius: "var(--r-full)",
                 fontWeight: 600,
-                letterSpacing: "0.06em",
+                letterSpacing: "0.02em",
               }}
             >
-              HOW IT WORKS // 3-STEP PIPELINE
+              How It Works · 3-Step Pipeline
             </span>
-            <span className="mono xs dim desktop-nav">ZERO HALLUCINATION GUARANTEE</span>
+            <span className="mono xs dim desktop-nav">Zero Hallucination Guarantee</span>
           </motion.div>
 
           <motion.h2
@@ -110,8 +110,8 @@ export function HowItWorks() {
               marginTop: "8px",
             }}
           >
-            From field whisper to <br />
-            <span style={{ color: "var(--accent)" }}>defensible schedule fact.</span>
+            From site whisper to <br />
+            <span style={{ color: "var(--brand)" }}>defensible schedule fact.</span>
           </motion.h2>
         </motion.div>
 
@@ -125,18 +125,18 @@ export function HowItWorks() {
                 onClick={() => setActiveStep(idx)}
                 style={{
                   padding: "18px 20px",
-                  background: isSelected ? "var(--bg-elevated)" : "rgba(16, 19, 26, 0.6)",
+                  background: isSelected ? "var(--bg-elevated)" : "rgba(15, 18, 24, 0.6)",
                   border: isSelected ? "1px solid var(--brand)" : "1px solid var(--line)",
                   borderRadius: "var(--r-md)",
                   textAlign: "left",
                   cursor: "pointer",
                   transition: "all 0.2s ease",
-                  boxShadow: isSelected ? "0 10px 30px rgba(46, 98, 255, 0.15)" : "none",
+                  boxShadow: isSelected ? "0 10px 30px rgba(0, 229, 153, 0.15)" : "none",
                 }}
               >
                 <div className="row between mb-2">
                   <span className="mono xs" style={{ color: isSelected ? "var(--brand)" : "var(--text-3)", fontWeight: 700 }}>
-                    STEP {s.num}
+                    Step {s.num}
                   </span>
                   <span className="mono xs" style={{ color: isSelected ? "var(--text)" : "var(--text-3)", fontWeight: 600 }}>
                     {s.label}
@@ -158,7 +158,7 @@ export function HowItWorks() {
             transition={{ duration: 0.25 }}
             className="card spotlight-card animated-border-glow"
             style={{
-              background: "rgba(16, 19, 26, 0.95)",
+              background: "rgba(15, 18, 24, 0.95)",
               border: "1px solid var(--line-strong)",
               padding: "32px",
               borderRadius: "var(--r-lg)",
@@ -175,8 +175,8 @@ export function HowItWorks() {
                       color: step.badgeColor,
                       background: "rgba(255, 255, 255, 0.05)",
                       border: "1px solid var(--line)",
-                      padding: "3px 10px",
-                      borderRadius: "4px",
+                      padding: "3px 12px",
+                      borderRadius: "var(--r-full)",
                       fontWeight: 600,
                     }}
                   >
@@ -189,10 +189,10 @@ export function HowItWorks() {
                 <p style={{ fontSize: "15px", color: "var(--text-2)", lineHeight: 1.65, marginBottom: "24px" }}>
                   {step.description}
                 </p>
-                <div className="p-3" style={{ background: "rgba(8, 9, 12, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
-                  <div className="mono xs dim mb-1">AUTOMATION SPEED:</div>
-                  <div className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
-                    &lt; 400ms DETERMINISTIC RECONCILIATION
+                <div className="p-3" style={{ background: "rgba(7, 8, 10, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                  <div className="mono xs dim mb-1">Reconciliation Speed:</div>
+                  <div className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                    &lt; 400ms Deterministic Graph Reconciliation
                   </div>
                 </div>
               </div>
@@ -200,7 +200,7 @@ export function HowItWorks() {
               {/* Right Interactive Visual Simulation */}
               <div
                 style={{
-                  background: "rgba(8, 9, 12, 0.95)",
+                  background: "rgba(7, 8, 10, 0.95)",
                   border: "1px solid var(--line-strong)",
                   borderRadius: "var(--r-md)",
                   padding: "24px",
@@ -230,15 +230,15 @@ export function HowItWorks() {
                         style={{
                           position: "absolute",
                           inset: 0,
-                          background: "linear-gradient(180deg, transparent 40%, rgba(8,9,12,0.85) 100%)",
+                          background: "linear-gradient(180deg, transparent 40%, rgba(7,8,10,0.85) 100%)",
                         }}
                       />
                       <div className="mono xs" style={{ position: "absolute", bottom: 10, left: 12, color: "#FFFFFF" }}>
-                        [FIELD SENSOR: LEVEL 4 REBAR SCAN]
+                        Field Sensor: Level 18 Rebar Scan
                       </div>
                     </div>
 
-                    <div className="mono xs mb-2" style={{ color: "var(--brand-300)", fontWeight: 600 }}>
+                    <div className="mono xs mb-2" style={{ color: "var(--brand)", fontWeight: 600 }}>
                       {step.visual.title}
                     </div>
 
@@ -250,7 +250,7 @@ export function HowItWorks() {
                         gap: "3px",
                         height: "36px",
                         padding: "8px 12px",
-                        background: "rgba(16, 19, 26, 0.8)",
+                        background: "rgba(15, 18, 24, 0.8)",
                         borderRadius: "var(--r-xs)",
                         border: "1px solid var(--line-soft)",
                         marginBottom: "14px",
@@ -298,14 +298,14 @@ export function HowItWorks() {
                           key={i}
                           className="p-2"
                           style={{
-                            background: "rgba(16, 19, 26, 0.8)",
+                            background: "rgba(15, 18, 24, 0.8)",
                             border: "1px solid var(--line-soft)",
                             borderRadius: "var(--r-xs)",
                           }}
                         >
                           <div className="row between">
                             <span style={{ fontSize: "12.5px", fontWeight: 600, color: "var(--text)" }}>{item.claim}</span>
-                            <span className="mono xs" style={{ color: item.status.includes("CRITICAL") ? "var(--danger)" : "var(--accent)", fontWeight: 700 }}>
+                            <span className="mono xs" style={{ color: item.status.includes("Critical") ? "var(--danger)" : "var(--brand)", fontWeight: 700 }}>
                               {item.status}
                             </span>
                           </div>
@@ -313,7 +313,7 @@ export function HowItWorks() {
                         </div>
                       ))}
                     </div>
-                    <div className="mono xs pt-2" style={{ borderTop: "1px solid var(--line-soft)", color: "var(--brand-300)" }}>
+                    <div className="mono xs pt-2" style={{ borderTop: "1px solid var(--line-soft)", color: "var(--brand)" }}>
                       {step.visual.meta}
                     </div>
                   </div>
@@ -322,10 +322,10 @@ export function HowItWorks() {
                 {/* Step 03: Primavera P6 Schedule Delta */}
                 {step.visual.type === "p6" && (
                   <div>
-                    <div className="mono xs mb-3" style={{ color: "var(--brand-300)", fontWeight: 600 }}>
+                    <div className="mono xs mb-3" style={{ color: "var(--brand)", fontWeight: 600 }}>
                       {step.visual.title}
                     </div>
-                    <div className="p-3 mb-3" style={{ background: "rgba(16, 19, 26, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
+                    <div className="p-3 mb-3" style={{ background: "rgba(15, 18, 24, 0.8)", border: "1px solid var(--line)", borderRadius: "var(--r-xs)" }}>
                       <div className="row between mb-2">
                         <span className="dim xs">Baseline Finish:</span>
                         <span className="mono xs" style={{ color: "var(--text)" }}>{step.visual.baselineStart}</span>
@@ -339,7 +339,7 @@ export function HowItWorks() {
                         <span className="mono xs" style={{ color: "var(--accent)" }}>{step.visual.criticalPathImpact}</span>
                       </div>
                     </div>
-                    <div className="mono xs pt-2" style={{ borderTop: "1px solid var(--line-soft)", color: "var(--accent)" }}>
+                    <div className="mono xs pt-2" style={{ borderTop: "1px solid var(--line-soft)", color: "var(--brand)" }}>
                       {step.visual.meta}
                     </div>
                   </div>

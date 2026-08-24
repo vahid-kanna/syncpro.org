@@ -4,19 +4,25 @@ import { Sliders, ShieldCheck, ArrowRight } from "lucide-react";
 import { fadeUpVariants, staggerContainer } from "../lib/motion";
 
 export function DelayCostCalculator() {
-  const [capexM, setCapexM] = useState<number>(250); // $250M CAPEX
+  const [capexCr, setCapexCr] = useState<number>(1200); // ₹1,200 Cr CAPEX
   const [delayWeeks, setDelayWeeks] = useState<number>(6); // 6 Weeks delay
 
-  // Financial Calculations
-  const dailyLD = Math.round((capexM * 1000000 * 0.001) / 7); // ~0.1% per week / 7 days
-  const totalLDs = dailyLD * (delayWeeks * 7);
-  const monthlyPrelims = Math.round((capexM * 1000000 * 0.08) / 24); // 8% total prelims over 24 mo
-  const extendedPrelims = Math.round((monthlyPrelims / 4.33) * delayWeeks);
-  const carryingCostInterest = Math.round((capexM * 1000000 * 0.07 * (delayWeeks / 52))); // 7% cost of capital
-  const totalExposure = totalLDs + extendedPrelims + carryingCostInterest;
+  // Financial Calculations in INR Crores & Lakhs
+  // Daily LD: 0.1% per week / 7 days
+  const dailyLdCr = (capexCr * 0.001) / 7;
+  const totalLdCr = dailyLdCr * (delayWeeks * 7);
 
-  // SyncPro 3-week early detection recovery
-  const syncproRecovery = Math.round(totalExposure * 0.76);
+  // Extended Preliminaries (8% CAPEX over 24 months = ~0.33% / mo)
+  const monthlyPrelimsCr = (capexCr * 0.08) / 24;
+  const extendedPrelimsCr = (monthlyPrelimsCr / 4.33) * delayWeeks;
+
+  // Working Capital Finance Carrying Cost @ 9% APR
+  const carryingCostCr = capexCr * 0.09 * (delayWeeks / 52);
+
+  const totalExposureCr = totalLdCr + extendedPrelimsCr + carryingCostCr;
+
+  // SyncPro 3-week early detection recovery (~76% preserved capital)
+  const syncproRecoveryCr = totalExposureCr * 0.76;
 
   return (
     <section
@@ -25,7 +31,7 @@ export function DelayCostCalculator() {
         position: "relative",
         paddingTop: "110px",
         paddingBottom: "110px",
-        background: "rgba(8, 9, 12, 0.85)",
+        background: "rgba(7, 8, 10, 0.9)",
         borderBottom: "1px solid var(--line)",
       }}
     >
@@ -42,18 +48,18 @@ export function DelayCostCalculator() {
             <span
               className="mono xs"
               style={{
-                color: "var(--accent)",
-                background: "var(--accent-bg)",
-                border: "1px solid var(--accent-line)",
-                padding: "4px 14px",
+                color: "var(--brand)",
+                background: "var(--brand-bg)",
+                border: "1px solid var(--brand-line)",
+                padding: "4px 16px",
                 borderRadius: "var(--r-full)",
                 fontWeight: 600,
-                letterSpacing: "0.06em",
+                letterSpacing: "0.02em",
               }}
             >
-              FINANCIAL RISK SANDBOX // ROI IMPACT
+              Financial Risk Sandbox · ROI Impact
             </span>
-            <span className="mono xs dim desktop-nav">CAPITAL EXPOSURE MODELING</span>
+            <span className="mono xs dim desktop-nav">Indian Megaproject Exposure Modeling</span>
           </motion.div>
 
           <motion.h2
@@ -68,7 +74,7 @@ export function DelayCostCalculator() {
             }}
           >
             Quantify the cost of <br />
-            <span style={{ color: "var(--accent)" }}>3 weeks of schedule blindness.</span>
+            <span style={{ color: "var(--brand)" }}>3 weeks of schedule blindness.</span>
           </motion.h2>
 
           <motion.p
@@ -76,8 +82,8 @@ export function DelayCostCalculator() {
             className="lead mt-4 measure"
             style={{ color: "var(--text-2)", fontSize: "17px", lineHeight: 1.6 }}
           >
-            On a $250M megaproject, every week of undetected critical path slip costs ~$400,000 in liquidated damages,
-            extended preliminaries, and carrying costs. Calculate your project's exposure below.
+            On a ₹1,200 Cr megaproject, every week of undetected critical path slip costs over ₹1.8 Cr in liquidated
+            damages, plant &amp; machinery idle overheads, and debt carrying interest.
           </motion.p>
         </motion.div>
 
@@ -90,7 +96,7 @@ export function DelayCostCalculator() {
             transition={{ duration: 0.5 }}
             className="card spotlight-card animated-border-glow"
             style={{
-              background: "rgba(16, 19, 26, 0.95)",
+              background: "rgba(15, 18, 24, 0.95)",
               border: "1px solid var(--line-strong)",
               padding: "32px",
               borderRadius: "var(--r-lg)",
@@ -98,30 +104,30 @@ export function DelayCostCalculator() {
             }}
           >
             <div className="row between mb-6 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-              <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
-                PROJECT INPUT PARAMETERS
+              <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                Project Input Parameters
               </span>
               <Sliders className="ico" style={{ width: 14, height: 14, color: "var(--brand)" }} />
             </div>
 
-            {/* Slider 01: Project CAPEX */}
+            {/* Slider 01: Project CAPEX in ₹ Crores */}
             <div className="mb-6">
               <div className="row between mb-2">
                 <label htmlFor="capex-slider" style={{ fontSize: "14.5px", fontWeight: 600, color: "var(--text)" }}>
-                  Contract Value (CAPEX)
+                  Contract Package Value (CAPEX)
                 </label>
-                <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700, fontSize: "16px" }}>
-                  ${capexM}M USD
+                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700, fontSize: "16px" }}>
+                  ₹{capexCr.toLocaleString()} Crores
                 </span>
               </div>
               <input
                 id="capex-slider"
                 type="range"
-                min="20"
-                max="1500"
-                step="10"
-                value={capexM}
-                onChange={(e) => setCapexM(Number(e.target.value))}
+                min="100"
+                max="5000"
+                step="50"
+                value={capexCr}
+                onChange={(e) => setCapexCr(Number(e.target.value))}
                 style={{
                   width: "100%",
                   accentColor: "var(--brand)",
@@ -129,9 +135,9 @@ export function DelayCostCalculator() {
                 }}
               />
               <div className="row between mono xs dim mt-1">
-                <span>$20M</span>
-                <span>$500M</span>
-                <span>$1.5B+</span>
+                <span>₹100 Cr</span>
+                <span>₹2,500 Cr</span>
+                <span>₹5,000 Cr+</span>
               </div>
             </div>
 
@@ -142,7 +148,7 @@ export function DelayCostCalculator() {
                   Undetected Critical Path Slip
                 </label>
                 <span className="mono xs" style={{ color: "var(--accent)", fontWeight: 700, fontSize: "16px" }}>
-                  {delayWeeks} WEEKS ({delayWeeks * 7} DAYS)
+                  {delayWeeks} Weeks ({delayWeeks * 7} Days)
                 </span>
               </div>
               <input
@@ -169,14 +175,14 @@ export function DelayCostCalculator() {
             <div
               className="p-3 mt-4"
               style={{
-                background: "rgba(8, 9, 12, 0.8)",
+                background: "rgba(7, 8, 10, 0.8)",
                 border: "1px solid var(--line-soft)",
                 borderRadius: "var(--r-xs)",
               }}
             >
-              <div className="mono xs dim mb-1">INDUSTRY BENCHMARKS:</div>
+              <div className="mono xs dim mb-1">Contractual Benchmarks:</div>
               <p className="xs dim" style={{ margin: 0, lineHeight: 1.5 }}>
-                Liquidated damages modeled at 0.1%/week; site preliminaries at 8% total CAPEX; cost of capital at 7% APR.
+                Liquidated damages modeled at 0.1%/week (FIDIC/NHAI standard); site overheads &amp; idle plant at 8% total CAPEX; cost of debt at 9% p.a.
               </p>
             </div>
           </motion.div>
@@ -189,7 +195,7 @@ export function DelayCostCalculator() {
             transition={{ duration: 0.5 }}
             className="card spotlight-card animated-border-glow"
             style={{
-              background: "rgba(16, 19, 26, 0.95)",
+              background: "rgba(15, 18, 24, 0.95)",
               border: "1px solid var(--line-strong)",
               padding: "32px",
               borderRadius: "var(--r-lg)",
@@ -201,15 +207,15 @@ export function DelayCostCalculator() {
           >
             <div>
               <div className="row between mb-4 pb-2" style={{ borderBottom: "1px solid var(--line-soft)" }}>
-                <span className="mono xs" style={{ color: "var(--brand-300)", fontWeight: 700 }}>
-                  TOTAL UNMITIGATED RISK
+                <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                  Total Unmitigated Exposure
                 </span>
                 <span className="mono xs" style={{ color: "var(--danger)", fontWeight: 700 }}>
-                  DIRECT FINANCIAL LOSS
+                  Direct Capital Loss
                 </span>
               </div>
 
-              {/* Huge Total Exposure Number */}
+              {/* Huge Total Exposure Number in ₹ Crores */}
               <div className="mb-4">
                 <div
                   style={{
@@ -220,24 +226,30 @@ export function DelayCostCalculator() {
                     letterSpacing: "-0.02em",
                   }}
                 >
-                  ${(totalExposure / 1000000).toFixed(2)}M
+                  ₹{totalExposureCr.toFixed(2)} Cr
                 </div>
                 <div className="mono xs dim">ACCUMULATED DIRECT LOSSES ACROSS {delayWeeks} WEEKS</div>
               </div>
 
               {/* Breakdown Rows */}
               <div className="col gap-2 mb-4" style={{ fontSize: "13.5px" }}>
-                <div className="row between p-2" style={{ background: "rgba(8, 9, 12, 0.8)", borderRadius: "var(--r-xs)" }}>
-                  <span className="dim">Liquidated Damages:</span>
-                  <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(totalLDs / 1000).toLocaleString()} USD</span>
+                <div className="row between p-2" style={{ background: "rgba(7, 8, 10, 0.8)", borderRadius: "var(--r-xs)" }}>
+                  <span className="dim">Liquidated Damages (LDs):</span>
+                  <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>
+                    ₹{totalLdCr.toFixed(2)} Cr ({((dailyLdCr * 100)).toFixed(1)} Lakhs/Day)
+                  </span>
                 </div>
-                <div className="row between p-2" style={{ background: "rgba(8, 9, 12, 0.8)", borderRadius: "var(--r-xs)" }}>
-                  <span className="dim">Extended Site Preliminaries:</span>
-                  <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(extendedPrelims / 1000).toLocaleString()} USD</span>
+                <div className="row between p-2" style={{ background: "rgba(7, 8, 10, 0.8)", borderRadius: "var(--r-xs)" }}>
+                  <span className="dim">Extended Site Overheads &amp; Plant Idle:</span>
+                  <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>
+                    ₹{extendedPrelimsCr.toFixed(2)} Cr
+                  </span>
                 </div>
-                <div className="row between p-2" style={{ background: "rgba(8, 9, 12, 0.8)", borderRadius: "var(--r-xs)" }}>
-                  <span className="dim">Carrying Costs &amp; Capital Interest:</span>
-                  <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>${(carryingCostInterest / 1000).toLocaleString()} USD</span>
+                <div className="row between p-2" style={{ background: "rgba(7, 8, 10, 0.8)", borderRadius: "var(--r-xs)" }}>
+                  <span className="dim">Debt Service &amp; Carrying Interest:</span>
+                  <span className="mono" style={{ color: "var(--text)", fontWeight: 600 }}>
+                    ₹{carryingCostCr.toFixed(2)} Cr
+                  </span>
                 </div>
               </div>
 
@@ -245,21 +257,21 @@ export function DelayCostCalculator() {
               <div
                 className="p-3"
                 style={{
-                  background: "rgba(245, 166, 35, 0.08)",
-                  border: "1px solid var(--accent-line)",
+                  background: "rgba(0, 229, 153, 0.08)",
+                  border: "1px solid var(--brand-line)",
                   borderRadius: "var(--r-xs)",
                 }}
               >
                 <div className="row gap-2 mb-1" style={{ alignItems: "center" }}>
-                  <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--accent)" }} />
-                  <span className="mono xs" style={{ color: "var(--accent)", fontWeight: 700 }}>
-                    SYNCPRO EARLY RECOVERY:
+                  <ShieldCheck className="ico" style={{ width: 14, height: 14, color: "var(--brand)" }} />
+                  <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                    SyncPro Early Protection:
                   </span>
                 </div>
                 <div className="row between mt-1">
                   <span className="xs" style={{ color: "var(--text-2)" }}>Protected Capital via 3-Week Early Detection:</span>
-                  <span className="mono xs" style={{ color: "var(--accent)", fontWeight: 700, fontSize: "14.5px" }}>
-                    +${(syncproRecovery / 1000000).toFixed(2)}M
+                  <span className="mono xs" style={{ color: "var(--brand)", fontWeight: 700, fontSize: "14.5px" }}>
+                    +₹{syncproRecoveryCr.toFixed(2)} Cr
                   </span>
                 </div>
               </div>
@@ -268,11 +280,11 @@ export function DelayCostCalculator() {
             <motion.a
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="btn btn-primary btn-block mt-4 mono xs"
+              className="btn btn-primary btn-block mt-4 xs"
               href="#waitlist"
-              style={{ justifyContent: "center", padding: "12px", fontWeight: 700 }}
+              style={{ justifyContent: "center", padding: "12px", fontWeight: 700, borderRadius: "var(--r-full)" }}
             >
-              PROTECT_MY_CAPITAL_PROJECT
+              Protect Project Capital
               <ArrowRight className="ico" />
             </motion.a>
           </motion.div>

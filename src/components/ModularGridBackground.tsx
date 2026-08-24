@@ -125,9 +125,9 @@ export function ModularGridBackground() {
         }}
       >
         <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: "var(--brand)" }} />
-        <span>COORD: [X: {mousePos.x}, Y: {mousePos.y}]</span>
-        <span style={{ color: "var(--accent)" }}>GRID: [COL_{mousePos.col.toString().padStart(2, '0')}, ROW_{mousePos.row.toString().padStart(2, '0')}]</span>
-        <span className="desktop-nav" style={{ color: "var(--text-4)" }}>CRS: EPSG:4326 // WGS84</span>
+        <span>Coord: [X: {mousePos.x}, Y: {mousePos.y}]</span>
+        <span style={{ color: "var(--accent)" }}>Grid: [Col {mousePos.col.toString().padStart(2, '0')}, Row {mousePos.row.toString().padStart(2, '0')}]</span>
+        <span className="desktop-nav" style={{ color: "var(--text-4)" }}>CRS: EPSG:4326 · WGS84</span>
       </div>
     </div>
   );

@@ -1,39 +1,38 @@
 /* ============================================================================
-   SyncPro Design System  ·  v3  ·  "Electric Cobalt & Deep Obsidian"
-   Inspired by Zero (landing.love/sites/zero)
+   SyncPro Design System  ·  v4  ·  "Luminous Emerald & Velvet Obsidian"
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&display=swap');
 
 :root {
-  /* Surfaces — Deep Obsidian & Precision Slate */
-  --bg-base:     #08090C;
-  --bg-sunken:   #0B0D12;
-  --bg-surface:  #10131A;
-  --bg-elevated: #161A24;
-  --bg-input:    #0E1118;
-  --bg-hover:    rgba(255, 255, 255, 0.05);
+  /* Surfaces — Velvet Obsidian & Precision Carbon */
+  --bg-base:     #07080A;
+  --bg-sunken:   #0B0D11;
+  --bg-surface:  #0F1218;
+  --bg-elevated: #151922;
+  --bg-input:    #0B0D11;
+  --bg-hover:    rgba(255, 255, 255, 0.04);
 
-  /* Hairlines — Crisp 1px Architectural Rules */
+  /* Hairlines — Precision 1px Structural Rules */
   --line:        rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(46, 98, 255, 0.35);
+  --line-strong: rgba(0, 229, 153, 0.32);
   --line-soft:   rgba(255, 255, 255, 0.04);
-  --line-gold:   rgba(245, 166, 35, 0.35);
+  --line-gold:   rgba(245, 166, 35, 0.32);
 
   /* Text — Warm Alabaster Ivory & Muted Slate */
   --text:   #FAF8F5;
-  --text-2: #98A2B3;
-  --text-3: #667085;
-  --text-4: #475467;
+  --text-2: #94A3B8;
+  --text-3: #64748B;
+  --text-4: #475569;
 
-  /* Brand — Electric Cobalt (#2E62FF) & Solar Gold (#F5A623) */
-  --brand:     #2E62FF;
-  --brand-600: #1D44C2;
-  --brand-500: #2E62FF;
-  --brand-400: #5B85FF;
-  --brand-300: #8DA9FF;
-  --brand-bg:  rgba(46, 98, 255, 0.12);
-  --brand-line:rgba(46, 98, 255, 0.35);
+  /* Brand — Luminous Emerald (#00E599 / #10B981) & Solar Gold (#F5A623) */
+  --brand:     #00E599;
+  --brand-600: #059669;
+  --brand-500: #10B981;
+  --brand-400: #00E599;
+  --brand-300: #34D399;
+  --brand-bg:  rgba(0, 229, 153, 0.12);
+  --brand-line:rgba(0, 229, 153, 0.32);
 
   --accent:     #F5A623;
   --accent-bg:  rgba(245, 166, 35, 0.12);
@@ -42,15 +41,15 @@
   --brass:     #F5A623;
   --brass-bg:  rgba(245, 166, 35, 0.12);
   --brass-line:rgba(245, 166, 35, 0.32);
-  --steel:     #60A5FA;
-  --steel-bg:  rgba(96, 165, 250, 0.12);
-  --steel-line:rgba(96, 165, 250, 0.30);
+  --steel:     #38BDF8;
+  --steel-bg:  rgba(56, 189, 248, 0.12);
+  --steel-line:rgba(56, 189, 248, 0.30);
 
   /* Semantic */
-  --success: #10B981;  --success-bg: rgba(16, 185, 129, 0.12);  --success-line: rgba(16, 185, 129, 0.30);
-  --warning: #F5A623;  --warning-bg: rgba(245, 166, 35, 0.12);  --warning-line: rgba(245, 166, 35, 0.30);
-  --danger:  #EF4444;  --danger-bg:  rgba(239, 68, 68, 0.12);   --danger-line:  rgba(239, 68, 68, 0.30);
-  --info:    #3B82F6;  --info-bg:    rgba(59, 130, 246, 0.12);  --info-line:    rgba(59, 130, 246, 0.30);
+  --success: #00E599;  --success-bg: rgba(0, 229, 153, 0.12);  --success-line: rgba(0, 229, 153, 0.30);
+  --warning: #F5A623;  --warning-bg: rgba(245, 166, 35, 0.12); --warning-line: rgba(245, 166, 35, 0.30);
+  --danger:  #EF4444;  --danger-bg:  rgba(239, 68, 68, 0.12);  --danger-line:  rgba(239, 68, 68, 0.30);
+  --info:    #38BDF8;  --info-bg:    rgba(56, 189, 248, 0.12); --info-line:    rgba(56, 189, 248, 0.30);
 
   /* Radius */
   --r-xs: 4px; --r-sm: 6px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px; --r-2xl: 20px; --r-full: 999px;
@@ -59,7 +58,7 @@
   --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
   --shadow-md: 0 8px 24px -8px rgba(0,0,0,.7);
   --shadow-pop: 0 20px 50px -15px rgba(0,0,0,.85), 0 0 0 1px var(--line);
-  --glow-brand: 0 0 30px rgba(46, 98, 255, 0.28);
+  --glow-brand: 0 0 30px rgba(0, 229, 153, 0.28);
 
   /* Typography */
   --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -90,13 +89,13 @@ button { cursor: pointer; background: none; border: none; }
 img, svg { display: block; max-width: 100%; }
 ul { list-style: none; padding: 0; }
 :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
-::selection { background: rgba(46, 98, 255, 0.35); color: #FFFFFF; }
+::selection { background: rgba(0, 229, 153, 0.35); color: #FFFFFF; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-base); }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(46,98,255,0.4); }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,229,153,0.4); }
 
 /* Typography Helpers */
 .display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; }
@@ -151,20 +150,21 @@ ul { list-style: none; padding: 0; }
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  border-radius: var(--r-xs);
+  border-radius: var(--r-full);
   font-weight: 600;
   transition: all 0.2s var(--ease);
   text-decoration: none;
 }
 .btn-primary {
   background: var(--brand);
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 24px rgba(46, 98, 255, 0.35);
+  color: #07080A;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 24px rgba(0, 229, 153, 0.35);
 }
 .btn-primary:hover {
-  background: var(--brand-400);
-  box-shadow: 0 0 32px rgba(46, 98, 255, 0.55);
+  background: #34D399;
+  box-shadow: 0 0 36px rgba(0, 229, 153, 0.6);
   transform: translateY(-2px);
 }
 .btn-outline {
@@ -178,7 +178,7 @@ ul { list-style: none; padding: 0; }
 }
 .btn-block { width: 100%; }
 
-/* Cards & Spotlights (Zero Inspired) */
+/* Cards & Spotlights */
 .card {
   position: relative;
   background: var(--bg-surface);
@@ -195,7 +195,7 @@ ul { list-style: none; padding: 0; }
 
 .spotlight-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -10px rgba(46, 98, 255, 0.2), 0 0 0 1px var(--brand-line);
+  box-shadow: 0 20px 40px -10px rgba(0, 229, 153, 0.2), 0 0 0 1px var(--brand-line);
 }
 
 .animated-border-glow {

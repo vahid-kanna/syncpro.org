@@ -51,7 +51,7 @@ export function Waitlist() {
         <div
           className="card spotlight-card animated-border-glow"
           style={{
-            background: "rgba(16, 19, 26, 0.95)",
+            background: "rgba(15, 18, 24, 0.95)",
             border: "1px solid var(--line-strong)",
             borderRadius: "var(--r-lg)",
             padding: "36px 32px",
@@ -85,7 +85,7 @@ export function Waitlist() {
                 </p>
                 <p className="xs dim mt-3">
                   Need immediate project controls assistance? Reach out directly to{" "}
-                  <a href={`mailto:${CONTACT_EMAIL}`} style={{ color: "var(--brand-300)", textDecoration: "underline" }}>
+                  <a href={`mailto:${CONTACT_EMAIL}`} style={{ color: "var(--brand)", textDecoration: "underline" }}>
                     {CONTACT_EMAIL}
                   </a>.
                 </p>
@@ -97,16 +97,16 @@ export function Waitlist() {
                 <span
                   className="mono xs"
                   style={{
-                    color: "var(--brand-300)",
+                    color: "var(--brand)",
                     background: "var(--brand-bg)",
                     border: "1px solid var(--brand-line)",
-                    padding: "4px 14px",
+                    padding: "4px 16px",
                     borderRadius: "var(--r-full)",
                     fontWeight: 600,
-                    letterSpacing: "0.06em",
+                    letterSpacing: "0.02em",
                   }}
                 >
-                  JOIN THE DESIGN PARTNER COHORT
+                  Join the Design Partner Cohort
                 </span>
               </div>
               <h2 className="display text-center" style={{ fontSize: "clamp(28px, 3.5vw, 42px)", lineHeight: 1.15, textAlign: "center", marginBottom: "12px" }}>
@@ -114,14 +114,14 @@ export function Waitlist() {
               </h2>
               <p className="lead text-center" style={{ textAlign: "center", fontSize: "15.5px", color: "var(--text-2)", marginBottom: "32px" }}>
                 We are reviewing incoming requests personally and granting early access to select general contractors,
-                owners, and project controls directors.
+                developers, and project controls directors.
               </p>
 
               {/* Kind Selector Tabs */}
               <div
                 style={{
                   display: "flex",
-                  background: "rgba(8, 9, 12, 0.8)",
+                  background: "rgba(7, 8, 10, 0.8)",
                   border: "1px solid var(--line-soft)",
                   borderRadius: "var(--r-full)",
                   padding: "4px",
@@ -140,8 +140,8 @@ export function Waitlist() {
                     padding: "8px 16px",
                     borderRadius: "var(--r-full)",
                     background: !isInvestor ? "var(--brand)" : "transparent",
-                    color: !isInvestor ? "#FFFFFF" : "var(--text-2)",
-                    fontWeight: 600,
+                    color: !isInvestor ? "#07080A" : "var(--text-2)",
+                    fontWeight: 700,
                     fontSize: "13.5px",
                     transition: "all 0.2s ease",
                   }}
@@ -158,8 +158,8 @@ export function Waitlist() {
                     padding: "8px 16px",
                     borderRadius: "var(--r-full)",
                     background: isInvestor ? "var(--brand)" : "transparent",
-                    color: isInvestor ? "#FFFFFF" : "var(--text-2)",
-                    fontWeight: 600,
+                    color: isInvestor ? "#07080A" : "var(--text-2)",
+                    fontWeight: 700,
                     fontSize: "13.5px",
                     transition: "all 0.2s ease",
                   }}
@@ -201,10 +201,10 @@ export function Waitlist() {
                       required
                       value={form.name}
                       onChange={(e) => set("name", e.target.value)}
-                      placeholder="e.g. David Ross"
+                      placeholder="e.g. Rajesh Sharma"
                       style={{
                         padding: "10px 14px",
-                        background: "rgba(8, 9, 12, 0.8)",
+                        background: "rgba(7, 8, 10, 0.8)",
                         border: "1px solid var(--line)",
                         borderRadius: "var(--r-xs)",
                         color: "var(--text)",
@@ -222,10 +222,10 @@ export function Waitlist() {
                       required
                       value={form.email}
                       onChange={(e) => set("email", e.target.value)}
-                      placeholder="david.ross@contractor.com"
+                      placeholder="rajesh.sharma@contractor.com"
                       style={{
                         padding: "10px 14px",
-                        background: "rgba(8, 9, 12, 0.8)",
+                        background: "rgba(7, 8, 10, 0.8)",
                         border: "1px solid var(--line)",
                         borderRadius: "var(--r-xs)",
                         color: "var(--text)",
@@ -242,10 +242,10 @@ export function Waitlist() {
                       required
                       value={form.company}
                       onChange={(e) => set("company", e.target.value)}
-                      placeholder="e.g. Turner, Bechtel, Skanska"
+                      placeholder="e.g. L&amp;T, Tata Projects, Shapoorji, DLF"
                       style={{
                         padding: "10px 14px",
-                        background: "rgba(8, 9, 12, 0.8)",
+                        background: "rgba(7, 8, 10, 0.8)",
                         border: "1px solid var(--line)",
                         borderRadius: "var(--r-xs)",
                         color: "var(--text)",
@@ -262,10 +262,10 @@ export function Waitlist() {
                       required
                       value={form.role}
                       onChange={(e) => set("role", e.target.value)}
-                      placeholder={isInvestor ? "e.g. Partner, Principal" : "e.g. Project Controls Manager"}
+                      placeholder={isInvestor ? "e.g. Partner, Principal" : "e.g. Project Director / GM Planning"}
                       style={{
                         padding: "10px 14px",
-                        background: "rgba(8, 9, 12, 0.8)",
+                        background: "rgba(7, 8, 10, 0.8)",
                         border: "1px solid var(--line)",
                         borderRadius: "var(--r-xs)",
                         color: "var(--text)",
@@ -290,7 +290,7 @@ export function Waitlist() {
                     }
                     style={{
                       padding: "10px 14px",
-                      background: "rgba(8, 9, 12, 0.8)",
+                      background: "rgba(7, 8, 10, 0.8)",
                       border: "1px solid var(--line)",
                       borderRadius: "var(--r-xs)",
                       color: "var(--text)",
@@ -304,7 +304,7 @@ export function Waitlist() {
                     type="submit"
                     disabled={status === "sending"}
                     className="btn btn-primary"
-                    style={{ minWidth: 220, padding: "12px 24px", borderRadius: "var(--r-full)", justifyContent: "center" }}
+                    style={{ minWidth: 220, padding: "12px 28px", borderRadius: "var(--r-full)", justifyContent: "center" }}
                   >
                     {status === "sending" ? (
                       <>
