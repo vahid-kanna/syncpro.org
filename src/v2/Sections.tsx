@@ -1,11 +1,9 @@
 /**
- * SyncPro v2 — sections with full SignalIQ motion language:
- * masked-line headlines sliding DOWN, staggered artifact reveals,
- * blur-in labels, count-up verdicts.
+ * SyncPro v2 — sections with humanized editorial copy.
  */
 import { useEffect, useRef, useState } from "react";
 import { Reveal, MaskLines } from "./Chrome";
-import { ScrubHeading } from "./Motion";
+import { ScrubHeading, Magnetic } from "./Motion";
 
 /* ================= HERO ================= */
 
@@ -14,7 +12,7 @@ export function Hero() {
     <section className="hero" id="top">
       <div className="wrap hero-in">
         <Reveal variant="down" className="hero-lblwrap">
-          <p className="mono lbl hero-lbl">INFRASTRUCTURE-GRADE AI</p>
+          <p className="mono lbl hero-lbl">INFRASTRUCTURE CONTROLS</p>
         </Reveal>
         <MaskLines
           as="h1"
@@ -25,10 +23,20 @@ export function Hero() {
         />
         <Reveal variant="up" delay={620}>
           <p className="hero-sub">
-            Contractors report critical-path slips three weeks after they happen. SyncPro
-            reads every site signal and reconciles it against your P6 baseline in real
-            time — before the delay gets expensive.
+            Contractors typically report critical path delays three weeks after they happen on site. SyncPro
+            captures daily field signals and reconciles them against your P6 baseline in real
+            time, catching schedule slippage before costs escalate.
           </p>
+        </Reveal>
+        <Reveal variant="up" delay={780} className="hero-btnrow">
+          <Magnetic>
+            <a className="hero-btn mono xs" href="#contact">
+              Initialize Pilot <span aria-hidden="true">→</span>
+            </a>
+          </Magnetic>
+          <a className="hero-anchor mono xs dim" href="#narrative">
+            Explore Schedule Engine ↓
+          </a>
         </Reveal>
       </div>
     </section>
@@ -38,9 +46,9 @@ export function Hero() {
 /* ============ GAP STATEMENT + 01 ARTIFACT ============ */
 
 const P6_ROWS = [
-  { id: "A1210", name: "Secant piling — podium", start: "Oct 12", tf: "+2d", tone: "" },
-  { id: "A1230", name: "L18 post-tension slab", start: "Dec 08", tf: "0d ⚑", tone: "warn" },
-  { id: "A1240", name: "MEP risers L04–L18", start: "Dec 11", tf: "-8d", tone: "bad" },
+  { id: "A1210", name: "Secant piling, podium package", start: "Oct 12", tf: "+2d", tone: "" },
+  { id: "A1230", name: "Level 18 post-tension slab", start: "Dec 08", tf: "0d ⚑", tone: "warn" },
+  { id: "A1240", name: "MEP risers Level 04 to 18", start: "Dec 11", tf: "-8d", tone: "bad" },
   { id: "A1250", name: "Facade unitisation", start: "Jan 20", tf: "+5d", tone: "" },
 ];
 
@@ -74,8 +82,8 @@ export function GapSection() {
       <ScrubHeading
         className="gap-h center"
         segs={[
-          { t: "A slip you can’t see" },
-          { t: "is money you can’t keep.", em: true },
+          { t: "A slip you cannot see" },
+          { t: "is money you cannot keep.", em: true },
         ]}
       />
 
@@ -88,11 +96,11 @@ export function GapSection() {
         <div className="artifact">
           <div className="abar mono xs">
             <span>BASELINE · ORACLE PRIMAVERA P6 (.XER)</span>
-            <span className="dim">STATUS CUT-OFF W12</span>
+            <span className="dim">STATUS CUTOFF WEEK 12</span>
           </div>
           <table className="xer">
             <thead>
-              <tr><th>ACTIVITY</th><th>TASK</th><th>START</th><th>TF</th></tr>
+              <tr><th>ACTIVITY</th><th>TASK</th><th>START</th><th>FLOAT</th></tr>
             </thead>
             <tbody>
               {P6_ROWS.map((row, i) => (
@@ -108,20 +116,19 @@ export function GapSection() {
           <div className="atotals">
             <p className="mono xs">
               <span className="dim">PARSER VERDICT&nbsp;&nbsp;</span>
-              <span className="ok">ON TRACK · LD EXPOSURE ₹0</span>
+              <span className="ok">ON TRACK · LIQUIDATED DAMAGES ₹0</span>
             </p>
             <div className="rawwall mono xs" aria-hidden="true">
               {Array.from({ length: 5 }, (_, i) => (
                 <p key={i}>
-                  SIG/2026-08-19/14:32:11/VOICE-NOTE/site-eng-07/GRID-C3-C7/120M3-M40/BATCH-#4902/SLUMP-140MM-OK/
-                  PT-CABLE-DELAYED-2DAYS/FAB-HOLD-VENDOR-09/DOCKET-SN-882/PENDING-CORROBATION/UNMAPPED-ACTIVITY/
+                  SITE NOTE 14:15 IST · GRID C3 TO C7 · 120 M3 M40 CONCRETE POURED · BATCH TICKET #4902 VERIFIED · POST TENSION STRAND DELIVERY DELAYED 2 DAYS AT FABRICATOR · CHALLAN #SN882 · UNLINKED TO P6 BASELINE
                 </p>
               ))}
             </div>
             <p className="mono xs verdict">
               <span className="dim">SYNCPRO READS&nbsp;&nbsp;</span>
               <span className="bad">
-                CRITICAL SLIP −<CountUp to={8} />D · LD EXPOSURE ₹<CountUp to={14} />.<CountUp to={4} /> CR
+                CRITICAL SLIP −<CountUp to={8} /> DAYS · EXPOSURE ₹<CountUp to={14} />.<CountUp to={4} /> CR
               </span>
             </p>
           </div>
@@ -130,7 +137,7 @@ export function GapSection() {
 
       <Reveal variant="up" delay={220}>
         <p className="gap-punch">
-          The truth was in the field all along. <em>Nobody could read it.</em>
+          The reality was documented on site from day one. <em>The master schedule just never saw it.</em>
         </p>
       </Reveal>
     </section>

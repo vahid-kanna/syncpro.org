@@ -1,5 +1,5 @@
 /**
- * SyncPro v2 — capabilities, platform stack, FAQ.
+ * SyncPro v2 — capabilities, platform stack, FAQ with humanized prose.
  */
 import { Reveal, MaskLines } from "./Chrome";
 import { ScrubHeading, Tilt } from "./Motion";
@@ -9,18 +9,18 @@ import { ScrubHeading, Tilt } from "./Motion";
 const CAPS = [
   {
     n: "01",
-    t: "Confidence-Gated Shadow Updates",
-    d: "Every field signal is resolved to its exact CPM activity, corroborated across independent evidence, and committed only when calibrated confidence clears the gate. The contract P6 is never touched.",
+    t: "Verified Shadow Updates",
+    d: "SyncPro maps each field update directly to its corresponding CPM activity, validates the progress against independent delivery and inspection records, and posts verified updates to a shadow schedule. Your master P6 file remains completely untouched.",
   },
   {
     n: "02",
-    t: "Cited Schedule Agent",
-    d: "Ask your schedule anything in plain language. Answers come from a Neo4j knowledge graph — every number traceable to the activity node that produced it.",
+    t: "Connected Schedule Agent",
+    d: "Query your schedule in plain language. SyncPro retrieves answers directly from a connected project graph, linking every date and float calculation back to the specific activity that produced it.",
   },
   {
     n: "03",
-    t: "Forensic Evidence Trail",
-    d: "An append-only audit log replays any schedule decision, assembles contemporaneous dossiers, and drafts FIDIC / NHAI extension-of-time notices before time-bars expire.",
+    t: "Contemporaneous Claim Dossiers",
+    d: "An immutable audit trail records every schedule adjustment, compiles supporting site documentation, and prepares formal FIDIC and NHAI extension of time notices before contractual notification windows close.",
   },
 ];
 
@@ -30,10 +30,10 @@ export function BuiltFor() {
       <MaskLines
         className="sec-h"
         baseDelay={0}
-        lines={[<>SyncPro turns site noise into</>, <><em>defensible schedule fact.</em></>]}
+        lines={[<>SyncPro turns daily site records into</>, <><em>defensible schedule reality.</em></>]}
       />
       <Reveal variant="down" delay={200}>
-        <p className="mono lbl cap-kick">BUILT FOR THE MODERN BASELINE.</p>
+        <p className="mono lbl cap-kick">BUILT FOR MODERN CONTROLS TEAMS.</p>
       </Reveal>
       <div className="caps">
         {CAPS.map((c, i) => (
@@ -55,12 +55,12 @@ export function BuiltFor() {
 /* ============ PLATFORM STACK ============ */
 
 const STACK: Array<[string, string]> = [
-  ["NEO4J", "CPM knowledge graph"],
-  ["FASTAPI", "Modular monolith core"],
-  ["MPXJ", ".XER / .MPP / .PP parsing"],
-  ["LANGCHAIN", "Grounded multi-LLM agents"],
-  ["POSTGRES", "Append-only audit ledger"],
-  ["GROQ · LLAMA 3.3", "Realtime inference"],
+  ["NEO4J", "Connected CPM schedule graph"],
+  ["FASTAPI", "Core scheduling service engine"],
+  ["MPXJ", "Parser for .XER, .MPP, and .PP files"],
+  ["LANGCHAIN", "Multi-agent reasoning framework"],
+  ["POSTGRES", "Immutable audit ledger"],
+  ["GROQ · LLAMA 3.3", "Sub-second inference layer"],
 ];
 
 export function Stack() {
@@ -71,7 +71,7 @@ export function Stack() {
         segs={[{ t: "A platform built like the" }, { t: "schedules it reads.", em: true }]}
       />
       <Reveal variant="down" delay={180}>
-        <p className="mono lbl cap-kick">ONE GRAPH UNDER EVERYTHING.</p>
+        <p className="mono lbl cap-kick">UNIFIED GRAPH ARCHITECTURE.</p>
       </Reveal>
       <div className="stackgrid">
         {STACK.map(([name, desc], i) => (
@@ -90,26 +90,38 @@ export function Stack() {
 /* ============ FAQ ============ */
 
 const QA: Array<[string, string]> = [
-  ["What is SyncPro?",
-   "SyncPro is an autonomous schedule intelligence engine for construction megaprojects. It ingests messy field signals — voice notes, batch tickets, delivery dockets — resolves each to the exact CPM activity in your Primavera P6 baseline, corroborates the claim across independent evidence sources, and maintains a live shadow forecast so critical-path slips surface weeks before contractors report them."],
-  ["Does SyncPro change our master schedule?",
-   "No. Updates land on a parallel, evidence-linked shadow schedule and are committed only after calibrated confidence gates pass. Anything below threshold routes to a planner review queue. Your contractual P6 baseline stays untouched."],
-  ["Which scheduling tools does it support?",
-   "Native parsing of Primavera P6 (.xer), Microsoft Project (.mpp), Asta Powerproject (.pp), plus Primavera XML/MSPDI via high-fidelity MPXJ engines. SyncPro layers on top of the tools you already run."],
-  ["How do the AI answers stay trustworthy?",
-   "Answers never come from a model's memory. A LangChain agent generates Cypher against your project's Neo4j graph and cites the activity nodes behind every figure — zero hallucinated quantities or dates."],
-  ["Is our schedule data used to train models?",
-   "Never. Project data lives in isolated tenant databases with enterprise encryption. Nothing crosses tenants, nothing trains public models."],
-  ["Can it help with delay claims?",
-   "Yes — the append-only audit trail replays any period of the job, assembles contemporaneous evidence dossiers, and drafts formal FIDIC / NHAI extension-of-time notices inside the contractual time-bar window."],
+  [
+    "What is SyncPro?",
+    "SyncPro is an automated schedule controls platform built for large capital projects. It processes routine field records including voice updates, concrete batch receipts, and delivery dockets, links them to specific activities in your Primavera P6 baseline, validates the work through independent site records, and maintains a parallel forecast to reveal schedule delays weeks before monthly reports."
+  ],
+  [
+    "Does SyncPro modify our master contractual schedule?",
+    "No. Updates are posted only to a parallel shadow schedule once cross checked against supporting site records. Any unverified claims route to your planning team for review, ensuring your contractual baseline remains secure and unmodified."
+  ],
+  [
+    "Which scheduling software does SyncPro support?",
+    "SyncPro works directly with files from Primavera P6 (.xer), Microsoft Project (.mpp), and Asta Powerproject (.pp), as well as standard XML exports. It integrates into your existing project controls workflow without requiring new software on site."
+  ],
+  [
+    "How does SyncPro prevent incorrect or fabricated outputs?",
+    "Answers are computed directly from your project data rather than generated from statistical memory. SyncPro queries your project graph directly and references the exact activity IDs behind every calculation, eliminating fabricated dates and quantities."
+  ],
+  [
+    "Is our proprietary project data used to train AI models?",
+    "Never. All project data is stored in dedicated, encrypted databases for each organization. Your proprietary schedules and site records are never shared across accounts or used to train public models."
+  ],
+  [
+    "How does SyncPro assist with contractual delay claims?",
+    "The built-in audit trail reconstructs project timelines, organizes supporting site documentation, and prepares formal extension of time claims in compliance with FIDIC and NHAI contractual deadlines."
+  ],
 ];
 
 export function FAQ() {
   return (
     <section className="sec wrap">
-      <ScrubHeading className="sec-h" segs={[{ t: "Everything else.", em: true }]} />
+      <ScrubHeading className="sec-h" segs={[{ t: "Frequently asked questions.", em: true }]} />
       <Reveal variant="down" delay={160}>
-        <p className="mono lbl cap-kick">FAQS.</p>
+        <p className="mono lbl cap-kick">PROJECT CONTROLS FAQ.</p>
       </Reveal>
       <div className="faq">
         {QA.map(([q, a], i) => (
