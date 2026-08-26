@@ -102,18 +102,25 @@ export function Nav() {
       return prev;
     });
   });
+
   return (
-    <header
-      ref={ref}
-      className={`v2nav${hidden ? " hide" : ""}`}
-    >
+    <header ref={ref} className={`v2nav${hidden ? " hide" : ""}`}>
       <div className="v2nav-in">
         <a className="wordmark" href="#top" aria-label="SyncPro home">
           SYNCPRO<span className="wm-dot">.</span>
         </a>
+
+        <nav className="v2nav-links desktop-nav mono xs">
+          <a href="#narrative" className="v2nav-a">Signal Engine</a>
+          <a href="#twin" className="v2nav-a">3D Twin</a>
+          <a href="#sandbox" className="v2nav-a">ROI Sandbox</a>
+          <a href="#platform" className="v2nav-a">Platform</a>
+          <a href="#faq" className="v2nav-a">FAQ</a>
+        </nav>
+
         <Magnetic>
-          <a className="v2cta" href="#contact">
-            Get In Touch <span aria-hidden="true">→</span>
+          <a className="v2cta" href="#pilot">
+            Request Pilot <span aria-hidden="true">→</span>
           </a>
         </Magnetic>
       </div>
