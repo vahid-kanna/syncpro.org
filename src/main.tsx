@@ -1,11 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./syncpro.css";
-import "./site.css";
-import App from "./App";
+import "./v2/v2.css";
+import AppV2 from "./v2/App";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <AppV2 />
   </StrictMode>,
 );
