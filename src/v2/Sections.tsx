@@ -10,20 +10,12 @@ import { ScrubHeading, Magnetic } from "./Motion";
 /* ================= HERO ================= */
 
 export function Hero() {
-  const [activeTab, setActiveTab] = useState<number>(0);
-  const phases = [
-    { name: "01 · Ground Audio Signal", time: "14:15 IST", status: "Transcribing Site Audio...", source: "Voice Note · Site Eng 07" },
-    { name: "02 · Graph Corroboration", time: "14:15:02", status: "Corroborated by 4 Batch Tickets", source: "Neo4j Knowledge Graph" },
-    { name: "03 · Primavera P6 Shadow Commit", time: "14:15:04", status: "Critical Slip Flagged (−8D Float)", source: "Oracle P6 (.XER)" },
-  ];
-
   return (
     <section className="hero" id="top">
       <div className="wrap hero-in">
         <Reveal variant="down" className="hero-lblwrap">
           <p className="mono lbl hero-lbl">INFRASTRUCTURE-GRADE AI</p>
         </Reveal>
-
         <MaskLines
           as="h1"
           className="hero-h"
@@ -31,76 +23,22 @@ export function Hero() {
           step={140}
           lines={[<>The complete</>, <>Schedule Intelligence Engine.</>]}
         />
-
-        <Reveal variant="up" delay={500}>
+        <Reveal variant="up" delay={620}>
           <p className="hero-sub">
             Contractors report critical-path slips three weeks after they happen. SyncPro
             reads every site signal and reconciles it against your P6 baseline in real
             time — before the delay gets expensive.
           </p>
         </Reveal>
-
-        <Reveal variant="up" delay={640} className="mt-8 flex gap-4 wrapf items-center">
+        <Reveal variant="up" delay={780} className="hero-btnrow">
           <Magnetic>
-            <a className="v2cta hero-btn" href="#pilot">
-              Request Pilot Access →
+            <a className="hero-btn mono xs" href="#contact">
+              Initialize Pilot <span aria-hidden="true">→</span>
             </a>
           </Magnetic>
-          <a className="mono xs dim hover-white" href="#sandbox">
-            Calculate Delay Exposure (₹ Cr) ↓
+          <a className="hero-anchor mono xs dim" href="#narrative">
+            Explore Schedule Engine ↓
           </a>
-        </Reveal>
-
-        {/* Live Hero Telemetry Scrubber Preview */}
-        <Reveal variant="up" delay={780} className="mt-12">
-          <div className="hero-preview">
-            <div className="abar mono xs">
-              <span className="flex items-center gap-2">
-                <span className="live-dot" />
-                <span>LIVE TELEMETRY STREAM · OBSIDIAN TOWER (₹1,800 CR CAPEX)</span>
-              </span>
-              <span className="ok">GRAPH ENGINE: ACTIVE</span>
-            </div>
-
-            <div className="hero-stream p-4">
-              <div className="hero-tabs mono xs mb-4">
-                {phases.map((p, idx) => (
-                  <button
-                    key={p.name}
-                    type="button"
-                    onClick={() => setActiveTab(idx)}
-                    className={`hero-tab${activeTab === idx ? " active" : ""}`}
-                  >
-                    {p.name}
-                  </button>
-                ))}
-              </div>
-
-              <div className="hero-stream-body mono xs">
-                <div className="row between mb-2">
-                  <span className="dim">EVENT TIMESTAMP: {phases[activeTab].time}</span>
-                  <span className="dim">SOURCE: {phases[activeTab].source}</span>
-                </div>
-                <div className="hero-log">
-                  {activeTab === 0 && (
-                    <p className="italic text-white">
-                      &ldquo;Batch #4902 delivered 14:15. Slump test 140mm verified. Poured 120m³ M40 concrete for Grid C3–C7. Post-tension cable delivery delayed by 2 days due to fabrication hold.&rdquo;
-                    </p>
-                  )}
-                  {activeTab === 1 && (
-                    <p className="text-white">
-                      MATCHING CLAIM: 120m³ M40 Concrete (Grid C3-C7) <span className="ok">✓ 100% CORROBORATED</span> across RMC Tickets #4901-#4908 and acoustic sounding scan. Zero hallucination guarantee passed.
-                    </p>
-                  )}
-                  {activeTab === 2 && (
-                    <p className="text-white">
-                      SHADOW SCHEDULE DELTA: Act ID: ACT-4092 consumes 2 days total float. Critical Path Slip flagged <span className="bad">3 weeks before monthly contractor review</span>. FIDIC Notice drafted.
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
         </Reveal>
       </div>
     </section>

@@ -26,7 +26,7 @@ const CAPS = [
 
 export function BuiltFor() {
   return (
-    <section className="sec wrap builtfor" id="platform">
+    <section className="sec wrap builtfor">
       <MaskLines
         className="sec-h"
         baseDelay={0}
@@ -106,7 +106,7 @@ const QA: Array<[string, string]> = [
 
 export function FAQ() {
   return (
-    <section className="sec wrap" id="faq">
+    <section className="sec wrap">
       <ScrubHeading className="sec-h" segs={[{ t: "Everything else.", em: true }]} />
       <Reveal variant="down" delay={160}>
         <p className="mono lbl cap-kick">FAQS.</p>

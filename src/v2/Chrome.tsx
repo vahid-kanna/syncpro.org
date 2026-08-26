@@ -5,6 +5,7 @@
  */
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useScrollFx, Magnetic } from "./Motion";
+import { submitWaitlist } from "../lib/waitlist";
 
 /* ---------------- reveal engine ---------------- */
 
@@ -102,27 +103,22 @@ export function Nav() {
       return prev;
     });
   });
-
   return (
-    <header ref={ref} className={`v2nav${hidden ? " hide" : ""}`}>
+    <header
+      ref={ref}
+      className={`v2nav${hidden ? " hide" : ""}`}
+    >
       <div className="v2nav-in">
         <a className="wordmark" href="#top" aria-label="SyncPro home">
           SYNCPRO<span className="wm-dot">.</span>
         </a>
-
-        <nav className="v2nav-links desktop-nav mono xs">
-          <a href="#narrative" className="v2nav-a">Signal Engine</a>
-          <a href="#twin" className="v2nav-a">3D Twin</a>
-          <a href="#sandbox" className="v2nav-a">ROI Sandbox</a>
-          <a href="#platform" className="v2nav-a">Platform</a>
-          <a href="#faq" className="v2nav-a">FAQ</a>
-        </nav>
-
-        <Magnetic>
-          <a className="v2cta" href="#pilot">
-            Request Pilot <span aria-hidden="true">→</span>
-          </a>
-        </Magnetic>
+        <div className="nav-actions">
+          <Magnetic>
+            <a className="v2cta" href="#contact">
+              Initialize Pilot <span aria-hidden="true">→</span>
+            </a>
+          </Magnetic>
+        </div>
       </div>
     </header>
   );
@@ -150,6 +146,28 @@ export function BrandMarquee() {
 
 export function Footer() {
   const r = useReveal();
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
+
+  async function handleFastSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email || status === "submitting") return;
+    setStatus("submitting");
+    try {
+      await submitWaitlist({
+        kind: "early-access",
+        name: email.split("@")[0] || "Executive",
+        email: email,
+        company: "Direct Request",
+        role: "Project Leader",
+        message: "Early access pilot request via single-line intake.",
+      });
+      setStatus("done");
+    } catch {
+      setStatus("done");
+    }
+  }
+
   return (
     <footer className="v2footer" id="contact">
       <div ref={r.ref} className={`foot-in ${r.shown ? "in" : ""}`}>
@@ -162,8 +180,37 @@ export function Footer() {
             <>Schedule Intelligence Engine.</>,
           ]}
         />
-        <Reveal variant="up" delay={260}>
+        
+        {/* Sleek Minimal 1-Line Pilot Input */}
+        <Reveal variant="up" delay={220} className="foot-formwrap">
+          {status === "done" ? (
+            <div className="foot-done mono xs">
+              <span className="foot-dot" /> Access request received. We will connect with you shortly.
+            </div>
+          ) : (
+            <form onSubmit={handleFastSubmit} className="foot-form">
+              <input
+                type="email"
+                required
+                placeholder="Enter work email for pilot access..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="foot-inp mono xs"
+              />
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className="foot-btn mono xs"
+              >
+                {status === "submitting" ? "Requesting..." : "Request Pilot →"}
+              </button>
+            </form>
+          )}
+        </Reveal>
+
+        <Reveal variant="up" delay={340}>
           <p className="foot-mailrow">
+            <span className="mono xs dim" style={{ marginRight: 10 }}>DIRECT LINE:</span>
             <Magnetic>
               <a className="foot-mail" href="mailto:founders@syncpro.org">
                 founders@syncpro.org <span aria-hidden="true">↗</span>
@@ -171,6 +218,7 @@ export function Footer() {
             </Magnetic>
           </p>
         </Reveal>
+
         <div className="foot-meta mono xs">
           <span>SET FOR THE MEGAPROJECT ERA</span>
           <span>© 2026 SYNCPRO · ALL RIGHTS RESERVED</span>
