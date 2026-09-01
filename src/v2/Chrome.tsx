@@ -6,6 +6,19 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useScrollFx, Magnetic } from "./Motion";
 
+/* ---------------- smooth scroll helper (no hash in URL) ---------------- */
+
+export function scrollToId(id: string) {
+  if (id === "top") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+}
+
 /* ---------------- reveal engine ---------------- */
 
 export function useReveal<T extends HTMLElement = HTMLDivElement>() {
@@ -108,11 +121,31 @@ export function Nav() {
       className={`v2nav${hidden ? " hide" : ""}`}
     >
       <div className="v2nav-in">
-        <a className="wordmark" href="#top" aria-label="SyncPro home">
-          SYNCPRO<span className="wm-dot">.</span>
+        <a
+          className="wordmark"
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToId("top");
+          }}
+          aria-label="SyncPro home"
+        >
+          <img
+            src="/logo.png"
+            alt="SyncPro"
+            className="wm-icon"
+          />
+          <span className="wm-text">SYNCPRO</span><span className="wm-dot">.</span>
         </a>
         <Magnetic>
-          <a className="v2cta" href="#contact">
+          <a
+            className="v2cta"
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToId("contact");
+            }}
+          >
             Get In Touch <span aria-hidden="true">→</span>
           </a>
         </Magnetic>

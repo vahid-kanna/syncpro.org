@@ -132,12 +132,21 @@ em {
   justify-content: space-between;
 }
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: "JetBrains Mono", monospace;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.26em;
   color: var(--txt);
   text-decoration: none;
+}
+.wm-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
 }
 .wm-dot { color: var(--acc); }
 .v2cta {

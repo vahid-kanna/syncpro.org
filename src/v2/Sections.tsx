@@ -2,7 +2,7 @@
  * SyncPro v2 — sections with humanized editorial copy.
  */
 import { useEffect, useRef, useState } from "react";
-import { Reveal, MaskLines } from "./Chrome";
+import { Reveal, MaskLines, scrollToId } from "./Chrome";
 import { ScrubHeading, Magnetic } from "./Motion";
 
 /* ================= HERO ================= */
@@ -30,11 +30,25 @@ export function Hero() {
         </Reveal>
         <Reveal variant="up" delay={780} className="hero-btnrow">
           <Magnetic>
-            <a className="hero-btn mono xs" href="#contact">
+            <a
+              className="hero-btn mono xs"
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToId("contact");
+              }}
+            >
               Initialize Pilot <span aria-hidden="true">→</span>
             </a>
           </Magnetic>
-          <a className="hero-anchor mono xs dim" href="#narrative">
+          <a
+            className="hero-anchor mono xs dim"
+            href="#narrative"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToId("narrative");
+            }}
+          >
             Explore Schedule Engine ↓
           </a>
         </Reveal>
