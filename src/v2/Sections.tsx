@@ -1,6 +1,7 @@
 /**
  * SyncPro v2 — sections with humanized editorial copy,
- * hero telemetry ticker, and interactive corroboration engine.
+ * hero telemetry ticker, interactive corroboration engine,
+ * voice waveform indicator, and grounded agent query simulation.
  */
 import { useEffect, useRef, useState } from "react";
 import { Reveal, MaskLines, scrollToId } from "./Chrome";
@@ -39,7 +40,7 @@ export function Hero() {
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToId("contact");
+                scrollToId("contact", true);
               }}
             >
               <span>Initialize Pilot</span>
@@ -99,9 +100,11 @@ interface ActivityDetail {
   start: string;
   tf: string;
   tone: string;
+  isVoice?: boolean;
   signalTitle: string;
   signalDetail: string;
   corroboration: string;
+  queryAnswer: string;
 }
 
 const P6_ACTIVITIES: ActivityDetail[] = [
@@ -111,9 +114,11 @@ const P6_ACTIVITIES: ActivityDetail[] = [
     start: "Oct 12",
     tf: "+2d",
     tone: "",
+    isVoice: false,
     signalTitle: "DRILLING LOG · RIG #02 COMPLETE",
     signalDetail: "32/32 piles cast. Concrete cylinder break test verified at 42 MPa. Work on schedule.",
     corroboration: "Piling log cross-referenced with batch challans #2201–#2232. Float intact (+2 days).",
+    queryAnswer: "Activity A1210 is 100% on schedule with +2d float. 32/32 secant piles cast and verified against concrete batch dockets #2201–#2232.",
   },
   {
     id: "A1230",
@@ -121,9 +126,11 @@ const P6_ACTIVITIES: ActivityDetail[] = [
     start: "Dec 08",
     tf: "0d ⚑",
     tone: "warn",
+    isVoice: true,
     signalTitle: "SITE VOCAL NOTE · FORMWORK INSPECTION",
     signalDetail: "Formwork deshoring cleared on L17. Rebar inspection signed off by third-party consultant.",
     corroboration: "Zero float remaining. Any material delivery disruption here shifts the critical path.",
+    queryAnswer: "Activity A1230 has 0 days float. Formwork deshoring cleared, but PT cable delay will convert this into the primary critical path within 48h.",
   },
   {
     id: "A1240",
@@ -131,9 +138,11 @@ const P6_ACTIVITIES: ActivityDetail[] = [
     start: "Dec 11",
     tf: "-8d",
     tone: "bad",
+    isVoice: true,
     signalTitle: "BATCH TICKET #4902 & SUPPLIER CHALLAN #SN882",
     signalDetail: "Post-tension strand vendor announced 2-day fabrication hold · Site crew reassigned.",
     corroboration: "Unlinked to P6 baseline yet consumes 8 days total float. Triggers ₹14.4 Cr liquidated damages risk.",
+    queryAnswer: "Activity A1240 consumed 8 days float because PT strand vendor announced a 2-day yard hold (Challan #SN882). Triggers 8-day critical path slip to Milestone M-04. Master P6 baseline remains isolated and untouched.",
   },
   {
     id: "A1250",
@@ -141,9 +150,11 @@ const P6_ACTIVITIES: ActivityDetail[] = [
     start: "Jan 20",
     tf: "+5d",
     tone: "",
+    isVoice: false,
     signalTitle: "FABRICATION DISPATCH · FACTORY QC",
     signalDetail: "Glazed curtain-wall modules 140–210 packed for road transit from Pune facility.",
     corroboration: "Factory dispatch manifest aligns with baseline buffer. 5 days positive float preserved.",
+    queryAnswer: "Activity A1250 retains +5d positive float. Factory dispatch manifest confirms curtain-wall panels are in road transit with ample schedule buffer.",
   },
 ];
 
@@ -176,6 +187,7 @@ function CountUp({ to, prefix = "", suffix = "" }: { to: number; prefix?: string
 
 export function GapSection() {
   const [selectedId, setSelectedId] = useState("A1240");
+  const [showAgentQuery, setShowAgentQuery] = useState(false);
   const activeRow = P6_ACTIVITIES.find((a) => a.id === selectedId) || P6_ACTIVITIES[2];
 
   return (
@@ -230,8 +242,15 @@ export function GapSection() {
           {/* Interactive Multi-Source Field Signal Feed */}
           <div className="signal-reconciler">
             <div className="reconciler-header mono xs">
-              <span className="live-dot pulse" />
-              <span>LIVE FIELD SIGNAL RECONCILER · LINKED TO [{activeRow.id}]</span>
+              <div className="rec-header-left">
+                <span className="live-dot pulse" />
+                <span>LIVE FIELD SIGNAL RECONCILER · LINKED TO [{activeRow.id}]</span>
+                {activeRow.isVoice && (
+                  <span className="audio-wave" aria-label="Field voice memo active">
+                    <i /><i /><i /><i /><i />
+                  </span>
+                )}
+              </div>
               <span className="reconciler-status">DISAMBIGUATED</span>
             </div>
 
@@ -246,6 +265,26 @@ export function GapSection() {
                 <span className="rec-badge engine">[CORROBORATION]</span>
                 <span className="rec-text">{activeRow.corroboration}</span>
               </div>
+            </div>
+
+            {/* Grounded Natural Language Schedule Query Simulator */}
+            <div className="agent-query-bar">
+              <button
+                type="button"
+                className="query-btn mono xs"
+                onClick={() => setShowAgentQuery((prev) => !prev)}
+                aria-expanded={showAgentQuery}
+              >
+                <span className="query-prompt">&gt;</span>
+                <span className="query-label">Ask Graph Agent: &ldquo;Why did {activeRow.id} lose float?&rdquo;</span>
+                <span className="query-badge">{showAgentQuery ? "HIDE" : "RUN QUERY"}</span>
+              </button>
+              {showAgentQuery && (
+                <div className="query-response mono xs">
+                  <span className="query-tag">[GROUNDED CYPHER ANSWER]</span>
+                  <p className="query-txt">{activeRow.queryAnswer}</p>
+                </div>
+              )}
             </div>
           </div>
 

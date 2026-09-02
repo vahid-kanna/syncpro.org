@@ -69,6 +69,7 @@ const CAPABILITIES_GRID = [
     name: "DCMA 14-POINT HEALTH",
     tag: "14/14 CHECKS",
     desc: "Automated audit of logic breaks, open ends, float abuse, and relationship integrity before baseline lock.",
+    subBadge: "0 OPEN ENDS · 0 HARD CONSTRAINTS · 100% LOGIC PASS",
   },
   {
     name: "NATIVE SCHEDULE PARSING",
@@ -117,6 +118,11 @@ export function Stack() {
                   <span className="stack-tag mono xs">{cap.tag}</span>
                 </div>
                 <span className="stackdesc">{cap.desc}</span>
+                {cap.subBadge && (
+                  <div className="stack-sub-badge mono xs">
+                    <span className="chk">✓</span> {cap.subBadge}
+                  </div>
+                )}
               </div>
             </CardSpotlight>
           </Reveal>

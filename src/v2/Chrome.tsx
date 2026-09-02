@@ -8,13 +8,23 @@ import { submitWaitlist } from "../lib/waitlist";
 
 /* ---------------- smooth scroll helper (no hash in URL) ---------------- */
 
-export function scrollToId(id: string) {
+export function scrollToId(id: string, focusInput = false) {
   if (id === "top") {
     window.scrollTo({ top: 0, behavior: "smooth" });
   } else {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
+      if (focusInput) {
+        setTimeout(() => {
+          const inp = el.querySelector<HTMLInputElement>("input[type='email']");
+          if (inp) {
+            inp.focus();
+            inp.classList.add("pulse-focus");
+            setTimeout(() => inp.classList.remove("pulse-focus"), 1800);
+          }
+        }, 500);
+      }
     }
   }
 }
@@ -166,7 +176,7 @@ export function Nav() {
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToId("contact");
+                scrollToId("contact", true);
               }}
             >
               Initialize Pilot <span aria-hidden="true">→</span>
