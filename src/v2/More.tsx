@@ -69,7 +69,6 @@ const CAPABILITIES_GRID = [
     name: "DCMA 14-POINT HEALTH",
     tag: "14/14 CHECKS",
     desc: "Automated audit of logic breaks, open ends, float abuse, and relationship integrity before baseline lock.",
-    subBadge: "0 OPEN ENDS · 0 HARD CONSTRAINTS · 100% LOGIC PASS",
   },
   {
     name: "NATIVE SCHEDULE PARSING",
@@ -108,26 +107,19 @@ export function Stack() {
       <Reveal variant="down" delay={180}>
         <p className="mono lbl cap-kick">CORE PLATFORM CAPABILITIES.</p>
       </Reveal>
-      <div className="stackgrid">
-        {CAPABILITIES_GRID.map((cap, i) => (
-          <Reveal key={cap.name} variant="fade" delay={i * 70}>
-            <CardSpotlight className="stack-spotlight">
-              <div className="stackcell">
-                <div className="stackcell-head">
-                  <span className="mono stackname">{cap.name}</span>
-                  <span className="stack-tag mono xs">{cap.tag}</span>
-                </div>
-                <span className="stackdesc">{cap.desc}</span>
-                {cap.subBadge && (
-                  <div className="stack-sub-badge mono xs">
-                    <span className="chk">✓</span> {cap.subBadge}
-                  </div>
-                )}
+      <Reveal variant="up" delay={240}>
+        <div className="stackgrid">
+          {CAPABILITIES_GRID.map((cap) => (
+            <div key={cap.name} className="stackcell">
+              <div className="stackcell-head">
+                <span className="mono stackname">{cap.name}</span>
+                <span className="stack-tag mono xs">{cap.tag}</span>
               </div>
-            </CardSpotlight>
-          </Reveal>
-        ))}
-      </div>
+              <p className="stackdesc">{cap.desc}</p>
+            </div>
+          ))}
+        </div>
+      </Reveal>
     </section>
   );
 }

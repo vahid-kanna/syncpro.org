@@ -188,30 +188,17 @@ export function Nav() {
   );
 }
 
-/* ---------------- enterprise ecosystem marquee ---------------- */
-
-const ECOSYSTEM_ITEMS = [
-  "ORACLE PRIMAVERA P6 (.XER)",
-  "MICROSOFT PROJECT (.MPP)",
-  "ASTA POWERPROJECT (.PP)",
-  "AUTODESK BUILD",
-  "PROCORE",
-  "SAP EPC",
-  "BIM 360",
-  "FIDIC CONTRACTS",
-  "NHAI EPC STANDARDS",
-];
+/* ---------------- brand marquee ---------------- */
 
 export function BrandMarquee() {
   return (
-    <div className="brandband" aria-label="Supported Enterprise Ecosystem">
+    <div className="brandband" aria-hidden="true">
       <div className="brandtrack">
         {[0, 1].map((half) => (
           <div className="brandrow" key={half}>
-            {ECOSYSTEM_ITEMS.map((item, i) => (
-              <span className="brandname mono" key={i}>
-                <span className="brand-dot">✦</span>
-                {item}
+            {Array.from({ length: 8 }, (_, i) => (
+              <span className="brandname" key={i}>
+                SYNCPRO
               </span>
             ))}
           </div>
