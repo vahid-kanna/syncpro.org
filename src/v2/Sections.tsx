@@ -1,5 +1,5 @@
 /**
- * SyncPro v2 — sections with humanized editorial copy.
+ * SyncPro v2 — sections with humanized editorial copy & premium hero actions.
  */
 import { useEffect, useRef, useState } from "react";
 import { Reveal, MaskLines, scrollToId } from "./Chrome";
@@ -28,29 +28,33 @@ export function Hero() {
             time, catching schedule slippage before costs escalate.
           </p>
         </Reveal>
-        <Reveal variant="up" delay={780} className="hero-btnrow">
+        <Reveal variant="up" delay={780} className="hero-actions">
           <Magnetic>
             <a
-              className="hero-btn mono xs"
+              className="btn-pri mono xs"
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToId("contact");
               }}
             >
-              Initialize Pilot <span aria-hidden="true">→</span>
+              <span>Initialize Pilot</span>
+              <span className="btn-arrow" aria-hidden="true">→</span>
             </a>
           </Magnetic>
-          <a
-            className="hero-anchor mono xs dim"
-            href="#narrative"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToId("narrative");
-            }}
-          >
-            Explore Schedule Engine ↓
-          </a>
+          <Magnetic>
+            <a
+              className="btn-sec mono xs"
+              href="#narrative"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToId("narrative");
+              }}
+            >
+              <span>Explore Schedule Engine</span>
+              <span className="btn-arrow-down" aria-hidden="true">↓</span>
+            </a>
+          </Magnetic>
         </Reveal>
       </div>
     </section>
