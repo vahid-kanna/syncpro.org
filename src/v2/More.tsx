@@ -1,5 +1,5 @@
 /**
- * SyncPro v2 — capabilities, platform stack, FAQ with humanized prose.
+ * SyncPro v2 — capabilities, core platform matrix, FAQ with humanized prose.
  */
 import { Reveal, MaskLines } from "./Chrome";
 import { ScrubHeading, Tilt } from "./Motion";
@@ -52,15 +52,15 @@ export function BuiltFor() {
   );
 }
 
-/* ============ PLATFORM STACK ============ */
+/* ============ CORE PLATFORM CAPABILITIES ============ */
 
-const STACK: Array<[string, string]> = [
-  ["NEO4J", "Connected CPM schedule graph"],
-  ["FASTAPI", "Core scheduling service engine"],
-  ["MPXJ", "Parser for .XER, .MPP, and .PP files"],
-  ["LANGCHAIN", "Multi-agent reasoning framework"],
-  ["POSTGRES", "Immutable audit ledger"],
-  ["GROQ · LLAMA 3.3", "Sub-second inference layer"],
+const CAPABILITIES_GRID: Array<[string, string]> = [
+  ["DCMA 14-POINT HEALTH", "Automated audit of logic breaks, open ends, float abuse, and relationship integrity."],
+  ["NATIVE SCHEDULE PARSING", "Direct parsing of Oracle Primavera P6 (.xer/.xml), MS Project (.mpp), and Asta (.pp)."],
+  ["MULTI-SOURCE CORROBORATION", "Cross-validates field voice notes, batch dockets, and inspection challans against CPM logic."],
+  ["GROUNDED GRAPH ENGINE", "Natural language schedule queries citing exact activity IDs and calculated float values."],
+  ["PARALLEL SHADOW FORECAST", "Live actual vs planned reconciliation with complete isolation from contractual master P6."],
+  ["CONTEMPORANEOUS CLAIMS", "Tamper-evident audit logs and pre-drafted FIDIC and NHAI extension of time dossiers."],
 ];
 
 export function Stack() {
@@ -68,17 +68,17 @@ export function Stack() {
     <section className="sec wrap">
       <ScrubHeading
         className="sec-h"
-        segs={[{ t: "A platform built like the" }, { t: "schedules it reads.", em: true }]}
+        segs={[{ t: "Engineered for complex" }, { t: "megaproject controls.", em: true }]}
       />
       <Reveal variant="down" delay={180}>
-        <p className="mono lbl cap-kick">UNIFIED GRAPH ARCHITECTURE.</p>
+        <p className="mono lbl cap-kick">CORE PLATFORM CAPABILITIES.</p>
       </Reveal>
       <div className="stackgrid">
-        {STACK.map(([name, desc], i) => (
+        {CAPABILITIES_GRID.map(([name, desc], i) => (
           <Reveal key={name} variant="fade" delay={i * 70}>
             <div className="stackcell">
               <span className="mono stackname">{name}</span>
-              <span className="xs dim">{desc}</span>
+              <span className="stackdesc">{desc}</span>
             </div>
           </Reveal>
         ))}

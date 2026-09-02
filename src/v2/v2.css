@@ -400,15 +400,16 @@ em {
 }
 .stackcell {
   background: var(--panel);
-  padding: 30px 26px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  transition: background 0.25s;
+  gap: 12px;
+  transition: background 0.25s ease;
 }
 .stackcell:hover { background: var(--panel2); }
-.stackname { font-size: 14px; font-weight: 700; letter-spacing: 0.1em; }
+.stackname { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #FFFFFF; }
 .stackname::before { content: "// "; color: var(--acc); }
+.stackdesc { font-size: 13.5px; color: var(--mut); line-height: 1.65; }
 
 /* ---------- FAQ ---------- */
 
