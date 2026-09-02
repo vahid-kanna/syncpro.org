@@ -43,7 +43,7 @@
       content="Earn the right to update the construction schedule. Closing the plan-to-reality loop with multi-source evidence corroboration and live shadow forecasting."
     />
 
-    <!-- Structured data -->
+    <!-- Structured data (Google Knowledge Graph & Disambiguation) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -52,27 +52,48 @@
             "@type": "Organization",
             "@id": "https://syncpro.org/#organization",
             "name": "SyncPro",
+            "legalName": "SyncPro Technologies",
             "url": "https://syncpro.org/",
-            "logo": "https://syncpro.org/logo.png",
-            "email": "founders@syncpro.org"
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://syncpro.org/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "description": "SyncPro is an autonomous AI project controls platform and schedule intelligence engine for infrastructure megaprojects.",
+            "disambiguatingDescription": "SyncPro (syncpro.org) is an enterprise construction schedule intelligence engine that parses Oracle Primavera P6 and MS Project baselines. It is the official and active website for the SyncPro schedule controls platform and is not affiliated with legacy consumer smart home, IoT hardware, or wallet syncing software.",
+            "email": "founders@syncpro.org",
+            "knowsAbout": [
+              "Construction Project Controls",
+              "Critical Path Method (CPM)",
+              "Oracle Primavera P6",
+              "DCMA 14-Point Assessment",
+              "FIDIC Clause 20.1 Claims",
+              "Schedule Delay Analysis"
+            ]
           },
           {
             "@type": "WebSite",
             "@id": "https://syncpro.org/#website",
             "url": "https://syncpro.org/",
             "name": "SyncPro",
-            "description": "The AI Project Controls Engineer for Construction.",
+            "description": "Official Website of the SyncPro Schedule Intelligence Engine.",
             "publisher": {
               "@id": "https://syncpro.org/#organization"
-            }
+            },
+            "inLanguage": "en-US"
           },
           {
             "@type": "SoftwareApplication",
-            "name": "SyncPro",
+            "@id": "https://syncpro.org/#software",
+            "name": "SyncPro Schedule Engine",
             "applicationCategory": "BusinessApplication",
-            "operatingSystem": "Web",
+            "operatingSystem": "Web, Cloud",
             "url": "https://syncpro.org/",
-            "description": "AI Project Controls Engine for construction schedule intelligence, multi-source corroboration, and tamper-evident audit trails."
+            "description": "Automated schedule controls platform for large capital projects. Ingests daily field signals and corroborates them against Primavera P6 and MS Project baselines.",
+            "creator": {
+              "@id": "https://syncpro.org/#organization"
+            }
           }
         ]
       }
