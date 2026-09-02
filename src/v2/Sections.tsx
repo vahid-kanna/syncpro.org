@@ -24,7 +24,7 @@ export function Hero() {
           className="hero-h"
           baseDelay={150}
           step={140}
-          lines={[<>The complete</>, <>Schedule Intelligence Engine.</>]}
+          lines={[<>SyncPro</>, <>Schedule Intelligence Engine.</>]}
         />
         <Reveal variant="up" delay={620}>
           <p className="hero-sub">
