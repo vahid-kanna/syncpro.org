@@ -1,50 +1,60 @@
 /**
- * SyncPro v2 — capabilities, core platform matrix, FAQ with humanized prose.
+ * SyncPro v2 — capabilities, core platform matrix, and interactive FAQ.
+ * Features the Canonical 3-Pillar Framework and CardSpotlight physics.
  */
+import { useState } from "react";
 import { Reveal, MaskLines } from "./Chrome";
-import { ScrubHeading, Tilt } from "./Motion";
+import { ScrubHeading, Tilt, CardSpotlight } from "./Motion";
 
-/* ============ CAPABILITIES ============ */
+/* ============ 3 CANONICAL STRATEGIC PILLARS ============ */
 
-const CAPS = [
+const PILLARS = [
   {
-    n: "01",
-    t: "Verified Shadow Updates",
-    d: "SyncPro maps each field update directly to its corresponding CPM activity, validates the progress against independent delivery and inspection records, and posts verified updates to a shadow schedule. Your master P6 file remains completely untouched.",
+    pillar: "PILLAR 01",
+    tag: "READ-ONLY P6 ISOLATION",
+    title: "Know the Plan · Schedule Graph",
+    desc: "Traversable CPM network with native Primavera P6, MS Project, and Asta ingestion. Automated DCMA 14-point integrity audits flag missing logic, open ends, and artificial float manipulation before baseline approval.",
   },
   {
-    n: "02",
-    t: "Connected Schedule Agent",
-    d: "Query your schedule in plain language. SyncPro retrieves answers directly from a connected project graph, linking every date and float calculation back to the specific activity that produced it.",
+    pillar: "PILLAR 02",
+    tag: "PARALLEL SHADOW FORECAST",
+    title: "Know Reality · Shadow Engine",
+    desc: "Captures routine voice notes, batch tickets, and delivery dockets. Disambiguates each field claim to its exact CPM task ID and commits only multi-source verified updates to a parallel shadow schedule without touching the contract baseline.",
   },
   {
-    n: "03",
-    t: "Contemporaneous Claim Dossiers",
-    d: "An immutable audit trail records every schedule adjustment, compiles supporting site documentation, and prepares formal FIDIC and NHAI extension of time notices before contractual notification windows close.",
+    pillar: "PILLAR 03",
+    tag: "FIDIC & NHAI COMPLIANCE",
+    title: "Run the Project · Claim Protection",
+    desc: "An event-sourced immutable audit log records every graph adjustment, compiling time-stamped evidence dossiers and drafting formal FIDIC Clause 20.1 and NHAI Extension-of-Time notices inside contractual notification windows.",
   },
 ];
 
 export function BuiltFor() {
   return (
-    <section className="sec wrap builtfor">
+    <section className="sec wrap builtfor" id="capabilities">
       <MaskLines
         className="sec-h"
         baseDelay={0}
         lines={[<>SyncPro turns daily site records into</>, <><em>defensible schedule reality.</em></>]}
       />
       <Reveal variant="down" delay={200}>
-        <p className="mono lbl cap-kick">BUILT FOR MODERN CONTROLS TEAMS.</p>
+        <p className="mono lbl cap-kick">THE THREE-PILLAR CONTROLS ARCHITECTURE.</p>
       </Reveal>
       <div className="caps">
-        {CAPS.map((c, i) => (
-          <Reveal key={c.n} variant="up" delay={i * 140} className="capwrap">
-            <Tilt max={5}>
-              <div className={`cap cap-${i}`}>
-                <span className="cap-n mono">{c.n}</span>
-                <h3>{c.t}</h3>
-                <p>{c.d}</p>
-              </div>
-            </Tilt>
+        {PILLARS.map((p, i) => (
+          <Reveal key={p.pillar} variant="up" delay={i * 140} className="capwrap">
+            <CardSpotlight className="cap-spotlight">
+              <Tilt max={5}>
+                <div className={`cap cap-${i}`}>
+                  <div className="cap-meta">
+                    <span className="cap-n mono">{p.pillar}</span>
+                    <span className="cap-badge mono xs">{p.tag}</span>
+                  </div>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
+                </div>
+              </Tilt>
+            </CardSpotlight>
           </Reveal>
         ))}
       </div>
@@ -54,18 +64,42 @@ export function BuiltFor() {
 
 /* ============ CORE PLATFORM CAPABILITIES ============ */
 
-const CAPABILITIES_GRID: Array<[string, string]> = [
-  ["DCMA 14-POINT HEALTH", "Automated audit of logic breaks, open ends, float abuse, and relationship integrity."],
-  ["NATIVE SCHEDULE PARSING", "Direct parsing of Oracle Primavera P6 (.xer/.xml), MS Project (.mpp), and Asta (.pp)."],
-  ["MULTI-SOURCE CORROBORATION", "Cross-validates field voice notes, batch dockets, and inspection challans against CPM logic."],
-  ["GROUNDED GRAPH ENGINE", "Natural language schedule queries citing exact activity IDs and calculated float values."],
-  ["PARALLEL SHADOW FORECAST", "Live actual vs planned reconciliation with complete isolation from contractual master P6."],
-  ["CONTEMPORANEOUS CLAIMS", "Tamper-evident audit logs and pre-drafted FIDIC and NHAI extension of time dossiers."],
+const CAPABILITIES_GRID = [
+  {
+    name: "DCMA 14-POINT HEALTH",
+    tag: "14/14 CHECKS",
+    desc: "Automated audit of logic breaks, open ends, float abuse, and relationship integrity before baseline lock.",
+  },
+  {
+    name: "NATIVE SCHEDULE PARSING",
+    tag: "P6 · MPP · PP",
+    desc: "Direct parsing of Oracle Primavera P6 (.xer/.xml), MS Project (.mpp), and Asta Powerproject (.pp).",
+  },
+  {
+    name: "MULTI-SOURCE CORROBORATION",
+    tag: "TRIANGULATION",
+    desc: "Cross-validates field voice notes, batch dockets, and inspection challans against CPM schedule logic.",
+  },
+  {
+    name: "GROUNDED GRAPH ENGINE",
+    tag: "NEO4J CYPHER",
+    desc: "Natural language schedule queries citing exact activity IDs and calculated float values without hallucinations.",
+  },
+  {
+    name: "PARALLEL SHADOW FORECAST",
+    tag: "ZERO OVERWRITE",
+    desc: "Live actual vs planned reconciliation with complete isolation from your contractual master P6 file.",
+  },
+  {
+    name: "CONTEMPORANEOUS CLAIMS",
+    tag: "EOT READY",
+    desc: "Tamper-evident audit logs and pre-drafted FIDIC and NHAI extension of time dispute packages.",
+  },
 ];
 
 export function Stack() {
   return (
-    <section className="sec wrap">
+    <section className="sec wrap" id="platform">
       <ScrubHeading
         className="sec-h"
         segs={[{ t: "Engineered for complex" }, { t: "megaproject controls.", em: true }]}
@@ -74,12 +108,17 @@ export function Stack() {
         <p className="mono lbl cap-kick">CORE PLATFORM CAPABILITIES.</p>
       </Reveal>
       <div className="stackgrid">
-        {CAPABILITIES_GRID.map(([name, desc], i) => (
-          <Reveal key={name} variant="fade" delay={i * 70}>
-            <div className="stackcell">
-              <span className="mono stackname">{name}</span>
-              <span className="stackdesc">{desc}</span>
-            </div>
+        {CAPABILITIES_GRID.map((cap, i) => (
+          <Reveal key={cap.name} variant="fade" delay={i * 70}>
+            <CardSpotlight className="stack-spotlight">
+              <div className="stackcell">
+                <div className="stackcell-head">
+                  <span className="mono stackname">{cap.name}</span>
+                  <span className="stack-tag mono xs">{cap.tag}</span>
+                </div>
+                <span className="stackdesc">{cap.desc}</span>
+              </div>
+            </CardSpotlight>
           </Reveal>
         ))}
       </div>
@@ -87,7 +126,7 @@ export function Stack() {
   );
 }
 
-/* ============ FAQ ============ */
+/* ============ INTERACTIVE FAQ ACCORDION ============ */
 
 const QA: Array<[string, string]> = [
   [
@@ -96,7 +135,7 @@ const QA: Array<[string, string]> = [
   ],
   [
     "Does SyncPro modify our master contractual schedule?",
-    "No. Updates are posted only to a parallel shadow schedule once cross checked against supporting site records. Any unverified claims route to your planning team for review, ensuring your contractual baseline remains secure and unmodified."
+    "No. Updates are posted only to a parallel shadow schedule once cross-checked against supporting site records. Any unverified claims route to your planning team for review, ensuring your contractual baseline remains secure and unmodified."
   ],
   [
     "Which scheduling software does SyncPro support?",
@@ -117,24 +156,45 @@ const QA: Array<[string, string]> = [
 ];
 
 export function FAQ() {
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+
+  const toggle = (i: number) => {
+    setOpenIdx((curr) => (curr === i ? null : i));
+  };
+
   return (
-    <section className="sec wrap">
+    <section className="sec wrap" id="faq">
       <ScrubHeading className="sec-h" segs={[{ t: "Frequently asked questions.", em: true }]} />
       <Reveal variant="down" delay={160}>
         <p className="mono lbl cap-kick">PROJECT CONTROLS FAQ.</p>
       </Reveal>
-      <div className="faq">
-        {QA.map(([q, a], i) => (
-          <Reveal key={i} variant="up" delay={Math.min(i * 60, 240)}>
-            <details className="qa">
-              <summary className="qa-q">
-                <span className="mono qa-n">{String(i + 1).padStart(2, "0")}</span>
-                {q}
-              </summary>
-              <p className="qa-a">{a}</p>
-            </details>
-          </Reveal>
-        ))}
+      <div className="faq-accordion">
+        {QA.map(([q, a], i) => {
+          const isOpen = openIdx === i;
+          return (
+            <Reveal key={i} variant="up" delay={Math.min(i * 60, 240)}>
+              <div className={`faq-item ${isOpen ? "open" : ""}`}>
+                <button
+                  type="button"
+                  className="faq-trigger"
+                  onClick={() => toggle(i)}
+                  aria-expanded={isOpen}
+                >
+                  <div className="faq-q-left">
+                    <span className="mono faq-n">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="faq-title">{q}</span>
+                  </div>
+                  <span className="faq-toggle-ico mono">{isOpen ? "−" : "+"}</span>
+                </button>
+                {isOpen && (
+                  <div className="faq-body">
+                    <p className="faq-ans">{a}</p>
+                  </div>
+                )}
+              </div>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );

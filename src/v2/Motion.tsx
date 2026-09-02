@@ -238,3 +238,43 @@ export function Tilt({ children, max = 6 }: { children: ReactNode; max?: number 
     </div>
   );
 }
+
+/* ---------------- card spotlight (linear/vercel effect) ---------------- */
+
+export function CardSpotlight({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el || prefersReduced()) return;
+    const r = el.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    el.style.setProperty("--mx", `${x}px`);
+    el.style.setProperty("--my", `${y}px`);
+    el.style.setProperty("--opacity", "1");
+  };
+
+  const handlePointerLeave = () => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.setProperty("--opacity", "0");
+  };
+
+  return (
+    <div
+      ref={ref}
+      className={`card-spotlight ${className}`}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+    >
+      {children}
+    </div>
+  );
+}
