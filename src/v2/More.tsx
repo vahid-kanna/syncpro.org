@@ -43,8 +43,8 @@ export function BuiltFor() {
       <div className="caps">
         {PILLARS.map((p, i) => (
           <Reveal key={p.pillar} variant="up" delay={i * 140} className="capwrap">
-            <CardSpotlight className="cap-spotlight">
-              <Tilt max={5}>
+            <Tilt max={4}>
+              <CardSpotlight className="cap-spotlight">
                 <div className={`cap cap-${i}`}>
                   <div className="cap-meta">
                     <span className="cap-n mono">{p.pillar}</span>
@@ -53,8 +53,8 @@ export function BuiltFor() {
                   <h3>{p.title}</h3>
                   <p>{p.desc}</p>
                 </div>
-              </Tilt>
-            </CardSpotlight>
+              </CardSpotlight>
+            </Tilt>
           </Reveal>
         ))}
       </div>

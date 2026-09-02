@@ -663,7 +663,7 @@ em {
 
 .card-spotlight {
   position: relative;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   --mx: 50%;
   --my: 50%;
@@ -673,7 +673,7 @@ em {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(245, 166, 35, 0.12), transparent 70%);
+  background: radial-gradient(460px circle at var(--mx) var(--my), rgba(245, 166, 35, 0.14), transparent 70%);
   opacity: var(--opacity);
   transition: opacity 0.25s ease;
   pointer-events: none;
@@ -683,17 +683,41 @@ em {
 .caps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 36px;
+  gap: 28px;
   border-top: 1px solid var(--line);
   padding-top: 36px;
+}
+.capwrap {
+  height: 100%;
+}
+.cap-spotlight {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.cap-spotlight:hover {
+  border-color: rgba(245, 166, 35, 0.35);
+  background: var(--panel2);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+}
+
+.cap {
+  padding: 38px 32px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .cap-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
-.cap-n { color: var(--acc); font-size: 13px; font-weight: 600; }
+.cap-n { color: var(--acc); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; }
 .cap-badge {
   font-size: 9.5px;
   letter-spacing: 0.1em;
@@ -704,8 +728,21 @@ em {
   padding: 3px 10px;
   font-weight: 600;
 }
-.cap h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; color: #FFFFFF; }
-.cap p { color: var(--mut); font-size: 14px; line-height: 1.7; }
+.cap h3 {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  color: #FFFFFF;
+  line-height: 1.35;
+}
+.cap p {
+  color: var(--mut);
+  font-size: 14px;
+  line-height: 1.75;
+  margin: 0;
+  flex-grow: 1;
+}
 
 /* ---------- platform stack grid ---------- */
 
