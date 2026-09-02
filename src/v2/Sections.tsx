@@ -212,32 +212,34 @@ export function GapSection() {
             <span className="dim">CLICK OR HOVER ANY ACTIVITY ROW</span>
           </div>
 
-          <table className="xer">
-            <thead>
-              <tr><th>ACTIVITY</th><th>TASK</th><th>START</th><th>FLOAT</th></tr>
-            </thead>
-            <tbody>
-              {P6_ACTIVITIES.map((row, i) => (
-                <tr
-                  key={row.id}
-                  className={selectedId === row.id ? "active-row" : ""}
-                  onMouseEnter={() => setSelectedId(row.id)}
-                  onClick={() => setSelectedId(row.id)}
-                  style={{ ["--ri" as never]: i }}
-                >
-                  <td className="mono dim">{row.id}</td>
-                  <td>
-                    {row.name}
-                    {selectedId === row.id && (
-                      <span className="inspect-tag mono xs">INSPECTING</span>
-                    )}
-                  </td>
-                  <td className="mono">{row.start}</td>
-                  <td className={`mono ${row.tone}`}>{row.tf}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="table-responsive">
+            <table className="xer">
+              <thead>
+                <tr><th>ACTIVITY</th><th>TASK</th><th>START</th><th>FLOAT</th></tr>
+              </thead>
+              <tbody>
+                {P6_ACTIVITIES.map((row, i) => (
+                  <tr
+                    key={row.id}
+                    className={selectedId === row.id ? "active-row" : ""}
+                    onMouseEnter={() => setSelectedId(row.id)}
+                    onClick={() => setSelectedId(row.id)}
+                    style={{ ["--ri" as never]: i }}
+                  >
+                    <td className="mono dim">{row.id}</td>
+                    <td>
+                      {row.name}
+                      {selectedId === row.id && (
+                        <span className="inspect-tag mono xs">INSPECTING</span>
+                      )}
+                    </td>
+                    <td className="mono">{row.start}</td>
+                    <td className={`mono ${row.tone}`}>{row.tf}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           {/* Interactive Multi-Source Field Signal Feed */}
           <div className="signal-reconciler">
