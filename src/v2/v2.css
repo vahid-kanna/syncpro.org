@@ -328,6 +328,10 @@ em {
 /* Animmaster Lib Mouse Spotlight Card */
 .spotlight-card {
   position: relative;
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.spotlight-card:hover {
+  border-color: rgba(255, 107, 53, 0.28);
 }
 .spotlight-card::before {
   content: "";
@@ -343,34 +347,151 @@ em {
   z-index: 1;
 }
 
+/* Audio Waveform Micro-Animation */
+.audio-wave-wrap {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 28px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin: 10px 0;
+}
+.audio-bar {
+  width: 3px;
+  border-radius: 2px;
+  background: var(--acc);
+  animation: audioPulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes audioPulse {
+  0% { transform: scaleY(0.25); opacity: 0.4; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+
+/* Exposure Visual Gauge */
+.exposure-visual-gauge {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+.gauge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.gauge-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(248, 113, 113, 0.2);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.gauge-fill-recovered {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, var(--ok), #34D399);
+  border-radius: 5px;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Architecture Signal Flow Connector */
+.arch-connector-flow {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px 0;
+  position: relative;
+}
+.connector-line {
+  width: 2px;
+  height: 24px;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.flow-dot {
+  position: absolute;
+  top: -6px;
+  left: -2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--acc);
+  box-shadow: 0 0 8px var(--acc);
+  animation: flowDown 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.flow-dot-2 { animation-delay: 0.6s; background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+.flow-dot-3 { animation-delay: 0.3s; background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+.flow-dot-4 { animation-delay: 0.9s; background: var(--acc); box-shadow: 0 0 8px var(--acc); }
+
+@keyframes flowDown {
+  0% { top: -6px; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 28px; opacity: 0; }
+}
+
 /* Three.js 3D CPM Canvas & Legend */
 .console-3d-wrapper {
   position: relative;
   background: radial-gradient(circle at center, #0e121a 0%, #06070a 100%);
-  min-height: 380px;
+  min-height: 400px;
   overflow: hidden;
 }
 .three-cpm-container {
   position: relative;
   width: 100%;
-  height: 380px;
+  height: 400px;
   cursor: grab;
 }
 .cpm-legend-tag {
   position: absolute;
   top: 14px;
   left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(10, 12, 16, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--line2);
+  padding: 6px 14px;
+  border-radius: 6px;
+  z-index: 5;
+  flex-wrap: wrap;
+}
+.legend-items {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(10, 12, 16, 0.85);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--line);
-  padding: 4px 10px;
-  border-radius: 4px;
-  z-index: 5;
-  pointer-events: none;
 }
+.cpm-reset-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line);
+  color: var(--txt);
+  font-family: inherit;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+.cpm-reset-btn:hover { background: rgba(255, 107, 53, 0.2); color: var(--acc); border-color: var(--acc); }
 .legend-dot {
   width: 6px;
   height: 6px;

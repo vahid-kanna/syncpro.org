@@ -3,9 +3,11 @@
  * Directly implements Skill 4 (Three.js 3D scene) + Animmaster interactive mouse physics:
  * Renders an interactive 3D CPM network topology with glowing nodes,
  * precedence logic links, and pulsating energy along the Coral Orange Critical Path.
+ * Includes interactive drag-to-rotate, raycasting tooltips, and live signal packet traversal.
  */
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { RotateCcw } from "lucide-react";
 
 interface ActivityNode {
   id: string;
@@ -62,6 +64,7 @@ export function ScheduleGraphCanvas() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [hoveredNode, setHoveredNode] = useState<ActivityNode | null>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const resetCameraRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     const container = containerRef.current;
@@ -73,10 +76,10 @@ export function ScheduleGraphCanvas() {
     // Scene, Camera, Renderer
     const scene = new THREE.Scene();
     const width = container.clientWidth || 1180;
-    const height = 360;
+    const height = 400;
 
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.set(0, 2, 34);
+    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
+    camera.position.set(0, 2, 36);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
@@ -89,7 +92,7 @@ export function ScheduleGraphCanvas() {
     scene.add(nodeGroup);
 
     const nodeMeshes: THREE.Mesh[] = [];
-    const sphereGeo = new THREE.SphereGeometry(0.45, 24, 24);
+    const sphereGeo = new THREE.SphereGeometry(0.48, 28, 28);
 
     NODES.forEach((node) => {
       const mat = new THREE.MeshBasicMaterial({
@@ -102,12 +105,12 @@ export function ScheduleGraphCanvas() {
 
       // Glow halo ring around critical nodes
       if (node.isCritical) {
-        const ringGeo = new THREE.RingGeometry(0.65, 0.8, 28);
+        const ringGeo = new THREE.RingGeometry(0.65, 0.82, 32);
         const ringMat = new THREE.MeshBasicMaterial({
           color: node.color,
           side: THREE.DoubleSide,
           transparent: true,
-          opacity: 0.5,
+          opacity: 0.65,
         });
         const ring = new THREE.Mesh(ringGeo, ringMat);
         ring.rotation.x = Math.PI / 2;
@@ -122,6 +125,20 @@ export function ScheduleGraphCanvas() {
     const linkGroup = new THREE.Group();
     scene.add(linkGroup);
 
+    // Energy packet group (traveling pulses along critical paths)
+    const packetGroup = new THREE.Group();
+    scene.add(packetGroup);
+
+    const packets: Array<{
+      mesh: THREE.Mesh;
+      from: THREE.Vector3;
+      to: THREE.Vector3;
+      speed: number;
+      progress: number;
+    }> = [];
+    const packetGeo = new THREE.SphereGeometry(0.22, 16, 16);
+    const packetMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
     LINKS.forEach(([fromIdx, toIdx, isCrit]) => {
       const p1 = NODES[fromIdx];
       const p2 = NODES[toIdx];
@@ -133,66 +150,119 @@ export function ScheduleGraphCanvas() {
 
       const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
       const lineMat = new THREE.LineBasicMaterial({
-        color: isCrit ? 0xff6b35 : 0x3b4252,
+        color: isCrit ? 0xff6b35 : 0x2e3440,
         linewidth: isCrit ? 2.5 : 1,
         transparent: true,
-        opacity: isCrit ? 0.85 : 0.35,
+        opacity: isCrit ? 0.9 : 0.3,
       });
 
       const line = new THREE.Line(lineGeo, lineMat);
       linkGroup.add(line);
+
+      // Add energy packet to critical links
+      if (isCrit) {
+        const pktMesh = new THREE.Mesh(packetGeo, packetMat);
+        packetGroup.add(pktMesh);
+        packets.push({
+          mesh: pktMesh,
+          from: points[0],
+          to: points[1],
+          speed: 0.007 + Math.random() * 0.005,
+          progress: Math.random(),
+        });
+      }
     });
 
     // Ambient floating particles
-    const particleCount = 70;
+    const particleCount = 80;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount * 3; i += 3) {
-      particlePositions[i] = (Math.random() - 0.5) * 45;
-      particlePositions[i + 1] = (Math.random() - 0.5) * 20;
-      particlePositions[i + 2] = (Math.random() - 0.5) * 25;
+      particlePositions[i] = (Math.random() - 0.5) * 50;
+      particlePositions[i + 1] = (Math.random() - 0.5) * 25;
+      particlePositions[i + 2] = (Math.random() - 0.5) * 30;
     }
 
     particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
     const particleMat = new THREE.PointsMaterial({
       color: 0xff6b35,
-      size: 0.12,
+      size: 0.14,
       transparent: true,
       opacity: 0.35,
     });
     const particles = new THREE.Points(particleGeo, particleMat);
     scene.add(particles);
 
-    // Mouse tracking & raycasting
+    // Mouse tracking & raycasting & drag-to-rotate
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2(-999, -999);
-    let targetRotX = 0;
-    let targetRotY = 0;
+    let targetHoverRotX = 0;
+    let targetHoverRotY = 0;
+    let userDragRotX = 0;
+    let userDragRotY = 0;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    let isDragging = false;
+    let prevX = 0;
+    let prevY = 0;
+
+    resetCameraRef.current = () => {
+      userDragRotX = 0;
+      userDragRotY = 0;
+      targetHoverRotX = 0;
+      targetHoverRotY = 0;
+    };
+
+    const handlePointerDown = (e: PointerEvent) => {
+      isDragging = true;
+      prevX = e.clientX;
+      prevY = e.clientY;
+      container.setPointerCapture(e.pointerId);
+      container.style.cursor = "grabbing";
+    };
+
+    const handlePointerUp = (e: PointerEvent) => {
+      isDragging = false;
+      try {
+        container.releasePointerCapture(e.pointerId);
+      } catch {
+        // ignore
+      }
+      container.style.cursor = "grab";
+    };
+
+    const handlePointerMove = (e: PointerEvent) => {
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
       mouse.x = x;
       mouse.y = y;
 
-      targetRotY = x * 0.18;
-      targetRotX = -y * 0.12;
+      if (isDragging) {
+        const dx = e.clientX - prevX;
+        const dy = e.clientY - prevY;
+        userDragRotY += dx * 0.007;
+        userDragRotX += dy * 0.007;
+        prevX = e.clientX;
+        prevY = e.clientY;
+      } else {
+        targetHoverRotY = x * 0.15;
+        targetHoverRotX = -y * 0.1;
+      }
 
       setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
     };
 
-    const handleMouseLeave = () => {
+    const handlePointerLeave = () => {
       mouse.x = -999;
       mouse.y = -999;
-      targetRotX = 0;
-      targetRotY = 0;
       setHoveredNode(null);
     };
 
-    container.addEventListener("mousemove", handleMouseMove);
-    container.addEventListener("mouseleave", handleMouseLeave);
+    container.addEventListener("pointerdown", handlePointerDown);
+    container.addEventListener("pointerup", handlePointerUp);
+    container.addEventListener("pointermove", handlePointerMove);
+    container.addEventListener("pointerleave", handlePointerLeave);
 
     // Resize Handler
     const handleResize = () => {
@@ -208,7 +278,6 @@ export function ScheduleGraphCanvas() {
     let animId: number;
     let isVisible = true;
 
-    // IntersectionObserver to pause rendering when offscreen
     const io = new IntersectionObserver((entries) => {
       isVisible = entries[0].isIntersecting;
     }, { threshold: 0.1 });
@@ -223,35 +292,46 @@ export function ScheduleGraphCanvas() {
       clock += 0.015;
 
       if (!prefersReduced) {
-        // Inertia camera rotation
-        nodeGroup.rotation.y += (targetRotY - nodeGroup.rotation.y) * 0.05;
-        nodeGroup.rotation.x += (targetRotX - nodeGroup.rotation.x) * 0.05;
-        linkGroup.rotation.y = nodeGroup.rotation.y;
-        linkGroup.rotation.x = nodeGroup.rotation.x;
+        // Combined smooth rotation (user drag + mouse parallax)
+        const finalTargetY = userDragRotY + targetHoverRotY;
+        const finalTargetX = userDragRotX + targetHoverRotX;
 
-        // Subtle particle drift
-        particles.rotation.y += 0.0008;
+        nodeGroup.rotation.y += (finalTargetY - nodeGroup.rotation.y) * 0.06;
+        nodeGroup.rotation.x += (finalTargetX - nodeGroup.rotation.x) * 0.06;
 
-        // Pulse critical halos
+        linkGroup.rotation.copy(nodeGroup.rotation);
+        packetGroup.rotation.copy(nodeGroup.rotation);
+
+        // Drift background particles
+        particles.rotation.y += 0.0006;
+
+        // Animate traveling signal energy packets
+        packets.forEach((pkt) => {
+          pkt.progress += pkt.speed;
+          if (pkt.progress > 1) pkt.progress = 0;
+          pkt.mesh.position.lerpVectors(pkt.from, pkt.to, pkt.progress);
+          const pulse = 1 + Math.sin(clock * 10 + pkt.progress * 6) * 0.25;
+          pkt.mesh.scale.set(pulse, pulse, pulse);
+        });
+
+        // Pulse critical halos on nodes
         nodeMeshes.forEach((mesh, idx) => {
           if (mesh.userData.isCritical) {
-            const scale = 1 + Math.sin(clock * 3 + idx) * 0.08;
+            const scale = 1 + Math.sin(clock * 3.5 + idx) * 0.09;
             mesh.scale.set(scale, scale, scale);
           }
         });
       }
 
-      // Raycast test for hovered node
+      // Raycasting for hovered node
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(nodeMeshes);
 
-      if (intersects.length > 0) {
+      if (intersects.length > 0 && !isDragging) {
         const hit = intersects[0].object.userData as ActivityNode;
         setHoveredNode(hit);
-        container.style.cursor = "pointer";
       } else {
         setHoveredNode(null);
-        container.style.cursor = "default";
       }
 
       renderer.render(scene, camera);
@@ -263,8 +343,10 @@ export function ScheduleGraphCanvas() {
       cancelAnimationFrame(animId);
       io.disconnect();
       window.removeEventListener("resize", handleResize);
-      container.removeEventListener("mousemove", handleMouseMove);
-      container.removeEventListener("mouseleave", handleMouseLeave);
+      container.removeEventListener("pointerdown", handlePointerDown);
+      container.removeEventListener("pointerup", handlePointerUp);
+      container.removeEventListener("pointermove", handlePointerMove);
+      container.removeEventListener("pointerleave", handlePointerLeave);
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
@@ -273,14 +355,26 @@ export function ScheduleGraphCanvas() {
   }, []);
 
   return (
-    <div className="three-cpm-container" ref={containerRef}>
-      {/* Overlay Badge */}
+    <div className="three-cpm-container" ref={containerRef} style={{ touchAction: "none" }}>
+      {/* Top Legend Bar with Reset Button */}
       <div className="cpm-legend-tag mono xs">
-        <span className="legend-dot critical" />
-        <span className="dim">CRITICAL PATH BACKBONE (0d / NEGATIVE FLOAT)</span>
-        <span className="legend-sep">·</span>
-        <span className="legend-dot buffer" />
-        <span className="dim">BUFFER FLOAT (&ge;+4d)</span>
+        <div className="legend-items">
+          <span className="legend-dot critical" />
+          <span className="dim">CRITICAL PATH (0d / NEGATIVE FLOAT)</span>
+          <span className="legend-sep">·</span>
+          <span className="legend-dot buffer" />
+          <span className="dim">BUFFER FLOAT (&ge;+4d)</span>
+          <span className="legend-sep">·</span>
+          <span className="dim">DRAG TO ROTATE 360°</span>
+        </div>
+        <button
+          type="button"
+          className="cpm-reset-btn"
+          onClick={() => resetCameraRef.current()}
+          title="Reset 3D camera"
+        >
+          <RotateCcw className="ico-xs" /> Reset View
+        </button>
       </div>
 
       {/* Interactive Node Tooltip */}
@@ -288,8 +382,8 @@ export function ScheduleGraphCanvas() {
         <div
           className="node-hover-tooltip mono xs"
           style={{
-            left: Math.min(Math.max(mousePos.x + 12, 10), 850),
-            top: Math.max(mousePos.y - 65, 10),
+            left: Math.min(Math.max(mousePos.x + 14, 10), 860),
+            top: Math.max(mousePos.y - 70, 10),
           }}
         >
           <div className="tooltip-head">

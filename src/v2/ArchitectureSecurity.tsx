@@ -8,6 +8,14 @@ import { Reveal, MaskLines } from "./Chrome";
 import { Database, ShieldCheck, Lock, Cpu, GitBranch, Server, CheckCircle2 } from "lucide-react";
 
 export function ArchitectureSecurity() {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
     <section className="sec wrap arch-sec" id="architecture">
       <MaskLines
@@ -24,7 +32,7 @@ export function ArchitectureSecurity() {
 
       {/* Interactive Architecture Diagram */}
       <Reveal variant="up" delay={150}>
-        <div className="arch-diagram">
+        <div className="arch-diagram spotlight-card" onMouseMove={handleMouseMove}>
           {/* Top Layer: Two Input Lanes */}
           <div className="arch-lanes">
             {/* Lane 1: Schedule Ingestion */}
@@ -66,6 +74,12 @@ export function ArchitectureSecurity() {
             </div>
           </div>
 
+          {/* Animated Signal Connectors 1 */}
+          <div className="arch-connector-flow" aria-hidden="true">
+            <div className="connector-line"><span className="flow-dot flow-dot-1" /></div>
+            <div className="connector-line"><span className="flow-dot flow-dot-2" /></div>
+          </div>
+
           {/* Middle Layer: Core Processing Engine */}
           <div className="arch-core">
             <div className="core-header mono xs">
@@ -90,6 +104,12 @@ export function ArchitectureSecurity() {
                 <span className="xs dim">Evidence grounding &amp; confidence evaluation (&ge;95%)</span>
               </div>
             </div>
+          </div>
+
+          {/* Animated Signal Connectors 2 */}
+          <div className="arch-connector-flow" aria-hidden="true">
+            <div className="connector-line"><span className="flow-dot flow-dot-3" /></div>
+            <div className="connector-line"><span className="flow-dot flow-dot-4" /></div>
           </div>
 
           {/* Bottom Layer: Immutable Ledger & Safe Delivery */}

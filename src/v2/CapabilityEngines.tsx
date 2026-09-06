@@ -97,6 +97,18 @@ export function CapabilityEngines() {
                       <Mic className="ico-xs acc" />
                       <span>VOICE NOTE // SITE SUPERINTENDENT</span>
                     </div>
+                    <div className="audio-wave-wrap" aria-hidden="true">
+                      {Array.from({ length: 22 }).map((_, i) => (
+                        <span
+                          key={i}
+                          className="audio-bar"
+                          style={{
+                            animationDelay: `${(i * 0.07).toFixed(2)}s`,
+                            height: `${Math.max(6, Math.sin(i * 0.45) * 16 + 10)}px`,
+                          }}
+                        />
+                      ))}
+                    </div>
                     <p className="signal-quote mono xs">
                       “Level 47 core wall pour complete. Putzmeister boom pump operating normally. 14 ready-mix trucks delivered
                       80 MPa mix. Waiting on 7-day cube break tests before stripping forms.”

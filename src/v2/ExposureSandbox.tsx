@@ -45,6 +45,15 @@ export function ExposureSandbox({ onOpenPilot }: { onOpenPilot: () => void }) {
   // SyncPro 3-week early detection recovery (~76% preserved capital via immediate float recovery)
   const capitalPreserved = totalExposure * 0.76;
 
+  // Animmaster Spotlight mouse tracker
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
     <section className="sec wrap exposure-sandbox-sec" id="exposure">
       <ScrubHeading
@@ -61,7 +70,7 @@ export function ExposureSandbox({ onOpenPilot }: { onOpenPilot: () => void }) {
       </div>
 
       <Reveal variant="up" delay={120}>
-        <div className="sandbox-container">
+        <div className="sandbox-container spotlight-card" onMouseMove={handleMouseMove}>
           {/* Top Controls Toolbar */}
           <div className="sandbox-toolbar mono xs">
             <div className="toolbar-left">
@@ -205,6 +214,20 @@ export function ExposureSandbox({ onOpenPilot }: { onOpenPilot: () => void }) {
                   <span className="total-val bad fw-bold">
                     {currencySymbol}{totalExposure.toFixed(2)} {unitSuffix}
                   </span>
+                </div>
+              </div>
+
+              {/* Visual Exposure Gauge */}
+              <div className="exposure-visual-gauge">
+                <div className="gauge-header mono xs">
+                  <span className="dim">PRESERVED CAPITAL RATIO</span>
+                  <span className="ok fw-bold">~76% EARLY RECOVERY</span>
+                </div>
+                <div className="gauge-track">
+                  <div
+                    className="gauge-fill-recovered"
+                    style={{ width: "76%" }}
+                  />
                 </div>
               </div>
 
