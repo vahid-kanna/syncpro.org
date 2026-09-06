@@ -322,6 +322,116 @@ em {
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75);
   overflow: hidden;
   text-align: left;
+  position: relative;
+}
+
+/* Animmaster Lib Mouse Spotlight Card */
+.spotlight-card {
+  position: relative;
+}
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    650px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(255, 107, 53, 0.08),
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Three.js 3D CPM Canvas & Legend */
+.console-3d-wrapper {
+  position: relative;
+  background: radial-gradient(circle at center, #0e121a 0%, #06070a 100%);
+  min-height: 380px;
+  overflow: hidden;
+}
+.three-cpm-container {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  cursor: grab;
+}
+.cpm-legend-tag {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 12, 16, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  border-radius: 4px;
+  z-index: 5;
+  pointer-events: none;
+}
+.legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.legend-dot.critical { background: var(--acc); box-shadow: 0 0 6px var(--acc); }
+.legend-dot.buffer { background: var(--ok); box-shadow: 0 0 6px var(--ok); }
+.legend-sep { color: var(--faint); }
+
+.node-hover-tooltip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  background: rgba(14, 16, 22, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--acc);
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  min-width: 190px;
+  transition: opacity 0.15s ease;
+}
+.tooltip-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.act-id-tag { color: var(--acc); font-weight: 700; }
+.tooltip-name { font-size: 11.5px; color: #fff; font-weight: 500; }
+.tooltip-wbs { font-size: 9.5px; letter-spacing: 0.1em; }
+
+.console-view-switch {
+  display: flex;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+.view-switch-btn {
+  background: transparent;
+  border: none;
+  color: var(--mut);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.view-switch-btn:hover { color: var(--txt); }
+.view-switch-btn.active {
+  background: rgba(255, 107, 53, 0.18);
+  color: var(--acc);
+  font-weight: 600;
 }
 
 .console-topbar {

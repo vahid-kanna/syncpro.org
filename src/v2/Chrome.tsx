@@ -91,6 +91,17 @@ export function MaskLines({
   );
 }
 
+export function scrollToId(id: string, _focus?: boolean) {
+  const el = document.getElementById(id.replace(/^#/, ""));
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+    if (_focus) {
+      const input = el.querySelector("input, select, textarea, button") as HTMLElement | null;
+      if (input) setTimeout(() => input.focus(), 400);
+    }
+  }
+}
+
 /* ---------------- nav ---------------- */
 
 export function Nav({ onOpenPilot }: { onOpenPilot: () => void }) {
