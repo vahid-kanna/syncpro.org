@@ -4,5 +4,7 @@ dist-ssr
 *.local
 .env
 .vite
+.agents/
+.claude/
 
 docs/
