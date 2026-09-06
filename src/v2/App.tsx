@@ -1,26 +1,27 @@
 /**
- * SyncPro v2 — Main App Shell
- * Assembles all 8 stages of Astra's master design blueprint:
- * 00. Global Chrome (Nav with telemetry badge & modal trigger)
- * 01. Living Control Room (Interactive Hero with P6 vs Shadow schedule simulation)
- * 02. The Forensic Gap (MoSPI ₹4.92 Lakh Cr overruns & side-by-side contrast)
- * 03. Financial Risk & Liquidated Damages Sandbox (interactive sliders & capital recovery)
- * 04. The 4 Capability Engines (Multimodal Ingestion, Shadow Scheduling, DCMA 14, Claims Shield)
- * 05. Unified Architecture & Enterprise Security (Dual lanes, Neo4j, deterministic engine)
- * 06. Validation, Pedigree & 30-Day Scoped Pilot Framework (Nirmaan, IIT Madras)
- * 07. Executive FAQ (Technical due diligence)
- * 08. Enterprise Pilot Qualification Console (High-conversion 3-step qualification form)
- * 09. Institutional Footer (Legal standards, IIT Madras attribution)
+ * SyncPro v2 — Main Application Shell (Refined with ZeroEka elegance & Astra blueprint)
+ * 10-section narrative architecture designed for executive clarity:
+ * - 01. Global Glassmorphic Nav
+ * - 02. Hero Section with 3D Three.js CPM Topology
+ * - 03. The Core Shift ("The plan is fixed. Site reality isn't.")
+ * - 04. Four Connected Capabilities (Ingestion, Shadow Scheduling, DCMA 14, FIDIC)
+ * - 05. Schedule Intelligence Console (Interactive CPM Gantt simulation)
+ * - 06. Financial Exposure Sandbox (Modeled capital risk & mitigation gauge)
+ * - 07. Built for Megaprojects (EPC Contractors, Developers, Claims Consultants)
+ * - 08. The Scoped Pilot Framework (30-Day Evaluation vs Enterprise Rollout)
+ * - 09. Executive FAQ & Pilot Enquiry Console (5 Q&As + 3-step intake form)
+ * - 10. Institutional Footer (Nirmaan, IIT Madras attribution)
  */
 import { useState } from "react";
 import { Nav, Footer, BrandMarquee } from "./Chrome";
 import { ScrollProgress, CursorGlow } from "./Motion";
 import { Hero } from "./Hero";
-import { ForensicGap } from "./ForensicGap";
+import { CoreShift } from "./CoreShift";
+import { FourPillars } from "./FourPillars";
+import { ScheduleConsole } from "./ScheduleConsole";
 import { ExposureSandbox } from "./ExposureSandbox";
-import { CapabilityEngines } from "./CapabilityEngines";
-import { ArchitectureSecurity } from "./ArchitectureSecurity";
-import { ValidationPedigree } from "./ValidationPedigree";
+import { Audiences } from "./Audiences";
+import { PilotFramework } from "./PilotFramework";
 import { ExecutiveFaq } from "./ExecutiveFaq";
 import { PilotConsole, PilotModal } from "./PilotConsole";
 
@@ -28,7 +29,13 @@ export default function AppV2() {
   const [isPilotModalOpen, setIsPilotModalOpen] = useState(false);
 
   const openPilot = () => {
-    setIsPilotModalOpen(true);
+    // On desktop, smooth scroll to intake form; on mobile/modal, trigger popup
+    const el = document.getElementById("intake");
+    if (el && window.innerWidth >= 768) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      setIsPilotModalOpen(true);
+    }
   };
 
   const closePilotModal = () => setIsPilotModalOpen(false);
@@ -39,38 +46,41 @@ export default function AppV2() {
       <CursorGlow />
       <Nav onOpenPilot={openPilot} />
       <main>
-        {/* Stage 01: Hero & Living Control Room Console */}
+        {/* Section 02: Hero & 3D CPM Schedule Mesh */}
         <Hero onOpenPilot={openPilot} />
 
-        {/* Stage 02: The Forensic Gap */}
-        <ForensicGap />
+        {/* Section 03: The Core Shift */}
+        <CoreShift />
 
-        {/* Stage 03: Financial Risk & Liquidated Damages Sandbox */}
+        {/* Section 04: The Four Connected Capabilities */}
+        <FourPillars />
+
+        {/* Section 05: Schedule Intelligence Console */}
+        <ScheduleConsole />
+
+        {/* Section 06: Financial Exposure Sandbox */}
         <ExposureSandbox onOpenPilot={openPilot} />
 
-        {/* Stage 04: The 4 Category-Defining Capability Engines */}
-        <CapabilityEngines />
-
-        {/* Stage 05: Unified Architecture & Enterprise Security */}
-        <ArchitectureSecurity />
-
-        {/* Industry Standards & Format Marquee */}
+        {/* Industry Standards Marquee */}
         <BrandMarquee />
 
-        {/* Stage 06: Pedigree & Scoped Pilot Validation */}
-        <ValidationPedigree onOpenPilot={openPilot} />
+        {/* Section 07: Built for Megaprojects (Audiences) */}
+        <Audiences />
 
-        {/* Stage 07: Executive FAQ */}
+        {/* Section 08: Scoped Pilot Framework */}
+        <PilotFramework onOpenPilot={openPilot} />
+
+        {/* Section 09: Executive FAQ */}
         <ExecutiveFaq />
 
-        {/* Stage 08: Enterprise Pilot Qualification Console */}
+        {/* Section 10: Pilot Intake Console */}
         <PilotConsole />
       </main>
 
-      {/* Stage 09: Monolithic Institutional Footer */}
+      {/* Institutional Footer */}
       <Footer onOpenPilot={openPilot} />
 
-      {/* Modal Dialog for Global Pilot Trigger */}
+      {/* Global Pilot Intake Modal */}
       <PilotModal isOpen={isPilotModalOpen} onClose={closePilotModal} />
     </>
   );

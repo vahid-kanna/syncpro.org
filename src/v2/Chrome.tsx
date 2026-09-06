@@ -1,12 +1,12 @@
 /**
  * SyncPro v2 — Chrome primitives (Nav, Footer, BrandMarquee, Reveal, MaskLines)
- * Upgraded directly to Astra's master design blueprint:
- * High-contrast glassmorphic navbar with telemetry badge,
- * enterprise industry standards marquee, and monolithic institutional footer.
+ * Sourced directly from Astra's ZeroEka-benchmarked elegance blueprint:
+ * High-clarity sticky glassmorphic navigation, industry standard marquee,
+ * and institutional footer with Sudha & Shankar Innovation Hub, IIT Madras attribution.
  */
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useScrollFx, Magnetic } from "./Motion";
-import { ShieldCheck, ArrowUpRight, Award, GitBranch } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 /* ---------------- reveal engine ---------------- */
 
@@ -61,9 +61,6 @@ export function Reveal({
   );
 }
 
-/**
- * Masked-line headline: each child line is clipped and slides into view.
- */
 export function MaskLines({
   lines,
   className = "",
@@ -102,7 +99,7 @@ export function scrollToId(id: string, _focus?: boolean) {
   }
 }
 
-/* ---------------- nav ---------------- */
+/* ---------------- Navigation Bar ---------------- */
 
 export function Nav({ onOpenPilot }: { onOpenPilot: () => void }) {
   const ref = useRef<HTMLElement>(null);
@@ -127,16 +124,16 @@ export function Nav({ onOpenPilot }: { onOpenPilot: () => void }) {
           <a className="wordmark" href="#top" aria-label="SyncPro home">
             SYNCPRO<span className="wm-dot">.</span>
           </a>
-          <span className="nav-telemetry mono xs dim">DEMO · P4 VIADUCT</span>
+          <span className="nav-telemetry mono xs dim">NIRMAAN · IIT MADRAS</span>
         </div>
 
-        {/* Navigation Anchors */}
-        <nav className="nav-anchors mono xs dim" aria-label="Page sections">
-          <a href="#control-room">Control Room</a>
-          <a href="#forensic-gap">The Gap</a>
+        {/* Clean, Non-Overwhelming Nav Anchors */}
+        <nav className="nav-anchors mono xs dim" aria-label="Main navigation">
+          <a href="#shift">The Shift</a>
+          <a href="#workflow">Capabilities</a>
+          <a href="#console">The Console</a>
           <a href="#exposure">Exposure</a>
-          <a href="#engines">4 Engines</a>
-          <a href="#architecture">Architecture</a>
+          <a href="#pilot">Pilot</a>
           <a href="#faq">FAQ</a>
         </nav>
 
@@ -144,7 +141,7 @@ export function Nav({ onOpenPilot }: { onOpenPilot: () => void }) {
         <div className="nav-actions">
           <Magnetic>
             <button type="button" className="v2cta mono xs" onClick={onOpenPilot}>
-              Request Pilot <span aria-hidden="true">→</span>
+              Discuss a Pilot <ArrowUpRight className="ico-xs" />
             </button>
           </Magnetic>
         </div>
@@ -153,19 +150,17 @@ export function Nav({ onOpenPilot }: { onOpenPilot: () => void }) {
   );
 }
 
-/* ---------------- brand marquee ---------------- */
+/* ---------------- Brand Marquee ---------------- */
 
 const MARQUEE_ITEMS = [
   "ORACLE PRIMAVERA P6 (.XER)",
   "ASTA POWERPROJECT (.PP)",
   "MICROSOFT PROJECT (.MPP)",
+  "DCMA 14-POINT QUALITY AUDIT",
   "FIDIC CLAUSE 8.4 & 20.1",
-  "DCMA 14-POINT QUALITY",
-  "NEO4J CPM GRAPH",
-  "RERA SECTION 18",
   "SCL DELAY PROTOCOL",
-  "FASTAPI SCHEDULER",
-  "CRYPTOGRAPHIC AUDIT LEDGER",
+  "NEO4J CPM GRAPH ENGINE",
+  "IMMUTABLE AS-BUILT AUDIT LEDGER",
 ];
 
 export function BrandMarquee() {
@@ -186,52 +181,57 @@ export function BrandMarquee() {
   );
 }
 
-/* ---------------- footer ---------------- */
+/* ---------------- Institutional Footer ---------------- */
 
 export function Footer({ onOpenPilot }: { onOpenPilot: () => void }) {
   const r = useReveal();
   return (
     <footer className="v2footer" id="contact">
       <div ref={r.ref} className={`foot-in ${r.shown ? "in" : ""}`}>
-        {/* Foot Headline */}
-        <div className="foot-head-wrap">
-          <span className="mono xs dim mb-2 d-block">THE AI PROJECT CONTROLS ENGINEER</span>
-          <h2 className="foot-display">
-            Earn the right to update <br />
-            <span className="foot-italic">the construction schedule.</span>
-          </h2>
+        {/* Top Split */}
+        <div className="footer-top-split">
+          <div className="foot-brand-col">
+            <a className="wordmark" href="#top">SYNCPRO<span className="wm-dot">.</span></a>
+            <p className="foot-motto xs dim mt-2">
+              Schedule intelligence.<br />
+              Built around the realities of megaproject delivery.
+            </p>
+          </div>
+
+          <div className="foot-incubator-col mono xs dim">
+            <p className="foot-addr">
+              Pre-incubated at Nirmaan, IIT Madras.<br />
+              Sudha &amp; Shankar Innovation Hub<br />
+              IIT Madras, Chennai 600036, India.
+            </p>
+          </div>
         </div>
 
         {/* Action Row */}
-        <div className="foot-action-row">
+        <div className="foot-action-row mt-4">
           <button type="button" className="hero-btn mono xs" onClick={onOpenPilot}>
-            Request Enterprise Pilot <span aria-hidden="true">→</span>
+            Discuss a Pilot <ArrowUpRight className="ico-xs" />
           </button>
           <a className="foot-mail mono xs" href="mailto:founders@syncpro.org">
             founders@syncpro.org <ArrowUpRight className="ico-xs" />
           </a>
         </div>
 
-        {/* Institutional & Standard Badges */}
-        <div className="foot-badges-grid mono xs dim">
-          <div className="badge-cell">
-            <Award className="ico-xs acc" />
-            <span>INCUBATED AT NIRMAAN, IIT MADRAS</span>
-          </div>
-          <div className="badge-cell">
-            <ShieldCheck className="ico-xs ok" />
-            <span>SCL DELAY PROTOCOL &amp; FIDIC 8.4 / 20.1 COMPLIANT</span>
-          </div>
-          <div className="badge-cell">
-            <GitBranch className="ico-xs warn" />
-            <span>DCMA 14-POINT SCHEDULE INTEGRITY AUDIT</span>
-          </div>
+        {/* Monolithic Wordmark Accent */}
+        <div className="footer-word mono" aria-hidden="true">
+          SYNCPRO.
         </div>
 
-        {/* Bottom Legal Meta */}
+        {/* Bottom Metadata */}
         <div className="foot-meta mono xs">
-          <span>SYNCPRO TECHNOLOGIES · SET FOR THE MEGAPROJECT ERA</span>
           <span>© 2026 SYNCPRO · ALL RIGHTS RESERVED</span>
+          <div className="foot-links">
+            <a href="#intake">Contact</a>
+            <span className="dim">·</span>
+            <a href="#faq">FAQ</a>
+            <span className="dim">·</span>
+            <span className="dim">In Development</span>
+          </div>
         </div>
       </div>
     </footer>

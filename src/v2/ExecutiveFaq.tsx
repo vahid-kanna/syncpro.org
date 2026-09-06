@@ -1,8 +1,8 @@
 /**
- * SyncPro v2 — Stage 07: Executive FAQ
- * 6 rigorous enterprise Q&As defined in Astra's blueprint,
- * addressing P6 integrity, 95% confidence threshold, hallucination prevention,
- * supported file formats, and data isolation.
+ * SyncPro v2 — Section 07 / Executive FAQ
+ * Sourced directly from Astra's blueprint:
+ * "Clear scope. No surprises."
+ * 5 essential, high-clarity Q&As answering the critical EPC buyer questions.
  */
 import { Reveal, MaskLines } from "./Chrome";
 
@@ -13,55 +13,61 @@ interface QAItem {
 
 const FAQ_ITEMS: QAItem[] = [
   {
-    q: "Will SyncPro overwrite our contractual Primavera P6 schedule?",
-    a: "No. The system ingests your schedule as a read-only source baseline and constructs an independent shadow graph. Qualified field observations update only the shadow forecast. Any change proposed to the master programme must be explicitly reviewed, validated, and approved by your project controls lead via a version-bound change set.",
+    q: "Does SyncPro replace Primavera P6?",
+    a: "No. The proposed workflow sits alongside Oracle Primavera P6. The approved contract baseline remains the inviolable reference; reviewed site events are modeled in a separate shadow forecast without modifying master project files.",
   },
   {
-    q: "What does the 95% confidence threshold mean?",
-    a: "It is an automated admission threshold for evidence reconciliation. A field update is admitted to the shadow graph only when multi-source evidence (e.g., site superintendent voice log corroborated by an independent material batch ticket and gate timestamp) clears >=95% certainty. Conflicting or ambiguous claims are immediately routed to a human planner queue.",
+    q: "What do we need for a pilot?",
+    a: "One active or completed package, its approved baseline (.xer) and latest update, selected routine site records (DPRs, batch dockets, voice notes), and access to a planning lead. We confirm P6 export compatibility and data requirements before agreeing a start date.",
   },
   {
-    q: "How do you prevent hallucinated schedule dates or activities?",
-    a: "SyncPro separates natural language understanding from critical path calculations. LLMs are used solely to extract structured entities from unstructured site shorthand. Forward and backward CPM passes, early/late dates, and total float calculations are computed deterministically by our graph engine directly from the CPM network, completely eliminating fabricated dates.",
+    q: "Can SyncPro guarantee savings or a successful claim?",
+    a: "No. Schedule diagnostics support review; they do not guarantee delivery. Financial examples are modeled assumptions, and any formal extension of time (EOT) claim depends on the commercial contract, physical evidence, causation, and applicable law.",
   },
   {
-    q: "Which scheduling software and file formats are supported?",
-    a: "SyncPro natively parses Oracle Primavera P6 (.xer and PMXML), Microsoft Project (.mpp and XML), and Asta Powerproject (.pp). Full support for multi-calendar projects, resource assignments, and complex precedence relationships is validated during the initial pilot phase.",
+    q: "How will proprietary project data be handled?",
+    a: "Data access, storage, retention, and deletion terms are agreed before any files are shared. The proposed pilot is strictly read-only. Your proprietary schedule baselines and commercial dockets are never used to train public AI models.",
   },
   {
-    q: "Does SyncPro replace our planning engineers or claims consultants?",
-    a: "No. SyncPro is designed to augment your existing team by automating the manual drudgery of tracking down WhatsApp messages, physical dockets, and inspection logs. It gives planning heads early critical path visibility weeks before monthly cutoffs, and provides claims consultants with immutable, contemporaneous evidence dossiers for FIDIC/NEC4 entitlement.",
-  },
-  {
-    q: "Is our proprietary project and schedule data protected?",
-    a: "Strictly. Every enterprise client operates in an isolated Virtual Private Cloud (VPC) with AES-256 encryption at rest and in transit. Your proprietary schedule baselines, contractor rates, and site communications are never shared across tenants and never used to train public AI models.",
+    q: "Is SyncPro available today?",
+    a: "SyncPro is in active development at Nirmaan, IIT Madras, and currently evaluating pilot candidate packages. Pilot timing, supported capabilities, and evaluation scopes are confirmed after technical scoping.",
   },
 ];
 
 export function ExecutiveFaq() {
   return (
-    <section className="sec wrap faq-sec" id="faq">
-      <MaskLines as="h2" className="sec-h center" baseDelay={80} lines={[<>Frequently asked</>, <><em>executive questions.</em></>]} />
+    <section className="section faq-sec" id="faq">
+      <div className="wrap">
+        <div className="section-head">
+          <div className="head-left">
+            <span className="eyebrow mono xs dim">07 / EXECUTIVE FAQ</span>
+            <MaskLines
+              as="h2"
+              className="sec-h"
+              baseDelay={80}
+              lines={[<>Clear scope.</>, <><span className="accent">No surprises.</span></>]}
+            />
+          </div>
+          <p className="head-desc">
+            Direct answers regarding master schedule integrity, pilot requirements, and proprietary data handling.
+          </p>
+        </div>
 
-      <div className="sechead mono xs center-head">
-        <span className="num">07</span>
-        <span>TECHNICAL DUE DILIGENCE &amp; FREQUENTLY ASKED QUESTIONS</span>
-      </div>
-
-      <div className="faq-list">
-        {FAQ_ITEMS.map((item, idx) => (
-          <Reveal key={idx} variant="up" delay={idx * 60}>
-            <details className="faq-accordion">
-              <summary className="faq-summary">
-                <span className="mono xs dim faq-index">0{idx + 1}</span>
-                <span className="faq-question">{item.q}</span>
-              </summary>
-              <div className="faq-answer">
-                <p>{item.a}</p>
-              </div>
-            </details>
-          </Reveal>
-        ))}
+        <div className="faq-list mt-6">
+          {FAQ_ITEMS.map((item, idx) => (
+            <Reveal key={idx} variant="up" delay={idx * 60}>
+              <details className="faq-accordion spotlight-card">
+                <summary className="faq-summary">
+                  <span className="mono xs dim faq-index">0{idx + 1}</span>
+                  <span className="faq-question">{item.q}</span>
+                </summary>
+                <div className="faq-answer">
+                  <p>{item.a}</p>
+                </div>
+              </details>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

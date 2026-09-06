@@ -1,387 +1,232 @@
 /**
- * SyncPro v2 — Hero Section with Living Control Room & 3D Three.js CPM Topology
- * Incorporates:
- * 1. Skill 1 (Anti-AI-Slop): Concrete CPM data, non-destructive P6 isolation, no vague buzzwords.
- * 2. Skill 2 (Design System): Strict DESIGN.md tokens, JetBrains Mono, Newsreader italic.
- * 3. Skill 3 (Battle-tested references): Linear/Stripe-level precision and data density.
- * 4. Skill 4 (Three.js 3D): Interactive 3D Critical Path Network Mesh with raycasting.
- * 5. Animmaster Lib: Spotlight border luminescence and kinetic spring transitions.
+ * SyncPro v2 — Hero Section (Redesigned with ZeroEka elegance & Astra blueprint)
+ * "Keep the baseline. See what's changing."
+ * Features:
+ * - Nirmaan · IIT Madras pre-incubation badge
+ * - Restrained, authoritative typography
+ * - Interactive Three.js 3D Critical Path schedule mesh
+ * - Dual calls to action (Discuss a Pilot / Explore Console)
+ * - Three trust commitments: Read-only scope, separate shadow forecast, planner-led review
  */
 import { useState } from "react";
 import { Reveal, MaskLines } from "./Chrome";
 import { Magnetic } from "./Motion";
-import { ShieldCheck, Clock, GitFork, Database, Box, BarChart3 } from "lucide-react";
+import { ShieldCheck, Database, GitFork, ArrowRight, Box, BarChart3 } from "lucide-react";
 import { ScheduleGraphCanvas } from "./ScheduleGraphCanvas";
 
-interface Scenario {
-  id: string;
-  name: string;
-  tag: string;
-  sourceType: string;
-  sourceText: string;
-  activityId: string;
-  activityName: string;
-  baselineStart: string;
-  baselineEnd: string;
-  shadowEnd: string;
-  floatDelta: string;
-  floatTone: "bad" | "warn" | "ok";
-  exposureCr: string;
-  confidence: number;
-  statusText: string;
-}
-
-const SCENARIOS: Scenario[] = [
-  {
-    id: "crane-p4",
-    name: "Pier P4 Crawler Crane Breakdown",
-    tag: "EQUIPMENT FAILURE",
-    sourceType: "WhatsApp Voice Note · Site Resident Eng.",
-    sourceText:
-      "“Crawler crane C-02 hydraulic slew ring failed at Pier P4. Rebar cage lifting suspended until mobile replacement arrives Friday morning.”",
-    activityId: "A1210",
-    activityName: "Substructure Pier P4 Rebar Cage Erection",
-    baselineStart: "Oct 12",
-    baselineEnd: "Nov 04",
-    shadowEnd: "Nov 12 (+8d)",
-    floatDelta: "-8d Float",
-    floatTone: "bad",
-    exposureCr: "₹9.4 Cr",
-    confidence: 98.2,
-    statusText: "Shadow Reconciled · P6 Baseline Preserved",
-  },
-  {
-    id: "strand-delay",
-    name: "L18 Post-Tension Strand Delivery Slip",
-    tag: "MATERIAL LOGISTICS",
-    sourceType: "Gate Telemetry & Challan OCR #SN882",
-    sourceText:
-      "“Challan #SN882 for 42T high-tensile prestressing strands delayed 4 days at fabricator yard. Formwork stripping at L18 blocked.”",
-    activityId: "A1230",
-    activityName: "Level 18 Post-Tension Slab Pour & Stressing",
-    baselineStart: "Dec 08",
-    baselineEnd: "Dec 22",
-    shadowEnd: "Jan 03 (+12d)",
-    floatDelta: "-12d Float",
-    floatTone: "bad",
-    exposureCr: "₹14.8 Cr",
-    confidence: 96.7,
-    statusText: "Shadow Reconciled · P6 Baseline Preserved",
-  },
-  {
-    id: "secant-piling",
-    name: "Podium Secant Piling Verified",
-    tag: "QUALITY CLEARANCE",
-    sourceType: "78 Ultrasonic Pile Integrity Logs (ASTM D5882)",
-    sourceText:
-      "“All 80 secant piles cast and cured. Cross-hole ultrasonic sonic logging completed with zero anomalies. Ready for capping beam.”",
-    activityId: "A1190",
-    activityName: "Secant Piling & Basement Dewatering",
-    baselineStart: "Sep 15",
-    baselineEnd: "Oct 28",
-    shadowEnd: "Oct 26 (-2d)",
-    floatDelta: "+2d Float",
-    floatTone: "ok",
-    exposureCr: "₹0.00",
-    confidence: 99.4,
-    statusText: "As-Built Verified · Cryptographic Hash Sealed",
-  },
-];
-
 export function Hero({ onOpenPilot }: { onOpenPilot: () => void }) {
-  const [activeScenario, setActiveScenario] = useState<Scenario>(SCENARIOS[0]);
-  const [activeView, setActiveView] = useState<"GANTT" | "3D_GRAPH">("GANTT");
+  const [activeView, setActiveView] = useState<"3D_GRAPH" | "GANTT">("3D_GRAPH");
 
-  // Animmaster Spotlight mouse tracker
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
-    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  // Synthetic demo disruption toggles
+  const [delays, setDelays] = useState<{ ifc: boolean; rain: boolean; pump: boolean }>({
+    ifc: false,
+    rain: false,
+    pump: false,
+  });
+
+  const toggleDelay = (key: "ifc" | "rain" | "pump") => {
+    setDelays((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  // CPM math for the hero preview
+  const dIFC = delays.ifc ? 5 : 0;
+  const dRain = delays.rain ? 4 : 0;
+  const dPump = delays.pump ? 7 : 0;
+
+  const aFinish = 8 + dIFC;
+  const bFinish = 16 + dPump;
+  const cFinish = aFinish + 12 + dRain;
+  const dStart = Math.max(bFinish, cFinish);
+  const shadowFinish = dStart + 17;
+  const finishMovement = shadowFinish - 37;
+
   return (
-    <section className="hero" id="top">
-      <div className="wrap hero-in">
-        {/* Eyebrow badge */}
-        <Reveal variant="down" className="hero-lblwrap">
-          <div className="hero-badge mono xs">
-            <span className="badge-dot" />
-            <span>AI PROJECT CONTROLS ENGINEER</span>
-            <span className="badge-sep">·</span>
-            <span className="dim">NIRMAAN, IIT MADRAS</span>
-          </div>
-        </Reveal>
-
-        {/* Hero Display Headline */}
-        <MaskLines
-          as="h1"
-          className="hero-h"
-          baseDelay={120}
-          step={130}
-          lines={[<>Your site changed.</>, <><em>Your baseline didn't.</em></>]}
-        />
-
-        {/* Supporting thesis */}
-        <Reveal variant="up" delay={500}>
-          <p className="hero-sub">
-            Contractors typically report critical path delays three weeks after they occur on site. SyncPro connects
-            daily field signals to your P6 schedule in real time, running a shadow forecast that reveals schedule slippage
-            and liquidated damages exposure before costs escalate.
-          </p>
-        </Reveal>
-
-        {/* CTA Buttons */}
-        <Reveal variant="up" delay={650} className="hero-btnrow">
-          <Magnetic>
-            <button type="button" className="hero-btn mono xs" onClick={onOpenPilot}>
-              Request Enterprise Pilot <span aria-hidden="true">→</span>
-            </button>
-          </Magnetic>
-          <a className="hero-anchor mono xs dim" href="#control-room">
-            Explore Live Scenario ↓
-          </a>
-        </Reveal>
-
-        {/* Trust Commitment Bar */}
-        <Reveal variant="fade" delay={800} className="hero-trust-bar">
-          <div className="trust-item mono xs">
-            <ShieldCheck className="ico-xs ok" />
-            <span>Evidence-Gated Reconciliation</span>
-          </div>
-          <span className="trust-sep">·</span>
-          <div className="trust-item mono xs">
-            <Database className="ico-xs acc" />
-            <span>Contract P6 File Preserved</span>
-          </div>
-          <span className="trust-sep">·</span>
-          <div className="trust-item mono xs">
-            <GitFork className="ico-xs warn" />
-            <span>Planner-Controlled Publication</span>
-          </div>
-        </Reveal>
-
-        {/* ================= HERO LIVING CONTROL ROOM ================= */}
-        <Reveal variant="up" delay={950} className="hero-console-wrap" id="control-room">
-          <div className="console-card spotlight-card" onMouseMove={handleMouseMove}>
-            {/* Console Header Bar with Mode Switcher */}
-            <div className="console-topbar mono xs">
-              <div className="topbar-left">
-                <span className="console-pulse" />
-                <span className="console-title">P4 VIADUCT PACKAGE (₹1,200 CR)</span>
-                <span className="dim">· SYNTHETIC DEMO</span>
+    <section className="hero section" id="top">
+      <div className="wrap">
+        <div className="hero-grid">
+          {/* Left Column: Thesis, Headings & CTAs */}
+          <div className="hero-content">
+            <Reveal variant="down">
+              <div className="hero-badge mono xs">
+                <span className="badge-dot" />
+                <span>NIRMAAN · IIT MADRAS</span>
+                <span className="badge-sep">·</span>
+                <span className="dim">PRE-INCUBATED</span>
               </div>
+            </Reveal>
 
-              <div className="topbar-right">
-                {/* View Mode Switcher (Gantt vs 3D Three.js) */}
-                <div className="console-view-switch">
+            <span className="eyebrow mono xs dim">SCHEDULE INTELLIGENCE FOR INFRASTRUCTURE</span>
+
+            <MaskLines
+              as="h1"
+              className="hero-h"
+              baseDelay={120}
+              step={120}
+              lines={[<>Keep the baseline.</>, <><span className="accent">See what’s changing.</span></>]}
+            />
+
+            <Reveal variant="up" delay={450}>
+              <p className="hero-sub">
+                SyncPro is building a clearer link between site events, schedule risk and the records behind every decision.
+                Model site reality in a separate shadow forecast without rewriting your contractual P6 program.
+              </p>
+            </Reveal>
+
+            <Reveal variant="up" delay={600} className="hero-actions">
+              <Magnetic>
+                <button type="button" className="hero-btn mono xs" onClick={onOpenPilot}>
+                  Discuss a Pilot <ArrowRight className="ico-xs" />
+                </button>
+              </Magnetic>
+              <a className="hero-anchor mono xs dim" href="#console">
+                Explore the console ↓
+              </a>
+            </Reveal>
+
+            <Reveal variant="fade" delay={750}>
+              <p className="hero-micro mono xs dim">
+                In development. Pilot enquiries open for Q3/Q4.
+              </p>
+            </Reveal>
+
+            {/* Three Trust Commitments */}
+            <Reveal variant="fade" delay={850} className="hero-trust-bar">
+              <div className="trust-item mono xs">
+                <Database className="ico-xs acc" />
+                <span>Read-only pilot scope</span>
+              </div>
+              <span className="trust-sep">·</span>
+              <div className="trust-item mono xs">
+                <GitFork className="ico-xs ok" />
+                <span>Separate shadow forecast</span>
+              </div>
+              <span className="trust-sep">·</span>
+              <div className="trust-item mono xs">
+                <ShieldCheck className="ico-xs warn" />
+                <span>Planner-led review</span>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Right Column: Interactive 3D CPM Schedule Mesh / Mini Gantt */}
+          <div className="hero-visual">
+            <Reveal variant="up" delay={300} className="hero-canvas-card spotlight-card">
+              {/* Top View Selector Bar */}
+              <div className="canvas-header mono xs">
+                <div className="canvas-title">
+                  <span className="console-pulse" />
+                  <span>CRITICAL PATH TOPOLOGY</span>
+                  <span className="dim">· P4 VIADUCT</span>
+                </div>
+                <div className="canvas-view-toggle">
                   <button
                     type="button"
-                    className={`view-switch-btn ${activeView === "GANTT" ? "active" : ""}`}
-                    onClick={() => setActiveView("GANTT")}
-                  >
-                    <BarChart3 className="ico-xs" /> GANTT RECONCILIATION
-                  </button>
-                  <button
-                    type="button"
-                    className={`view-switch-btn ${activeView === "3D_GRAPH" ? "active" : ""}`}
+                    className={`toggle-tab ${activeView === "3D_GRAPH" ? "active" : ""}`}
                     onClick={() => setActiveView("3D_GRAPH")}
                   >
-                    <Box className="ico-xs" /> 3D CPM TOPOLOGY (THREE.JS)
+                    <Box className="ico-xs" /> 3D CPM MESH
+                  </button>
+                  <button
+                    type="button"
+                    className={`toggle-tab ${activeView === "GANTT" ? "active" : ""}`}
+                    onClick={() => setActiveView("GANTT")}
+                  >
+                    <BarChart3 className="ico-xs" /> GANTT PREVIEW
                   </button>
                 </div>
-
-                <span className="topbar-tag">P6 .XER (READ-ONLY)</span>
               </div>
-            </div>
 
-            {/* Scenario Selector Tabs */}
-            <div className="console-scenario-row">
-              <span className="mono xs dim trigger-lbl">TEST A SITE SIGNAL:</span>
-              <div className="scenario-chips">
-                {SCENARIOS.map((sc) => {
-                  const isSel = sc.id === activeScenario.id;
-                  return (
+              {/* View 1: Native Three.js 3D Critical Path Mesh */}
+              {activeView === "3D_GRAPH" ? (
+                <div className="three-view-box">
+                  <ScheduleGraphCanvas />
+                </div>
+              ) : (
+                /* View 2: Compact Interactive Gantt Simulation */
+                <div className="hero-gantt-box mono xs">
+                  <div className="disruption-chips">
+                    <span className="dim">TEST DISRUPTION:</span>
                     <button
-                      key={sc.id}
                       type="button"
-                      onClick={() => setActiveScenario(sc)}
-                      className={`scenario-chip mono xs ${isSel ? "active" : ""}`}
+                      className={`chip ${delays.ifc ? "active bad" : ""}`}
+                      onClick={() => toggleDelay("ifc")}
                     >
-                      <span className={`chip-indicator ${sc.floatTone}`} />
-                      <span className="chip-name">{sc.name}</span>
-                      <span className="chip-tag dim">{sc.tag}</span>
+                      Late IFC (+5d)
                     </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* View 1: 3D Three.js Topology View */}
-            {activeView === "3D_GRAPH" ? (
-              <div className="console-3d-wrapper">
-                <ScheduleGraphCanvas />
-              </div>
-            ) : (
-              /* View 2: Dual CPM Gantt Comparison & Evidence Inspector */
-              <div className="console-grid">
-                {/* Left Pane: P6 Baseline vs Shadow Schedule Comparison */}
-                <div className="console-left">
-                  <div className="pane-header mono xs">
-                    <span>CPM LOGIC & SCHEDULE DIVERGENCE</span>
-                    <span className="dim">DATA DATE: 14-OCT-2026</span>
+                    <button
+                      type="button"
+                      className={`chip ${delays.rain ? "active bad" : ""}`}
+                      onClick={() => toggleDelay("rain")}
+                    >
+                      Monsoon (+4d)
+                    </button>
+                    <button
+                      type="button"
+                      className={`chip ${delays.pump ? "active bad" : ""}`}
+                      onClick={() => toggleDelay("pump")}
+                    >
+                      Delivery (+7d)
+                    </button>
                   </div>
 
-                  <div className="schedule-table-wrap">
-                    <table className="schedule-table">
-                      <thead>
-                        <tr className="mono xs dim">
-                          <th>MODEL</th>
-                          <th>ACTIVITY</th>
-                          <th>START</th>
-                          <th>FINISH</th>
-                          <th>FLOAT</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {/* Frozen Baseline Row */}
-                        <tr className="row-baseline">
-                          <td className="mono xs">
-                            <span className="badge-model baseline">P6 BASELINE</span>
-                          </td>
-                          <td>
-                            <div className="act-cell">
-                              <span className="mono xs dim">{activeScenario.activityId}</span>
-                              <span className="act-name">{activeScenario.activityName}</span>
-                            </div>
-                          </td>
-                          <td className="mono xs">{activeScenario.baselineStart}</td>
-                          <td className="mono xs">{activeScenario.baselineEnd}</td>
-                          <td className="mono xs ok">+3d (Safe)</td>
-                        </tr>
-
-                        {/* Dynamic SyncPro Shadow Row */}
-                        <tr className="row-shadow">
-                          <td className="mono xs">
-                            <span className="badge-model shadow">SYNCPRO SHADOW</span>
-                          </td>
-                          <td>
-                            <div className="act-cell">
-                              <span className="mono xs dim">{activeScenario.activityId}</span>
-                              <span className="act-name highlight">{activeScenario.activityName}</span>
-                            </div>
-                          </td>
-                          <td className="mono xs">{activeScenario.baselineStart}</td>
-                          <td className={`mono xs ${activeScenario.floatTone} fw-bold`}>
-                            {activeScenario.shadowEnd}
-                          </td>
-                          <td className={`mono xs ${activeScenario.floatTone} fw-bold`}>
-                            {activeScenario.floatDelta}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* Visual Gantt Bar Track */}
-                  <div className="gantt-viz">
-                    <div className="gantt-row">
-                      <span className="mono xs dim gantt-lbl">BASELINE:</span>
-                      <div className="gantt-track">
-                        <div className="gantt-bar baseline-bar" style={{ width: "65%", left: "10%" }}>
-                          <span className="mono xs">Contract Target: {activeScenario.baselineEnd}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="gantt-row">
-                      <span className="mono xs dim gantt-lbl">SHADOW:</span>
-                      <div className="gantt-track">
+                  {/* Compact Gantt Bars */}
+                  <div className="mini-gantt-bars">
+                    <div className="bar-row">
+                      <span className="dim bar-lbl">A IFC Release</span>
+                      <div className="bar-track">
+                        <div className="bar baseline" style={{ width: "22%", left: "0%" }} />
                         <div
-                          className={`gantt-bar shadow-bar ${activeScenario.floatTone}`}
-                          style={{
-                            width: activeScenario.floatTone === "bad" ? "82%" : "62%",
-                            left: "10%",
-                          }}
-                        >
-                          <span className="mono xs">
-                            Forecast: {activeScenario.shadowEnd} ({activeScenario.floatDelta})
-                          </span>
-                        </div>
+                          className={`bar shadow ${dIFC > 0 ? "bad" : "ok"}`}
+                          style={{ width: `${((8 + dIFC) / 46) * 100}%`, left: "0%" }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="bar-row">
+                      <span className="dim bar-lbl">B Procurement</span>
+                      <div className="bar-track">
+                        <div className="bar baseline" style={{ width: "35%", left: "0%" }} />
+                        <div
+                          className={`bar shadow ${dPump > 0 ? "bad" : "ok"}`}
+                          style={{ width: `${((16 + dPump) / 46) * 100}%`, left: "0%" }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="bar-row">
+                      <span className="dim bar-lbl">C Foundations</span>
+                      <div className="bar-track">
+                        <div className="bar baseline" style={{ width: "26%", left: "22%" }} />
+                        <div
+                          className={`bar shadow ${dRain > 0 || dIFC > 0 ? "bad" : "ok"}`}
+                          style={{ width: `${((12 + dRain) / 46) * 100}%`, left: `${(aFinish / 46) * 100}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="bar-row">
+                      <span className="dim bar-lbl">D Installation</span>
+                      <div className="bar-track">
+                        <div className="bar baseline" style={{ width: "22%", left: "48%" }} />
+                        <div
+                          className="bar shadow"
+                          style={{ width: `${(10 / 46) * 100}%`, left: `${(dStart / 46) * 100}%` }}
+                        />
                       </div>
                     </div>
                   </div>
 
-                  {/* Exposure Metric Ribbon */}
-                  <div className="console-metrics mono xs">
-                    <div className="metric-box">
-                      <span className="dim">CRITICAL PATH SLIP</span>
-                      <span className={`metric-val ${activeScenario.floatTone}`}>
-                        {activeScenario.floatDelta}
-                      </span>
-                    </div>
-                    <div className="metric-box">
-                      <span className="dim">PROJECTED LD EXPOSURE</span>
-                      <span className={`metric-val ${activeScenario.floatTone === "bad" ? "bad" : "ok"}`}>
-                        {activeScenario.exposureCr}
-                      </span>
-                    </div>
-                    <div className="metric-box">
-                      <span className="dim">CORROBORATION</span>
-                      <span className="metric-val ok">{activeScenario.confidence}% MATCH</span>
-                    </div>
+                  <div className="mini-gantt-summary">
+                    <span className="dim">CONTROLLING SLIP:</span>
+                    <span className={finishMovement > 0 ? "bad fw-bold" : "ok fw-bold"}>
+                      +{finishMovement} Working Days ({finishMovement > 0 ? "Critical Path Extended" : "On Plan"})
+                    </span>
                   </div>
                 </div>
-
-                {/* Right Pane: Evidence Inspector & Safeguard Gate */}
-                <div className="console-right">
-                  <div className="pane-header mono xs">
-                    <span>UNSTRUCTURED SIGNAL RESOLUTION</span>
-                    <span className="ok">CONFIDENCE &ge; 95%</span>
-                  </div>
-
-                  {/* Raw Field Observation Card */}
-                  <div className="evidence-card">
-                    <div className="evidence-type mono xs dim">
-                      <Clock className="ico-xs" />
-                      <span>{activeScenario.sourceType}</span>
-                    </div>
-                    <p className="evidence-quote">{activeScenario.sourceText}</p>
-                  </div>
-
-                  {/* Entity Resolution Flow */}
-                  <div className="resolution-flow mono xs">
-                    <div className="flow-step">
-                      <span className="dim">GRAPH ENTITY:</span>
-                      <span className="flow-val">{activeScenario.activityId} // {activeScenario.activityName}</span>
-                    </div>
-                    <div className="flow-step">
-                      <span className="dim">CONFIDENCE SCORE:</span>
-                      <span className="flow-val ok">{activeScenario.confidence}% (Admission Passed)</span>
-                    </div>
-                    <div className="flow-step">
-                      <span className="dim">SYSTEM ACTION:</span>
-                      <span className="flow-val warn">{activeScenario.statusText}</span>
-                    </div>
-                  </div>
-
-                  {/* Non-Destructive Isolation Guarantee */}
-                  <div className="safeguard-box">
-                    <div className="safeguard-head mono xs">
-                      <ShieldCheck className="ico-xs ok" />
-                      <span>P6 MASTER IMMUNITY SAFEGUARD</span>
-                    </div>
-                    <p className="xs dim">
-                      The master Primavera P6 file remains completely untouched. SyncPro updates only the parallel
-                      shadow graph, allowing planners to simulate delay claims and mitigation options without risking
-                      contractual baseline audit integrity.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
+              )}
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
