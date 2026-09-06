@@ -1,33 +1,12 @@
 /**
- * SyncPro v2 — chrome primitives + reveal engine.
- * Nav with live status & section anchors, ecosystem marquee, and enterprise footer.
+ * SyncPro v2 — Chrome primitives (Nav, Footer, BrandMarquee, Reveal, MaskLines)
+ * Upgraded directly to Astra's master design blueprint:
+ * High-contrast glassmorphic navbar with telemetry badge,
+ * enterprise industry standards marquee, and monolithic institutional footer.
  */
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useScrollFx, Magnetic } from "./Motion";
-import { submitWaitlist } from "../lib/waitlist";
-
-/* ---------------- smooth scroll helper (no hash in URL) ---------------- */
-
-export function scrollToId(id: string, focusInput = false) {
-  if (id === "top") {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      if (focusInput) {
-        setTimeout(() => {
-          const inp = el.querySelector<HTMLInputElement>("input[type='email']");
-          if (inp) {
-            inp.focus();
-            inp.classList.add("pulse-focus");
-            setTimeout(() => inp.classList.remove("pulse-focus"), 1800);
-          }
-        }, 500);
-      }
-    }
-  }
-}
+import { ShieldCheck, ArrowUpRight, Award, GitBranch } from "lucide-react";
 
 /* ---------------- reveal engine ---------------- */
 
@@ -61,15 +40,18 @@ export function Reveal({
   variant = "up",
   delay = 0,
   className = "",
+  id,
 }: {
   children: ReactNode;
   variant?: Variant;
   delay?: number;
   className?: string;
+  id?: string;
 }) {
   const r = useReveal();
   return (
     <div
+      id={id}
       ref={r.ref}
       className={`rv rv-${variant}${r.shown ? " in" : ""} ${className}`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
@@ -80,8 +62,7 @@ export function Reveal({
 }
 
 /**
- * Masked-line headline: each child line is clipped and slides DOWN
- * into view. Wrap each line in <span>.
+ * Masked-line headline: each child line is clipped and slides into view.
  */
 export function MaskLines({
   lines,
@@ -112,75 +93,48 @@ export function MaskLines({
 
 /* ---------------- nav ---------------- */
 
-export function Nav() {
+export function Nav({ onOpenPilot }: { onOpenPilot: () => void }) {
   const ref = useRef<HTMLElement>(null);
   const [hidden, setHidden] = useState(false);
+
   useScrollFx((_y, _m, dy) => {
     const y = window.scrollY;
-    const shouldHide = dy > 2 && y > 140;
-    const shouldShow = dy < -2 || y <= 140;
+    const shouldHide = dy > 3 && y > 140;
+    const shouldShow = dy < -3 || y <= 140;
     setHidden((prev) => {
       if (shouldHide && !prev) return true;
       if (shouldShow && prev) return false;
       return prev;
     });
   });
+
   return (
-    <header
-      ref={ref}
-      className={`v2nav${hidden ? " hide" : ""}`}
-    >
+    <header ref={ref} className={`v2nav${hidden ? " hide" : ""}`}>
       <div className="v2nav-in">
-        <div className="nav-brand-wrap">
-          <a
-            className="wordmark"
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToId("top");
-            }}
-            aria-label="SyncPro home"
-          >
-            <img
-              src="/logo.png"
-              alt="SyncPro"
-              className="wm-icon"
-            />
-            <span className="wm-text">SYNCPRO</span><span className="wm-dot">.</span>
+        {/* Brand Wordmark */}
+        <div className="nav-brand-group">
+          <a className="wordmark" href="#top" aria-label="SyncPro home">
+            SYNCPRO<span className="wm-dot">.</span>
           </a>
-          <div className="nav-status mono xs">
-            <span className="status-dot pulse" />
-            <span className="status-txt">ENGINE OPERATIONAL</span>
-          </div>
+          <span className="nav-telemetry mono xs dim">DEMO · P4 VIADUCT</span>
         </div>
 
-        <nav className="nav-links mono xs" aria-label="Quick navigation">
-          <a href="#narrative" onClick={(e) => { e.preventDefault(); scrollToId("narrative"); }}>
-            Schedule Gap
-          </a>
-          <a href="#capabilities" onClick={(e) => { e.preventDefault(); scrollToId("capabilities"); }}>
-            Pillars
-          </a>
-          <a href="#platform" onClick={(e) => { e.preventDefault(); scrollToId("platform"); }}>
-            Capabilities
-          </a>
-          <a href="#faq" onClick={(e) => { e.preventDefault(); scrollToId("faq"); }}>
-            FAQ
-          </a>
+        {/* Navigation Anchors */}
+        <nav className="nav-anchors mono xs dim" aria-label="Page sections">
+          <a href="#control-room">Control Room</a>
+          <a href="#forensic-gap">The Gap</a>
+          <a href="#exposure">Exposure</a>
+          <a href="#engines">4 Engines</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#faq">FAQ</a>
         </nav>
 
-        <div className="nav-cta-wrap">
+        {/* Primary CTA */}
+        <div className="nav-actions">
           <Magnetic>
-            <a
-              className="v2cta"
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToId("contact", true);
-              }}
-            >
-              Initialize Pilot <span aria-hidden="true">→</span>
-            </a>
+            <button type="button" className="v2cta mono xs" onClick={onOpenPilot}>
+              Request Pilot <span aria-hidden="true">→</span>
+            </button>
           </Magnetic>
         </div>
       </div>
@@ -190,15 +144,28 @@ export function Nav() {
 
 /* ---------------- brand marquee ---------------- */
 
+const MARQUEE_ITEMS = [
+  "ORACLE PRIMAVERA P6 (.XER)",
+  "ASTA POWERPROJECT (.PP)",
+  "MICROSOFT PROJECT (.MPP)",
+  "FIDIC CLAUSE 8.4 & 20.1",
+  "DCMA 14-POINT QUALITY",
+  "NEO4J CPM GRAPH",
+  "RERA SECTION 18",
+  "SCL DELAY PROTOCOL",
+  "FASTAPI SCHEDULER",
+  "CRYPTOGRAPHIC AUDIT LEDGER",
+];
+
 export function BrandMarquee() {
   return (
     <div className="brandband" aria-hidden="true">
       <div className="brandtrack">
         {[0, 1].map((half) => (
           <div className="brandrow" key={half}>
-            {Array.from({ length: 8 }, (_, i) => (
-              <span className="brandname" key={i}>
-                SYNCPRO
+            {MARQUEE_ITEMS.map((name, i) => (
+              <span className="brandname mono" key={`${half}-${i}`}>
+                {name} <span className="brand-dot">·</span>
               </span>
             ))}
           </div>
@@ -210,94 +177,49 @@ export function BrandMarquee() {
 
 /* ---------------- footer ---------------- */
 
-export function Footer() {
+export function Footer({ onOpenPilot }: { onOpenPilot: () => void }) {
   const r = useReveal();
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
-
-  async function handleFastSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email || status === "submitting") return;
-    setStatus("submitting");
-    try {
-      await submitWaitlist({
-        kind: "early-access",
-        name: email.split("@")[0] || "Executive",
-        email: email,
-        company: "Direct Enterprise Pilot Request",
-        role: "Project Controls Lead",
-        message: "Enterprise pilot request from syncpro.org",
-      });
-      setStatus("done");
-    } catch {
-      setStatus("done");
-    }
-  }
-
   return (
     <footer className="v2footer" id="contact">
       <div ref={r.ref} className={`foot-in ${r.shown ? "in" : ""}`}>
-        <MaskLines
-          as="h2"
-          className={`foot-h ${r.shown ? "in" : ""}`}
-          baseDelay={80}
-          lines={[
-            <>Stop discovering slips three weeks late.</>,
-            <>Take command of your critical path.</>,
-          ]}
-        />
+        {/* Foot Headline */}
+        <div className="foot-head-wrap">
+          <span className="mono xs dim mb-2 d-block">THE AI PROJECT CONTROLS ENGINEER</span>
+          <h2 className="foot-display">
+            Earn the right to update <br />
+            <span className="foot-italic">the construction schedule.</span>
+          </h2>
+        </div>
 
-        {/* 1-Line Pilot Form */}
-        <Reveal variant="up" delay={220} className="foot-formwrap">
-          {status === "done" ? (
-            <div className="foot-done mono xs">
-              <span className="foot-dot" /> Pilot request received. Our engineering lead will connect within 24 hours.
-            </div>
-          ) : (
-            <form onSubmit={handleFastSubmit} className="foot-form">
-              <input
-                type="email"
-                required
-                placeholder="Enter work email for pilot access..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="foot-inp mono xs"
-              />
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className="foot-btn mono xs"
-              >
-                {status === "submitting" ? "Requesting..." : "Initialize Pilot →"}
-              </button>
-            </form>
-          )}
-        </Reveal>
+        {/* Action Row */}
+        <div className="foot-action-row">
+          <button type="button" className="hero-btn mono xs" onClick={onOpenPilot}>
+            Request Enterprise Pilot <span aria-hidden="true">→</span>
+          </button>
+          <a className="foot-mail mono xs" href="mailto:founders@syncpro.org">
+            founders@syncpro.org <ArrowUpRight className="ico-xs" />
+          </a>
+        </div>
 
-        {/* Enterprise Security Trust Line */}
-        <Reveal variant="up" delay={280}>
-          <div className="foot-trust mono xs">
-            <span>🔒 DEDICATED TENANT ENCRYPTION</span>
-            <span className="pipe">·</span>
-            <span>ZERO PUBLIC MODEL TRAINING</span>
-            <span className="pipe">·</span>
-            <span>COMPLETE MASTER P6 ISOLATION</span>
+        {/* Institutional & Standard Badges */}
+        <div className="foot-badges-grid mono xs dim">
+          <div className="badge-cell">
+            <Award className="ico-xs acc" />
+            <span>INCUBATED AT NIRMAAN, IIT MADRAS</span>
           </div>
-        </Reveal>
+          <div className="badge-cell">
+            <ShieldCheck className="ico-xs ok" />
+            <span>SCL DELAY PROTOCOL &amp; FIDIC 8.4 / 20.1 COMPLIANT</span>
+          </div>
+          <div className="badge-cell">
+            <GitBranch className="ico-xs warn" />
+            <span>DCMA 14-POINT SCHEDULE INTEGRITY AUDIT</span>
+          </div>
+        </div>
 
-        <Reveal variant="up" delay={340}>
-          <p className="foot-mailrow">
-            <span className="mono xs dim" style={{ marginRight: 10 }}>DIRECT LINE:</span>
-            <Magnetic>
-              <a className="foot-mail" href="mailto:founders@syncpro.org">
-                founders@syncpro.org <span aria-hidden="true">↗</span>
-              </a>
-            </Magnetic>
-          </p>
-        </Reveal>
-
+        {/* Bottom Legal Meta */}
         <div className="foot-meta mono xs">
-          <span>RESEARCH-GROUNDED AT IIT MADRAS · BUILT FOR GLOBAL MEGAPROJECTS</span>
+          <span>SYNCPRO TECHNOLOGIES · SET FOR THE MEGAPROJECT ERA</span>
           <span>© 2026 SYNCPRO · ALL RIGHTS RESERVED</span>
         </div>
       </div>
