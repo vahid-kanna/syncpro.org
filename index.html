@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
+    <!--
+      Marks the document as JS-capable before first paint. The scroll-reveal
+      styles are scoped to `.js`, so if scripting is unavailable or fails, no
+      content is ever hidden. Inline and synchronous on purpose: adding this
+      class later would cause a visible flash of already-revealed content.
+    -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+
     <!-- Favicons & app icons -->
     <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />

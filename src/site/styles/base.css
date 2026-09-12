@@ -199,11 +199,15 @@ ul, ol { list-style: none; padding: 0; }
 }
 
 /* ---- 5. Motion -------------------------------------------------------- */
-.rv { opacity: 0; transform: translateY(16px); }
-.rv.in { opacity: 1; transform: none; transition: opacity .7s var(--ease), transform .7s var(--ease); }
+/* Reveal-on-scroll is scoped to `.js`, a class set by an inline script in the
+   document head. If JavaScript never runs, nothing is hidden and every section
+   renders normally — content is never left permanently invisible, and there is
+   no hidden-text exposure to crawlers. */
+.js .rv { opacity: 0; transform: translateY(16px); }
+.js .rv.in { opacity: 1; transform: none; transition: opacity .7s var(--ease), transform .7s var(--ease); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rv { opacity: 1; transform: none; }
+  .js .rv { opacity: 1; transform: none; }
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
 }
