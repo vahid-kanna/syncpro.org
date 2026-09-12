@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#000000" />
+    <title>404 — Page not found | SyncPro</title>
+    <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #000000;
+        --panel: #0a0a0b;
+        --line: rgba(255, 255, 255, 0.09);
+        --txt: #f4f4f1;
+        --mut: #8a8f98;
+        --acc: #f5a623;
+        --mono: "JetBrains Mono", ui-monospace, monospace;
+        --serif: "Newsreader", Georgia, serif;
+      }
+      *,
+      *::before,
+      *::after { box-sizing: border-box; }
+      * { margin: 0; }
+      body {
+        background: var(--bg);
+        color: var(--txt);
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+        -webkit-font-smoothing: antialiased;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 32px 32px;
+        pointer-events: none;
+      }
+      .wrap {
+        position: relative;
+        max-width: 620px;
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+        padding: 44px 40px;
+      }
+      .code {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        color: var(--acc);
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: clamp(30px, 5vw, 44px);
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+      }
+      h1 em {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 480;
+        color: var(--acc);
+      }
+      p {
+        margin-top: 18px;
+        color: var(--mut);
+        max-width: 46ch;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 32px;
+      }
+      a {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 12px 22px;
+        transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+      }
+      a.primary {
+        background: var(--acc);
+        color: #07080a;
+        font-weight: 700;
+      }
+      a.primary:hover { background: #fbbf24; transform: translateY(-1px); }
+      a.ghost {
+        border: 1px solid var(--line);
+        color: var(--mut);
+      }
+      a.ghost:hover { border-color: var(--acc); color: var(--acc); }
+      .meta {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        color: var(--mut);
+        margin-top: 36px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <p class="code">ERROR 404 · ROUTE NOT IN BASELINE</p>
+      <h1>This page is not on the <em>critical path.</em></h1>
+      <p>
+        The address you requested does not exist on syncpro.org. Every activity we
+        track has a logic link — this one does not. Head back to the schedule.
+      </p>
+      <div class="actions">
+        <a class="primary" href="/">Return to SyncPro →</a>
+        <a class="ghost" href="mailto:founders@syncpro.org">founders@syncpro.org</a>
+      </div>
+      <p class="meta">SYNCPRO · SCHEDULE INTELLIGENCE ENGINE</p>
+    </main>
+  </body>
+</html>

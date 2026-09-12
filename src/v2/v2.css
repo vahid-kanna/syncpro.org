@@ -13,7 +13,7 @@
   --soft:  rgba(255, 255, 255, 0.05);
   --txt:   #F4F4F1;
   --mut:   #8A8F98;
-  --faint: #55595F;
+  --faint: #55595F; /* 2.98:1 on --bg — decorative/border use only, never text */
   --ghost: #16171B;
   --acc:   #F5A623;
   --bad:   #F87171;
@@ -80,6 +80,9 @@ main, header, footer {
   letter-spacing: 0.22em;
   color: var(--mut);
 }
+/* Section eyebrow labels sit directly under a masked-line serif heading.
+   Without an explicit margin they collide with the heading descenders. */
+.cap-kick { margin-top: 22px; }
 em {
   font-family: "Newsreader", Georgia, serif;
   font-style: italic;
@@ -108,7 +111,9 @@ em {
 .mlines .mline {
   display: block;
   overflow: hidden;
-  padding-block: 0.05em;
+  /* Descender room: italic Newsreader serif has deep descenders (y, g, p) that
+     were being clipped by overflow:hidden at 0.05em. */
+  padding-block: 0.16em;
 }
 .mlines .mline-in {
   display: block;
@@ -182,7 +187,7 @@ em {
   gap: 8px;
   color: var(--ok);
   letter-spacing: 0.14em;
-  font-size: 10px;
+  font-size: 11px;
   border-left: 1px solid var(--line);
   padding-left: 16px;
 }
@@ -370,14 +375,14 @@ em {
   letter-spacing: -0.02em;
 }
 .telem-lbl {
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   color: var(--txt);
   font-weight: 600;
 }
 .telem-sub {
   font-size: 11px;
-  color: var(--faint);
+  color: var(--mut);
 }
 
 /* ---------- sections ---------- */
@@ -469,9 +474,9 @@ em {
   padding: 13px 18px 9px;
   font-family: "JetBrains Mono", monospace;
   font-weight: 500;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
-  color: var(--faint);
+  color: var(--mut);
   border-bottom: 1px solid var(--soft);
 }
 .xer td { padding: 12px 18px; border-bottom: 1px solid var(--soft); color: #C9CCD1; transition: color 0.2s; }
@@ -479,7 +484,7 @@ em {
 .xer tbody tr:hover { background: rgba(245, 166, 35, 0.04); }
 .xer tbody tr:hover td { color: #FFFFFF; }
 .xer tr:last-child td { border-bottom: none; }
-.xer td.mono { font-size: 12px; color: var(--faint); }
+.xer td.mono { font-size: 12px; color: var(--mut); }
 
 .active-row {
   background: rgba(245, 166, 35, 0.08) !important;
@@ -490,7 +495,7 @@ em {
 }
 .inspect-tag {
   margin-left: 10px;
-  font-size: 9px;
+  font-size: 11px;
   padding: 2px 7px;
   background: rgba(245, 166, 35, 0.16);
   border: 1px solid rgba(245, 166, 35, 0.35);
@@ -514,7 +519,7 @@ em {
   margin-bottom: 10px;
   color: var(--mut);
   letter-spacing: 0.12em;
-  font-size: 10px;
+  font-size: 11px;
 }
 .rec-header-left {
   display: flex;
@@ -553,7 +558,7 @@ em {
   box-shadow: 0 0 8px var(--acc);
 }
 .reconciler-status {
-  font-size: 9.5px;
+  font-size: 11px;
   color: var(--ok);
   background: rgba(52, 211, 153, 0.12);
   border: 1px solid rgba(52, 211, 153, 0.3);
@@ -622,7 +627,7 @@ em {
   font-size: 11px;
 }
 .query-badge {
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   color: var(--acc);
   background: rgba(245, 166, 35, 0.12);
@@ -641,7 +646,7 @@ em {
 .query-tag {
   display: block;
   color: var(--acc);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   font-weight: 700;
   margin-bottom: 4px;
@@ -719,7 +724,7 @@ em {
 }
 .cap-n { color: var(--acc); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; }
 .cap-badge {
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   color: var(--acc);
   background: rgba(245, 166, 35, 0.08);
@@ -780,7 +785,7 @@ em {
 }
 .stackname::before { content: "// "; color: var(--acc); }
 .stack-tag {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   color: var(--mut);
   background: rgba(255, 255, 255, 0.04);
@@ -848,7 +853,7 @@ em {
   gap: 18px;
 }
 .faq-n {
-  color: var(--faint);
+  color: var(--mut);
   font-size: 12px;
   flex-shrink: 0;
 }
@@ -901,15 +906,19 @@ em {
 }
 .foot-formwrap {
   margin-top: 32px;
-  max-width: 500px;
+  max-width: 620px;
 }
+
+/* Qualification form: enquiry-type toggle + 2x2 field grid + submit.
+   Captures the name / company / role the submit payload has always expected. */
 .foot-form {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 14px;
   background: var(--panel2);
   border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 4px 6px 4px 18px;
+  border-radius: 16px;
+  padding: 16px;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .foot-form:focus-within,
@@ -923,24 +932,82 @@ em {
   50% { box-shadow: 0 0 36px rgba(245, 166, 35, 0.65); }
   100% { box-shadow: 0 0 24px rgba(245, 166, 35, 0.2); }
 }
-.foot-inp {
+
+.foot-kind {
+  display: flex;
+  gap: 8px;
+}
+.foot-kindbtn {
   flex: 1;
   background: transparent;
-  border: none;
-  outline: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 12px;
+  color: var(--mut);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.foot-kindbtn:hover {
+  color: var(--txt);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.foot-kindbtn.on {
+  background: rgba(245, 166, 35, 0.12);
+  border-color: var(--acc);
+  color: var(--acc);
+}
+
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.foot-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+.foot-flabel {
+  color: var(--mut);
+  letter-spacing: 0.14em;
+}
+
+.foot-inp {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 10px 12px;
   color: var(--txt);
   font-size: 13px;
   letter-spacing: 0.02em;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.foot-inp:focus {
+  border-color: var(--acc);
 }
 .foot-inp::placeholder {
-  color: var(--faint);
+  color: var(--mut);
+  opacity: 0.8;
 }
+.foot-sel {
+  appearance: none;
+  cursor: pointer;
+}
+.foot-sel option {
+  background: var(--panel2);
+  color: var(--txt);
+}
+
 .foot-btn {
   background: var(--acc);
   color: #07080A;
   border: none;
   border-radius: 999px;
-  padding: 10px 20px;
+  padding: 12px 22px;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -955,6 +1022,15 @@ em {
 .foot-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.foot-link {
+  color: var(--mut);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.foot-link:hover {
+  color: var(--acc);
 }
 .foot-done {
   display: flex;
@@ -982,10 +1058,10 @@ em {
   margin-top: 22px;
   color: var(--mut);
   letter-spacing: 0.12em;
-  font-size: 10px;
+  font-size: 11px;
 }
 .foot-trust .pipe {
-  color: var(--faint);
+  color: var(--mut);
 }
 .foot-mailrow {
   margin-top: 28px;
@@ -1011,7 +1087,7 @@ em {
   margin-top: 54px;
   padding-top: 20px;
   border-top: 1px solid var(--soft);
-  color: var(--faint);
+  color: var(--mut);
   letter-spacing: 0.16em;
 }
 
@@ -1125,7 +1201,7 @@ em {
     padding-top: 100px;
     padding-bottom: 34px;
   }
-  .hero-lbl { margin-bottom: 20px; font-size: 10px; }
+  .hero-lbl { margin-bottom: 20px; font-size: 11px; }
   .hero-tracer { width: 36px; margin-right: 12px; }
   .hero-h { font-size: clamp(32px, 8.8vw, 48px); letter-spacing: -0.03em; }
   .hero-sub { font-size: 14.5px; margin-top: 20px; line-height: 1.65; }
@@ -1149,12 +1225,12 @@ em {
   .hero-telemetry { grid-template-columns: 1fr 1fr; }
   .telem-cell { padding: 14px 14px; gap: 2px; }
   .telem-val { font-size: 18px; }
-  .telem-lbl { font-size: 9px; }
+  .telem-lbl { font-size: 11px; }
   .telem-sub { display: none; }
 
   .sec { padding: 50px 16px; }
   .gap-h { font-size: clamp(26px, 7vw, 40px); }
-  .sechead { font-size: 10px; margin-bottom: 20px; }
+  .sechead { font-size: 11px; margin-bottom: 20px; }
   .gap-punch { font-size: 17px; margin-top: 24px; }
 
   .artifact { margin: 24px 0 0; border-radius: 10px; }
@@ -1162,7 +1238,7 @@ em {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-    font-size: 9px;
+    font-size: 11px;
     padding: 10px 14px;
   }
   .xer th, .xer td { padding: 10px 12px; font-size: 11.5px; }
@@ -1172,7 +1248,7 @@ em {
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
-    font-size: 9px;
+    font-size: 11px;
   }
   .reconciler-row {
     flex-direction: column;
@@ -1188,7 +1264,7 @@ em {
   .query-badge { align-self: flex-start; }
 
   .atotals { padding: 14px; gap: 8px; }
-  .verdict { font-size: 10px; word-break: break-word; }
+  .verdict { font-size: 11px; word-break: break-word; }
 
   .stackgrid { grid-template-columns: 1fr; }
   .stackcell { padding: 22px 18px; }
@@ -1207,16 +1283,15 @@ em {
   .foot-h { font-size: clamp(28px, 7.5vw, 42px); }
   .foot-formwrap { margin-top: 24px; max-width: 100%; }
   .foot-form {
-    flex-direction: column;
     border-radius: 14px;
-    padding: 8px;
-    gap: 8px;
-    align-items: stretch;
+    padding: 12px;
+    gap: 12px;
   }
-  .foot-inp { width: 100%; padding: 8px 10px; }
-  .foot-btn { width: 100%; text-align: center; padding: 11px 16px; }
+  .foot-grid { grid-template-columns: 1fr; gap: 10px; }
+  .foot-kindbtn { padding: 9px 8px; }
+  .foot-btn { width: 100%; text-align: center; padding: 12px 16px; }
   .foot-trust {
-    font-size: 9px;
+    font-size: 11px;
     gap: 6px;
     flex-direction: column;
     align-items: flex-start;
@@ -1231,7 +1306,7 @@ em {
   .foot-meta {
     flex-direction: column;
     gap: 6px;
-    font-size: 9px;
+    font-size: 11px;
     margin-top: 36px;
   }
 }
