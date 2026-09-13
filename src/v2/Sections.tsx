@@ -1,13 +1,13 @@
 /**
  * SyncPro v2 — sections with humanized editorial copy,
- * hero telemetry ticker, and the redesigned Schedule Divergence Radar.
- * Replaces the dense, cluttered table with a stunning, high-contrast
- * dual-horizon comparison and interactive latency timeline slider. (Zero 3D).
+ * hero telemetry ticker, and Section 01: "The Two Realities".
+ * Features 3D TiltCards, cursor spotlight luminescence,
+ * and the kinetic Reconciliation Bridge between Office P6 and Living Field.
  */
 import { useState } from "react";
 import { Reveal, MaskLines, scrollToId } from "./Chrome";
-import { ScrubHeading, Magnetic } from "./Motion";
-import { Clock, Sliders, FileText } from "lucide-react";
+import { ScrubHeading, Magnetic, Tilt, CardSpotlight } from "./Motion";
+import { FileText, ShieldCheck, Zap, Lock, Activity, Clock } from "lucide-react";
 
 /* ================= HERO ================= */
 
@@ -94,91 +94,86 @@ export function Hero() {
   );
 }
 
-/* ============ REDESIGNED 01: SCHEDULE DIVERGENCE RADAR ============ */
+/* ============ SECTION 01: THE TWO REALITIES ============ */
 
-interface Scenario {
+interface RealityScenario {
   id: string;
   name: string;
+  code: string;
   badge: string;
-  activityCode: string;
-  p6Date: string;
+  // Reality 01: Contractual Office (.XER)
+  p6Milestone: string;
   p6Float: string;
-  syncproDate: string;
-  syncproFloat: string;
-  syncproFloatTone: "bad" | "warn" | "ok";
-  evidenceNote: string;
-  delayExposure: string;
-  remedyAction: string;
+  p6Status: string;
+  p6Insight: string;
+  // Reality 02: Living Field Ground Truth
+  siteForecast: string;
+  siteFloat: string;
+  siteTone: "bad" | "warn" | "ok";
+  siteEvidence: string;
+  siteExposure: string;
+  // Reconciliation Bridge
+  bridgeConfidence: string;
+  bridgeDelta: string;
 }
 
-const SCENARIOS: Scenario[] = [
+const REALITY_SCENARIOS: RealityScenario[] = [
   {
     id: "pt-slab",
     name: "Level 18 Post-Tension Slab",
-    badge: "MATERIAL SUPPLY DISRUPTION",
-    activityCode: "A1230",
-    p6Date: "Dec 08",
-    p6Float: "0d (Reported On Plan)",
-    syncproDate: "Dec 20 (+12 Days)",
-    syncproFloat: "-8 Days Exhausted",
-    syncproFloatTone: "bad",
-    evidenceNote: "Challan #SN882: 42T prestressing strand fabrication held 4 days at vendor yard.",
-    delayExposure: "₹14.4 Cr",
-    remedyAction: "Formwork stripping parallelized across Grid C–D · 6 days float recovered",
+    code: "A1230",
+    badge: "MATERIAL SUPPLY DELAY",
+    p6Milestone: "Dec 08",
+    p6Float: "0d · Balanced",
+    p6Status: "Reported On Plan",
+    p6Insight: "The monthly P6 snapshot assumes continuous strand delivery. Stalls at the fabricator yard remain invisible until month-end cutoffs.",
+    siteForecast: "Dec 20 (+12d)",
+    siteFloat: "-8d Float Deficit",
+    siteTone: "bad",
+    siteEvidence: "Challan #SN882: 42T prestressing strand fabrication held 4 days at fabricator. Deshoring stalled.",
+    siteExposure: "₹14.4 Cr Exposure at Risk",
+    bridgeConfidence: "98.4%",
+    bridgeDelta: "+12 Days Critical Divergence",
   },
   {
     id: "mep-risers",
-    name: "MEP Chilled Water Risers L04–L18",
-    badge: "ENGINEERING REVISION CLASH",
-    activityCode: "A1240",
-    p6Date: "Dec 11",
-    p6Float: "+3d (Reported Buffer)",
-    syncproDate: "Dec 27 (+16 Days)",
-    syncproFloat: "-11 Days Critical Slip",
-    syncproFloatTone: "bad",
-    evidenceNote: "Consultant transmittal Rev-04 shifted shaft clearance by 300mm on Level 09.",
-    delayExposure: "₹18.2 Cr",
-    remedyAction: "Contemporaneous FIDIC 8.4 claim notice auto-drafted before 28-day time-bar",
+    name: "MEP Chilled Water Risers",
+    code: "A1240",
+    badge: "CONSULTANT DRAWING REVISION",
+    p6Milestone: "Dec 11",
+    p6Float: "+3d · Safe Buffer",
+    p6Status: "Buffer Intact",
+    p6Insight: "Office baseline reflects initial IFC drawings. Engineering shaft coordination clashes have not been incorporated into the master schedule.",
+    siteForecast: "Dec 27 (+16d)",
+    siteFloat: "-11d Critical Slip",
+    siteTone: "bad",
+    siteEvidence: "Consultant transmittal Rev-04 shifted riser shaft clearance by 300mm on Level 09. Erection halted.",
+    siteExposure: "₹18.2 Cr Delay Liability",
+    bridgeConfidence: "97.8%",
+    bridgeDelta: "+16 Days Critical Divergence",
   },
   {
     id: "secant-piles",
-    name: "Secant Wall Foundation Piling",
-    badge: "INDEPENDENT QA/QC CLEARANCE",
-    activityCode: "A1210",
-    p6Date: "Oct 12",
-    p6Float: "+2d (Safe Buffer)",
-    syncproDate: "Oct 10 (-2 Days Ahead)",
-    syncproFloat: "+4d Float Preserved",
-    syncproFloatTone: "ok",
-    evidenceNote: "32/32 ultrasonic pile integrity logs cross-referenced with concrete batch tickets #2201–#2232.",
-    delayExposure: "₹0.00",
-    remedyAction: "As-built verification sealed to immutable audit ledger with cryptographic hash",
+    name: "Secant Wall Foundations",
+    code: "A1210",
+    badge: "QA/QC INTEGRITY CLEARANCE",
+    p6Milestone: "Oct 12",
+    p6Float: "+2d · On Track",
+    p6Status: "In Progress",
+    p6Insight: "Awaiting physical testing certificates. Float calculations rely on verbal site superintendent updates.",
+    siteForecast: "Oct 10 (-2d)",
+    siteFloat: "+4d Float Safe",
+    siteTone: "ok",
+    siteEvidence: "32/32 ultrasonic pile integrity logs (ASTM D5882) cross-referenced with concrete batch tickets #2201–#2232.",
+    siteExposure: "₹0.00 Risk (Ahead of Plan)",
+    bridgeConfidence: "99.2%",
+    bridgeDelta: "-2 Days Early Completion",
   },
 ];
 
 export function GapSection() {
-  const [activeScenarioId, setActiveScenarioId] = useState("pt-slab");
-  const [latencyDay, setLatencyDay] = useState(14); // slider from Day 1 to Day 28
-
-  const currentScenario = SCENARIOS.find((s) => s.id === activeScenarioId) || SCENARIOS[0];
-
-  // Dynamic cost calculation based on detection latency day
-  let latencyStatus = "DAY 14 · FLOAT BUFFER DEPLETED";
-  let latencyCost = "₹1.8 Cr";
-  let latencyBadgeClass = "warn";
-  let latencyAction = "Critical path float eaten. Acceleration crews required to prevent handover slip.";
-
-  if (latencyDay <= 5) {
-    latencyStatus = `DAY ${latencyDay} · EARLY DETECTION WINDOW`;
-    latencyCost = "₹15 Lakhs";
-    latencyBadgeClass = "ok";
-    latencyAction = "SyncPro flags delivery stall on day 3. Minor sequence rebalancing fully recovers float.";
-  } else if (latencyDay >= 22) {
-    latencyStatus = `DAY ${latencyDay} · MONTH-END P6 REPORT RUN`;
-    latencyCost = currentScenario.delayExposure;
-    latencyBadgeClass = "bad";
-    latencyAction = "Contractual milestone missed. Liquidated damages accrued. Subcontractor dispute locked in.";
-  }
+  const [activeId, setActiveId] = useState("pt-slab");
+  const activeScenario = REALITY_SCENARIOS.find((s) => s.id === activeId) || REALITY_SCENARIOS[0];
 
   return (
     <section className="sec wrap st-wrap" id="narrative">
@@ -192,176 +187,169 @@ export function GapSection() {
 
       <div className="sechead mono xs center-head">
         <span className="num">01</span>
-        <span>THE DETECTION GAP · LIVE SCHEDULE DIVERGENCE RADAR</span>
+        <span>THE TWO REALITIES · SYNCHRONIZING CONTRACT WITH GROUND TRUTH</span>
       </div>
 
-      <Reveal variant="up" delay={120}>
-        <div className="divergence-container spotlight-card">
-          {/* Top Scenario Selector Bar */}
-          <div className="radar-topbar mono xs">
-            <span className="radar-label dim">SELECT SITE INCIDENT:</span>
-            <div className="radar-chips">
-              {SCENARIOS.map((sc) => {
-                const isActive = sc.id === activeScenarioId;
-                return (
-                  <button
-                    key={sc.id}
-                    type="button"
-                    className={`radar-chip ${isActive ? "active" : ""}`}
-                    onClick={() => setActiveScenarioId(sc.id)}
-                  >
-                    <span className={`chip-dot ${sc.syncproFloatTone}`} />
-                    <span className="chip-name">{sc.name}</span>
-                    <span className="chip-code dim">{sc.activityCode}</span>
-                  </button>
-                );
-              })}
+      {/* Scenario Selector Chips */}
+      <div className="two-realities-selector mono xs">
+        <span className="selector-lbl dim">SELECT PROJECT SCENARIO:</span>
+        <div className="selector-chips">
+          {REALITY_SCENARIOS.map((sc) => {
+            const isSel = sc.id === activeId;
+            return (
+              <button
+                key={sc.id}
+                type="button"
+                className={`scenario-pill ${isSel ? "active" : ""}`}
+                onClick={() => setActiveId(sc.id)}
+              >
+                <span className={`pill-dot ${sc.siteTone}`} />
+                <span className="pill-name">{sc.name}</span>
+                <span className="pill-code dim">{sc.code}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* The 3D Composition: Two Juxtaposed Realities with Reconciliation Bridge */}
+      <Reveal variant="up" delay={140}>
+        <div className="two-realities-wrapper">
+          {/* Card 01: The Contractual Office (3D Tilt Card) */}
+          <div className="reality-col">
+            <Tilt max={6}>
+              <CardSpotlight className="reality-card reality-office">
+                <div className="reality-inner-3d">
+                  <div className="card-top-row mono xs">
+                    <div className="card-tag dim">
+                      <FileText className="ico-xs" />
+                      <span>REALITY 01 // CONTRACTUAL OFFICE</span>
+                    </div>
+                    <span className="airgap-badge">P6 (.XER) · FROZEN</span>
+                  </div>
+
+                  <div className="cad-blueprint-overlay" aria-hidden="true" />
+
+                  <div className="reality-metric-box">
+                    <span className="metric-tag mono xs dim">REPORTED CONTRACT MILESTONE</span>
+                    <div className="metric-primary mono">
+                      {activeScenario.p6Milestone}
+                    </div>
+                    <div className="metric-sub-row mono xs">
+                      <span className="dim">REPORTED FLOAT: <strong className="ok">{activeScenario.p6Float}</strong></span>
+                      <span className="dim">STATUS: <strong className="txt">{activeScenario.p6Status}</strong></span>
+                    </div>
+                  </div>
+
+                  <div className="reality-description">
+                    <p className="desc-text xs dim">
+                      {activeScenario.p6Insight}
+                    </p>
+                  </div>
+
+                  <div className="float-3d-badge mono xs">
+                    <Lock className="ico-xs ok" />
+                    <span>MASTER PROGRAM PRESERVED · ZERO AUTO-OVERWRITES</span>
+                  </div>
+                </div>
+              </CardSpotlight>
+            </Tilt>
+          </div>
+
+          {/* Center Connector: The Reconciliation Bridge */}
+          <div className="bridge-conduit-container">
+            <div className="conduit-line" aria-hidden="true">
+              <span className="conduit-pulse conduit-pulse-left" />
+              <span className="conduit-pulse conduit-pulse-right" />
+            </div>
+            <div className="bridge-emblem mono xs">
+              <div className="emblem-core">
+                <Zap className="ico-xs acc" />
+                <span className="emblem-title">SYNCPRO BRIDGE</span>
+              </div>
+              <span className="emblem-meta ok">{activeScenario.bridgeConfidence} CORROBORATED</span>
             </div>
           </div>
 
-          {/* Dual Perspective: P6 Mirage vs SyncPro Reality */}
-          <div className="dual-perspective-grid">
-            {/* Left Card: Monthly Primavera P6 View */}
-            <div className="perspective-card p6-mirage">
-              <div className="perspective-header mono xs">
-                <div className="header-tag dim">
-                  <FileText className="ico-xs" />
-                  <span>ORACLE PRIMAVERA P6 (.XER)</span>
-                </div>
-                <span className="header-status dim">STATIC MONTHLY PDF</span>
-              </div>
-
-              <div className="perspective-content">
-                <div className="metric-headline">
-                  <span className="metric-label mono xs dim">REPORTED MILESTONE</span>
-                  <span className="metric-val">{currentScenario.p6Date}</span>
-                </div>
-
-                <div className="metric-split mono xs">
-                  <div className="split-item">
-                    <span className="dim">REPORTED FLOAT</span>
-                    <span className="ok fw-bold">{currentScenario.p6Float}</span>
-                  </div>
-                  <div className="split-item">
-                    <span className="dim">CONTRACT RISK</span>
-                    <span className="ok">₹0 EXPOSURE</span>
-                  </div>
-                </div>
-
-                {/* Visual Static Baseline Bar */}
-                <div className="timeline-visual">
-                  <div className="timeline-track">
-                    <div className="track-bar static-baseline" style={{ width: "70%" }}>
-                      <span className="track-label mono xs">Target: {currentScenario.p6Date}</span>
+          {/* Card 02: The Living Field Reality (3D Tilt Card) */}
+          <div className="reality-col">
+            <Tilt max={6}>
+              <CardSpotlight className="reality-card reality-field">
+                <div className="reality-inner-3d">
+                  <div className="card-top-row mono xs">
+                    <div className="card-tag acc">
+                      <Activity className="ico-xs acc" />
+                      <span>REALITY 02 // LIVING GROUND TRUTH</span>
                     </div>
-                  </div>
-                </div>
-
-                <p className="perspective-note xs dim">
-                  Master contractual program remains unaware of site delivery stalls until monthly status cutoff.
-                </p>
-              </div>
-            </div>
-
-            {/* Right Card: SyncPro Live Shadow Ground Truth */}
-            <div className="perspective-card syncpro-truth">
-              <div className="perspective-header mono xs">
-                <div className="header-tag acc">
-                  <span className="pulse-dot-acc" />
-                  <span>SYNCPRO SHADOW FORECAST</span>
-                </div>
-                <span className={`header-status ${currentScenario.syncproFloatTone}`}>
-                  CONTINUOUS GROUND TRUTH
-                </span>
-              </div>
-
-              <div className="perspective-content">
-                <div className="metric-headline">
-                  <span className="metric-label mono xs dim">CORROBORATED HANDOVER</span>
-                  <span className={`metric-val ${currentScenario.syncproFloatTone}`}>
-                    {currentScenario.syncproDate}
-                  </span>
-                </div>
-
-                <div className="metric-split mono xs">
-                  <div className="split-item">
-                    <span className="dim">TRUE CRITICAL FLOAT</span>
-                    <span className={`${currentScenario.syncproFloatTone} fw-bold`}>
-                      {currentScenario.syncproFloat}
+                    <span className={`live-badge ${activeScenario.siteTone}`}>
+                      SHADOW CPM · LIVE
                     </span>
                   </div>
-                  <div className="split-item">
-                    <span className="dim">EXPOSURE AT RISK</span>
-                    <span className={`${currentScenario.syncproFloatTone === "bad" ? "bad" : "ok"} fw-bold`}>
-                      {currentScenario.delayExposure}
-                    </span>
-                  </div>
-                </div>
 
-                {/* Visual Dynamic Slippage Bar */}
-                <div className="timeline-visual">
-                  <div className="timeline-track">
-                    <div
-                      className={`track-bar dynamic-shadow ${currentScenario.syncproFloatTone}`}
-                      style={{ width: currentScenario.syncproFloatTone === "bad" ? "88%" : "68%" }}
-                    >
-                      <span className="track-label mono xs">
-                        Live Forecast: {currentScenario.syncproDate}
-                      </span>
+                  <div className="telemetry-mesh-overlay" aria-hidden="true" />
+
+                  <div className="reality-metric-box">
+                    <span className="metric-tag mono xs dim">CORROBORATED SHADOW FORECAST</span>
+                    <div className={`metric-primary mono ${activeScenario.siteTone}`}>
+                      {activeScenario.siteForecast}
+                    </div>
+                    <div className="metric-sub-row mono xs">
+                      <span className="dim">TRUE FLOAT: <strong className={activeScenario.siteTone}>{activeScenario.siteFloat}</strong></span>
+                      <span className="dim">EXPOSURE: <strong className={activeScenario.siteTone === "bad" ? "bad" : "ok"}>{activeScenario.siteExposure}</strong></span>
                     </div>
                   </div>
-                </div>
 
-                <div className="evidence-pill mono xs">
-                  <Clock className="ico-xs acc" />
-                  <span className="evidence-txt">{currentScenario.evidenceNote}</span>
+                  <div className="reality-evidence-box mono xs">
+                    <div className="evidence-header">
+                      <Clock className="ico-xs acc" />
+                      <span>DAILY SITE EVIDENCE (UNLINKED TO P6)</span>
+                    </div>
+                    <p className="evidence-text">
+                      {activeScenario.siteEvidence}
+                    </p>
+                  </div>
+
+                  <div className="float-3d-badge mono xs highlight-badge">
+                    <ShieldCheck className="ico-xs acc" />
+                    <span>DIVERGENCE DETECTED 3 WEEKS EARLY · AUDIT SHIELDED</span>
+                  </div>
                 </div>
-              </div>
+              </CardSpotlight>
+            </Tilt>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Synthesis Outcome Deck */}
+      <Reveal variant="up" delay={200}>
+        <div className="synthesis-deck mono xs">
+          <div className="synthesis-cell">
+            <span className="cell-num acc">01</span>
+            <div className="cell-text">
+              <strong className="cell-title">CONTRACTUAL P6 AIR-GAP</strong>
+              <span className="cell-desc dim">The master .xer program remains 100% untouched. Planners hold exclusive authorization.</span>
             </div>
           </div>
 
-          {/* Interactive Latency Slider: Demonstrate the Cost of Delay Over Time */}
-          <div className="latency-slider-panel">
-            <div className="latency-header mono xs">
-              <div className="latency-title">
-                <Sliders className="ico-xs acc" />
-                <span>INSPECT SCHEDULE LATENCY · DRAG TO REVEAL COST OF TIME-LAG</span>
-              </div>
-              <span className={`latency-badge ${latencyBadgeClass}`}>{latencyStatus}</span>
+          <div className="synthesis-cell">
+            <span className="cell-num acc">02</span>
+            <div className="cell-text">
+              <strong className="cell-title">3-WEEK RECOVERY HEADROOM</strong>
+              <span className="cell-desc dim">Catch critical path divergence on Day 3 instead of Day 28, preserving float recovery options.</span>
             </div>
+          </div>
 
-            <div className="slider-wrapper">
-              <input
-                type="range"
-                min={1}
-                max={28}
-                value={latencyDay}
-                onChange={(e) => setLatencyDay(Number(e.target.value))}
-                className="latency-range-slider"
-                aria-label="Detection latency in days"
-              />
-              <div className="slider-labels mono xs dim">
-                <span>Day 01 · Site Stall Begins</span>
-                <span className="active-day-label acc">Selected: Day {latencyDay}</span>
-                <span>Day 28 · Month-End P6 PDF</span>
-              </div>
-            </div>
-
-            <div className="latency-impact-row mono xs">
-              <div className="impact-col">
-                <span className="dim">ESTIMATED COST TO MITIGATE:</span>
-                <span className={`impact-cost ${latencyBadgeClass} fw-bold`}>{latencyCost}</span>
-              </div>
-              <div className="impact-col right">
-                <span className="dim">SCHEDULE GOVERNANCE STATUS:</span>
-                <span className="impact-action dim">{latencyAction}</span>
-              </div>
+          <div className="synthesis-cell">
+            <span className="cell-num acc">03</span>
+            <div className="cell-text">
+              <strong className="cell-title">FIDIC &amp; NHAI CLAIMS DEFENSE</strong>
+              <span className="cell-desc dim">Date-stamped evidence automatically compiles into EOT notices before contractual time-bars close.</span>
             </div>
           </div>
         </div>
       </Reveal>
 
-      <Reveal variant="up" delay={220}>
+      <Reveal variant="up" delay={260}>
         <p className="gap-punch center">
           The reality was documented on site from day one. <em>The master schedule just never saw it.</em>
         </p>
