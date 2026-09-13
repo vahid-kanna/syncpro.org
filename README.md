@@ -7,7 +7,6 @@
 [![Framework](https://img.shields.io/badge/Framework-React%2019%20%2B%20TypeScript-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
 [![Bundler](https://img.shields.io/badge/Bundler-Vite%206-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
 [![3D Engine](https://img.shields.io/badge/3D%20Engine-Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org)
-[![License](https://img.shields.io/badge/License-Proprietary%20%28All%20Rights%20Reserved%29-red?style=for-the-badge)](#-license)
 
 **The Autonomous Schedule Intelligence & Delay Prediction Platform for Infrastructure Megaprojects.**
 

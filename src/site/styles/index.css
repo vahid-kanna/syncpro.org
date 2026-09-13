@@ -1,8 +1,0 @@
-/* ============================================================================
-   SyncPro · syncpro.org — stylesheet entry
-   Load order matters: tokens/reset → components → sections.
-   ========================================================================== */
-@import "./base.css";
-@import "./components.css";
-@import "./sections.css";
-@import "./effects.css";

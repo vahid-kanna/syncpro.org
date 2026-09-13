@@ -4,7 +4,7 @@
  */
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useScrollFx, Magnetic } from "./Motion";
-import { submitWaitlist, CONTACT_EMAIL, type WaitlistKind } from "../lib/waitlist";
+import { submitWaitlist } from "../lib/waitlist";
 
 /* ---------------- smooth scroll helper (no hash in URL) ---------------- */
 
@@ -103,9 +103,6 @@ export function MaskLines({
         <span className="mline" key={i}>
           <span className="mline-in" style={{ transitionDelay: `${baseDelay + i * step}ms` }}>
             {l}
-            {/* Separate the block lines for text extraction / screen readers —
-                without this, textContent reads "SyncProSchedule Intelligence". */}
-            {i < lines.length - 1 ? " " : null}
           </span>
         </span>
       ))}
@@ -213,44 +210,23 @@ export function BrandMarquee() {
 
 /* ---------------- footer ---------------- */
 
-const ROLES = [
-  "Project Controls Lead",
-  "Planning Engineer",
-  "Project Director / Sponsor",
-  "Consultant / PMC",
-  "Investor / Advisor",
-  "Other",
-];
-
-const ENQUIRY_KINDS: Array<{ k: WaitlistKind; label: string }> = [
-  { k: "early-access", label: "Pilot access" },
-  { k: "investor", label: "Investor / advisor" },
-];
-
 export function Footer() {
   const r = useReveal();
-  const [kind, setKind] = useState<WaitlistKind>("early-access");
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [company, setCompany] = useState("");
-  const [role, setRole] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleFastSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email || status === "submitting") return;
     setStatus("submitting");
     try {
       await submitWaitlist({
-        kind,
-        name: name.trim() || email.split("@")[0] || "Executive",
-        email: email.trim(),
-        company: company.trim() || "Not specified",
-        role: role || "Not specified",
-        message:
-          kind === "investor"
-            ? "Investor / advisor enquiry from syncpro.org"
-            : "Enterprise pilot request from syncpro.org",
+        kind: "early-access",
+        name: email.split("@")[0] || "Executive",
+        email: email,
+        company: "Direct Enterprise Pilot Request",
+        role: "Project Controls Lead",
+        message: "Enterprise pilot request from syncpro.org",
       });
       setStatus("done");
     } catch {
@@ -271,98 +247,28 @@ export function Footer() {
           ]}
         />
 
-        {/* Qualified pilot / investor request — captures the fields the
-            submit payload has always expected, and activates the investor branch. */}
+        {/* 1-Line Pilot Form */}
         <Reveal variant="up" delay={220} className="foot-formwrap">
           {status === "done" ? (
             <div className="foot-done mono xs">
-              <span className="foot-dot" /> Request received. Our engineering lead will connect within 24 hours.
+              <span className="foot-dot" /> Pilot request received. Our engineering lead will connect within 24 hours.
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="foot-form">
-              <div className="foot-kind" role="radiogroup" aria-label="Enquiry type">
-                {ENQUIRY_KINDS.map(({ k, label }) => (
-                  <button
-                    key={k}
-                    type="button"
-                    role="radio"
-                    aria-checked={kind === k}
-                    className={`foot-kindbtn mono xs${kind === k ? " on" : ""}`}
-                    onClick={() => setKind(k)}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="foot-grid">
-                <label className="foot-field">
-                  <span className="foot-flabel mono xs">WORK EMAIL</span>
-                  <input
-                    type="email"
-                    required
-                    autoComplete="email"
-                    placeholder="you@company.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="foot-inp mono xs"
-                  />
-                </label>
-
-                <label className="foot-field">
-                  <span className="foot-flabel mono xs">FULL NAME</span>
-                  <input
-                    type="text"
-                    required
-                    autoComplete="name"
-                    placeholder="Your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="foot-inp mono xs"
-                  />
-                </label>
-
-                <label className="foot-field">
-                  <span className="foot-flabel mono xs">COMPANY</span>
-                  <input
-                    type="text"
-                    required
-                    autoComplete="organization"
-                    placeholder="Organisation"
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
-                    className="foot-inp mono xs"
-                  />
-                </label>
-
-                <label className="foot-field">
-                  <span className="foot-flabel mono xs">ROLE</span>
-                  <select
-                    required
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    className="foot-inp foot-sel mono xs"
-                  >
-                    <option value="">Select…</option>
-                    {ROLES.map((rr) => (
-                      <option key={rr} value={rr}>
-                        {rr}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-
+            <form onSubmit={handleFastSubmit} className="foot-form">
+              <input
+                type="email"
+                required
+                placeholder="Enter work email for pilot access..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="foot-inp mono xs"
+              />
               <button
                 type="submit"
                 disabled={status === "submitting"}
                 className="foot-btn mono xs"
               >
-                {status === "submitting"
-                  ? "Requesting…"
-                  : kind === "investor"
-                    ? "Request Investor Briefing →"
-                    : "Initialize Pilot →"}
+                {status === "submitting" ? "Requesting..." : "Initialize Pilot →"}
               </button>
             </form>
           )}
@@ -383,8 +289,8 @@ export function Footer() {
           <p className="foot-mailrow">
             <span className="mono xs dim" style={{ marginRight: 10 }}>DIRECT LINE:</span>
             <Magnetic>
-              <a className="foot-mail" href={`mailto:${CONTACT_EMAIL}`}>
-                {CONTACT_EMAIL} <span aria-hidden="true">↗</span>
+              <a className="foot-mail" href="mailto:founders@syncpro.org">
+                founders@syncpro.org <span aria-hidden="true">↗</span>
               </a>
             </Magnetic>
           </p>
@@ -392,16 +298,6 @@ export function Footer() {
 
         <div className="foot-meta mono xs">
           <span>RESEARCH-GROUNDED AT IIT MADRAS · BUILT FOR GLOBAL MEGAPROJECTS</span>
-          <span>
-            <a
-              className="foot-link"
-              href="https://github.com/vahid-kanna/syncpro.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GITHUB ↗
-            </a>
-          </span>
           <span>© 2026 SYNCPRO · ALL RIGHTS RESERVED</span>
         </div>
       </div>
