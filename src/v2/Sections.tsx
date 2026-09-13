@@ -1,11 +1,13 @@
 /**
  * SyncPro v2 — sections with humanized editorial copy,
- * hero telemetry ticker, interactive corroboration engine,
- * voice waveform indicator, and grounded agent query simulation.
+ * hero telemetry ticker, and the redesigned Schedule Divergence Radar.
+ * Replaces the dense, cluttered table with a stunning, high-contrast
+ * dual-horizon comparison and interactive latency timeline slider. (Zero 3D).
  */
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Reveal, MaskLines, scrollToId } from "./Chrome";
 import { ScrubHeading, Magnetic } from "./Motion";
+import { Clock, Sliders, FileText } from "lucide-react";
 
 /* ================= HERO ================= */
 
@@ -92,103 +94,91 @@ export function Hero() {
   );
 }
 
-/* ============ GAP STATEMENT + 01 ARTIFACT ============ */
+/* ============ REDESIGNED 01: SCHEDULE DIVERGENCE RADAR ============ */
 
-interface ActivityDetail {
+interface Scenario {
   id: string;
   name: string;
-  start: string;
-  tf: string;
-  tone: string;
-  isVoice?: boolean;
-  signalTitle: string;
-  signalDetail: string;
-  corroboration: string;
-  queryAnswer: string;
+  badge: string;
+  activityCode: string;
+  p6Date: string;
+  p6Float: string;
+  syncproDate: string;
+  syncproFloat: string;
+  syncproFloatTone: "bad" | "warn" | "ok";
+  evidenceNote: string;
+  delayExposure: string;
+  remedyAction: string;
 }
 
-const P6_ACTIVITIES: ActivityDetail[] = [
+const SCENARIOS: Scenario[] = [
   {
-    id: "A1210",
-    name: "Secant piling, podium package",
-    start: "Oct 12",
-    tf: "+2d",
-    tone: "",
-    isVoice: false,
-    signalTitle: "DRILLING LOG · RIG #02 COMPLETE",
-    signalDetail: "32/32 piles cast. Concrete cylinder break test verified at 42 MPa. Work on schedule.",
-    corroboration: "Piling log cross-referenced with batch challans #2201–#2232. Float intact (+2 days).",
-    queryAnswer: "Activity A1210 is 100% on schedule with +2d float. 32/32 secant piles cast and verified against concrete batch dockets #2201–#2232.",
+    id: "pt-slab",
+    name: "Level 18 Post-Tension Slab",
+    badge: "MATERIAL SUPPLY DISRUPTION",
+    activityCode: "A1230",
+    p6Date: "Dec 08",
+    p6Float: "0d (Reported On Plan)",
+    syncproDate: "Dec 20 (+12 Days)",
+    syncproFloat: "-8 Days Exhausted",
+    syncproFloatTone: "bad",
+    evidenceNote: "Challan #SN882: 42T prestressing strand fabrication held 4 days at vendor yard.",
+    delayExposure: "₹14.4 Cr",
+    remedyAction: "Formwork stripping parallelized across Grid C–D · 6 days float recovered",
   },
   {
-    id: "A1230",
-    name: "Level 18 post-tension slab",
-    start: "Dec 08",
-    tf: "0d ⚑",
-    tone: "warn",
-    isVoice: true,
-    signalTitle: "SITE VOCAL NOTE · FORMWORK INSPECTION",
-    signalDetail: "Formwork deshoring cleared on L17. Rebar inspection signed off by third-party consultant.",
-    corroboration: "Zero float remaining. Any material delivery disruption here shifts the critical path.",
-    queryAnswer: "Activity A1230 has 0 days float. Formwork deshoring cleared, but PT cable delay will convert this into the primary critical path within 48h.",
+    id: "mep-risers",
+    name: "MEP Chilled Water Risers L04–L18",
+    badge: "ENGINEERING REVISION CLASH",
+    activityCode: "A1240",
+    p6Date: "Dec 11",
+    p6Float: "+3d (Reported Buffer)",
+    syncproDate: "Dec 27 (+16 Days)",
+    syncproFloat: "-11 Days Critical Slip",
+    syncproFloatTone: "bad",
+    evidenceNote: "Consultant transmittal Rev-04 shifted shaft clearance by 300mm on Level 09.",
+    delayExposure: "₹18.2 Cr",
+    remedyAction: "Contemporaneous FIDIC 8.4 claim notice auto-drafted before 28-day time-bar",
   },
   {
-    id: "A1240",
-    name: "MEP risers Level 04 to 18",
-    start: "Dec 11",
-    tf: "-8d",
-    tone: "bad",
-    isVoice: true,
-    signalTitle: "BATCH TICKET #4902 & SUPPLIER CHALLAN #SN882",
-    signalDetail: "Post-tension strand vendor announced 2-day fabrication hold · Site crew reassigned.",
-    corroboration: "Unlinked to P6 baseline yet consumes 8 days total float. Triggers ₹14.4 Cr liquidated damages risk.",
-    queryAnswer: "Activity A1240 consumed 8 days float because PT strand vendor announced a 2-day yard hold (Challan #SN882). Triggers 8-day critical path slip to Milestone M-04. Master P6 baseline remains isolated and untouched.",
-  },
-  {
-    id: "A1250",
-    name: "Facade unitisation",
-    start: "Jan 20",
-    tf: "+5d",
-    tone: "",
-    isVoice: false,
-    signalTitle: "FABRICATION DISPATCH · FACTORY QC",
-    signalDetail: "Glazed curtain-wall modules 140–210 packed for road transit from Pune facility.",
-    corroboration: "Factory dispatch manifest aligns with baseline buffer. 5 days positive float preserved.",
-    queryAnswer: "Activity A1250 retains +5d positive float. Factory dispatch manifest confirms curtain-wall panels are in road transit with ample schedule buffer.",
+    id: "secant-piles",
+    name: "Secant Wall Foundation Piling",
+    badge: "INDEPENDENT QA/QC CLEARANCE",
+    activityCode: "A1210",
+    p6Date: "Oct 12",
+    p6Float: "+2d (Safe Buffer)",
+    syncproDate: "Oct 10 (-2 Days Ahead)",
+    syncproFloat: "+4d Float Preserved",
+    syncproFloatTone: "ok",
+    evidenceNote: "32/32 ultrasonic pile integrity logs cross-referenced with concrete batch tickets #2201–#2232.",
+    delayExposure: "₹0.00",
+    remedyAction: "As-built verification sealed to immutable audit ledger with cryptographic hash",
   },
 ];
 
-/** Count-up number for the verdict line. */
-function CountUp({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (es) => {
-        if (!es.some((e) => e.isIntersecting)) return;
-        io.disconnect();
-        const t0 = performance.now();
-        const tick = (t: number) => {
-          const p = Math.min(1, (t - t0) / 1200);
-          setVal(Math.round(to * (1 - Math.pow(1 - p, 3))));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      },
-      { rootMargin: "-40px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [to]);
-  return <span ref={ref}>{prefix}{val}{suffix}</span>;
-}
-
 export function GapSection() {
-  const [selectedId, setSelectedId] = useState("A1240");
-  const [showAgentQuery, setShowAgentQuery] = useState(false);
-  const activeRow = P6_ACTIVITIES.find((a) => a.id === selectedId) || P6_ACTIVITIES[2];
+  const [activeScenarioId, setActiveScenarioId] = useState("pt-slab");
+  const [latencyDay, setLatencyDay] = useState(14); // slider from Day 1 to Day 28
+
+  const currentScenario = SCENARIOS.find((s) => s.id === activeScenarioId) || SCENARIOS[0];
+
+  // Dynamic cost calculation based on detection latency day
+  let latencyStatus = "DAY 14 · FLOAT BUFFER DEPLETED";
+  let latencyCost = "₹1.8 Cr";
+  let latencyBadgeClass = "warn";
+  let latencyAction = "Critical path float eaten. Acceleration crews required to prevent handover slip.";
+
+  if (latencyDay <= 5) {
+    latencyStatus = `DAY ${latencyDay} · EARLY DETECTION WINDOW`;
+    latencyCost = "₹15 Lakhs";
+    latencyBadgeClass = "ok";
+    latencyAction = "SyncPro flags delivery stall on day 3. Minor sequence rebalancing fully recovers float.";
+  } else if (latencyDay >= 22) {
+    latencyStatus = `DAY ${latencyDay} · MONTH-END P6 REPORT RUN`;
+    latencyCost = currentScenario.delayExposure;
+    latencyBadgeClass = "bad";
+    latencyAction = "Contractual milestone missed. Liquidated damages accrued. Subcontractor dispute locked in.";
+  }
 
   return (
     <section className="sec wrap st-wrap" id="narrative">
@@ -200,113 +190,179 @@ export function GapSection() {
         ]}
       />
 
-      <div className="sechead mono xs">
+      <div className="sechead mono xs center-head">
         <span className="num">01</span>
-        <span>WHAT YOUR SCHEDULE SEES · INTERACTIVE GROUND TRUTH AUDIT</span>
+        <span>THE DETECTION GAP · LIVE SCHEDULE DIVERGENCE RADAR</span>
       </div>
 
-      <Reveal variant="up" delay={100}>
-        <div className="artifact">
-          <div className="abar mono xs">
-            <span>BASELINE · ORACLE PRIMAVERA P6 (.XER)</span>
-            <span className="dim">CLICK OR HOVER ANY ACTIVITY ROW</span>
-          </div>
-
-          <div className="table-responsive">
-            <table className="xer">
-              <thead>
-                <tr><th>ACTIVITY</th><th>TASK</th><th>START</th><th>FLOAT</th></tr>
-              </thead>
-              <tbody>
-                {P6_ACTIVITIES.map((row, i) => (
-                  <tr
-                    key={row.id}
-                    className={selectedId === row.id ? "active-row" : ""}
-                    onMouseEnter={() => setSelectedId(row.id)}
-                    onClick={() => setSelectedId(row.id)}
-                    style={{ ["--ri" as never]: i }}
+      <Reveal variant="up" delay={120}>
+        <div className="divergence-container spotlight-card">
+          {/* Top Scenario Selector Bar */}
+          <div className="radar-topbar mono xs">
+            <span className="radar-label dim">SELECT SITE INCIDENT:</span>
+            <div className="radar-chips">
+              {SCENARIOS.map((sc) => {
+                const isActive = sc.id === activeScenarioId;
+                return (
+                  <button
+                    key={sc.id}
+                    type="button"
+                    className={`radar-chip ${isActive ? "active" : ""}`}
+                    onClick={() => setActiveScenarioId(sc.id)}
                   >
-                    <td className="mono dim">{row.id}</td>
-                    <td>
-                      {row.name}
-                      {selectedId === row.id && (
-                        <span className="inspect-tag mono xs">INSPECTING</span>
-                      )}
-                    </td>
-                    <td className="mono">{row.start}</td>
-                    <td className={`mono ${row.tone}`}>{row.tf}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    <span className={`chip-dot ${sc.syncproFloatTone}`} />
+                    <span className="chip-name">{sc.name}</span>
+                    <span className="chip-code dim">{sc.activityCode}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Interactive Multi-Source Field Signal Feed */}
-          <div className="signal-reconciler">
-            <div className="reconciler-header mono xs">
-              <div className="rec-header-left">
-                <span className="live-dot pulse" />
-                <span>LIVE FIELD SIGNAL RECONCILER · LINKED TO [{activeRow.id}]</span>
-                {activeRow.isVoice && (
-                  <span className="audio-wave" aria-label="Field voice memo active">
-                    <i /><i /><i /><i /><i />
-                  </span>
-                )}
+          {/* Dual Perspective: P6 Mirage vs SyncPro Reality */}
+          <div className="dual-perspective-grid">
+            {/* Left Card: Monthly Primavera P6 View */}
+            <div className="perspective-card p6-mirage">
+              <div className="perspective-header mono xs">
+                <div className="header-tag dim">
+                  <FileText className="ico-xs" />
+                  <span>ORACLE PRIMAVERA P6 (.XER)</span>
+                </div>
+                <span className="header-status dim">STATIC MONTHLY PDF</span>
               </div>
-              <span className="reconciler-status">DISAMBIGUATED</span>
+
+              <div className="perspective-content">
+                <div className="metric-headline">
+                  <span className="metric-label mono xs dim">REPORTED MILESTONE</span>
+                  <span className="metric-val">{currentScenario.p6Date}</span>
+                </div>
+
+                <div className="metric-split mono xs">
+                  <div className="split-item">
+                    <span className="dim">REPORTED FLOAT</span>
+                    <span className="ok fw-bold">{currentScenario.p6Float}</span>
+                  </div>
+                  <div className="split-item">
+                    <span className="dim">CONTRACT RISK</span>
+                    <span className="ok">₹0 EXPOSURE</span>
+                  </div>
+                </div>
+
+                {/* Visual Static Baseline Bar */}
+                <div className="timeline-visual">
+                  <div className="timeline-track">
+                    <div className="track-bar static-baseline" style={{ width: "70%" }}>
+                      <span className="track-label mono xs">Target: {currentScenario.p6Date}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="perspective-note xs dim">
+                  Master contractual program remains unaware of site delivery stalls until monthly status cutoff.
+                </p>
+              </div>
             </div>
 
-            <div className="reconciler-body mono xs">
-              <div className="reconciler-row">
-                <span className="rec-badge signal">[FIELD EVENT]</span>
-                <span className="rec-text">
-                  <strong>{activeRow.signalTitle}</strong> — {activeRow.signalDetail}
+            {/* Right Card: SyncPro Live Shadow Ground Truth */}
+            <div className="perspective-card syncpro-truth">
+              <div className="perspective-header mono xs">
+                <div className="header-tag acc">
+                  <span className="pulse-dot-acc" />
+                  <span>SYNCPRO SHADOW FORECAST</span>
+                </div>
+                <span className={`header-status ${currentScenario.syncproFloatTone}`}>
+                  CONTINUOUS GROUND TRUTH
                 </span>
               </div>
-              <div className="reconciler-row">
-                <span className="rec-badge engine">[CORROBORATION]</span>
-                <span className="rec-text">{activeRow.corroboration}</span>
-              </div>
-            </div>
 
-            {/* Grounded Natural Language Schedule Query Simulator */}
-            <div className="agent-query-bar">
-              <button
-                type="button"
-                className="query-btn mono xs"
-                onClick={() => setShowAgentQuery((prev) => !prev)}
-                aria-expanded={showAgentQuery}
-              >
-                <span className="query-prompt">&gt;</span>
-                <span className="query-label">Ask Graph Agent: &ldquo;Why did {activeRow.id} lose float?&rdquo;</span>
-                <span className="query-badge">{showAgentQuery ? "HIDE" : "RUN QUERY"}</span>
-              </button>
-              {showAgentQuery && (
-                <div className="query-response mono xs">
-                  <span className="query-tag">[GROUNDED CYPHER ANSWER]</span>
-                  <p className="query-txt">{activeRow.queryAnswer}</p>
+              <div className="perspective-content">
+                <div className="metric-headline">
+                  <span className="metric-label mono xs dim">CORROBORATED HANDOVER</span>
+                  <span className={`metric-val ${currentScenario.syncproFloatTone}`}>
+                    {currentScenario.syncproDate}
+                  </span>
                 </div>
-              )}
+
+                <div className="metric-split mono xs">
+                  <div className="split-item">
+                    <span className="dim">TRUE CRITICAL FLOAT</span>
+                    <span className={`${currentScenario.syncproFloatTone} fw-bold`}>
+                      {currentScenario.syncproFloat}
+                    </span>
+                  </div>
+                  <div className="split-item">
+                    <span className="dim">EXPOSURE AT RISK</span>
+                    <span className={`${currentScenario.syncproFloatTone === "bad" ? "bad" : "ok"} fw-bold`}>
+                      {currentScenario.delayExposure}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Visual Dynamic Slippage Bar */}
+                <div className="timeline-visual">
+                  <div className="timeline-track">
+                    <div
+                      className={`track-bar dynamic-shadow ${currentScenario.syncproFloatTone}`}
+                      style={{ width: currentScenario.syncproFloatTone === "bad" ? "88%" : "68%" }}
+                    >
+                      <span className="track-label mono xs">
+                        Live Forecast: {currentScenario.syncproDate}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="evidence-pill mono xs">
+                  <Clock className="ico-xs acc" />
+                  <span className="evidence-txt">{currentScenario.evidenceNote}</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="atotals">
-            <p className="mono xs">
-              <span className="dim">CONTRACT P6 VERDICT&nbsp;&nbsp;</span>
-              <span className="ok">ON TRACK · LIQUIDATED DAMAGES ₹0</span>
-            </p>
-            <p className="mono xs verdict glow-pulse">
-              <span className="dim">SYNCPRO RECONCILES&nbsp;&nbsp;</span>
-              <span className="bad">
-                CRITICAL SLIP −<CountUp to={8} /> DAYS · EXPOSURE ₹<CountUp to={14} />.<CountUp to={4} /> CR
-              </span>
-            </p>
+          {/* Interactive Latency Slider: Demonstrate the Cost of Delay Over Time */}
+          <div className="latency-slider-panel">
+            <div className="latency-header mono xs">
+              <div className="latency-title">
+                <Sliders className="ico-xs acc" />
+                <span>INSPECT SCHEDULE LATENCY · DRAG TO REVEAL COST OF TIME-LAG</span>
+              </div>
+              <span className={`latency-badge ${latencyBadgeClass}`}>{latencyStatus}</span>
+            </div>
+
+            <div className="slider-wrapper">
+              <input
+                type="range"
+                min={1}
+                max={28}
+                value={latencyDay}
+                onChange={(e) => setLatencyDay(Number(e.target.value))}
+                className="latency-range-slider"
+                aria-label="Detection latency in days"
+              />
+              <div className="slider-labels mono xs dim">
+                <span>Day 01 · Site Stall Begins</span>
+                <span className="active-day-label acc">Selected: Day {latencyDay}</span>
+                <span>Day 28 · Month-End P6 PDF</span>
+              </div>
+            </div>
+
+            <div className="latency-impact-row mono xs">
+              <div className="impact-col">
+                <span className="dim">ESTIMATED COST TO MITIGATE:</span>
+                <span className={`impact-cost ${latencyBadgeClass} fw-bold`}>{latencyCost}</span>
+              </div>
+              <div className="impact-col right">
+                <span className="dim">SCHEDULE GOVERNANCE STATUS:</span>
+                <span className="impact-action dim">{latencyAction}</span>
+              </div>
+            </div>
           </div>
         </div>
       </Reveal>
 
       <Reveal variant="up" delay={220}>
-        <p className="gap-punch">
+        <p className="gap-punch center">
           The reality was documented on site from day one. <em>The master schedule just never saw it.</em>
         </p>
       </Reveal>
