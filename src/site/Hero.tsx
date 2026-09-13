@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { CREDS, HERO } from "./lib/content";
 import { CHECKS, SAMPLE } from "./lib/audit";
 import { scrollToId, useCountUp, useInView } from "./lib/hooks";
-import { ArrowRight, Bolt, Clock, FileDoc } from "./lib/icons";
+import { ArrowRight, Bolt, Clock, FileDoc, Graph, Shield } from "./lib/icons";
+import { CpmNetwork3D } from "./CpmNetwork3D";
+import { Magnetic, TiltCard } from "./lib/interactions";
 
 const R = 40;
 const CIRC = 2 * Math.PI * R;
@@ -57,8 +60,8 @@ function HealthCard() {
   );
 
   return (
-    <div className="hero-visual">
-      <div className="hcard" ref={ref}>
+    <div className="hero-visual" ref={ref}>
+      <TiltCard className="hcard">
         <div className="hcard-head">
           <span className="row gap-2">
             <FileDoc size={15} className="t-info" />
@@ -138,12 +141,14 @@ function HealthCard() {
             <ArrowRight size={13} />
           </a>
         </div>
-      </div>
+      </TiltCard>
     </div>
   );
 }
 
 export function Hero() {
+  const [visualMode, setVisualMode] = useState<"3d" | "dcma">("3d");
+
   return (
     <section className="hero" id="top">
       <div className="wrap-lg hero-grid">
@@ -165,30 +170,34 @@ export function Hero() {
           <p className="lead hero-sub rv">{HERO.sub}</p>
 
           <div className="hero-cta rv">
-            <a
-              className="btn btn-primary btn-lg"
-              href="#demo"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToId("demo");
-                // Let the scroll begin, then start the audit so the visitor
-                // arrives to a demo already running.
-                setTimeout(() => window.dispatchEvent(new Event("syncpro:run-audit")), 420);
-              }}
-            >
-              {HERO.ctaPrimary}
-              <ArrowRight className="ico" />
-            </a>
-            <a
-              className="btn btn-outline btn-lg"
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToId("contact");
-              }}
-            >
-              {HERO.ctaSecondary}
-            </a>
+            <Magnetic strength={0.22}>
+              <a
+                className="btn btn-primary btn-lg"
+                href="#demo"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToId("demo");
+                  // Let the scroll begin, then start the audit so the visitor
+                  // arrives to a demo already running.
+                  setTimeout(() => window.dispatchEvent(new Event("syncpro:run-audit")), 420);
+                }}
+              >
+                {HERO.ctaPrimary}
+                <ArrowRight className="ico" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.15}>
+              <a
+                className="btn btn-outline btn-lg"
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToId("contact");
+                }}
+              >
+                {HERO.ctaSecondary}
+              </a>
+            </Magnetic>
           </div>
           <p className="hero-note rv">{HERO.note}</p>
 
@@ -202,8 +211,38 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="rv">
-          <HealthCard />
+        <div className="hero-visual-container rv">
+          <div className="hero-view-switch">
+            <div className="hero-view-tabs" role="tablist" aria-label="Visual demonstration mode">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={visualMode === "3d"}
+                className={`hero-view-btn ${visualMode === "3d" ? "is-active" : ""}`}
+                onClick={() => setVisualMode("3d")}
+              >
+                {visualMode === "3d" && <span className="dot-active" />}
+                <Graph size={13} />
+                <span>3D CPM Topology</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={visualMode === "dcma"}
+                className={`hero-view-btn ${visualMode === "dcma" ? "is-active" : ""}`}
+                onClick={() => setVisualMode("dcma")}
+              >
+                {visualMode === "dcma" && <span className="dot-active" />}
+                <Shield size={13} />
+                <span>DCMA Health Card</span>
+              </button>
+            </div>
+            <span className="mono xs faint" style={{ paddingRight: 8 }}>
+              {visualMode === "3d" ? "Interactive WebGL" : "14-Point Baseline"}
+            </span>
+          </div>
+
+          {visualMode === "3d" ? <CpmNetwork3D /> : <HealthCard />}
         </div>
       </div>
     </section>

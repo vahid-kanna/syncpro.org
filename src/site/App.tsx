@@ -2,6 +2,7 @@ import "./styles/index.css";
 import { Footer, Nav } from "./Chrome";
 import { Hero } from "./Hero";
 import { Gate, Pillars, Problem } from "./Pillars";
+import { DelayCalculator } from "./Calculator";
 import { Demo } from "./Demo";
 import { Suite } from "./Suite";
 import { Icp, Pricing } from "./Icp";
@@ -30,6 +31,7 @@ export default function App() {
       <main id="main">
         <Hero />
         <Problem />
+        <DelayCalculator />
         <Pillars />
         <Demo />
         <Gate />

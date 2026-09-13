@@ -1,5 +1,6 @@
 import { INTEGRATIONS, PRODUCTS, SUITE_NOTE, type Product } from "./lib/content";
 import { Bolt } from "./lib/icons";
+import { TiltCard } from "./lib/interactions";
 
 const TAG_FOR: Record<Product["statusKind"], string> = {
   live: "tag tag-success",
@@ -13,7 +14,7 @@ function ProductCard({ p }: { p: Product }) {
   const planned = p.statusKind === "planned";
 
   return (
-    <article className={`card card-hover prod rv${planned ? " is-planned" : ""}`}>
+    <TiltCard className={`card card-hover prod rv${planned ? " is-planned" : ""}`} maxTilt={5}>
       <div className="prod-top">
         <span className="prod-n">{p.n}</span>
         <span className={TAG_FOR[p.statusKind]}>
@@ -34,7 +35,7 @@ function ProductCard({ p }: { p: Product }) {
           <span>{p.problem}</span>
         </div>
       ) : null}
-    </article>
+    </TiltCard>
   );
 }
 

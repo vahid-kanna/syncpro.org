@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FAQ, TRUST } from "./lib/content";
 import { Plus, Shield, Scale, Database } from "./lib/icons";
+import { TiltCard } from "./lib/interactions";
 
 const TRUST_ICONS = [Shield, Scale, Database];
 
@@ -75,13 +76,13 @@ export function Trust() {
           {TRUST.items.map((t, i) => {
             const Ico = TRUST_ICONS[i % TRUST_ICONS.length];
             return (
-              <article className="card card-hover trust-cell rv" key={t.t}>
+              <TiltCard className="card card-hover trust-cell rv" key={t.t} maxTilt={5}>
                 <Ico size={19} className="t-brand" />
                 <h3 className="h3">{t.t}</h3>
                 <p className="small dim" style={{ lineHeight: 1.65 }}>
                   {t.d}
                 </p>
-              </article>
+              </TiltCard>
             );
           })}
         </div>

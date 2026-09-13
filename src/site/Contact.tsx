@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CONTACT, CONTACT_EMAIL } from "./lib/content";
 import { submitWaitlist, type WaitlistKind } from "../lib/waitlist";
 import { ArrowRight, Check, Mail } from "./lib/icons";
+import { Magnetic } from "./lib/interactions";
 
 const SCALES = [
   "Under $50M",
@@ -245,10 +246,12 @@ export function Contact() {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg" disabled={state === "sending"}>
-                  {state === "sending" ? "Sending…" : "Request pilot access"}
-                  {state === "sending" ? null : <ArrowRight className="ico" />}
-                </button>
+                <Magnetic strength={0.16}>
+                  <button type="submit" className="btn btn-primary btn-lg" disabled={state === "sending"}>
+                    {state === "sending" ? "Sending…" : "Request pilot access"}
+                    {state === "sending" ? null : <ArrowRight className="ico" />}
+                  </button>
+                </Magnetic>
 
                 <p className="xs faint" style={{ lineHeight: 1.6 }}>
                   No newsletter, no drip sequence. One reply from a founder, within two working days.

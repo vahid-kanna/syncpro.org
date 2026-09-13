@@ -9,6 +9,7 @@
 /* Order here must match the DOM order of sections in App.tsx, because the nav
    highlights the section currently in view. */
 export const NAV_LINKS = [
+  { id: "roi-sandbox", label: "Holding cost" },
   { id: "demo", label: "Live audit" },
   { id: "platform", label: "Platform" },
   { id: "products", label: "Products" },

@@ -8,6 +8,7 @@ import {
 } from "./lib/content";
 import { scrollToId, useActiveSection, useEscape, useScrollLock } from "./lib/hooks";
 import { ArrowRight, Close, Github, Linkedin, Mail, Menu, Wordmark } from "./lib/icons";
+import { Magnetic } from "./lib/interactions";
 
 /* ---- Scroll progress ----------------------------------------------------- */
 
@@ -111,16 +112,18 @@ export function Nav() {
             <i className="sdot sdot-live pulse" aria-hidden />
             {HERO.status}
           </span>
-          <a
-            className="btn btn-outline btn-sm nav-cta"
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              go("contact");
-            }}
-          >
-            Request access
-          </a>
+          <Magnetic strength={0.16}>
+            <a
+              className="btn btn-outline btn-sm nav-cta"
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                go("contact");
+              }}
+            >
+              Request access
+            </a>
+          </Magnetic>
           <button
             type="button"
             className="btn btn-ghost btn-sm nav-burger"

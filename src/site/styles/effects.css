@@ -1,0 +1,294 @@
+/* ============================================================================
+   SyncPro · syncpro.org
+   effects.css — 3D canvas, tilt cards, cursor spotlights, and micro-interactions
+   ========================================================================== */
+
+/* ---- Ambient Hero Glow & Blueprint Watermark --------------------------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  right: -80px;
+  width: 680px;
+  height: 680px;
+  background: radial-gradient(circle, rgba(240, 168, 58, 0.075) 0%, rgba(240, 168, 58, 0.015) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  left: 5%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(88, 150, 224, 0.06) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Hero View Switcher (3D Graph vs DCMA Health) --------------------- */
+.hero-visual-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero-view-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+
+.hero-view-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.hero-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border-radius: var(--r-sm);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-3);
+  transition: all var(--dur) var(--ease);
+}
+
+.hero-view-btn:hover {
+  color: var(--text);
+}
+
+.hero-view-btn.is-active {
+  background: var(--bg-elevated);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--line-strong);
+}
+
+.hero-view-btn .dot-active {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-500);
+}
+
+/* ---- 3D CPM Canvas Wrapper -------------------------------------------- */
+.cpm-3d-wrapper {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  background: radial-gradient(ellipse at 50% 35%, #14181f 0%, #0c0e11 85%);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-pop), 0 0 30px -10px rgba(240, 168, 58, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.cpm-3d-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cpm-hud-header {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.cpm-hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background: rgba(12, 14, 17, 0.8);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  backdrop-filter: blur(8px);
+}
+
+.cpm-hud-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-500);
+}
+
+.cpm-hud-dot.pulse {
+  box-shadow: 0 0 0 3px rgba(240, 168, 58, 0.25);
+}
+
+.cpm-hud-stats {
+  display: flex;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--text-4);
+  background: rgba(12, 14, 17, 0.7);
+  padding: 4px 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line-soft);
+}
+
+.cpm-hud-stats b {
+  color: var(--brand-400);
+}
+
+@media (max-width: 640px) {
+  .cpm-hud-stats { display: none; }
+  .cpm-3d-wrapper { height: 380px; }
+}
+
+/* Tooltip on node hover */
+.cpm-node-tooltip {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(15, 18, 24, 0.94);
+  border: 1px solid var(--brand-line);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  animation: tooltipFadeIn 0.16s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cpm-tooltip-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.cpm-tooltip-name {
+  font-size: 13.5px;
+  font-weight: 550;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.cpm-tooltip-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 11.5px;
+  color: var(--text-3);
+  padding-top: 6px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.cpm-tooltip-meta b {
+  color: var(--text);
+}
+
+.cpm-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ---- 3D Tilt Cards & Cursor Spotlights --------------------------------- */
+.card-tilt {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.card-tilt:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.magnetic-box {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* ---- Financial Risk Sandbox / Delay Cost Calculator -------------------- */
+.sandbox-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-pop);
+}
+
+.sandbox-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.slider-track-wrap input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-elevated);
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--brand-500);
+}
+
+.loss-meter-display {
+  font-family: var(--mono);
+  font-size: clamp(32px, 3.6vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--danger);
+  line-height: 1.05;
+}
+
+.recovery-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--brand-bg);
+  border: 1px solid var(--brand-line);
+  border-radius: var(--r-sm);
+  color: var(--brand-400);
+  font-size: 12px;
+  font-weight: 550;
+}

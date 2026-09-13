@@ -1,6 +1,7 @@
 import { ICP, PRICING } from "./lib/content";
 import { Check, Close } from "./lib/icons";
 import { scrollToId } from "./lib/hooks";
+import { Magnetic, TiltCard } from "./lib/interactions";
 
 /* ---- Who it's for -------------------------------------------------------- */
 
@@ -71,7 +72,7 @@ export function Pricing() {
 
         <div className="price-grid">
           {PRICING.tiers.map((t) => (
-            <article className={`card tier rv${t.featured ? " is-feature" : ""}`} key={t.name}>
+            <TiltCard className={`card tier rv${t.featured ? " is-feature" : ""}`} key={t.name} maxTilt={4}>
               <div className="between">
                 <span className="tier-name">{t.name}</span>
                 {t.featured ? <span className="tag tag-brand">Most common</span> : null}
@@ -94,17 +95,19 @@ export function Pricing() {
                 ))}
               </ul>
 
-              <a
-                className={`btn btn-block ${t.featured ? "btn-primary" : "btn-outline"}`}
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToId("contact");
-                }}
-              >
-                {t.name === "Enterprise / Benchmark" ? "Talk to founders" : "Start a pilot"}
-              </a>
-            </article>
+              <Magnetic strength={0.15}>
+                <a
+                  className={`btn btn-block ${t.featured ? "btn-primary" : "btn-outline"}`}
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToId("contact");
+                  }}
+                >
+                  {t.name === "Enterprise / Benchmark" ? "Talk to founders" : "Start a pilot"}
+                </a>
+              </Magnetic>
+            </TiltCard>
           ))}
         </div>
 

@@ -216,10 +216,10 @@ export const Linkedin = (p: IcoProps) => (
 );
 
 /**
- * Wordmark: a CPM node-link mark — parallel activities converging on the
- * committed update, which is the one thing the product is about.
+ * BrandMark: The SyncPro "Path S" brand mark.
+ * Read as a letter it says SyncPro; read as a diagram it is a finish-to-start activity path.
  */
-export const Wordmark = ({ size = 22, className, style }: IcoProps) => (
+export const BrandMark = ({ size = 24, className, style }: IcoProps) => (
   <svg
     width={size}
     height={size}
@@ -230,27 +230,17 @@ export const Wordmark = ({ size = 22, className, style }: IcoProps) => (
     aria-hidden
     focusable="false"
   >
-    <path
-      d="M4 6.5h5.2M4 12h5.2M4 17.5h5.2"
-      stroke="currentColor"
-      strokeOpacity=".42"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    />
-    <path
-      d="M9.2 6.5 15 12M9.2 12h5.8M9.2 17.5 15 12"
-      stroke="currentColor"
-      strokeOpacity=".55"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-    />
-    <rect x="15" y="8.6" width="6.2" height="6.8" rx="1.6" fill="#F0A83A" />
-    <path
-      d="m17.2 12 1.3 1.3 2.3-2.4"
-      stroke="#14110A"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <g transform="translate(-6.00 -6.00) scale(1.500000)">
+      <path
+        d="M18.6 5.4H5.4V12H18.6V18.6H5.4"
+        fill="none"
+        stroke="#F0A83A"
+        strokeWidth="2.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </g>
   </svg>
 );
+
+export const Wordmark = BrandMark;

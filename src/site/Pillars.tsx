@@ -1,6 +1,7 @@
 import { GATE, PILLARS, PROBLEM } from "./lib/content";
 import { ArrowRight } from "./lib/icons";
 import { scrollToId } from "./lib/hooks";
+import { TiltCard } from "./lib/interactions";
 
 /* ---- The problem --------------------------------------------------------- */
 
@@ -16,11 +17,11 @@ export function Problem() {
 
         <div className="proof-grid rv">
           {PROBLEM.figures.map((f) => (
-            <div className="proof-cell" key={f.v}>
+            <TiltCard className="proof-cell" key={f.v} maxTilt={4}>
               <span className="v">{f.v}</span>
               <span className="l">{f.l}</span>
               <span className="s">{f.s}</span>
-            </div>
+            </TiltCard>
           ))}
         </div>
 
@@ -48,7 +49,7 @@ export function Pillars() {
 
         <div className="grid-3">
           {PILLARS.items.map((p) => (
-            <article className="card card-hover pillar rv" key={p.n}>
+            <TiltCard className="card card-hover pillar rv" key={p.n} maxTilt={5}>
               <span className="pillar-n">{p.n}</span>
               <h3 className="h2">{p.title}</h3>
               <p className="pillar-q">{p.q}</p>
@@ -58,7 +59,7 @@ export function Pillars() {
                   <li key={l}>{l}</li>
                 ))}
               </ul>
-            </article>
+            </TiltCard>
           ))}
         </div>
       </div>
